@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -28,14 +29,7 @@
                         "name": "Column #3"
                     }
                 ],
-                "header": [
-                    [
-                        null,
-                        null,
-                        null,
-                        null
-                    ]
-                ],
+                "header": [],
                 "metadata": {
                     "columns": "4",
                     "rows": "601"
@@ -142,12 +136,6 @@
                     "<SBW (nm)> \t2\tNone\tNone",
                     "<Energy> \t175\tNone\tNone",
                     "<Current Wavelength> \t200\tNone\tNone",
-                    [
-                        null,
-                        null,
-                        null,
-                        null
-                    ],
                     "sample1\tNone\tNone\tNone",
                     "sample1\tNone\tNone\tNone",
                     "Collection Time: 29/03/2023 15:33:07\tNone\tNone\tNone",
@@ -194,6 +182,7 @@
         ]
     },
     "description": "multicolumn (2) XLSX file with header at the end - Data from Tasnim",
+    "devices": [],
     "id": "15400217-b730-47db-9d5c-a300bce7ae95",
     "identifiers": [
         {
@@ -220,7 +209,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
+    "ols": "",
+    "ontology": "",
+    "software": [],
     "tables": [
         {
             "header": {

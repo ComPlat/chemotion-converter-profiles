@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/plain",
@@ -96,6 +97,7 @@
         ]
     },
     "description": "JASCO V-570; ref location: KIT CN, data: +, metadata: +",
+    "devices": [],
     "id": "6be46fd7-59a2-4b02-829b-cbfef8c19646",
     "identifiers": [
         {
@@ -115,7 +117,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
+    "ols": "",
+    "ontology": "",
+    "software": [],
     "tables": [
         {
             "header": {

@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/csv",
@@ -126,6 +127,7 @@
         ]
     },
     "description": "differential scanning calorimetry",
+    "devices": [],
     "id": "3e2fb90e-b6b6-4152-9182-ed8e203a58b5",
     "identifiers": [
         {
@@ -356,8 +358,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
     "ols": "CHMO:0000684",
+    "ontology": "CHMO:0000684",
+    "software": [],
     "tables": [
         {
             "header": {

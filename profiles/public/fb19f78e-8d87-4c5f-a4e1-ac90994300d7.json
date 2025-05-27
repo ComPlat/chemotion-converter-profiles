@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/plain",
@@ -5332,6 +5333,7 @@
         ]
     },
     "description": "LCMSsolution; ref location: KIT CN, data: +, metadata: +\n;Subtype 1",
+    "devices": [],
     "id": "fb19f78e-8d87-4c5f-a4e1-ac90994300d7",
     "identifiers": [
         {
@@ -5359,7 +5361,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
+    "ols": "",
+    "ontology": "",
+    "software": [],
     "tables": [
         {
             "header": {

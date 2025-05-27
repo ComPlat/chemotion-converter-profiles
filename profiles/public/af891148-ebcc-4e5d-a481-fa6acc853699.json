@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/plain",
@@ -95,6 +96,7 @@
         ]
     },
     "description": "Horiba Duetta; ref location: KIT CN, data: +, metadata: +",
+    "devices": [],
     "id": "af891148-ebcc-4e5d-a481-fa6acc853699",
     "identifiers": [
         {
@@ -107,7 +109,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
+    "ols": "",
+    "ontology": "",
+    "software": [],
     "tables": [
         {
             "header": {

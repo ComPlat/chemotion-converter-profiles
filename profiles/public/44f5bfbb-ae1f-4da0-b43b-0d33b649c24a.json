@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/plain",
@@ -704,6 +705,7 @@
         ]
     },
     "description": "Size Exclusion Chromatography (SEC)\nwith one Detector Output",
+    "devices": [],
     "id": "44f5bfbb-ae1f-4da0-b43b-0d33b649c24a",
     "identifiers": [
         {
@@ -973,8 +975,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
     "ols": "CHMO:0001013",
+    "ontology": "CHMO:0001013",
+    "software": [],
     "tables": [
         {
             "header": {

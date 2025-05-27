@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/csv",
@@ -513,6 +514,7 @@
         ]
     },
     "description": "Cary 60; ref location: KIT CN, data: +, metadata: +",
+    "devices": [],
     "id": "db05bfb4-6829-4339-bec1-54065710f211",
     "identifiers": [
         {
@@ -532,7 +534,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
+    "ols": "",
+    "ontology": "",
+    "software": [],
     "tables": [
         {
             "header": {

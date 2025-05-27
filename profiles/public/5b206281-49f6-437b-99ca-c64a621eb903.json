@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "application/octet-stream",
@@ -74,6 +75,7 @@
         ]
     },
     "description": "generic data table only; ref location: Uni Aachen, data: +, metadata: -",
+    "devices": [],
     "id": "5b206281-49f6-437b-99ca-c64a621eb903",
     "identifiers": [
         {
@@ -86,7 +88,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
+    "ols": "",
+    "ontology": "",
+    "software": [],
     "tables": [
         {
             "header": {

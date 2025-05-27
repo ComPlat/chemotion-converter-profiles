@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "application/octet-stream",
@@ -214,6 +215,7 @@
         ]
     },
     "description": "---; ref location: ---, data: +, metadata: -",
+    "devices": [],
     "id": "0d7dd8d4-a599-4151-855e-643956a7362c",
     "identifiers": [
         {
@@ -225,7 +227,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
+    "ols": "",
+    "ontology": "",
+    "software": [],
     "tables": [
         {
             "header": {

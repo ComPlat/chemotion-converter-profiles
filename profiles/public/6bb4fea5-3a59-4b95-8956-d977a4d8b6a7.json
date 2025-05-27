@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/plain",
@@ -217,6 +218,7 @@
         ]
     },
     "description": "Metrohm Autolab Nova; ref location: Uni Aachen, data: +, metadata: (-)\n;(basic Metadata calculation done by Reader)",
+    "devices": [],
     "id": "6bb4fea5-3a59-4b95-8956-d977a4d8b6a7",
     "identifiers": [
         {
@@ -241,11 +243,73 @@
             "tableIndex": 0,
             "type": "tableMetadata",
             "value": "WE(1).Current (A)"
+        },
+        {
+            "key": "scan_rate",
+            "match": "any",
+            "optional": true,
+            "outputKey": "scan_rate",
+            "outputLayer": "meas",
+            "outputTableIndex": 0,
+            "type": "fileMetadata",
+            "value": "0.09998236414401321"
+        },
+        {
+            "key": "step_size",
+            "match": "any",
+            "optional": true,
+            "outputKey": "step_size",
+            "outputLayer": "meas",
+            "outputTableIndex": 0,
+            "type": "fileMetadata",
+            "value": "0.0010679116287260553"
+        },
+        {
+            "key": "v_end",
+            "match": "any",
+            "optional": true,
+            "outputKey": "voltage_limit_end",
+            "outputLayer": "meas",
+            "outputTableIndex": 0,
+            "type": "fileMetadata",
+            "value": "0"
+        },
+        {
+            "key": "v_init",
+            "match": "any",
+            "optional": true,
+            "outputKey": "voltage_start",
+            "outputLayer": "meas",
+            "outputTableIndex": 0,
+            "type": "fileMetadata",
+            "value": "0.001068115234375"
+        },
+        {
+            "key": "v_limit1",
+            "match": "any",
+            "optional": true,
+            "outputKey": "voltage_limit_one",
+            "outputLayer": "meas",
+            "outputTableIndex": 0,
+            "type": "fileMetadata",
+            "value": "1.50070190429688"
+        },
+        {
+            "key": "v_limit2",
+            "match": "any",
+            "optional": true,
+            "outputKey": "voltage_limit_two",
+            "outputLayer": "meas",
+            "outputTableIndex": 0,
+            "type": "fileMetadata",
+            "value": "-1.30096435546875"
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
     "ols": "CHMO:0000025",
+    "ontology": "CHMO:0000025",
+    "software": [],
     "tables": [
         {
             "header": {

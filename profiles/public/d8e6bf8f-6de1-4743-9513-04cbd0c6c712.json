@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/csv",
@@ -197,6 +198,7 @@
         ]
     },
     "description": "multicolumn (4) file with no header - Data from Tasnim",
+    "devices": [],
     "id": "d8e6bf8f-6de1-4743-9513-04cbd0c6c712",
     "identifiers": [
         {
@@ -239,8 +241,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
     "ols": "CHMO:0000292",
+    "ontology": "CHMO:0000292",
+    "software": [],
     "tables": [
         {
             "header": {

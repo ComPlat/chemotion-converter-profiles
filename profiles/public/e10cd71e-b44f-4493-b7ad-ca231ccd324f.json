@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
@@ -21,22 +22,7 @@
                     }
                 ],
                 "header": [
-                    "X Intensity\tRecord 4: loaded lipid test2 1\tNone\tNone\tNone\tNone\tNone\tNone\tNone\tNone\tNone\tNone\tNone",
-                    [
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null
-                    ]
+                    "X Intensity\tRecord 4: loaded lipid test2 1\tNone\tNone\tNone\tNone\tNone\tNone\tNone\tNone\tNone\tNone\tNone"
                 ],
                 "metadata": {
                     "columns": "2",
@@ -147,6 +133,7 @@
         ]
     },
     "description": "DLS intensity INT (FI)",
+    "devices": [],
     "id": "e10cd71e-b44f-4493-b7ad-ca231ccd324f",
     "identifiers": [
         {
@@ -166,7 +153,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
+    "ols": "",
+    "ontology": "",
+    "software": [],
     "tables": [
         {
             "header": {

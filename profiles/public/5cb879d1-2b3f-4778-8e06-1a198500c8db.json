@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/plain",
@@ -199,6 +200,7 @@
         ]
     },
     "description": "---; ref location: TU Dresden, data: +, metadata: + \n",
+    "devices": [],
     "id": "5cb879d1-2b3f-4778-8e06-1a198500c8db",
     "identifiers": [
         {
@@ -356,8 +358,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
     "ols": "CHMO:0001167",
+    "ontology": "CHMO:0001167",
+    "software": [],
     "tables": [
         {
             "header": {

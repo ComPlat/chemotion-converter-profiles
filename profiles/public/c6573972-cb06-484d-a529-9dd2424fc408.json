@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "application/octet-stream",
@@ -858,6 +859,7 @@
         ]
     },
     "description": "PalmSens PSTrace; ref location: IPB Leibniz, data: +, metadata: +",
+    "devices": [],
     "id": "c6573972-cb06-484d-a529-9dd2424fc408",
     "identifiers": [
         {
@@ -912,8 +914,8 @@
             "key": "deviceserial",
             "match": "any",
             "optional": true,
-            "outputKey": "title",
-            "outputLayer": "general",
+            "outputKey": "serial",
+            "outputLayer": "instrument",
             "outputTableIndex": null,
             "tableIndex": 0,
             "type": "tableMetadata",
@@ -1019,15 +1021,17 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
     "ols": "CHMO:0000025",
+    "ontology": "CHMO:0000025",
+    "software": [],
     "tables": [
         {
             "header": {
                 "DATA CLASS": "XYPOINTS",
                 "DATA TYPE": "CYCLIC VOLTAMMETRY",
-                "XUNITS": "Voltage in V",
-                "YUNITS": "Current in A"
+                "XUNITS": "Voltage vs Ref",
+                "YUNITS": "Ampere"
             },
             "loopType": "all",
             "matchTables": true,

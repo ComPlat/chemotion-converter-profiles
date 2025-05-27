@@ -1,4 +1,5 @@
 {
+    "converter_version": "1.5.0",
     "data": {
         "metadata": {
             "content_type": "text/plain",
@@ -139,6 +140,7 @@
         ]
     },
     "description": "Inspect Table 50kN; ref location: Fraunhofer IWS, data: +, metadata: -\n;LowTemp",
+    "devices": [],
     "id": "6d344bc4-c4fb-4306-9d56-1e754e7e0590",
     "identifiers": [
         {
@@ -167,8 +169,10 @@
         }
     ],
     "isDisabled": false,
-    "last_migration": "20250507140000",
+    "last_migration": "20250523125234",
     "ols": "CHMO:0001163",
+    "ontology": "CHMO:0001163",
+    "software": [],
     "tables": [
         {
             "header": {
