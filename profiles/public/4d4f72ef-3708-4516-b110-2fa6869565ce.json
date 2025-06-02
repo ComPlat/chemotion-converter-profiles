@@ -1,0 +1,134 @@
+{
+  "data": {
+    "attachments": [],
+    "metadata": {
+      "content_type": "application/octet-stream",
+      "extension": ".xy",
+      "file_name": "CC-ME-32_250408_4.xy",
+      "mime_type": "text/plain",
+      "reader": "AsciiReader",
+      "uploaded": "2025-06-02T07:27:29.720383"
+    },
+    "tables": [
+      {
+        "columns": [
+          {
+            "key": "0",
+            "name": "Column #0"
+          },
+          {
+            "key": "1",
+            "name": "Column #1"
+          }
+        ],
+        "header": [
+          "#Date: 08-Apr-25 12:22; Sample: 4 CC-ME-32 08.04.2025 Conrads; Exposure Time: 4 minutes; Comment: Transmission; curved Germanium (111); Cu: 1.540598 Å; 40 kV; 40 mA; Mythen; moving PSD; 2theta/omega scan (2:1); 260 mm TubeMonoDist; 191 mm SampDetDist"
+        ],
+        "metadata": {
+          "columns": "2",
+          "rows": "5963"
+        },
+        "rows": [
+          [
+            "04.000",
+            "1547"
+          ],
+          [
+            "04.015",
+            "1565"
+          ],
+          [
+            "04.030",
+            "1517"
+          ],
+          [
+            "04.045",
+            "1569"
+          ],
+          [
+            "04.060",
+            "1557"
+          ],
+          [
+            "04.075",
+            "1542"
+          ],
+          [
+            "04.090",
+            "1521"
+          ],
+          [
+            "04.105",
+            "1537"
+          ],
+          [
+            "04.120",
+            "1559"
+          ],
+          [
+            "04.135",
+            "1599"
+          ]
+        ]
+      }
+    ]
+  },
+  "description": "??? ; ref location: ???, data: +, metadata: as comment",
+  "id": "4d4f72ef-3708-4516-b110-2fa6869565ce",
+  "identifiers": [
+    {
+      "key": "extension",
+      "match": "exact",
+      "optional": false,
+      "type": "fileMetadata",
+      "value": ".xy"
+    },
+    {
+      "key": "reader",
+      "match": "exact",
+      "optional": false,
+      "type": "fileMetadata",
+      "value": "AsciiReader"
+    },
+    {
+      "lineNumber": 1,
+      "match": "regex",
+      "optional": false,
+      "tableIndex": 0,
+      "type": "tableHeader",
+      "value": "(2theta/omega scan)"
+    },
+    {
+      "lineNumber": 1,
+      "match": "regex",
+      "optional": false,
+      "tableIndex": 0,
+      "type": "tableHeader",
+      "value": "(SampDetDist)"
+    }
+  ],
+  "isDefaultProfile": false,
+  "ols": "CHMO:0000156",
+  "tables": [
+    {
+      "header": {
+        "DATA CLASS": "XYPOINTS",
+        "DATA TYPE": "X-RAY DIFFRACTION",
+        "XUNITS": "2Theta",
+        "YUNITS": "Intensity"
+      },
+      "loopType": "all",
+      "table": {
+        "xColumn": {
+          "columnIndex": 0,
+          "tableIndex": 0
+        },
+        "yColumn": {
+          "columnIndex": 1,
+          "tableIndex": 0
+        }
+      }
+    }
+  ],
+  "title": "PXRD data from xy, data: +, metadata: -"
+}
