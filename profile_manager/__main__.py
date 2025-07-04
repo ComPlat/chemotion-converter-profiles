@@ -66,8 +66,8 @@ def _build_content_table(content_dict: dict, md_file: MdUtils, table_header: lis
 
     table_content = []
 
-    for entity_id in content_dict:
-        row = [entity_id] + [_clean_value(value) for value in content_dict[entity_id].values()]
+    for entity_id, entity in sorted(content_dict.items()):
+        row = [entity_id] + [_clean_value(value) for value in entity.values()]
         table_content.append(row)
 
     table = [table_header] + table_content
@@ -153,8 +153,6 @@ def build_index(reader, profiles):
 
     with md_file_path.open('r') as old_file:
         fc = old_file.read()
-        print(fc)
-        print(old_file_content)
         if fc == old_file_content:
             click.echo(f"❌ no update necessary {md_file_path} is up to date")
             sys.exit(211)
