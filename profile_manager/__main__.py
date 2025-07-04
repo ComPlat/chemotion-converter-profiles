@@ -153,9 +153,10 @@ def build_index(reader, profiles):
 
     with md_file_path.open('rb') as old_file:
         if old_file.read() == old_file_content:
-            click.echo("❌ no update necessary build/index.md is up to date")
+            click.echo(f"❌ no update necessary {md_file_path} is up to date")
             sys.exit(211)
-    click.echo("build/index.md is updated")
+    click.echo(f"{md_file_path} is updated")
+
 
 
 def validate_profiles():
