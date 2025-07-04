@@ -20,4 +20,11 @@ jobs:
           pip install -r ./requirements.txt
       - name: Build index
         run: |
-          python -m profile_manager build_index
+          python -m profile_manager build
+          exit_code=$?
+          if [ $exit_code -ne 211 ]; then
+            echo "❌ index.md is not updated"
+            exit 1
+          else
+            echo "✅ index.md is up to date"
+          fi
