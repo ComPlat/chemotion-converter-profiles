@@ -144,15 +144,18 @@ def build_index(reader, profiles):
     old_file_content = ""
     if md_file_path.exists():
         old_md_file_path = md_file_path.rename(md_file_path.parent.joinpath('index_old.md'))
-        with old_md_file_path.open('rb') as old_file:
+        with old_md_file_path.open('r') as old_file:
             old_file_content = old_file.read()
         old_md_file_path.unlink()
 
     md_file.create_md_file()
 
 
-    with md_file_path.open('rb') as old_file:
-        if old_file.read() == old_file_content:
+    with md_file_path.open('r') as old_file:
+        fc = old_file.read()
+        print(fc)
+        print(old_file_content)
+        if fc == old_file_content:
             click.echo(f"❌ no update necessary {md_file_path} is up to date")
             sys.exit(211)
     click.echo(f"{md_file_path} is updated")
