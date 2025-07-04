@@ -27,4 +27,5 @@ jobs:
             exit 1
           else
             echo "✅ index.md is up to date"
+            exit 0
           fi
