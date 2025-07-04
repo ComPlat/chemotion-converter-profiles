@@ -21,11 +21,3 @@ jobs:
       - name: Build index
         run: |
           python -m profile_manager build
-          exit_code=$?
-          if [ $exit_code -ne 211 ]; then
-            echo "❌ index.md is not up to date"
-            exit 1
-          else
-            echo "✅ index.md is up to date"
-            exit 0
-          fi

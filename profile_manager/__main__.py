@@ -153,10 +153,10 @@ def build_index(reader, profiles):
 
     with md_file_path.open('r') as old_file:
         fc = old_file.read()
-        if fc == old_file_content:
-            click.echo(f"❌ no update necessary {md_file_path} is up to date")
+        if fc != old_file_content:
+            click.echo(f"{md_file_path} is updated")
             sys.exit(211)
-    click.echo(f"{md_file_path} is updated")
+    click.echo(f"❌ no update necessary {md_file_path} is up to date")
 
 
 
