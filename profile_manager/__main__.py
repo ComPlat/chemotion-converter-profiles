@@ -64,19 +64,12 @@ def build_index():
 
     md_file.new_header(level=1, title='Profiles')
 
+    md_file.new_paragraph("A profile is JSON file defining a ruleset on how to convert your input file."
+                          "Normally, it is created by uploading an example of your input file to the GUI of the "+
+                          md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-client", text="converter client frontend") + ".")
+
     table_header = ["id"] + list(profile_entry.keys())
-    table_content = []
-
-    for profile_id in profiles_dict:
-        row = [profile_id] + [clean_value(value) for value in profiles_dict[profile_id].values()]
-        table_content.append(row)
-
-    table = [table_header] + table_content
-
-    # Flatten for Markdown or similar tools
-    flat_table = [cell for row in table for cell in row]
-    md_file.new_line()
-    md_file.new_table(columns=len(table_header), rows=int(len(flat_table)/len(table_header)), text=flat_table)
+    dict_to_md_table(md_file, table_header, profiles_dict)
 
     reader_dir = Path(__file__).parent.parent.joinpath('readers')
 
@@ -94,19 +87,13 @@ def build_index():
 
     md_file.new_header(level=1, title='Readers')
 
+    md_file.new_paragraph("A reader is a python class file handling the translation of your input file format to a usable python object."
+                          "Normally, it is created by uploading an example of your input file to the GUI of the " +
+                          md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-client",
+                                                  text="converter client frontend") + ".")
+
     table_header = ["file name"] + list(reader_entry.keys())
-    table_content = []
-
-    for profile_id in readers_dict:
-        row = [profile_id] + [clean_value(value) for value in readers_dict[profile_id].values()]
-        table_content.append(row)
-
-    table = [table_header] + table_content
-
-    # Flatten for Markdown or similar tools
-    flat_table = [cell for row in table for cell in row]
-    md_file.new_line()
-    md_file.new_table(columns=len(table_header), rows=int(len(flat_table) / len(table_header)), text=flat_table)
+    dict_to_md_table(md_file, table_header, readers_dict)
 
     md_file.create_md_file()
 
@@ -116,6 +103,26 @@ def build_index():
     # ...
 
     # todo: write to index html
+
+'''
+def fill_md_into_template(md_file, template_file):
+    with open(template_file, "r") as template:
+        template_content = template.read()
+    md_file.new_line()
+    md_file.new_raw_html(template_content)
+'''
+
+def dict_to_md_table(md_file, table_header, dict_to_write):
+    table_content = []
+    for key in dict_to_write:
+        row = [key] + [clean_value(value) for value in dict_to_write[key].values()]
+        table_content.append(row)
+    table = [table_header] + table_content
+    # Flatten for Markdown or similar tools
+    flat_table = [cell for row in table for cell in row]
+    md_file.new_line()
+    md_file.new_table(columns=len(table_header), rows=int(len(flat_table) / len(table_header)), text=flat_table)
+
 
 def validate_profiles():
     profile_dir = Path(__file__).parent.parent.joinpath('profiles/public')

@@ -5,7 +5,9 @@ Chemotion Converter
 
 Chemotion Converter is a very powerful python file converter running as a stand-alone flask server or included in an ELN and called via API during file upload. For local and offline users, it is also possible to use it as an CLI tool.
 # Profiles
-  
+
+
+A profile is JSON file defining a ruleset on how to convert your input file.Normally, it is created by uploading an example of your input file to the GUI of the [converter client frontend](https://github.com/ComPlat/chemotion-converter-client).  
 
 |id|reader|extension|title|description|devices|software|identifiers|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -45,7 +47,9 @@ Chemotion Converter is a very powerful python file converter running as a stand-
 |fbbe088a-b688-4609-8c00-086a149f61ba|ExcelReader|.xlsx|DLS-ACF|ACF - INT (FI)|[]|[]|[('reader', 'ExcelReader')]|
 
 # Readers
-  
+
+
+A reader is a python class file handling the translation of your input file format to a usable python object.Normally, it is created by uploading an example of your input file to the GUI of the [converter client frontend](https://github.com/ComPlat/chemotion-converter-client).  
 
 |file name|class name|identifier|priority|check|
 | :---: | :---: | :---: | :---: | :---: |
