@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.12", "3.13"]
+        python-version: ["3.12"]
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python ${{ matrix.python-version }}
@@ -20,4 +20,4 @@ jobs:
           pip install -r ./requirements.txt
       - name: Build index
         run: |
-          python -m profile_manager build_index
+          python -m profile_manager build

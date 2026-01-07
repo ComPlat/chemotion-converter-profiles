@@ -52,7 +52,7 @@ def read_metadata_from_readercode(path):
     tree = ast.parse(source)
     mv = MyVisitor()
     mv.visit(tree)
-    return mv.reader_name, mv.identifier, mv.priority, mv.check, mv.prepare_tables
+    return mv.reader_name, mv.identifier, mv.priority, f"<pre>{mv.check}</pre>", mv.prepare_tables
 
 if __name__ == "__main__":
     res = read_metadata_from_readercode(Path(__file__).parent.parent.joinpath('readers/aif.py'))
