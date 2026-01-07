@@ -2,6 +2,7 @@ import json
 import sys
 from pathlib import Path
 
+import markdown
 from converter_app.profile_migration.utils.registration import Migrations
 from converter_app.validation import validate_profile
 
@@ -33,6 +34,9 @@ def get_identifiers(json_file):
 
 
 def build_index():
+    profile_entry = {}
+    reader_entry = {}
+
     profile_dir = Path(__file__).parent.parent.joinpath('profiles/public')
     md_file = MdUtils(file_name='index', title=program_name)
     # Additional Markdown syntax...
@@ -80,7 +84,7 @@ def build_index():
             "class name": my_ast[0],
             "identifier": my_ast[1],
             "priority": my_ast[2],
-            "check": str(my_ast[3]).split('"""')[-1].strip()
+            "check": str(my_ast[3]).strip()
         }
 
         readers_dict[reader_name] = reader_entry
@@ -97,20 +101,18 @@ def build_index():
 
     md_file.create_md_file()
 
+    fill_md_into_html(md_file, "index_template.html")
 
 
 
-    # ...
-
-    # todo: write to index html
-
-'''
-def fill_md_into_template(md_file, template_file):
-    with open(template_file, "r") as template:
-        template_content = template.read()
-    md_file.new_line()
-    md_file.new_raw_html(template_content)
-'''
+def fill_md_into_html(md_file: MdUtils, html_file):
+    with open(html_file, "r") as file:
+        html_content = file.read()
+    markdown_content = markdown.markdown(md_file.file_data_text, extensions=["tables", "fenced_code"])
+    html_content = html_content.replace("{{ PROGRAM_NAME }}", program_name)
+    html_content = html_content.replace("{{  TABLE_CONTENT  }}", markdown_content)
+    with open("../index.html", "w") as file:
+        file.write(html_content)
 
 def dict_to_md_table(md_file, table_header, dict_to_write):
     table_content = []
@@ -136,12 +138,9 @@ def migrate_profiles():
     Migrations().run_migration(str(profile_dir))
 
 if __name__ == '__main__':
-    print(88)
     sysargs = list(sys.argv)
     print(sysargs)
     if len(sysargs) >= 2:
-        print(33)
         if sys.argv[1] == 'build_index':
-            print(55)
             build_index()
     print("EOC reached")
