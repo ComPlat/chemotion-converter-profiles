@@ -1,5 +1,7 @@
 import ast
+from importlib.resources.abc import Traversable
 from pathlib import Path
+from typing import Union
 
 
 class MyVisitor(ast.NodeVisitor):
@@ -42,17 +44,31 @@ class MyVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
 
-def read_metadata_from_readercode(path):
+def read_metadata_from_readercode(reader: Union[Path, Traversable]):
     """
-    :param path:
-    :return: mv.reader_name, mv.identifier, mv.priority, mv.check, mv.prepare_tables
+    Accepts either a pathlib.Path or an importlib.resources Traversable.
     """
-    with open(path) as f:
-        source = f.read()
+    if isinstance(reader, Path):
+        source = reader.read_text(encoding="utf-8")
+    elif isinstance(reader, Traversable):
+        source = reader.read_text(encoding="utf-8")
+    else:
+        raise TypeError(
+            f"Unsupported reader type: {type(reader)!r}. "
+            "Expected pathlib.Path or importlib.resources.abc.Traversable."
+        )
+
     tree = ast.parse(source)
     mv = MyVisitor()
     mv.visit(tree)
-    return mv.reader_name, mv.identifier, mv.priority, f"<pre>{mv.check}</pre>", mv.prepare_tables
+
+    return (
+        mv.reader_name,
+        mv.identifier,
+        mv.priority,
+        f"<pre>{mv.check}</pre>" if mv.check else "",
+        mv.prepare_tables,
+    )
 
 if __name__ == "__main__":
     res = read_metadata_from_readercode(Path(__file__).parent.parent.joinpath('readers/aif.py'))

@@ -1,8 +1,11 @@
 import json
+import os
 import sys
+from importlib.resources import files
 from pathlib import Path
 
 import markdown
+import pyprojroot
 from converter_app.profile_migration.utils.registration import Migrations
 from converter_app.validation import validate_profile
 
@@ -75,19 +78,28 @@ def build_index():
     table_header = ["id"] + list(profile_entry.keys())
     dict_to_md_table(md_file, table_header, profiles_dict)
 
-    reader_dir = Path(__file__).parent.parent.joinpath('readers')
+    reader_dir = files("converter_app") / "readers"
 
-    for reader in reader_dir.glob("*.py"):
-        my_ast = read_metadata_from_readercode(reader)
-        reader_name = reader.stem
-        reader_entry = {
-            "class name": my_ast[0],
-            "identifier": my_ast[1],
-            "priority": my_ast[2],
-            "check": str(my_ast[3]).strip()
-        }
+    for reader in sorted(reader_dir.iterdir(), key=lambda r: r.name):
+        if reader.is_file() and reader.name.endswith(".py"):
+            try:
+                my_ast = read_metadata_from_readercode(reader)
 
-        readers_dict[reader_name] = reader_entry
+                # works for Path and Traversable
+                reader_name = reader.name.rsplit(".", 1)[0]
+
+                reader_entry = {
+                    "class name": my_ast[0],
+                    "identifier": my_ast[1],
+                    "priority": my_ast[2],
+                    "check": my_ast[3].strip() if my_ast[3] else "",
+                }
+
+                readers_dict[reader_name] = reader_entry
+
+            except Exception as e:
+                print(f"Skipping {reader.name}: {e}")
+                continue
 
     md_file.new_header(level=1, title='Readers')
 
@@ -111,7 +123,10 @@ def fill_md_into_html(md_file: MdUtils, html_file):
     markdown_content = markdown.markdown(md_file.file_data_text, extensions=["tables", "fenced_code"])
     html_content = html_content.replace("{{ PROGRAM_NAME }}", program_name)
     html_content = html_content.replace("{{  TABLE_CONTENT  }}", markdown_content)
-    with open("../index.html", "w") as file:
+    base_path = pyprojroot.find_root(pyprojroot.has_dir("build"))
+    os.makedirs(os.path.join(base_path, "docs"), exist_ok=True)
+    index_path = Path(base_path, "docs", "index.html")
+    with open(index_path, "w") as file:
         file.write(html_content)
 
 def dict_to_md_table(md_file, table_header, dict_to_write):
@@ -139,7 +154,7 @@ def migrate_profiles():
 
 if __name__ == '__main__':
     sysargs = list(sys.argv)
-    print(sysargs)
+    # print(sysargs)
     if len(sysargs) >= 2:
         if sys.argv[1] == 'build_index':
             build_index()

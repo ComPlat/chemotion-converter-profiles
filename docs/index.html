@@ -422,6 +422,13 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: center;"><strong>init</strong></td>
+<td style="text-align: center;">None</td>
+<td style="text-align: center;">None</td>
+<td style="text-align: center;">None</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
 <td style="text-align: center;">afm</td>
 <td style="text-align: center;">AfmReader</td>
 <td style="text-align: center;">afm_reader</td>
@@ -436,18 +443,18 @@
 <td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.file.suffix.lower() in ('.txt', '.aif') and self.file.mime_type == 'text/plain':<br>        first_line = self.file.string.splitlines()[0]<br>        return 'raw2aif' in first_line<br>    return False</pre></td>
 </tr>
 <tr>
-<td style="text-align: center;">ascii</td>
-<td style="text-align: center;">AsciiReader</td>
-<td style="text-align: center;">ascii_reader</td>
-<td style="text-align: center;">1000</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return not self.file.encoding == 'binary'</pre></td>
-</tr>
-<tr>
 <td style="text-align: center;">asc_zip</td>
 <td style="text-align: center;">AscZipReader</td>
 <td style="text-align: center;">asc_zip_reader</td>
 <td style="text-align: center;">10</td>
 <td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if self.file.suffix.lower() == '.zip' and self.file.mime_type == 'application/zip':<br>        with ZipFile(self.file.fp, 'r') as zip_obj:<br>            list_of_file_names = zip_obj.namelist()<br>            if any((fileName.lower().endswith('.asc') for fileName in list_of_file_names)):<br>                with tempfile.TemporaryDirectory() as td:<br>                    zipdir = os.path.join(td, os.path.basename(self.file.name))<br>                    os.makedirs(zipdir)<br>                    result = True<br>                    for file_name in list_of_file_names:<br>                        if file_name.lower().endswith('.asc'):<br>                            path_file_name = zip_obj.extract(file_name, zipdir)<br>                            with open(path_file_name, mode='r', encoding='latin_1') as f:<br>                                self.filedata[file_name] = f.readlines()<br>    return result</pre></td>
+</tr>
+<tr>
+<td style="text-align: center;">ascii</td>
+<td style="text-align: center;">AsciiReader</td>
+<td style="text-align: center;">ascii_reader</td>
+<td style="text-align: center;">1000</td>
+<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return not self.file.encoding == 'binary'</pre></td>
 </tr>
 <tr>
 <td style="text-align: center;">brml</td>
@@ -475,7 +482,7 @@
 <td style="text-align: center;">CfxReader</td>
 <td style="text-align: center;">cfx_reader</td>
 <td style="text-align: center;">11</td>
-<td style="text-align: center;"><pre>None</pre></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr>
 <td style="text-align: center;">cif</td>
@@ -632,25 +639,11 @@
 <td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if super().check():<br>        first_line = self.file.string.splitlines()[0]<br>        result = first_line.startswith('$SEM_DATA_VERSION')<br>    return result</pre></td>
 </tr>
 <tr>
-<td style="text-align: center;">stoe_raw</td>
-<td style="text-align: center;">StoeRawReader</td>
-<td style="text-align: center;">stoe_raw_reader</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    self.file_type = self.get_file_type_version()<br>    return self.file.suffix.lower() == '.raw' and self.file.encoding.lower() == 'binary' and (self.file_type == 'RAW_1.06Powdat')</pre></td>
-</tr>
-<tr>
 <td style="text-align: center;">tif</td>
 <td style="text-align: center;">TifReader</td>
 <td style="text-align: center;">tif_reader</td>
 <td style="text-align: center;">96</td>
 <td style="text-align: center;"><pre>def check(self):<br>    result = False<br>    if self.file.suffix.lower() == '.tif' and self.file.mime_type == 'image/tiff':<br>        self._parsed_values = self._read_img()<br>        result = self._parsed_values is not None and len(self._parsed_values) &gt; 0<br>    return result</pre></td>
-</tr>
-<tr>
-<td style="text-align: center;">tvb</td>
-<td style="text-align: center;">TvbReader</td>
-<td style="text-align: center;">tvb_reader</td>
-<td style="text-align: center;">5</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix.lower() == '.tvb' and self.file.encoding.lower() == 'binary'</pre></td>
 </tr>
 <tr>
 <td style="text-align: center;">uvvis</td>
@@ -685,7 +678,7 @@
 <td style="text-align: center;">XRDMLReader</td>
 <td style="text-align: center;">xrdml_reader</td>
 <td style="text-align: center;">None</td>
-<td style="text-align: center;"><pre>None</pre></td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
