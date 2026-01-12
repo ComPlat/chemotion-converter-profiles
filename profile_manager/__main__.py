@@ -48,11 +48,17 @@ def build_index():
                           f"For local and offline users, it is also possible to use it as an CLI tool.")
     for profile in profile_dir.glob("*.json"):
         with open(profile, "r") as file:
-            json_profile = json.loads(file.read())
+            try:
+                json_profile = json.loads(file.read())
+            except json.JSONDecodeError:
+                print(f"Skipping {profile}: invalid JSON")
+                continue
+        ''' to be done later, validation is needed or all versions to avoid faulty jsons
         try:
             validate_profile(json_profile)
         except:
             pass # continue
+        '''
 
         # Extract relevant fields
         profile_id = json_profile.get("id")
@@ -108,7 +114,9 @@ def build_index():
                           md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-client",
                                                   text="converter client frontend") + ".")
 
-    table_header = ["file name"] + list(reader_entry.keys())
+    table_header = ["file name"]
+    if reader_entry:
+        table_header += list(reader_entry.keys())
     dict_to_md_table(md_file, table_header, readers_dict)
 
     md_file.create_md_file()
