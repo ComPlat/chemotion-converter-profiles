@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ PROGRAM_NAME }}</title>
+
+    <style>
+      :root { color-scheme: light dark; }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+        line-height: 1.6;
+      }
+      header {
+        padding: 24px 16px;
+        border-bottom: 1px solid #ddd;
+      }
+      main {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px 5px 30px;
+      }
+      /* Optional: basic styling for rendered Markdown content */
+      .markdown h1, .markdown h2, .markdown h3 { line-height: 1.25; margin-top: 1.6em; }
+      .markdown pre { padding: 12px; overflow: auto; border: 1px solid #ddd; border-radius: 8px; }
+      .markdown code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+      .markdown table { border-collapse: collapse; width: 100%; }
+      .markdown th, .markdown td { border: 1px solid #ddd; padding: 8px; vertical-align: top; }
+      .markdown blockquote { margin: 0; padding-left: 12px; border-left: 4px solid #ddd; opacity: 0.9; }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>{{ PROGRAM_NAME }}</h1>
+    </header>
+
+    <main>
+      <!-- Replace this with HTML produced by your Markdown renderer -->
+      <article class="markdown">
+        {{  TABLE_CONTENT  }}
+      </article>
+    </main>
+  </body>
+</html>

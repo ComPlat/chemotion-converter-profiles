@@ -1,163 +1,152 @@
 import json
 import os
 import sys
-import uuid
-from io import BufferedReader
+from importlib.resources import files
 from pathlib import Path
 
-import click
+import markdown
+import pyprojroot
 from converter_app.profile_migration.utils.registration import Migrations
 from converter_app.validation import validate_profile
-import converter_app.readers  as readers
 
-from mdutils.mdutils import MdUtils  # https://github.com/didix21/mdutils
+from mdutils.mdutils import MdUtils # https://github.com/didix21/mdutils
 
 from profile_manager.parse_ast import read_metadata_from_readercode
 
 program_name = "Chemotion Converter"
+profiles_dict = {}
+readers_dict = {}
 
-@click.group()
-def cli():
-    """A collection of helpful tools for maintaining converter profiles."""
-    pass
-
-
-def _clean_value(val):
+def clean_value(val):
     # Convert to string and replace line breaks with space
     return str(val).replace("\n", "<br>").replace("\r", " ").strip()
 
-
-def _get_identifiers(json_file):
+def get_identifiers(json_file):
     identifiers = json_file.get("identifiers", [])
 
     # Filter and extract tuples where optional == False
     required_identifiers = [
-        f'__{entry.get("key")}__ _must be:_ {entry.get("value")}'
+        (entry.get("key"), entry.get("value"))
         for entry in identifiers
         if not entry.get("optional", True)
            and entry.get("key") is not None
            and entry.get("value") is not None
     ]
 
-    return '\n'.join(required_identifiers)
+    return required_identifiers
 
 
-def _extract_profiles(profile):
-    with open(profile, "r") as file:
-        json_profile = json.loads(file.read())
-    try:
-        validate_profile(json_profile)
-    except:
-        pass  # continue
-    # Extract relevant fields
-    profile_id = json_profile.get("id")
-    profile_entry = {
-        "reader": json_profile["data"]["metadata"].get("reader"),
-        "extension": json_profile["data"]["metadata"].get("extension"),
-        "title": json_profile.get("title"),
-        "description": json_profile.get("description"),
-        "devices": json_profile.get("devices"),
-        "software": json_profile.get("software"),
-        "identifiers": _get_identifiers(json_profile)
-    }
-    return profile_entry, profile_id
+def build_index():
+    profile_entry = {}
+    reader_entry = {}
 
-def _build_content_table(content_dict: dict, md_file: MdUtils, table_header: list):
-
-    table_content = []
-
-    for entity_id, entity in sorted(content_dict.items()):
-        row = [entity_id] + [_clean_value(value) for value in entity.values()]
-        table_content.append(row)
-
-    table = [table_header] + table_content
-
-    # Flatten for Markdown or similar tools
-    flat_table = [cell for row in table for cell in row]
-    md_file.new_line()
-    md_file.new_table(columns=len(table_header), rows=len(content_dict) + 1, text=flat_table, text_align='left')
-
-
-def _build_profiles_table(md_file: MdUtils):
     profile_dir = Path(__file__).parent.parent.joinpath('profiles/public')
-    profiles_dict = {}
-    for profile in profile_dir.glob("*.json"):
-        profile_entry, profile_id = _extract_profiles(profile)
-        profiles_dict[profile_id] = profile_entry
-
-    profile_entry = next(iter(profiles_dict.values()))
-    if not profile_entry:
-        return
-    md_file.new_header(level=1, title='Profiles')
-
-    table_header = ["id"] + list(profile_entry.keys())
-
-    _build_content_table(profiles_dict, md_file, table_header)
-
-
-
-def _build_reader_table(md_file: MdUtils):
-    reader_dir = Path(readers.__file__).parent
-    readers_dict = {}
-    for reader in reader_dir.glob("*.py"):
-        my_ast = read_metadata_from_readercode(reader)
-        reader_name = reader.stem
-        reader_entry = {
-            "class name": my_ast[0],
-            "identifier": my_ast[1],
-            "priority": my_ast[2],
-            "check":  my_ast[3]
-        }
-
-        readers_dict[reader_name] = reader_entry
-
-    md_file.new_header(level=1, title='Readers')
-    reader_entry = next(iter(readers_dict.values()))
-    if not reader_entry:
-        return
-    table_header = ["file name"] + list(reader_entry.keys())
-
-    _build_content_table(readers_dict, md_file, table_header)
-
-
-@cli.command('build')
-@click.option('--reader', is_flag=True, default=False, help="If set, the index.md file contains only a table with information about all the readers!")
-@click.option('--profiles', is_flag=True, default=False, help="If set, the index.md file contains only a table with information about all the profiles!")
-def build_index(reader, profiles):
-    """Builds an index.md page. This page contains a table of all public available Converter profiles and reader."""
-    md_file_path = Path(__file__).parent.parent.joinpath('build/index.md')
-    md_file_path.parent.mkdir(parents=True, exist_ok=True)
-    md_file = MdUtils(file_name=md_file_path.__str__(), title=program_name)
+    md_file = MdUtils(file_name='index', title=program_name)
     # Additional Markdown syntax...
     md_file.new_paragraph(f"{program_name} is a very powerful python file converter "
                           f"running as a stand-alone flask server or included in an ELN and called via API during file upload. "
                           f"For local and offline users, it is also possible to use it as an CLI tool.")
+    for profile in profile_dir.glob("*.json"):
+        with open(profile, "r") as file:
+            try:
+                json_profile = json.loads(file.read())
+            except json.JSONDecodeError:
+                print(f"Skipping {profile}: invalid JSON")
+                continue
+        ''' to be done later, validation is needed or all versions to avoid faulty jsons
+        try:
+            validate_profile(json_profile)
+        except:
+            pass # continue
+        '''
 
-    if reader and profiles:
-        reader = profiles = False
+        # Extract relevant fields
+        profile_id = json_profile.get("id")
+        profile_entry = {
+            "reader": json_profile["data"]["metadata"].get("reader"),
+            "extension": json_profile["data"]["metadata"].get("extension"),
+            "title": json_profile.get("title"),
+            "description": json_profile.get("description"),
+            "devices": json_profile.get("devices"),
+            "software": json_profile.get("software"),
+            "identifiers": get_identifiers(json_profile)
+        }
 
-    if not reader:
-        _build_profiles_table(md_file)
-    if not profiles:
-        _build_reader_table(md_file)
+        # Save to the main dictionary
+        profiles_dict[profile_id] = profile_entry
 
-    old_file_content = ""
-    if md_file_path.exists():
-        old_md_file_path = md_file_path.rename(md_file_path.parent.joinpath('index_old.md'))
-        with old_md_file_path.open('r') as old_file:
-            old_file_content = old_file.read()
-        old_md_file_path.unlink()
+    md_file.new_header(level=1, title='Profiles')
+
+    md_file.new_paragraph("A profile is JSON file defining a ruleset on how to convert your input file."
+                          "Normally, it is created by uploading an example of your input file to the GUI of the "+
+                          md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-client", text="converter client frontend") + ".")
+
+    table_header = ["id"] + list(profile_entry.keys())
+    dict_to_md_table(md_file, table_header, profiles_dict)
+
+    reader_dir = files("converter_app") / "readers"
+
+    for reader in sorted(reader_dir.iterdir(), key=lambda r: r.name):
+        if reader.is_file() and reader.name.endswith(".py"):
+            try:
+                my_ast = read_metadata_from_readercode(reader)
+
+                # works for Path and Traversable
+                reader_name = reader.name.rsplit(".", 1)[0]
+
+                reader_entry = {
+                    "class name": my_ast[0],
+                    "identifier": my_ast[1],
+                    "priority": my_ast[2],
+                    "check": my_ast[3].strip() if my_ast[3] else "",
+                }
+
+                readers_dict[reader_name] = reader_entry
+
+            except Exception as e:
+                print(f"Skipping {reader.name}: {e}")
+                continue
+
+    md_file.new_header(level=1, title='Readers')
+
+    md_file.new_paragraph("A reader is a python class file handling the translation of your input file format to a usable python object."
+                          "Normally, it is created by uploading an example of your input file to the GUI of the " +
+                          md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-client",
+                                                  text="converter client frontend") + ".")
+
+    table_header = ["file name"]
+    if reader_entry:
+        table_header += list(reader_entry.keys())
+    dict_to_md_table(md_file, table_header, readers_dict)
 
     md_file.create_md_file()
 
+    fill_md_into_html(md_file, "index_template.html")
 
-    with md_file_path.open('r') as old_file:
-        fc = old_file.read()
-        if fc != old_file_content:
-            click.echo(f"{md_file_path} is updated")
-            sys.exit(211)
-    click.echo(f"❌ no update necessary {md_file_path} is up to date")
 
+
+def fill_md_into_html(md_file: MdUtils, html_file):
+    with open(html_file, "r") as file:
+        html_content = file.read()
+    markdown_content = markdown.markdown(md_file.file_data_text, extensions=["tables", "fenced_code"])
+    html_content = html_content.replace("{{ PROGRAM_NAME }}", program_name)
+    html_content = html_content.replace("{{  TABLE_CONTENT  }}", markdown_content)
+    base_path = pyprojroot.find_root(pyprojroot.has_dir("build"))
+    os.makedirs(os.path.join(base_path, "docs"), exist_ok=True)
+    index_path = Path(base_path, "docs", "index.html")
+    with open(index_path, "w") as file:
+        file.write(html_content)
+
+def dict_to_md_table(md_file, table_header, dict_to_write):
+    table_content = []
+    for key in dict_to_write:
+        row = [key] + [clean_value(value) for value in dict_to_write[key].values()]
+        table_content.append(row)
+    table = [table_header] + table_content
+    # Flatten for Markdown or similar tools
+    flat_table = [cell for row in table for cell in row]
+    md_file.new_line()
+    md_file.new_table(columns=len(table_header), rows=int(len(flat_table) / len(table_header)), text=flat_table)
 
 
 def validate_profiles():
@@ -171,6 +160,10 @@ def migrate_profiles():
     profile_dir = Path(__file__).parent.parent.joinpath('profiles')
     Migrations().run_migration(str(profile_dir))
 
-
 if __name__ == '__main__':
-    cli()
+    sysargs = list(sys.argv)
+    # print(sysargs)
+    if len(sysargs) >= 2:
+        if sys.argv[1] == 'build_index':
+            build_index()
+    print("EOC reached")
