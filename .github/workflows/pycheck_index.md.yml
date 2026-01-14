@@ -20,4 +20,4 @@ jobs:
           pip install -r ./requirements.txt
       - name: Build index
         run: |
-          python -m profile_manager build
+          python -m profile_manager build_index
