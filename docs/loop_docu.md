@@ -175,7 +175,7 @@ It lets a user decide:
 1. **Whether an output table should be repeated for multiple input tables**, and  
 2. **According to which rule those input tables should be selected.**
 
-Below is what each visible element means, in plain English, and how it connects to the backend behavior.
+Below is what each visible element means and how it connects to the backend behavior.
 
 ---
 
@@ -206,6 +206,9 @@ A dropdown with these options:
 
 The user chooses one of these options for each output table.
 
+<img width="785" height="443" alt="grafik" src="https://github.com/user-attachments/assets/02b32599-05c6-4f22-adca-d9cbb5e5cb32" />
+
+
 ### How this relates to the backend
 
 The selected value is stored as `loopType` in `profile.tables[index].loopType`. In the backend, this corresponds to:
@@ -222,13 +225,27 @@ The options mean:
   Backend: `loopType` is not `'all'`, and the frontend uses `loop_header` rules.  
   → The backend uses `loop_header` to check if input tables have matching **column headers** (column names and positions).
 
+  <img width="1626" height="414" alt="grafik" src="https://github.com/user-attachments/assets/43d39f23-4b86-4067-8aef-ada996008947" />
+
+
 - **`theader`**  
   Backend: `loopType` is not `'all'`, and the frontend uses `loop_theader`.  
   → The backend uses `loop_theader` and `_search_regex` to check for **matching table header text/patterns**.
 
+  <img width="742" height="106" alt="grafik" src="https://github.com/user-attachments/assets/91eb1a42-f501-47da-aedb-068eb2692699" />
+
+
 - **`metadata`**  
   Backend: `loopType` is not `'all'`, and the frontend uses `loop_metadata`.  
   → The backend uses `loop_metadata` to compare **metadata values** between tables.
+
+  <img width="760" height="112" alt="grafik" src="https://github.com/user-attachments/assets/1e6145cb-9829-4845-a24f-3fd51c21a368" />
+
+- **it is also possible to combine all settings with a logical "&"**
+
+  <img width="754" height="184" alt="grafik" src="https://github.com/user-attachments/assets/1ab58e89-7f59-4421-9718-dae5087fc625" />
+
+
 
 So, this dropdown directly controls **which type of loop condition** the backend will apply.
 
