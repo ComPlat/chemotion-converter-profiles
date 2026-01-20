@@ -1,4 +1,4 @@
-chemotion-converter-app @ git+https://github.com/ComPlat/chemotion-converter-app@209-toml-for-submodules
+chemotion-converter-app @ git+https://github.com/ComPlat/chemotion-converter-app
 mdutils ~= 1.7.0
 click ~= 8.2.1
 gemmi>=0.6.7

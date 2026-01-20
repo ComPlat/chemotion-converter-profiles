@@ -1,4 +1,4 @@
-name: Pytest
+name: Build index page
 
 on: [push]
 
