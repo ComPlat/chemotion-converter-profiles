@@ -31,3 +31,9 @@ jobs:
       - name: Build index
         run: |
           python -m profile_manager build_index
+      - name: Where is index.html?
+        run: |
+          pwd
+          ls -la
+          find . -maxdepth 4 -name index.html -o -name index.md
+
