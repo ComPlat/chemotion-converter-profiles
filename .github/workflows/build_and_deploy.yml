@@ -1,6 +1,8 @@
-name: Build & Deploy Pages (test branch)
+name: Build & Deploy Pages
 
 on:
+  push:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -9,13 +11,13 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages-test"
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
   build:
-    # Only run when workflow is started from the "test" branch
-    if: github.ref == 'refs/heads/github-workflow'
+    # Ensure deploys only come from main (both push + manual runs must select main)
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
@@ -47,7 +49,7 @@ jobs:
           path: docs
 
   deploy:
-    if: github.ref == 'refs/heads/github-workflow'
+    if: github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     environment:
