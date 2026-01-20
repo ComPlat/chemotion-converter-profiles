@@ -1,23 +1,60 @@
-name: Pytest
+name: Build & Deploy Pages (test branch)
 
-on: [push]
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages-test"
+  cancel-in-progress: true
 
 jobs:
   build:
+    # Only run when workflow is started from the "test" branch
+    if: github.ref == 'refs/heads/github-workflow'
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: "3.12"
+
       - name: Install dependencies
         run: |
-          pip install pip --upgrade
-          pip install -r ./requirements.txt
-      - name: Build index
+          python -m pip install --upgrade pip
+          python -m pip install --no-cache-dir -r requirements.txt
+
+      - name: Build index into docs/
         run: |
-          python -m profile_manager build
+          python -m profile_manager build_index
+          echo "Built files in docs/:"
+          ls -la docs
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact (docs/)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+  deploy:
+    if: github.ref == 'refs/heads/github-workflow'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
