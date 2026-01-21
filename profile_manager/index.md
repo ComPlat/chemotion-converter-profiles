@@ -28,6 +28,8 @@ A profile is JSON file defining a ruleset on how to convert your input file.Norm
 |71883827-4472-48d8-becf-64ea89324f3e|SecReader|.TXT|SEC 2|Size Exclusion Chromatography with two Detector Outputs|[]|[]|[('reader', 'SecReader'), ('table_name', 'MWD'), ('Detector 2', 'I2')]|
 |799f3db4-fd21-4aa7-a7bd-7c5548cbe316|DtaReader|.DTA|CV Gamry||[]|[]|[('extension', '.DTA'), ('TITLE', 'Cyclic')]|
 |8079b064-6314-4d99-b13b-e4f590cf556f|CSVReader|.csv|UV-VIS data from csv, data: +, metadata: -|Cary 60; ref location: KIT CN, data: +, metadata: +|[]|[]|[('column_00', 'Wavelength'), ('column_01', 'Abs')]|
+|8b00e934-9bc4-4248-a2de-b303d2e93aa4|DtaReader|.DTA|## Nameless (04/12/2025 14:33:36)|Test|['g', 'a']|['windows', 'x', 'linux']|[('file_name', 'DHM-12-CV-1mM+1mMFc-N2_100mVps-No9.DTA')]|
+|8c8c4b18-143a-4245-a8d4-29e47c6b86a1|BioLogic|.gz|Biologic as tar gz|CV Files|[]|[]|[('reader', 'BioLogic'), ('settings.technique', 'CV')]|
 |a5b05507-aed2-462b-a526-3fee53c87a48|CSVReader|.txt|DLS data from txt, data: +, metadata: -|---; ref location: ---, data: +, metadata: -<br>;Subtype 1|[]|[]|[('file_name', 'SSP-0'), ('extension', '.txt')]|
 |af891148-ebcc-4e5d-a481-fa6acc853699|CSVReader|.txt|UV-VIS data from txt, data: +, metadata: -|Horiba Duetta; ref location: KIT CN, data: +, metadata: +|[]|[]|[]|
 |b31ef3df-eacf-4440-bbb3-34b073be9eb9|CSVReader|.txt|CD MS Spectra data from txt, data: +, metadata: -|LCMSsolution; ref location: KIT CN, data: +, metadata: + ;Subtype 2|[]|[]|[('reader', 'CSVReader')]|

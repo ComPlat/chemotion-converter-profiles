@@ -121,11 +121,12 @@ def build_index():
 
     md_file.create_md_file()
 
-    fill_md_into_html(md_file, "index_template.html")
+    template_path = Path(__file__).parent.joinpath("index_template.html")
+    fill_md_into_html(md_file, template_path)
 
 
 
-def fill_md_into_html(md_file: MdUtils, html_file):
+def fill_md_into_html(md_file: MdUtils, html_file: Path):
     with open(html_file, "r") as file:
         html_content = file.read()
     markdown_content = markdown.markdown(md_file.file_data_text, extensions=["tables", "fenced_code"])
