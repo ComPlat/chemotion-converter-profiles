@@ -78,7 +78,7 @@ def build_index():
     md_file.new_header(level=1, title='Profiles')
 
     md_file.new_paragraph("A profile is JSON file defining a ruleset on how to convert your input file."
-                          "Normally, it is created by uploading an example of your input file to the GUI of the "+
+                          " Normally, it is created by uploading an example of your input file to the GUI of the "+
                           md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-client", text="converter client frontend") + ".")
 
     table_header = ["id"] + list(profile_entry.keys())
@@ -110,9 +110,9 @@ def build_index():
     md_file.new_header(level=1, title='Readers')
 
     md_file.new_paragraph("A reader is a python class file handling the translation of your input file format to a usable python object."
-                          "Normally, it is created by uploading an example of your input file to the GUI of the " +
-                          md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-client",
-                                                  text="converter client frontend") + ".")
+                          " It is created by providing an example file to the developers or python coders and used and defined by the " +
+                          md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-app",
+                                                  text="converter app backend") + ".")
 
     table_header = ["file name"]
     if reader_entry:
