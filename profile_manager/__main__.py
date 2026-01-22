@@ -146,6 +146,39 @@ def fill_md_into_html(md_file: MdUtils, html_file: Path):
     with open(index_path, "w") as file:
         file.write(html_content)
 
+def convert_docs_md_to_html():
+    docs_dir = Path(__file__).parent.parent.joinpath("docs")
+    if not docs_dir.exists():
+        return
+    for md_file in docs_dir.glob("*.md"):
+        with open(md_file, "r") as file:
+            md_text = file.read()
+        html_body = markdown.markdown(md_text, extensions=["tables", "fenced_code"])
+        html_title = md_file.stem.replace("_", " ").title()
+        html_text = (
+            "<!doctype html>\n"
+            "<html lang=\"en\">\n"
+            "<head>\n"
+            "  <meta charset=\"utf-8\">\n"
+            f"  <title>{html_title}</title>\n"
+            "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+            "  <style>\n"
+            "    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; }\n"
+            "    pre { overflow-x: auto; }\n"
+            "    code { font-family: \"Courier New\", monospace; }\n"
+            "    table { border-collapse: collapse; }\n"
+            "    th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; }\n"
+            "  </style>\n"
+            "</head>\n"
+            "<body>\n"
+            f"{html_body}\n"
+            "</body>\n"
+            "</html>\n"
+        )
+        html_path = md_file.with_suffix(".html")
+        with open(html_path, "w") as file:
+            file.write(html_text)
+
 def dict_to_md_table(md_file, table_header, dict_to_write):
     table_content = []
     for key in dict_to_write:
@@ -175,4 +208,5 @@ if __name__ == '__main__':
     if len(sysargs) >= 2:
         if sys.argv[1] == 'build_index':
             build_index()
+            convert_docs_md_to_html()
     print("EOC reached")
