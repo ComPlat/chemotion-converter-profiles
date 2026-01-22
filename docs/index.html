@@ -1,4 +1,4 @@
- <!--If you want to change design and css style of the index.html do it only on this template file, !never! edit the index in the folder /docs/index.html. It is locally only for testing and will be overwritten by the build process.-->
+ <!--If you want to change design and css style of the index.html do it only on the template file, !never! edit the index in the folder /docs/index.html. It is locally only for testing and will be overwritten by the build process.-->
 <!doctype html>
 <html lang="en">
   <head>
@@ -40,397 +40,9 @@
     <main>
       <!-- Replace this with HTML produced by your Markdown renderer -->
       <article class="markdown">
-        <p>Chemotion Converter is a very powerful python file converter running as a stand-alone flask server or included in an ELN and called via API during file upload. For local and offline users, it is also possible to use it as an CLI tool.</p>
-<h1>Profiles</h1>
-<p>A profile is JSON file defining a ruleset on how to convert your input file.Normally, it is created by uploading an example of your input file to the GUI of the <a href="https://github.com/ComPlat/chemotion-converter-client">converter client frontend</a>.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">id</th>
-<th style="text-align: center;">reader</th>
-<th style="text-align: center;">extension</th>
-<th style="text-align: center;">title</th>
-<th style="text-align: center;">description</th>
-<th style="text-align: center;">devices</th>
-<th style="text-align: center;">software</th>
-<th style="text-align: center;">identifiers</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">0cd6596c-83d2-49ab-a982-1dfec98d16ba</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.dpt</td>
-<td style="text-align: center;">IR DPT</td>
-<td style="text-align: center;">IR-Alpha (CS)</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('extension', '.dpt')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">0d04f3c5-43d4-408a-85ef-34b33975020a</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.csv</td>
-<td style="text-align: center;">DSC with Time</td>
-<td style="text-align: center;">differential scanning calorimetry</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'CSVReader'), ('extension', '.csv'), ('column_02', 'DSC/(mW/mg)'), ('column_00', '##Temp./°C')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">0d7dd8d4-a599-4151-855e-643956a7362c</td>
-<td style="text-align: center;">BrmlReader</td>
-<td style="text-align: center;">.brml</td>
-<td style="text-align: center;">X-ray diffraction data from brml, data: +, metadata: -</td>
-<td style="text-align: center;">---; ref location: ---, data: +, metadata: -</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('extension', '.brml')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">15400217-b730-47db-9d5c-a300bce7ae95</td>
-<td style="text-align: center;">ExcelReader</td>
-<td style="text-align: center;">.xlsx</td>
-<td style="text-align: center;">UVVIS CS</td>
-<td style="text-align: center;">multicolumn (2) XLSX file with header at the end - Data from Tasnim</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'ExcelReader'), ('extension', '.xlsx')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">2a913039-c48d-4fd5-9fbb-706733e53f76</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">UV-Vis</td>
-<td style="text-align: center;">UV Vis INT (FI)</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'CSVReader')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">3e2fb90e-b6b6-4152-9182-ed8e203a58b5</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.csv</td>
-<td style="text-align: center;">DSC without time</td>
-<td style="text-align: center;">differential scanning calorimetry</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'CSVReader'), ('column_01', 'DSC/(mW/mg)'), ('column_00', '##Temp./°C'), ('extension', '.csv')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">44f5bfbb-ae1f-4da0-b43b-0d33b649c24a</td>
-<td style="text-align: center;">SecReader</td>
-<td style="text-align: center;">.TXT</td>
-<td style="text-align: center;">SEC 1</td>
-<td style="text-align: center;">Size Exclusion Chromatography (SEC)<br>with one Detector Output</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'SecReader'), ('table_name', 'MWD'), ('Detector 1', 'I1')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">4d4f72ef-3708-4516-b110-2fa6869565ce</td>
-<td style="text-align: center;">AsciiReader</td>
-<td style="text-align: center;">.xy</td>
-<td style="text-align: center;">PXRD data from xy, data: +, metadata: -</td>
-<td style="text-align: center;">??? ; ref location: ???, data: +, metadata: as comment</td>
-<td style="text-align: center;">None</td>
-<td style="text-align: center;">None</td>
-<td style="text-align: center;">[('extension', '.xy'), ('reader', 'AsciiReader')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">5a413afd-cb77-40e4-99b1-c044d94eaa51</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">UV-VIS data from general txt, data: +, metadata: -</td>
-<td style="text-align: center;">generic data table only; ref location: ---, data: +, metadata: -</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-</tr>
-<tr>
-<td style="text-align: center;">5b206281-49f6-437b-99ca-c64a621eb903</td>
-<td style="text-align: center;">AsciiReader</td>
-<td style="text-align: center;">.xy</td>
-<td style="text-align: center;">Mass spectrometry from general xy format, data: +, metadata: -</td>
-<td style="text-align: center;">generic data table only; ref location: Uni Aachen, data: +, metadata: -</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-</tr>
-<tr>
-<td style="text-align: center;">5cb879d1-2b3f-4778-8e06-1a198500c8db</td>
-<td style="text-align: center;">AifReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">(AIF) Sorption-Desorption Measurement from txt, data: +, metadata: +</td>
-<td style="text-align: center;">---; ref location: TU Dresden, data: +, metadata: + <br></td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'AifReader'), ('Unit_column_#0', '_adsorp_pressure')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">6bb4fea5-3a59-4b95-8956-d977a4d8b6a7</td>
-<td style="text-align: center;">NovaReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">CV data from txt, data: +, metadata: (+)</td>
-<td style="text-align: center;">Metrohm Autolab Nova; ref location: Uni Aachen, data: +, metadata: (-)<br>;(basic Metadata calculation done by Reader)</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'NovaReader'), ('column_00', 'Potential applied (V)'), ('column_02', 'WE(1).Current (A)')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">6be46fd7-59a2-4b02-829b-cbfef8c19646</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">UV-VIS data from txt, data: +, metadata: -</td>
-<td style="text-align: center;">JASCO V-570; ref location: KIT CN, data: +, metadata: +</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('extension', '.txt')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">6d344bc4-c4fb-4306-9d56-1e754e7e0590</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">Tensile test data from txt, data: +, metadata: -</td>
-<td style="text-align: center;">Inspect Table 50kN; ref location: Fraunhofer IWS, data: +, metadata: -<br>;LowTemp</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('column_01', 'Force_N'), ('column_05', 'Elongation_%'), ('column_02', 'Strain_mm')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">71883827-4472-48d8-becf-64ea89324f3e</td>
-<td style="text-align: center;">SecReader</td>
-<td style="text-align: center;">.TXT</td>
-<td style="text-align: center;">SEC 2</td>
-<td style="text-align: center;">Size Exclusion Chromatography with two Detector Outputs</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'SecReader'), ('table_name', 'MWD'), ('Detector 2', 'I2')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">799f3db4-fd21-4aa7-a7bd-7c5548cbe316</td>
-<td style="text-align: center;">DtaReader</td>
-<td style="text-align: center;">.DTA</td>
-<td style="text-align: center;">CV Gamry</td>
-<td style="text-align: center;"></td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('extension', '.DTA'), ('TITLE', 'Cyclic')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">8079b064-6314-4d99-b13b-e4f590cf556f</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.csv</td>
-<td style="text-align: center;">UV-VIS data from csv, data: +, metadata: -</td>
-<td style="text-align: center;">Cary 60; ref location: KIT CN, data: +, metadata: +</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('column_00', 'Wavelength'), ('column_01', 'Abs')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">8b00e934-9bc4-4248-a2de-b303d2e93aa4</td>
-<td style="text-align: center;">DtaReader</td>
-<td style="text-align: center;">.DTA</td>
-<td style="text-align: center;">## Nameless (04/12/2025 14:33:36)</td>
-<td style="text-align: center;">Test</td>
-<td style="text-align: center;">['g', 'a']</td>
-<td style="text-align: center;">['windows', 'x', 'linux']</td>
-<td style="text-align: center;">[('file_name', 'DHM-12-CV-1mM+1mMFc-N2_100mVps-No9.DTA')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">8c8c4b18-143a-4245-a8d4-29e47c6b86a1</td>
-<td style="text-align: center;">BioLogic</td>
-<td style="text-align: center;">.gz</td>
-<td style="text-align: center;">Biologic as tar gz</td>
-<td style="text-align: center;">CV Files</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'BioLogic'), ('settings.technique', 'CV')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">a5b05507-aed2-462b-a526-3fee53c87a48</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">DLS data from txt, data: +, metadata: -</td>
-<td style="text-align: center;">---; ref location: ---, data: +, metadata: -<br>;Subtype 1</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('file_name', 'SSP-0'), ('extension', '.txt')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">af891148-ebcc-4e5d-a481-fa6acc853699</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">UV-VIS data from txt, data: +, metadata: -</td>
-<td style="text-align: center;">Horiba Duetta; ref location: KIT CN, data: +, metadata: +</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-</tr>
-<tr>
-<td style="text-align: center;">b31ef3df-eacf-4440-bbb3-34b073be9eb9</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">CD MS Spectra data from txt, data: +, metadata: -</td>
-<td style="text-align: center;">LCMSsolution; ref location: KIT CN, data: +, metadata: + ;Subtype 2</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'CSVReader')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">c498c925-61e0-455e-a4c6-c46ac9c2f5c6</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.csv</td>
-<td style="text-align: center;">Mass spectrometry from txt, data: +, metadata: -</td>
-<td style="text-align: center;">Finnigian MAT8230, ref location: ---, data: +, metadata: -</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-</tr>
-<tr>
-<td style="text-align: center;">c6573972-cb06-484d-a529-9dd2424fc408</td>
-<td style="text-align: center;">PsSessionReader</td>
-<td style="text-align: center;">.pssession</td>
-<td style="text-align: center;">CV data from pssession, data: +, metadata: +</td>
-<td style="text-align: center;">PalmSens PSTrace; ref location: IPB Leibniz, data: +, metadata: +</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('extension', '.pssession'), ('title', '(Cyclic Voltammetry)')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">c7e3130f-6c23-432a-a886-a82d11632da2</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">UV-Vis</td>
-<td style="text-align: center;">UV-Vis (AK Théato Seminar) - Campus West, KIT</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'CSVReader')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">c9d63af9-2ce7-425e-895c-c04b8497c26c</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">Tensile test data from txt, data: +, metadata: -</td>
-<td style="text-align: center;">Inspect Table 50kN; ref location: Fraunhofer IWS, data: +, metadata: - <br>;HighTemp</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('column_01', 'Force_N'), ('column_02', 'Deformation (fine)_mm'), ('column_05', 'Strain_mm')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">cddfe1ff-ef5a-44fb-a6ba-443a870c7a27</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">Emission spectrum</td>
-<td style="text-align: center;">(fluorescence) emission spectrum with generic dataset (FI)</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'CSVReader')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">d8e6bf8f-6de1-4743-9513-04cbd0c6c712</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.csv</td>
-<td style="text-align: center;">UVVIS CS</td>
-<td style="text-align: center;">multicolumn (4) file with no header - Data from Tasnim</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'CSVReader'), ('extension', '.csv'), ('column_00', 'Wavelength (nm)'), ('column_07', 'Abs')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">d9be2928-fd8e-4abe-bbe0-3e419330875f</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">DLS data from txt, data: +, metadata: -</td>
-<td style="text-align: center;">---; ref location: ---, data: +, metadata: -<br>;Subtype 2</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('extension', '.txt'), ('file_name', 'IW-SPEGA')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">db05bfb4-6829-4339-bec1-54065710f211</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.csv</td>
-<td style="text-align: center;">UV-VIS data from multi-column csv, data: +, metadata: -</td>
-<td style="text-align: center;">Cary 60; ref location: KIT CN, data: +, metadata: +</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('content_type', 'text/csv')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">df15f2b0-4133-4231-8b48-bec52fb6043c</td>
-<td style="text-align: center;">CifReader</td>
-<td style="text-align: center;">.cif</td>
-<td style="text-align: center;">crystallographic metadata from cif, data: -, metadata: +</td>
-<td style="text-align: center;">Stoe StadiVari diffractometer; ref location: KIT CN, data: +, metadata: +</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('extension', '.cif'), ('reader', 'CifReader')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">e10cd71e-b44f-4493-b7ad-ca231ccd324f</td>
-<td style="text-align: center;">ExcelReader</td>
-<td style="text-align: center;">.xlsx</td>
-<td style="text-align: center;">DLS</td>
-<td style="text-align: center;">DLS intensity INT (FI)</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'ExcelReader')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">e7a4ee04-cdf6-4da6-a82c-ba6909af6cee</td>
-<td style="text-align: center;">OldExcelReader</td>
-<td style="text-align: center;">.xls</td>
-<td style="text-align: center;">TGA</td>
-<td style="text-align: center;">TGA - Campus West, KIT with Isothermal</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'OldExcelReader'), ('Instrument Type', 'TGA5500')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">e845bc85-07b9-4e21-8bdf-4daa4a74fa15</td>
-<td style="text-align: center;">OldExcelReader</td>
-<td style="text-align: center;">.xls</td>
-<td style="text-align: center;">TGA with derivative</td>
-<td style="text-align: center;">TGA - Campus West, KIT with Isothermal<br>and Derivative</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'OldExcelReader'), ('Instrument Type', 'TGA5500')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">fb19f78e-8d87-4c5f-a4e1-ac90994300d7</td>
-<td style="text-align: center;">CSVReader</td>
-<td style="text-align: center;">.txt</td>
-<td style="text-align: center;">CD MS Spectra data from txt, data: +, metadata: -</td>
-<td style="text-align: center;">LCMSsolution; ref location: KIT CN, data: +, metadata: +<br>;Subtype 1</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'CSVReader'), ('column_00', 'm/z')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">fb63e718-3842-4d45-9b39-84a53b27e483</td>
-<td style="text-align: center;">OldExcelReader</td>
-<td style="text-align: center;">.xls</td>
-<td style="text-align: center;">TGA 2</td>
-<td style="text-align: center;">TGA - Campus West, KIT without Isothermal</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'OldExcelReader'), ('Instrument Type', 'TGA5500')]</td>
-</tr>
-<tr>
-<td style="text-align: center;">fbbe088a-b688-4609-8c00-086a149f61ba</td>
-<td style="text-align: center;">ExcelReader</td>
-<td style="text-align: center;">.xlsx</td>
-<td style="text-align: center;">DLS-ACF</td>
-<td style="text-align: center;">ACF - INT (FI)</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[]</td>
-<td style="text-align: center;">[('reader', 'ExcelReader')]</td>
-</tr>
-</tbody>
-</table>
+        <p>Chemotion Converter is a very powerful python file converter running as a stand-alone flask server or included in an ELN or scientific Repository (like the <a href="https://chemotion.net/">Chemotion ELN</a>, other ELNs we cannot guarantee) and called via API during file upload. For local and offline users, it is also possible to use it as an CLI tool.</p>
 <h1>Readers</h1>
-<p>A reader is a python class file handling the translation of your input file format to a usable python object.Normally, it is created by uploading an example of your input file to the GUI of the <a href="https://github.com/ComPlat/chemotion-converter-client">converter client frontend</a>.</p>
+<p>A reader is a python class file handling the translation of your input file format to a usable python object. It is created by providing an example file to the developers or python coders and used and defined by the <a href="https://github.com/ComPlat/chemotion-converter-app">converter app backend</a>.</p>
 <table>
 <thead>
 <tr>
@@ -700,6 +312,414 @@
 <td style="text-align: center;">xrdml_reader</td>
 <td style="text-align: center;">None</td>
 <td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h1>Profiles</h1>
+<p>A profile is JSON file defining a ruleset on how to convert your input file. Normally, it is created by uploading an example of your input file to the GUI of the <a href="https://github.com/ComPlat/chemotion-converter-client">converter client frontend</a>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">id</th>
+<th style="text-align: center;">reader</th>
+<th style="text-align: center;">extension</th>
+<th style="text-align: center;">title</th>
+<th style="text-align: center;">description</th>
+<th style="text-align: center;">devices</th>
+<th style="text-align: center;">software</th>
+<th style="text-align: center;">identifiers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0d7dd8d4-a599-4151-855e-643956a7362c</td>
+<td style="text-align: center;">BrmlReader</td>
+<td style="text-align: center;">.brml</td>
+<td style="text-align: center;">X-ray diffraction data from brml, data: +, metadata: -</td>
+<td style="text-align: center;">---; ref location: ---, data: +, metadata: -</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('extension', '.brml')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">df15f2b0-4133-4231-8b48-bec52fb6043c</td>
+<td style="text-align: center;">CifReader</td>
+<td style="text-align: center;">.cif</td>
+<td style="text-align: center;">crystallographic metadata from cif, data: -, metadata: +</td>
+<td style="text-align: center;">Stoe StadiVari diffractometer; ref location: KIT CN, data: +, metadata: +</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('extension', '.cif'), ('reader', 'CifReader')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">0d04f3c5-43d4-408a-85ef-34b33975020a</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.csv</td>
+<td style="text-align: center;">DSC with Time</td>
+<td style="text-align: center;">differential scanning calorimetry</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'CSVReader'), ('extension', '.csv'), ('column_02', 'DSC/(mW/mg)'), ('column_00', '##Temp./°C')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">3e2fb90e-b6b6-4152-9182-ed8e203a58b5</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.csv</td>
+<td style="text-align: center;">DSC without time</td>
+<td style="text-align: center;">differential scanning calorimetry</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'CSVReader'), ('column_01', 'DSC/(mW/mg)'), ('column_00', '##Temp./°C'), ('extension', '.csv')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">8079b064-6314-4d99-b13b-e4f590cf556f</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.csv</td>
+<td style="text-align: center;">UV-VIS data from csv, data: +, metadata: -</td>
+<td style="text-align: center;">Cary 60; ref location: KIT CN, data: +, metadata: +</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('column_00', 'Wavelength'), ('column_01', 'Abs')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">c498c925-61e0-455e-a4c6-c46ac9c2f5c6</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.csv</td>
+<td style="text-align: center;">Mass spectrometry from txt, data: +, metadata: -</td>
+<td style="text-align: center;">Finnigian MAT8230, ref location: ---, data: +, metadata: -</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+</tr>
+<tr>
+<td style="text-align: center;">d8e6bf8f-6de1-4743-9513-04cbd0c6c712</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.csv</td>
+<td style="text-align: center;">UVVIS CS</td>
+<td style="text-align: center;">multicolumn (4) file with no header - Data from Tasnim</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'CSVReader'), ('extension', '.csv'), ('column_00', 'Wavelength (nm)'), ('column_07', 'Abs')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">db05bfb4-6829-4339-bec1-54065710f211</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.csv</td>
+<td style="text-align: center;">UV-VIS data from multi-column csv, data: +, metadata: -</td>
+<td style="text-align: center;">Cary 60; ref location: KIT CN, data: +, metadata: +</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('content_type', 'text/csv')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">0cd6596c-83d2-49ab-a982-1dfec98d16ba</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.dpt</td>
+<td style="text-align: center;">IR DPT</td>
+<td style="text-align: center;">IR-Alpha (CS)</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('extension', '.dpt')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">799f3db4-fd21-4aa7-a7bd-7c5548cbe316</td>
+<td style="text-align: center;">DtaReader</td>
+<td style="text-align: center;">.DTA</td>
+<td style="text-align: center;">CV Gamry</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('extension', '.DTA'), ('TITLE', 'Cyclic')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">8b00e934-9bc4-4248-a2de-b303d2e93aa4</td>
+<td style="text-align: center;">DtaReader</td>
+<td style="text-align: center;">.DTA</td>
+<td style="text-align: center;">## Nameless (04/12/2025 14:33:36)</td>
+<td style="text-align: center;">Test</td>
+<td style="text-align: center;">['g', 'a']</td>
+<td style="text-align: center;">['windows', 'x', 'linux']</td>
+<td style="text-align: center;">[('file_name', 'DHM-12-CV-1mM+1mMFc-N2_100mVps-No9.DTA')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">12b1ff4b-e295-4377-ba11-c602d855a644</td>
+<td style="text-align: center;">HplcReader</td>
+<td style="text-align: center;">.gz</td>
+<td style="text-align: center;">Chemstation</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'HplcReader'), ('mime_type', 'application/gzip'), ('internal_reader_name', 'chemstation')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">8c8c4b18-143a-4245-a8d4-29e47c6b86a1</td>
+<td style="text-align: center;">BioLogic</td>
+<td style="text-align: center;">.gz</td>
+<td style="text-align: center;">Biologic as tar gz</td>
+<td style="text-align: center;">CV Files</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'BioLogic'), ('settings.technique', 'CV')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">d7729388-8350-402c-b617-82a6fa4900dd</td>
+<td style="text-align: center;">LcmsReader</td>
+<td style="text-align: center;">.gz</td>
+<td style="text-align: center;">LcmsReader</td>
+<td style="text-align: center;">OpenLab</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('content_type', 'application/x-gzip'), ('extension', '.gz'), ('reader', 'LcmsReader')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">c6573972-cb06-484d-a529-9dd2424fc408</td>
+<td style="text-align: center;">PsSessionReader</td>
+<td style="text-align: center;">.pssession</td>
+<td style="text-align: center;">CV data from pssession, data: +, metadata: +</td>
+<td style="text-align: center;">PalmSens PSTrace; ref location: IPB Leibniz, data: +, metadata: +</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('extension', '.pssession'), ('title', '(Cyclic Voltammetry)')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">2a913039-c48d-4fd5-9fbb-706733e53f76</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">UV-Vis</td>
+<td style="text-align: center;">UV Vis INT (FI)</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'CSVReader')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">44f5bfbb-ae1f-4da0-b43b-0d33b649c24a</td>
+<td style="text-align: center;">SecReader</td>
+<td style="text-align: center;">.TXT</td>
+<td style="text-align: center;">SEC 1</td>
+<td style="text-align: center;">Size Exclusion Chromatography (SEC)<br>with one Detector Output</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'SecReader'), ('table_name', 'MWD'), ('Detector 1', 'I1')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">5a413afd-cb77-40e4-99b1-c044d94eaa51</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">UV-VIS data from general txt, data: +, metadata: -</td>
+<td style="text-align: center;">generic data table only; ref location: ---, data: +, metadata: -</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+</tr>
+<tr>
+<td style="text-align: center;">5cb879d1-2b3f-4778-8e06-1a198500c8db</td>
+<td style="text-align: center;">AifReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">(AIF) Sorption-Desorption Measurement from txt, data: +, metadata: +</td>
+<td style="text-align: center;">---; ref location: TU Dresden, data: +, metadata: + <br></td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'AifReader'), ('Unit_column_#0', '_adsorp_pressure')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">6bb4fea5-3a59-4b95-8956-d977a4d8b6a7</td>
+<td style="text-align: center;">NovaReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">CV data from txt, data: +, metadata: (+)</td>
+<td style="text-align: center;">Metrohm Autolab Nova; ref location: Uni Aachen, data: +, metadata: (-)<br>;(basic Metadata calculation done by Reader)</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'NovaReader'), ('column_00', 'Potential applied (V)'), ('column_02', 'WE(1).Current (A)')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">6be46fd7-59a2-4b02-829b-cbfef8c19646</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">UV-VIS data from txt, data: +, metadata: -</td>
+<td style="text-align: center;">JASCO V-570; ref location: KIT CN, data: +, metadata: +</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('extension', '.txt')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">6d344bc4-c4fb-4306-9d56-1e754e7e0590</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">Tensile test data from txt, data: +, metadata: -</td>
+<td style="text-align: center;">Inspect Table 50kN; ref location: Fraunhofer IWS, data: +, metadata: -<br>;LowTemp</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('column_01', 'Force_N'), ('column_05', 'Elongation_%'), ('column_02', 'Strain_mm')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">71883827-4472-48d8-becf-64ea89324f3e</td>
+<td style="text-align: center;">SecReader</td>
+<td style="text-align: center;">.TXT</td>
+<td style="text-align: center;">SEC 2</td>
+<td style="text-align: center;">Size Exclusion Chromatography with two Detector Outputs</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'SecReader'), ('table_name', 'MWD'), ('Detector 2', 'I2')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">a5b05507-aed2-462b-a526-3fee53c87a48</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">DLS data from txt, data: +, metadata: -</td>
+<td style="text-align: center;">---; ref location: ---, data: +, metadata: -<br>;Subtype 1</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('file_name', 'SSP-0'), ('extension', '.txt')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">af891148-ebcc-4e5d-a481-fa6acc853699</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">UV-VIS data from txt, data: +, metadata: -</td>
+<td style="text-align: center;">Horiba Duetta; ref location: KIT CN, data: +, metadata: +</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+</tr>
+<tr>
+<td style="text-align: center;">b31ef3df-eacf-4440-bbb3-34b073be9eb9</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">CD MS Spectra data from txt, data: +, metadata: -</td>
+<td style="text-align: center;">LCMSsolution; ref location: KIT CN, data: +, metadata: + ;Subtype 2</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'CSVReader')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">c7e3130f-6c23-432a-a886-a82d11632da2</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">UV-Vis</td>
+<td style="text-align: center;">UV-Vis (AK Théato Seminar) - Campus West, KIT</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'CSVReader')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">c9d63af9-2ce7-425e-895c-c04b8497c26c</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">Tensile test data from txt, data: +, metadata: -</td>
+<td style="text-align: center;">Inspect Table 50kN; ref location: Fraunhofer IWS, data: +, metadata: - <br>;HighTemp</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('column_01', 'Force_N'), ('column_02', 'Deformation (fine)_mm'), ('column_05', 'Strain_mm')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">cddfe1ff-ef5a-44fb-a6ba-443a870c7a27</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">Emission spectrum</td>
+<td style="text-align: center;">(fluorescence) emission spectrum with generic dataset (FI)</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'CSVReader')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">d9be2928-fd8e-4abe-bbe0-3e419330875f</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">DLS data from txt, data: +, metadata: -</td>
+<td style="text-align: center;">---; ref location: ---, data: +, metadata: -<br>;Subtype 2</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('extension', '.txt'), ('file_name', 'IW-SPEGA')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">fb19f78e-8d87-4c5f-a4e1-ac90994300d7</td>
+<td style="text-align: center;">CSVReader</td>
+<td style="text-align: center;">.txt</td>
+<td style="text-align: center;">CD MS Spectra data from txt, data: +, metadata: -</td>
+<td style="text-align: center;">LCMSsolution; ref location: KIT CN, data: +, metadata: +<br>;Subtype 1</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'CSVReader'), ('column_00', 'm/z')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">e7a4ee04-cdf6-4da6-a82c-ba6909af6cee</td>
+<td style="text-align: center;">OldExcelReader</td>
+<td style="text-align: center;">.xls</td>
+<td style="text-align: center;">TGA</td>
+<td style="text-align: center;">TGA - Campus West, KIT with Isothermal</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'OldExcelReader'), ('Instrument Type', 'TGA5500')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">e845bc85-07b9-4e21-8bdf-4daa4a74fa15</td>
+<td style="text-align: center;">OldExcelReader</td>
+<td style="text-align: center;">.xls</td>
+<td style="text-align: center;">TGA with derivative</td>
+<td style="text-align: center;">TGA - Campus West, KIT with Isothermal<br>and Derivative</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'OldExcelReader'), ('Instrument Type', 'TGA5500')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">fb63e718-3842-4d45-9b39-84a53b27e483</td>
+<td style="text-align: center;">OldExcelReader</td>
+<td style="text-align: center;">.xls</td>
+<td style="text-align: center;">TGA 2</td>
+<td style="text-align: center;">TGA - Campus West, KIT without Isothermal</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'OldExcelReader'), ('Instrument Type', 'TGA5500')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">15400217-b730-47db-9d5c-a300bce7ae95</td>
+<td style="text-align: center;">ExcelReader</td>
+<td style="text-align: center;">.xlsx</td>
+<td style="text-align: center;">UVVIS CS</td>
+<td style="text-align: center;">multicolumn (2) XLSX file with header at the end - Data from Tasnim</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'ExcelReader'), ('extension', '.xlsx')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">e10cd71e-b44f-4493-b7ad-ca231ccd324f</td>
+<td style="text-align: center;">ExcelReader</td>
+<td style="text-align: center;">.xlsx</td>
+<td style="text-align: center;">DLS</td>
+<td style="text-align: center;">DLS intensity INT (FI)</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'ExcelReader')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">fbbe088a-b688-4609-8c00-086a149f61ba</td>
+<td style="text-align: center;">ExcelReader</td>
+<td style="text-align: center;">.xlsx</td>
+<td style="text-align: center;">DLS-ACF</td>
+<td style="text-align: center;">ACF - INT (FI)</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[('reader', 'ExcelReader')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">4d4f72ef-3708-4516-b110-2fa6869565ce</td>
+<td style="text-align: center;">AsciiReader</td>
+<td style="text-align: center;">.xy</td>
+<td style="text-align: center;">PXRD data from xy, data: +, metadata: -</td>
+<td style="text-align: center;">??? ; ref location: ???, data: +, metadata: as comment</td>
+<td style="text-align: center;">None</td>
+<td style="text-align: center;">None</td>
+<td style="text-align: center;">[('extension', '.xy'), ('reader', 'AsciiReader')]</td>
+</tr>
+<tr>
+<td style="text-align: center;">5b206281-49f6-437b-99ca-c64a621eb903</td>
+<td style="text-align: center;">AsciiReader</td>
+<td style="text-align: center;">.xy</td>
+<td style="text-align: center;">Mass spectrometry from general xy format, data: +, metadata: -</td>
+<td style="text-align: center;">generic data table only; ref location: Uni Aachen, data: +, metadata: -</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
+<td style="text-align: center;">[]</td>
 </tr>
 </tbody>
 </table>

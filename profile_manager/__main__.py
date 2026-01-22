@@ -44,8 +44,47 @@ def build_index():
     md_file = MdUtils(file_name='index', title=program_name)
     # Additional Markdown syntax...
     md_file.new_paragraph(f"{program_name} is a very powerful python file converter "
-                          f"running as a stand-alone flask server or included in an ELN and called via API during file upload. "
+                          f"running as a stand-alone flask server or included in an ELN or scientific Repository "
+                          f"(like the {md_file.new_inline_link(link="https://chemotion.net/", text="Chemotion ELN")}, other ELNs we cannot guarantee) "
+                          f"and called via API during file upload. "
                           f"For local and offline users, it is also possible to use it as an CLI tool.")
+
+    reader_dir = files("converter_app") / "readers"
+
+    for reader in sorted(reader_dir.iterdir(), key=lambda r: r.name):
+        if reader.is_file() and reader.name.endswith(".py"):
+            try:
+                my_ast = read_metadata_from_readercode(reader)
+
+                # works for Path and Traversable
+                reader_name = reader.name.rsplit(".", 1)[0]
+
+                reader_entry = {
+                    "class name": my_ast[0],
+                    "identifier": my_ast[1],
+                    "priority": my_ast[2],
+                    "check": my_ast[3].strip() if my_ast[3] else "",
+                }
+
+                readers_dict[reader_name] = reader_entry
+
+            except Exception as e:
+                print(f"Skipping {reader.name}: {e}")
+                continue
+
+    md_file.new_header(level=1, title='Readers')
+
+    md_file.new_paragraph("A reader is a python class file handling the translation of your input file format to a usable python object."
+                          " It is created by providing an example file to the developers or python coders and used and defined by the " +
+                          md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-app",
+                                                  text="converter app backend") + ".")
+
+    table_header = ["file name"]
+    if reader_entry:
+        table_header += list(reader_entry.keys())
+    dict_to_md_table(md_file, table_header, readers_dict)
+
+
     for profile in profile_dir.glob("*.json"):
         with open(profile, "r") as file:
             try:
@@ -82,42 +121,11 @@ def build_index():
                           md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-client", text="converter client frontend") + ".")
 
     table_header = ["id"] + list(profile_entry.keys())
-    dict_to_md_table(md_file, table_header, profiles_dict)
-
-    reader_dir = files("converter_app") / "readers"
-
-    for reader in sorted(reader_dir.iterdir(), key=lambda r: r.name):
-        if reader.is_file() and reader.name.endswith(".py"):
-            try:
-                my_ast = read_metadata_from_readercode(reader)
-
-                # works for Path and Traversable
-                reader_name = reader.name.rsplit(".", 1)[0]
-
-                reader_entry = {
-                    "class name": my_ast[0],
-                    "identifier": my_ast[1],
-                    "priority": my_ast[2],
-                    "check": my_ast[3].strip() if my_ast[3] else "",
-                }
-
-                readers_dict[reader_name] = reader_entry
-
-            except Exception as e:
-                print(f"Skipping {reader.name}: {e}")
-                continue
-
-    md_file.new_header(level=1, title='Readers')
-
-    md_file.new_paragraph("A reader is a python class file handling the translation of your input file format to a usable python object."
-                          " It is created by providing an example file to the developers or python coders and used and defined by the " +
-                          md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-app",
-                                                  text="converter app backend") + ".")
-
-    table_header = ["file name"]
-    if reader_entry:
-        table_header += list(reader_entry.keys())
-    dict_to_md_table(md_file, table_header, readers_dict)
+    profiles_sorted = dict(sorted(
+        profiles_dict.items(),
+        key=lambda item: (item[1].get("extension") or "").lower(),
+    ))
+    dict_to_md_table(md_file, table_header, profiles_sorted)
 
     md_file.create_md_file()
 
