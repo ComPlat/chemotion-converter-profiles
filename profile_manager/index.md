@@ -7,7 +7,8 @@ Chemotion Converter is a very powerful python file converter running as a stand-
 # Profiles
 
 
-A profile is JSON file defining a ruleset on how to convert your input file.Normally, it is created by uploading an example of your input file to the GUI of the [converter client frontend](https://github.com/ComPlat/chemotion-converter-client).
+A profile is JSON file defining a ruleset on how to convert your input file.
+Normally, it is created by uploading an example of your input file to the GUI of the [converter client frontend](https://github.com/ComPlat/chemotion-converter-client).
 
 |id|reader|extension|title|description|devices|software|identifiers|
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
@@ -52,7 +53,8 @@ A profile is JSON file defining a ruleset on how to convert your input file.Norm
 # Readers
 
 
-A reader is a python class file handling the translation of your input file format to a usable python object.Normally, it is created by uploading an example of your input file to the GUI of the [converter client frontend](https://github.com/ComPlat/chemotion-converter-client).
+A reader is a python class file handling the translation of your input file format to a usable python object.
+It is created by providing an example file to the developers or python coders and used and defined by the [converter app backend](https://github.com/ComPlat/chemotion-converter-app).
 
 |file name|class name|identifier|priority|check|
 | :---: | :---: | :---: | :---: | :---: |
