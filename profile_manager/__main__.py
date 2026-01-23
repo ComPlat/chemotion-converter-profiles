@@ -1,6 +1,8 @@
 import json
 import os
+import shutil
 import sys
+from typing import BinaryIO, cast
 from importlib.resources import files
 from pathlib import Path
 
@@ -41,6 +43,11 @@ def build_index():
     reader_entry = {}
 
     profile_dir = Path(__file__).parent.parent.joinpath('profiles/public')
+    base_path = pyprojroot.find_root(pyprojroot.has_dir("build"))
+    docs_profile_dir = Path(base_path, "docs", "atch", "server", "profiles")
+    docs_reader_dir = Path(base_path, "docs", "atch", "server", "readers")
+    os.makedirs(docs_profile_dir, exist_ok=True)
+    os.makedirs(docs_reader_dir, exist_ok=True)
     md_file = MdUtils(file_name='index', title=program_name)
     # Additional Markdown syntax...
     md_file.new_paragraph(f"{program_name} is a very powerful python file converter "
@@ -58,6 +65,16 @@ def build_index():
 
                 # works for Path and Traversable
                 reader_name = reader.name.rsplit(".", 1)[0]
+                reader_target = docs_reader_dir / reader.name
+                if isinstance(reader, Path):
+                    shutil.copy2(reader, reader_target)
+                else:
+                    with reader.open("rb") as source, open(reader_target, "wb") as dest:
+                        # noinspection PyTypeChecker
+                        shutil.copyfileobj(
+                            cast(BinaryIO, source), cast(BinaryIO, dest)
+                        )
+                reader_link = f"<a href=\"atch/server/readers/{reader.name}\" download>{reader.name}</a>"
 
                 reader_entry = {
                     "class name": my_ast[0],
@@ -66,7 +83,7 @@ def build_index():
                     "check": my_ast[3].strip() if my_ast[3] else "",
                 }
 
-                readers_dict[reader_name] = reader_entry
+                readers_dict[reader_link] = reader_entry
 
             except Exception as e:
                 print(f"Skipping {reader.name}: {e}")
@@ -79,7 +96,7 @@ def build_index():
                           md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-app",
                                                   text="converter app backend") + ".")
 
-    table_header = ["file name"]
+    table_header = ["file name (click to download from this GitHub.io mirror)"]
     if reader_entry:
         table_header += list(reader_entry.keys())
     dict_to_md_table(md_file, table_header, readers_dict)
@@ -111,8 +128,12 @@ def build_index():
             "identifiers": get_identifiers(json_profile)
         }
 
-        # Save to the main dictionary
-        profiles_dict[profile_id] = profile_entry
+        # Copy profile JSON to docs and link to the local docs path
+        shutil.copy2(profile, docs_profile_dir / profile.name)
+        profile_link = (
+            f"<a href=\"atch/server/profiles/{profile_id}.json\" download>{profile_id}</a>"
+        )
+        profiles_dict[profile_link] = profile_entry
 
     md_file.new_header(level=1, title='Profiles')
 
@@ -120,7 +141,7 @@ def build_index():
                           " Normally, it is created by uploading an example of your input file to the GUI of the "+
                           md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-client", text="converter client frontend") + ".")
 
-    table_header = ["id"] + list(profile_entry.keys())
+    table_header = ["id (click to download from this GitHub.io mirror)"] + list(profile_entry.keys())
     profiles_sorted = dict(sorted(
         profiles_dict.items(),
         key=lambda item: (item[1].get("extension") or "").lower(),
