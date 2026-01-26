@@ -1,3 +1,5 @@
 /.venv/
 /.idea/
 /readers/
+/docs/atch/server/
+*bkp
