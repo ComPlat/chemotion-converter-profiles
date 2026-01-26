@@ -8,8 +8,6 @@ from pathlib import Path
 
 import markdown
 import pyprojroot
-# from st_aggrid import AgGrid
-# import pandas as pd
 from converter_app.profile_migration.utils.registration import Migrations
 from converter_app.validation import validate_profile
 
@@ -51,12 +49,6 @@ def build_index():
     os.makedirs(docs_profile_dir, exist_ok=True)
     os.makedirs(docs_reader_dir, exist_ok=True)
     md_file = MdUtils(file_name='index', title=program_name)
-    # Additional Markdown syntax...
-    md_file.new_paragraph(f"{program_name} is a very powerful python file converter "
-                          f"running as a stand-alone flask server or included in an ELN or scientific Repository "
-                          f"(like the {md_file.new_inline_link(link="https://chemotion.net/", text="Chemotion ELN")}, other ELNs we cannot guarantee) "
-                          f"and called via API during file upload. "
-                          f"For local and offline users, it is also possible to use it as an CLI tool.")
 
     reader_dir = files("converter_app") / "readers"
 
@@ -76,7 +68,7 @@ def build_index():
                         shutil.copyfileobj(
                             cast(BinaryIO, source), cast(BinaryIO, dest)
                         )
-                reader_link = f"<a href=\"atch/server/readers/{reader.name}\" download>{reader.name}</a>"
+                reader_link = reader.name
 
                 reader_entry = {
                     "class name": my_ast[0],
@@ -91,20 +83,11 @@ def build_index():
                 print(f"Skipping {reader.name}: {e}")
                 continue
 
-    md_file.new_header(level=1, title='Readers')
-
-    md_file.new_paragraph("A reader is a python class file handling the translation of your input file format to a usable python object."
-                          " It is created by providing an example file to the developers or python coders and used and defined by the " +
-                          md_file.new_inline_link(link="https://github.com/ComPlat/chemotion-converter-app",
-                                                  text="converter app backend") + ".")
-
     table_header = ["file name (click to download from this GitHub.io mirror)"]
     if reader_entry:
         table_header += list(reader_entry.keys())
-    dict_to_md_table(md_file, table_header, readers_dict)
+    # dict_to_md_table(md_file, table_header, readers_dict)
     row_data, column_defs = readers_dict_to_grid_config()
-    #Streamline AgGrid - check if needed
-    # AgGrid(pd.DataFrame(row_data), gridOptions={"columnDefs": column_defs})
     ag_grid_html = dict_to_ag_grid_html(row_data, column_defs)
 
     for profile in profile_dir.glob("*.json"):
@@ -166,12 +149,12 @@ def readers_dict_to_grid_config():
     ]
 
     column_defs = [
-        {"field": "file name", "pinned": "left"},
+        {"field": "file name", "pinned": "left",  "cellRenderer": "linkRenderer"},
         *[
             {
                 "field": key,
                 # attach renderer only for "check"
-                **({"cellRenderer": "codeCellRenderer"} if key == "check" else {})
+                **({"cellRenderer": "codeCellRenderer", "flex": 3} if key == "check" else {})
             }
             for key in next(iter(readers_dict.values()))
         ],
@@ -206,12 +189,18 @@ def dict_to_ag_grid_html(row_data, column_defs):
               ">${{params.value}}</code>
             `;
           }}
+          
+          function linkRenderer(params) {{
+            if (!params.value) return "";
+              return `<a href="atch/server/readers/${{params.value}}" target="_blank" rel="noopener">${{params.value}}</a>`;
+          }}
         
           const gridOptions = {{
             theme: "legacy",
             columnDefs: {json.dumps(column_defs)},
             rowData: {json.dumps(row_data)},
             defaultColDef: {{
+              flex: 1,
               sortable: true,
               filter: true,
               resizable: true,
@@ -219,7 +208,8 @@ def dict_to_ag_grid_html(row_data, column_defs):
               autoHeight: true
             }},
             components: {{
-              codeCellRenderer: codeCellRenderer
+              codeCellRenderer: codeCellRenderer,
+              linkRenderer: linkRenderer,
             }}
           }};
         
@@ -240,7 +230,7 @@ def fill_md_into_html(md_file: MdUtils, html_file: Path, ag_grid_table):
     markdown_content = markdown.markdown(md_file.file_data_text, extensions=["tables", "fenced_code"])
     html_content = html_content.replace("{{ PROGRAM_NAME }}", program_name)
     html_content = html_content.replace("{{  TABLE_CONTENT  }}", markdown_content)
-    html_content = html_content.replace("{{ AG_GRID_TABLE }}", ag_grid_table)
+    html_content = html_content.replace("{{ PROFILES_TABLE }}", ag_grid_table)
     base_path = pyprojroot.find_root(pyprojroot.has_dir("build"))
     os.makedirs(os.path.join(base_path, "docs"), exist_ok=True)
     index_path = Path(base_path, "docs", "index.html")
