@@ -6,6 +6,8 @@ from pathlib import Path
 
 import markdown
 import pyprojroot
+# from st_aggrid import AgGrid
+# import pandas as pd
 from converter_app.profile_migration.utils.registration import Migrations
 from converter_app.validation import validate_profile
 
@@ -83,7 +85,10 @@ def build_index():
     if reader_entry:
         table_header += list(reader_entry.keys())
     dict_to_md_table(md_file, table_header, readers_dict)
-
+    row_data, column_defs = readers_dict_to_grid_config()
+    #Streamline AgGrid - check if needed
+    # AgGrid(pd.DataFrame(row_data), gridOptions={"columnDefs": column_defs})
+    ag_grid_html = dict_to_ag_grid_html(row_data, column_defs)
 
     for profile in profile_dir.glob("*.json"):
         with open(profile, "r") as file:
@@ -130,16 +135,91 @@ def build_index():
     md_file.create_md_file()
 
     template_path = Path(__file__).parent.joinpath("index_template.html")
-    fill_md_into_html(md_file, template_path)
+    fill_md_into_html(md_file, template_path, ag_grid_html)
+
+
+def readers_dict_to_grid_config():
+    row_data = [
+        {"file name": k, **v}
+        for k, v in readers_dict.items()
+    ]
+
+    column_defs = [
+        {"field": "file name", "pinned": "left"},
+        *[
+            {
+                "field": key,
+                # attach renderer only for "check"
+                **({"cellRenderer": "codeCellRenderer"} if key == "check" else {})
+            }
+            for key in next(iter(readers_dict.values()))
+        ],
+    ]
+    return row_data, column_defs
+
+
+def dict_to_ag_grid_html(row_data, column_defs):
+    grid_id = "readersGrid"
+
+    return f"""<div id="{grid_id}" class="ag-theme-alpine" style="height: 300px; width: 100%;"></div>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css">
+        <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+        
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {{
+        
+          function codeCellRenderer(params) {{
+            if (!params.value) return "";
+        
+            return `
+              <code style="
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                white-space: pre-wrap;
+                display: block;
+                font-size: 12px;
+                background: #f6f8fa;
+                padding: 6px 8px;
+                border-radius: 6px;
+                line-height: 1.4;
+              ">${{params.value}}</code>
+            `;
+          }}
+        
+          const gridOptions = {{
+            theme: "legacy",
+            columnDefs: {json.dumps(column_defs)},
+            rowData: {json.dumps(row_data)},
+            defaultColDef: {{
+              sortable: true,
+              filter: true,
+              resizable: true,
+              wrapText: true,
+              autoHeight: true
+            }},
+            components: {{
+              codeCellRenderer: codeCellRenderer
+            }}
+          }};
+        
+          agGrid.createGrid(
+            document.getElementById("{grid_id}"),
+            gridOptions
+          );
+        
+        }});
+        </script>
+        """
 
 
 
-def fill_md_into_html(md_file: MdUtils, html_file: Path):
+def fill_md_into_html(md_file: MdUtils, html_file: Path, ag_grid_table):
     with open(html_file, "r") as file:
         html_content = file.read()
     markdown_content = markdown.markdown(md_file.file_data_text, extensions=["tables", "fenced_code"])
     html_content = html_content.replace("{{ PROGRAM_NAME }}", program_name)
     html_content = html_content.replace("{{  TABLE_CONTENT  }}", markdown_content)
+    html_content = html_content.replace("{{ AG_GRID_TABLE }}", ag_grid_table)
     base_path = pyprojroot.find_root(pyprojroot.has_dir("build"))
     os.makedirs(os.path.join(base_path, "docs"), exist_ok=True)
     index_path = Path(base_path, "docs", "index.html")
