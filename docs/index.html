@@ -46,7 +46,7 @@
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">file name (click to download from this GitHub.io mirror)</th>
+<th style="text-align: center;">file name</th>
 <th style="text-align: center;">class name</th>
 <th style="text-align: center;">identifier</th>
 <th style="text-align: center;">priority</th>
@@ -55,259 +55,301 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/__init__.py" download><strong>init</strong>.py</a></td>
+<td style="text-align: center;"><strong>init</strong></td>
 <td style="text-align: center;">None</td>
 <td style="text-align: center;">None</td>
 <td style="text-align: center;">None</td>
 <td style="text-align: center;"></td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/afm.py" download>afm.py</a></td>
+<td style="text-align: center;">afm</td>
 <td style="text-align: center;">AfmReader</td>
 <td style="text-align: center;">afm_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    return self.file.suffix.lower() == '.spm'</pre></td>
+<td style="text-align: center;">def check(self):<br>    return self.file.suffix.lower() == '.spm'</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/aif.py" download>aif.py</a></td>
+<td style="text-align: center;">aif</td>
 <td style="text-align: center;">AifReader</td>
 <td style="text-align: center;">aif_reader</td>
 <td style="text-align: center;">95</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.file.suffix.lower() in ('.txt', '.aif') and self.file.mime_type == 'text/plain':<br>        first_line = self.file.string.splitlines()[0]<br>        return 'raw2aif' in first_line<br>    return False</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.file.suffix.lower() in ('.txt', '.aif') and self.file.mime_type == 'text/plain':<br>        first_line = self.file.string.splitlines()[0]<br>        return 'raw2aif' in first_line<br>    return False</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/asc_zip.py" download>asc_zip.py</a></td>
+<td style="text-align: center;">asc_zip</td>
 <td style="text-align: center;">AscZipReader</td>
 <td style="text-align: center;">asc_zip_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if self.file.suffix.lower() == '.zip' and self.file.mime_type == 'application/zip':<br>        with ZipFile(self.file.fp, 'r') as zip_obj:<br>            list_of_file_names = zip_obj.namelist()<br>            if any((fileName.lower().endswith('.asc') for fileName in list_of_file_names)):<br>                with tempfile.TemporaryDirectory() as td:<br>                    zipdir = os.path.join(td, os.path.basename(self.file.name))<br>                    os.makedirs(zipdir)<br>                    result = True<br>                    for file_name in list_of_file_names:<br>                        if file_name.lower().endswith('.asc'):<br>                            path_file_name = zip_obj.extract(file_name, zipdir)<br>                            with open(path_file_name, mode='r', encoding='latin_1') as f:<br>                                self.filedata[file_name] = f.readlines()<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if self.file.suffix.lower() == '.zip' and self.file.mime_type == 'application/zip':<br>        with ZipFile(self.file.fp, 'r') as zip_obj:<br>            list_of_file_names = zip_obj.namelist()<br>            if any((fileName.lower().endswith('.asc') for fileName in list_of_file_names)):<br>                with tempfile.TemporaryDirectory() as td:<br>                    zipdir = os.path.join(td, os.path.basename(self.file.name))<br>                    os.makedirs(zipdir)<br>                    result = True<br>                    for file_name in list_of_file_names:<br>                        if file_name.lower().endswith('.asc'):<br>                            path_file_name = zip_obj.extract(file_name, zipdir)<br>                            with open(path_file_name, mode='r', encoding='latin_1') as f:<br>                                self.filedata[file_name] = f.readlines()<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/ascii.py" download>ascii.py</a></td>
+<td style="text-align: center;">ascii</td>
 <td style="text-align: center;">AsciiReader</td>
 <td style="text-align: center;">ascii_reader</td>
 <td style="text-align: center;">1000</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return not self.file.encoding == 'binary'</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return not self.file.encoding == 'binary'</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/brml.py" download>brml.py</a></td>
+<td style="text-align: center;">bio_logic_reader</td>
+<td style="text-align: center;">BioLogic</td>
+<td style="text-align: center;">bio_logic_080ecac4-8fa2-4c47-b7cc-4ef5db082b07</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">def check(self):<br>    mpr_found = False<br>    if self.file.is_tar_archive:<br>        for file in self.file_content:<br>            self.mpr_reader = MprReader(file)<br>            if self.mpr_reader.check():<br>                mpr_found = True<br>                break<br>        if not mpr_found:<br>            return False<br>        for file in self.file_content:<br>            file.fp.seek(0)<br>            self.mpl_reader = MplReader(file)<br>            if self.mpl_reader.check():<br>                break<br>            self.mpl_reader = None<br>        return True<br>    return False</td>
+</tr>
+<tr>
+<td style="text-align: center;">brml</td>
 <td style="text-align: center;">BrmlReader</td>
 <td style="text-align: center;">brml_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix == '.brml'</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix == '.brml'</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/brucker_dotzero.py" download>brucker_dotzero.py</a></td>
+<td style="text-align: center;">brucker_dotzero</td>
 <td style="text-align: center;">DotZeroReader</td>
 <td style="text-align: center;">dot_zero_reader</td>
 <td style="text-align: center;">79</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    dotzero_extentions = ['.0']<br>    if self.is_tar_ball:<br>        for x in self.file_content:<br>            try:<br>                if opusFC.isOpusFile(x.fp.filename):<br>                    self._dotzero_file = x.fp.filename<br>                    return True<br>            except (ValueError, TypeError, FileNotFoundError):<br>                pass<br>        dx_file = next((x for x in self.file_content if x.suffix.lower() == '.dx'), None)<br>        if dx_file is not None:<br>            self._dx_name = dx_file.name[:-3]<br>    elif self.file.suffix.lower() in dotzero_extentions:<br>        with tempfile.NamedTemporaryFile(suffix='.0', delete=False) as temp_file:<br>            self._dotzero_file = temp_file.name<br>            self.file.fp.save(self._dotzero_file)<br>            self._has_temp_copy = True<br>            if opusFC.isOpusFile(self._dotzero_file):<br>                return True<br>            return False<br>    return self._dotzero_file is not None</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    dotzero_extentions = ['.0']<br>    if self.is_tar_ball:<br>        for x in self.file_content:<br>            try:<br>                if opusFC.isOpusFile(x.fp.filename):<br>                    self._dotzero_file = x.fp.filename<br>                    return True<br>            except (ValueError, TypeError, FileNotFoundError):<br>                pass<br>        dx_file = next((x for x in self.file_content if x.suffix.lower() == '.dx'), None)<br>        if dx_file is not None:<br>            self._dx_name = dx_file.name[:-3]<br>    elif self.file.suffix.lower() in dotzero_extentions:<br>        with tempfile.NamedTemporaryFile(suffix='.0', delete=False) as temp_file:<br>            self._dotzero_file = temp_file.name<br>            self.file.fp.save(self._dotzero_file)<br>            self._has_temp_copy = True<br>            if opusFC.isOpusFile(self._dotzero_file):<br>                return True<br>            return False<br>    return self._dotzero_file is not None</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/cary.py" download>cary.py</a></td>
+<td style="text-align: center;">cary</td>
 <td style="text-align: center;">CaryReader</td>
 <td style="text-align: center;">cary_reader</td>
 <td style="text-align: center;">90</td>
-<td style="text-align: center;"><pre>def check(self):<br>    result = self.check_csv()<br>    if result:<br>        split = re.split('(?:\r?\n){2,}', self.file.string.strip())<br>        metadata_string = data_string = None<br>        try:<br>            data_string, metadata_string = split<br>        except ValueError:<br>            result = False<br>        if result and 'Instrument  Cary' in metadata_string:<br>            self.rows = list(csv.reader(io.StringIO(data_string), self.file.features('csv_dialect')))<br>            self.lines = data_string.splitlines()<br>            self.metadata_lines = metadata_string.splitlines()<br>        else:<br>            result = False<br>    logger.debug('result=%s', result)<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    result = self.check_csv()<br>    if result:<br>        split = re.split('(?:\r?\n){2,}', self.file.string.strip())<br>        metadata_string = data_string = None<br>        try:<br>            data_string, metadata_string = split<br>        except ValueError:<br>            result = False<br>        if result and 'Instrument  Cary' in metadata_string:<br>            self.rows = list(csv.reader(io.StringIO(data_string), self.file.features('csv_dialect')))<br>            self.lines = data_string.splitlines()<br>            self.metadata_lines = metadata_string.splitlines()<br>        else:<br>            result = False<br>    logger.debug('result=%s', result)<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/cfx.py" download>cfx.py</a></td>
+<td style="text-align: center;">cfx</td>
 <td style="text-align: center;">CfxReader</td>
 <td style="text-align: center;">cfx_reader</td>
 <td style="text-align: center;">11</td>
 <td style="text-align: center;"></td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/cif.py" download>cif.py</a></td>
+<td style="text-align: center;">cif</td>
 <td style="text-align: center;">CifReader</td>
 <td style="text-align: center;">cif_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.file.suffix.lower() == '.zip' and self.file.mime_type == 'application/zip':<br>        with ZipFile(self.file.fp, 'r') as zip_obj:<br>            try:<br>                file_name = next((x for x in zip_obj.namelist() if x.lower().endswith(self.file_prefix)))<br>                with os.path.join(tempfile.TemporaryDirectory().name, self.file.name) as zipdir:<br>                    os.makedirs(zipdir)<br>                    path_file_name = zip_obj.extract(file_name, zipdir)<br>                    with open(path_file_name, 'rb') as f:<br>                        fs = FileStorage(stream=f, filename=os.path.basename(file_name), content_type='chemical/x-cif')<br>                        self.file = File(fs)<br>            except:<br>                logger.debug('result=%s', False)<br>                return False<br>    result = self.file.suffix.lower() == self.file_prefix and self.file.mime_type == 'text/plain'<br>    if result:<br>        try:<br>            self.cif = cif.read_string(self.file.content)<br>        except ValueError as e:<br>            if str(e).endswith('expected block header (data_)'):<br>                content = 'data_' + re.split('^data_', self.file.string, flags=re.M)[-1]<br>                try:<br>                    self.cif = cif.read_string(content)<br>                except ValueError:<br>                    result = False<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.file.suffix.lower() == '.zip' and self.file.mime_type == 'application/zip':<br>        with ZipFile(self.file.fp, 'r') as zip_obj:<br>            try:<br>                file_name = next((x for x in zip_obj.namelist() if x.lower().endswith(self.file_prefix)))<br>                with os.path.join(tempfile.TemporaryDirectory().name, self.file.name) as zipdir:<br>                    os.makedirs(zipdir)<br>                    path_file_name = zip_obj.extract(file_name, zipdir)<br>                    with open(path_file_name, 'rb') as f:<br>                        fs = FileStorage(stream=f, filename=os.path.basename(file_name), content_type='chemical/x-cif')<br>                        self.file = File(fs)<br>            except:<br>                logger.debug('result=%s', False)<br>                return False<br>    result = self.file.suffix.lower() == self.file_prefix and self.file.mime_type == 'text/plain'<br>    if result:<br>        try:<br>            self.cif = cif.read_string(self.file.content)<br>        except ValueError as e:<br>            if str(e).endswith('expected block header (data_)'):<br>                content = 'data_' + re.split('^data_', self.file.string, flags=re.M)[-1]<br>                try:<br>                    self.cif = cif.read_string(content)<br>                except ValueError:<br>                    result = False<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/csm.py" download>csm.py</a></td>
+<td style="text-align: center;">csm</td>
 <td style="text-align: center;">CsmReader</td>
 <td style="text-align: center;">csm_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    is_check = super().check()<br>    if is_check:<br>        return '<div id="metainfo">' in self.file.string</pre></td>
+<td style="text-align: center;">def check(self):<br>    is_check = super().check()<br>    if is_check:<br>        return '<div id="metainfo">' in self.file.string</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/csv_reader.py" download>csv_reader.py</a></td>
+<td style="text-align: center;">csv_reader</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">csv_reader</td>
 <td style="text-align: center;">100</td>
-<td style="text-align: center;"><pre>def check(self):<br>    result = self.check_csv()<br>    if result:<br>        self.lines = self.file.string.splitlines()<br>        try:<br>            self.rows = list(csv.reader(io.StringIO(self.file.string), self.file.features('csv_dialect')))<br>        except:<br>            self.rows = list(csv.reader(self.lines, self.file.features('csv_dialect')))<br>    logger.debug('result=%s', result)<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    result = self.check_csv()<br>    if result:<br>        self.lines = self.file.string.splitlines()<br>        try:<br>            self.rows = list(csv.reader(io.StringIO(self.file.string), self.file.features('csv_dialect')))<br>        except:<br>            self.rows = list(csv.reader(self.lines, self.file.features('csv_dialect')))<br>    logger.debug('result=%s', result)<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/dsp.py" download>dsp.py</a></td>
+<td style="text-align: center;">dsp</td>
 <td style="text-align: center;">DSPReader</td>
 <td style="text-align: center;">dsp_reader</td>
 <td style="text-align: center;">95</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.file.suffix.lower() == '.dsp' and self.file.mime_type == 'text/plain':<br>        first_line = self.file.string.splitlines()[0]<br>        return 'sinacsa' in first_line<br>    return False</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.file.suffix.lower() == '.dsp' and self.file.mime_type == 'text/plain':<br>        first_line = self.file.string.splitlines()[0]<br>        return 'sinacsa' in first_line<br>    return False</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/dta.py" download>dta.py</a></td>
+<td style="text-align: center;">dta</td>
 <td style="text-align: center;">DtaReader</td>
 <td style="text-align: center;">dta_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.encoding != 'binary' and self.file.suffix.lower() == '.dta'</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.encoding != 'binary' and self.file.suffix.lower() == '.dta'</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/dwl.py" download>dwl.py</a></td>
+<td style="text-align: center;">dwl</td>
 <td style="text-align: center;">_ReaderSate</td>
 <td style="text-align: center;">dwl-reader</td>
 <td style="text-align: center;">11</td>
-<td style="text-align: center;"><pre>def check(self):<br>    result = self.file.suffix.lower() == '.result' and self.file.mime_type == 'text/plain'<br>    if result:<br>        self.lines = self.file.string.splitlines()<br>        try:<br>            result = re.match('^&lt;[^&gt;]+&gt;$', self.lines[0]) is not None or self.lines[1].startswith('Start') or self.lines[2].startswith('Status')<br>        except IndexError:<br>            result = False<br>    if result:<br>        self._check_next_tag(self.lines[0])<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    result = self.file.suffix.lower() == '.result' and self.file.mime_type == 'text/plain'<br>    if result:<br>        self.lines = self.file.string.splitlines()<br>        try:<br>            result = re.match('^&lt;[^&gt;]+&gt;$', self.lines[0]) is not None or self.lines[1].startswith('Start') or self.lines[2].startswith('Status')<br>        except IndexError:<br>            result = False<br>    if result:<br>        self._check_next_tag(self.lines[0])<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/ea_pdf.py" download>ea_pdf.py</a></td>
+<td style="text-align: center;">ea_pdf</td>
 <td style="text-align: center;">EaPdfReader</td>
 <td style="text-align: center;">pdf_ea_reader</td>
 <td style="text-align: center;">99</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    res = super().check()<br>    if res:<br>        res = len(self.text_data) == 1 and '<em>' in self.text_data and self.text_data['</em>'][-1]['text'].strip().startswith('Signature')<br>    return res</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    res = super().check()<br>    if res:<br>        res = len(self.text_data) == 1 and '<em>' in self.text_data and self.text_data['</em>'][-1]['text'].strip().startswith('Signature')<br>    return res</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/ebl.py" download>ebl.py</a></td>
+<td style="text-align: center;">ebl</td>
 <td style="text-align: center;">_State</td>
 <td style="text-align: center;">ebl_reader</td>
 <td style="text-align: center;">50</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = self.file.suffix.lower() == '.log' and self.file.mime_type == 'text/plain'<br>    if result:<br>        self.lines = self.file.string.splitlines()<br>        self.pre_header, self.pre_script, result = self._PreProcessor.process_header(self.lines[:self._PreProcessor.header_lines])<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = self.file.suffix.lower() == '.log' and self.file.mime_type == 'text/plain'<br>    if result:<br>        self.lines = self.file.string.splitlines()<br>        self.pre_header, self.pre_script, result = self._PreProcessor.process_header(self.lines[:self._PreProcessor.header_lines])<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/excel.py" download>excel.py</a></td>
+<td style="text-align: center;">excel</td>
 <td style="text-align: center;">ExcelReader</td>
 <td style="text-align: center;">excel_reader</td>
 <td style="text-align: center;">15</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.file.encoding != 'binary':<br>        result = False<br>    elif self.file.suffix != '.xlsx':<br>        result = False<br>    else:<br>        try:<br>            self.wb = openpyxl.load_workbook(filename=self.file.fp)<br>            result = True<br>        except (openpyxl.utils.exceptions.InvalidFileException, zipfile.BadZipFile):<br>            result = False<br>    logger.debug('result=%s', result)<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.file.encoding != 'binary':<br>        result = False<br>    elif self.file.suffix != '.xlsx':<br>        result = False<br>    else:<br>        try:<br>            self.wb = openpyxl.load_workbook(filename=self.file.fp)<br>            result = True<br>        except (openpyxl.utils.exceptions.InvalidFileException, zipfile.BadZipFile):<br>            result = False<br>    logger.debug('result=%s', result)<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/gcd.py" download>gcd.py</a></td>
+<td style="text-align: center;">gcd</td>
 <td style="text-align: center;">GcdReader</td>
 <td style="text-align: center;">gcd_reader</td>
 <td style="text-align: center;">5</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.is_tar_ball:<br>        self.file = next((x for x in self.file_content if x.name.lower().endswith('.gcd.txt')), None)<br>        if self.file is None:<br>            return False<br>    result = self.file.suffix.lower() == '.txt'<br>    if result:<br>        self.lines = self._parse_input()<br>        result = '[Chromatogram (Ch1)]' in self.lines and '[Compound Results(Ch1)]' in self.lines<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.is_tar_ball:<br>        self.file = next((x for x in self.file_content if x.name.lower().endswith('.gcd.txt')), None)<br>        if self.file is None:<br>            return False<br>    result = self.file.suffix.lower() == '.txt'<br>    if result:<br>        try:<br>            self.lines = self._parse_input()<br>        except AttributeError:<br>            return False<br>        result = '[Chromatogram (Ch1)]' in self.lines and '[Compound Results(Ch1)]' in self.lines<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/hplc_reader.py" download>hplc_reader.py</a></td>
+<td style="text-align: center;">hplc_reader</td>
 <td style="text-align: center;">HplcReader</td>
 <td style="text-align: center;">hplc_reader</td>
 <td style="text-align: center;">5</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.is_tar_ball:<br>        try:<br>            if len(self.file_content) &gt; 1:<br>                self.df = ph.read_chromatograms(self.file_content[0].file_path)<br>            else:<br>                return False<br>            return True<br>        except ValueError:<br>            pass<br>    return False</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    if self.is_tar_ball:<br>        try:<br>            if len(self.file_content) &gt; 1:<br>                self.df = ph.read_chromatograms(self.file_content[0].file_path)<br>            else:<br>                return False<br>            return True<br>        except ValueError:<br>            pass<br>    return False</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/html.py" download>html.py</a></td>
+<td style="text-align: center;">html</td>
 <td style="text-align: center;">HtmlReader</td>
 <td style="text-align: center;">html_reader</td>
 <td style="text-align: center;">100</td>
-<td style="text-align: center;"><pre>def check(self):<br>    return self.file.suffix.lower() == '.html'</pre></td>
+<td style="text-align: center;">def check(self):<br>    return self.file.suffix.lower() == '.html'</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/jasco.py" download>jasco.py</a></td>
+<td style="text-align: center;">jasco</td>
 <td style="text-align: center;">JascoReader</td>
 <td style="text-align: center;">jasco_reader</td>
 <td style="text-align: center;">99</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if self.file.string is not None:<br>        if len(self.file.string.splitlines()) == 1:<br>            file_lines = self.file.string.split(',')<br>            if len(file_lines) &gt; self.header_length - 1 and file_lines[self.header_length - 1] == str(len(file_lines) - self.header_length):<br>                result = True<br>                self.lines = file_lines<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if self.file.string is not None:<br>        if len(self.file.string.splitlines()) == 1:<br>            file_lines = self.file.string.split(',')<br>            if len(file_lines) &gt; self.header_length - 1 and file_lines[self.header_length - 1] == str(len(file_lines) - self.header_length):<br>                result = True<br>                self.lines = file_lines<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/jcamp_conv_reader.py" download>jcamp_conv_reader.py</a></td>
+<td style="text-align: center;">jcamp_conv_reader</td>
 <td style="text-align: center;">JcampReader</td>
 <td style="text-align: center;">jcamp_reader</td>
 <td style="text-align: center;">80</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    jsamp_extentions = ['.dx', '.jdx', '.jcm']<br>    if self.is_tar_ball:<br>        self.file = next((x for x in self.file_content if x.suffix.lower() in jsamp_extentions), None)<br>        if self.file is None:<br>            return False<br>    result = self.file.suffix.lower() in jsamp_extentions<br>    logger.debug('result=%s', result)<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    jsamp_extentions = ['.dx', '.jdx', '.jcm']<br>    if self.is_tar_ball:<br>        self.file = next((x for x in self.file_content if x.suffix.lower() in jsamp_extentions), None)<br>        if self.file is None:<br>            return False<br>    result = self.file.suffix.lower() in jsamp_extentions<br>    logger.debug('result=%s', result)<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/json_reader.py" download>json_reader.py</a></td>
+<td style="text-align: center;">json_reader</td>
 <td style="text-align: center;">JsonReader</td>
 <td style="text-align: center;">json_reader</td>
 <td style="text-align: center;">20</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix.lower() == '.json'</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix.lower() == '.json'</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/lithoz_pdf.py" download>lithoz_pdf.py</a></td>
+<td style="text-align: center;">lithoz_pdf</td>
 <td style="text-align: center;">PdfLithozReader</td>
 <td style="text-align: center;">pdf_lithoz_reader</td>
 <td style="text-align: center;">99</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    res = super().check()<br>    if res:<br>        res = len(self.text_data) == 6 and 'Zusammenfassung' in self.text_data<br>    return res</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    res = super().check()<br>    if res:<br>        res = len(self.text_data) == 6 and 'Zusammenfassung' in self.text_data<br>    return res</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/nova.py" download>nova.py</a></td>
+<td style="text-align: center;">mpl</td>
+<td style="text-align: center;">MplReader</td>
+<td style="text-align: center;">mps_reader</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix in ('.mpl',)</td>
+</tr>
+<tr>
+<td style="text-align: center;">mpr</td>
+<td style="text-align: center;">MprReader</td>
+<td style="text-align: center;">mpr_reader</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    check_result = self.file.encoding == 'binary' and self.file.suffix == '.mpr'<br>    if check_result:<br>        with tempfile.NamedTemporaryFile() as tp:<br>            try:<br>                tp.write(self.file.content)<br>                result = yadg.extractors.extract(filetype='eclab.mpr', path=tp.name)<br>                self._numpy_data = result.to_dict()<br>            except (NotImplementedError, AssertionError, ValueError) as e:<br>                return False<br>    return check_result</td>
+</tr>
+<tr>
+<td style="text-align: center;">nova</td>
 <td style="text-align: center;">NovaReader</td>
 <td style="text-align: center;">nova_reader</td>
 <td style="text-align: center;">90</td>
-<td style="text-align: center;"><pre>def check(self):<br>    result = self.check_csv()<br>    if result:<br>        first_line = self.file.string.splitlines()[0]<br>        first_row = next(csv.reader(io.StringIO(first_line), self.file.features('csv_dialect')))<br>        if first_row[:8] == self.first_row:<br>            self.rows = list(csv.reader(io.StringIO(self.file.string), self.file.features('csv_dialect')))<br>            self.lines = self.file.string.splitlines()<br>        else:<br>            result = False<br>    logger.debug('result=%s', result)<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    result = self.check_csv()<br>    if result:<br>        first_line = self.file.string.splitlines()[0]<br>        first_row = next(csv.reader(io.StringIO(first_line), self.file.features('csv_dialect')))<br>        if first_row[:8] == self.first_row:<br>            self.rows = list(csv.reader(io.StringIO(self.file.string), self.file.features('csv_dialect')))<br>            self.lines = self.file.string.splitlines()<br>        else:<br>            result = False<br>    logger.debug('result=%s', result)<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/old_excel.py" download>old_excel.py</a></td>
+<td style="text-align: center;">old_excel</td>
 <td style="text-align: center;">OldExcelReader</td>
 <td style="text-align: center;">old_excel_reader</td>
 <td style="text-align: center;">16</td>
-<td style="text-align: center;"><pre>def check(self):<br>    if self.file.encoding != 'binary' or self.file.suffix != '.xls':<br>        return False<br>    try:<br>        self.wb = xlrd.open_workbook(file_contents=self.file.content)<br>        return True<br>    except:<br>        return False</pre></td>
+<td style="text-align: center;">def check(self):<br>    if self.file.encoding != 'binary' or self.file.suffix != '.xls':<br>        return False<br>    try:<br>        self.wb = xlrd.open_workbook(file_contents=self.file.content)<br>        return True<br>    except:<br>        return False</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/pdf.py" download>pdf.py</a></td>
+<td style="text-align: center;">pdf</td>
 <td style="text-align: center;">PdfReader</td>
 <td style="text-align: center;">pdf_reader</td>
 <td style="text-align: center;">100</td>
-<td style="text-align: center;"><pre>def check(self):<br>    result = self.file.suffix == '.pdf'<br>    if result:<br>        self.text_data = self._read_pdf()<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    result = self.file.suffix == '.pdf'<br>    if result:<br>        self.text_data = self._read_pdf()<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/pssession.py" download>pssession.py</a></td>
+<td style="text-align: center;">pssession</td>
 <td style="text-align: center;">PsSessionReader</td>
 <td style="text-align: center;">pssession_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix == '.pssession'</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix == '.pssession'</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/sec.py" download>sec.py</a></td>
+<td style="text-align: center;">sec</td>
 <td style="text-align: center;">SecReader</td>
 <td style="text-align: center;">sec_reader</td>
 <td style="text-align: center;">95</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if self.file.suffix.lower() == '.txt' and self.file.mime_type == 'text/plain':<br>        first_lines = [self.file.string.splitlines()[0], self.file.string.splitlines()[1], self.file.string.splitlines()[2]]<br>        result_a = 'Sample :' in first_lines[0] and 'Method settings :' in first_lines[1] and ('Sequence table :' in first_lines[2])<br>        result_b = 'Sample :' in first_lines[0] and 'Inject date :' in first_lines[1] and ('Inject volume :' in first_lines[2])<br>        result = result_a or result_b<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if self.file.suffix.lower() == '.txt' and self.file.mime_type == 'text/plain':<br>        first_lines = [self.file.string.splitlines()[0], self.file.string.splitlines()[1], self.file.string.splitlines()[2]]<br>        result_a = 'Sample :' in first_lines[0] and 'Method settings :' in first_lines[1] and ('Sequence table :' in first_lines[2])<br>        result_b = 'Sample :' in first_lines[0] and 'Inject date :' in first_lines[1] and ('Inject volume :' in first_lines[2])<br>        result = result_a or result_b<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/sem.py" download>sem.py</a></td>
+<td style="text-align: center;">sem</td>
 <td style="text-align: center;">SemReader</td>
 <td style="text-align: center;">sem_reader</td>
 <td style="text-align: center;">95</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if super().check():<br>        first_line = self.file.string.splitlines()[0]<br>        result = first_line.startswith('$SEM_DATA_VERSION')<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = False<br>    if super().check():<br>        first_line = self.file.string.splitlines()[0]<br>        result = first_line.startswith('$SEM_DATA_VERSION')<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/tif.py" download>tif.py</a></td>
+<td style="text-align: center;">squid</td>
+<td style="text-align: center;">SquidReader</td>
+<td style="text-align: center;">squid_reader</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">def check(self):<br>    return self.file.encoding != 'binary' and self.file.suffix.lower() == '.dat'</td>
+</tr>
+<tr>
+<td style="text-align: center;">stoe_raw</td>
+<td style="text-align: center;">StoeRawReader</td>
+<td style="text-align: center;">stoe_raw_reader</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix.lower() == '.raw' and self.file.encoding.lower() == 'binary' and (self.file_type == 'RAW_1.06Powdat')</td>
+</tr>
+<tr>
+<td style="text-align: center;">tif</td>
 <td style="text-align: center;">TifReader</td>
 <td style="text-align: center;">tif_reader</td>
 <td style="text-align: center;">96</td>
-<td style="text-align: center;"><pre>def check(self):<br>    result = False<br>    if self.file.suffix.lower() == '.tif' and self.file.mime_type == 'image/tiff':<br>        self._parsed_values = self._read_img()<br>        result = self._parsed_values is not None and len(self._parsed_values) &gt; 0<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    result = False<br>    if self.file.suffix.lower() == '.tif' and self.file.mime_type == 'image/tiff':<br>        self._parsed_values = self._read_img()<br>        result = self._parsed_values is not None and len(self._parsed_values) &gt; 0<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/uvvis.py" download>uvvis.py</a></td>
+<td style="text-align: center;">tvb</td>
+<td style="text-align: center;">TvbReader</td>
+<td style="text-align: center;">tvb_reader</td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    return self.file.suffix.lower() == '.tvb' and self.file.encoding.lower() == 'binary'</td>
+</tr>
+<tr>
+<td style="text-align: center;">uvvis</td>
 <td style="text-align: center;">UvvisReader</td>
 <td style="text-align: center;">uvvis_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = super().check()<br>    if result:<br>        metadata_begin = self.lines[-2] if len(self.lines) &gt; 1 else ''<br>        return 'Properties' in metadata_begin<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    """<br>        :return: True if it fits<br>        """<br>    result = super().check()<br>    if result:<br>        metadata_begin = self.lines[-2] if len(self.lines) &gt; 1 else ''<br>        return 'Properties' in metadata_begin<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/uxd_reader.py" download>uxd_reader.py</a></td>
+<td style="text-align: center;">uxd_reader</td>
 <td style="text-align: center;">UXDReader</td>
 <td style="text-align: center;">uxd_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    return self.file.suffix.lower() in self._file_extensions</pre></td>
+<td style="text-align: center;">def check(self):<br>    return self.file.suffix.lower() in self._file_extensions</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/vsi.py" download>vsi.py</a></td>
+<td style="text-align: center;">vsi</td>
 <td style="text-align: center;">VsiReader</td>
 <td style="text-align: center;">vsi_reader</td>
 <td style="text-align: center;">8</td>
-<td style="text-align: center;"><pre>def check(self):<br>    if not super().check():<br>        return False<br>    text = self.file.string[:500]<br>    result = '&lt;DataContainer key="MetaData" typeid=' in text<br>    result &amp;= '&lt;DataContainer typeid=' in text<br>    return result</pre></td>
+<td style="text-align: center;">def check(self):<br>    if not super().check():<br>        return False<br>    text = self.file.string[:500]<br>    result = '&lt;DataContainer key="MetaData" typeid=' in text<br>    result &amp;= '&lt;DataContainer typeid=' in text<br>    return result</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/xml_reader.py" download>xml_reader.py</a></td>
+<td style="text-align: center;">xml_reader</td>
 <td style="text-align: center;">XMLReader</td>
 <td style="text-align: center;">xml_reader</td>
 <td style="text-align: center;">10</td>
-<td style="text-align: center;"><pre>def check(self):<br>    return self.file.suffix.lower() in self._file_extensions</pre></td>
+<td style="text-align: center;">def check(self):<br>    return self.file.suffix.lower() in self._file_extensions</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/readers/xrdml.py" download>xrdml.py</a></td>
+<td style="text-align: center;">xrdml</td>
 <td style="text-align: center;">XRDMLReader</td>
 <td style="text-align: center;">xrdml_reader</td>
 <td style="text-align: center;">None</td>
@@ -320,7 +362,7 @@
 <table>
 <thead>
 <tr>
-<th style="text-align: center;">id (click to download from this GitHub.io mirror)</th>
+<th style="text-align: center;">id</th>
 <th style="text-align: center;">reader</th>
 <th style="text-align: center;">extension</th>
 <th style="text-align: center;">title</th>
@@ -332,7 +374,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/0d7dd8d4-a599-4151-855e-643956a7362c.json" download>0d7dd8d4-a599-4151-855e-643956a7362c</a></td>
+<td style="text-align: center;">0d7dd8d4-a599-4151-855e-643956a7362c</td>
 <td style="text-align: center;">BrmlReader</td>
 <td style="text-align: center;">.brml</td>
 <td style="text-align: center;">X-ray diffraction data from brml, data: +, metadata: -</td>
@@ -342,7 +384,7 @@
 <td style="text-align: center;">[('extension', '.brml')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/df15f2b0-4133-4231-8b48-bec52fb6043c.json" download>df15f2b0-4133-4231-8b48-bec52fb6043c</a></td>
+<td style="text-align: center;">df15f2b0-4133-4231-8b48-bec52fb6043c</td>
 <td style="text-align: center;">CifReader</td>
 <td style="text-align: center;">.cif</td>
 <td style="text-align: center;">crystallographic metadata from cif, data: -, metadata: +</td>
@@ -352,7 +394,7 @@
 <td style="text-align: center;">[('extension', '.cif'), ('reader', 'CifReader')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/0d04f3c5-43d4-408a-85ef-34b33975020a.json" download>0d04f3c5-43d4-408a-85ef-34b33975020a</a></td>
+<td style="text-align: center;">0d04f3c5-43d4-408a-85ef-34b33975020a</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.csv</td>
 <td style="text-align: center;">DSC with Time</td>
@@ -362,7 +404,7 @@
 <td style="text-align: center;">[('reader', 'CSVReader'), ('extension', '.csv'), ('column_02', 'DSC/(mW/mg)'), ('column_00', '##Temp./°C')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/3e2fb90e-b6b6-4152-9182-ed8e203a58b5.json" download>3e2fb90e-b6b6-4152-9182-ed8e203a58b5</a></td>
+<td style="text-align: center;">3e2fb90e-b6b6-4152-9182-ed8e203a58b5</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.csv</td>
 <td style="text-align: center;">DSC without time</td>
@@ -372,7 +414,7 @@
 <td style="text-align: center;">[('reader', 'CSVReader'), ('column_01', 'DSC/(mW/mg)'), ('column_00', '##Temp./°C'), ('extension', '.csv')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/8079b064-6314-4d99-b13b-e4f590cf556f.json" download>8079b064-6314-4d99-b13b-e4f590cf556f</a></td>
+<td style="text-align: center;">8079b064-6314-4d99-b13b-e4f590cf556f</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.csv</td>
 <td style="text-align: center;">UV-VIS data from csv, data: +, metadata: -</td>
@@ -382,7 +424,7 @@
 <td style="text-align: center;">[('column_00', 'Wavelength'), ('column_01', 'Abs')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/c498c925-61e0-455e-a4c6-c46ac9c2f5c6.json" download>c498c925-61e0-455e-a4c6-c46ac9c2f5c6</a></td>
+<td style="text-align: center;">c498c925-61e0-455e-a4c6-c46ac9c2f5c6</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.csv</td>
 <td style="text-align: center;">Mass spectrometry from txt, data: +, metadata: -</td>
@@ -392,7 +434,7 @@
 <td style="text-align: center;">[]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/d8e6bf8f-6de1-4743-9513-04cbd0c6c712.json" download>d8e6bf8f-6de1-4743-9513-04cbd0c6c712</a></td>
+<td style="text-align: center;">d8e6bf8f-6de1-4743-9513-04cbd0c6c712</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.csv</td>
 <td style="text-align: center;">UVVIS CS</td>
@@ -402,7 +444,7 @@
 <td style="text-align: center;">[('reader', 'CSVReader'), ('extension', '.csv'), ('column_00', 'Wavelength (nm)'), ('column_07', 'Abs')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/db05bfb4-6829-4339-bec1-54065710f211.json" download>db05bfb4-6829-4339-bec1-54065710f211</a></td>
+<td style="text-align: center;">db05bfb4-6829-4339-bec1-54065710f211</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.csv</td>
 <td style="text-align: center;">UV-VIS data from multi-column csv, data: +, metadata: -</td>
@@ -412,7 +454,7 @@
 <td style="text-align: center;">[('content_type', 'text/csv')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/0cd6596c-83d2-49ab-a982-1dfec98d16ba.json" download>0cd6596c-83d2-49ab-a982-1dfec98d16ba</a></td>
+<td style="text-align: center;">0cd6596c-83d2-49ab-a982-1dfec98d16ba</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.dpt</td>
 <td style="text-align: center;">IR DPT</td>
@@ -422,7 +464,7 @@
 <td style="text-align: center;">[('extension', '.dpt')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/799f3db4-fd21-4aa7-a7bd-7c5548cbe316.json" download>799f3db4-fd21-4aa7-a7bd-7c5548cbe316</a></td>
+<td style="text-align: center;">799f3db4-fd21-4aa7-a7bd-7c5548cbe316</td>
 <td style="text-align: center;">DtaReader</td>
 <td style="text-align: center;">.DTA</td>
 <td style="text-align: center;">CV Gamry</td>
@@ -432,17 +474,7 @@
 <td style="text-align: center;">[('extension', '.DTA'), ('TITLE', 'Cyclic')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/8b00e934-9bc4-4248-a2de-b303d2e93aa4.json" download>8b00e934-9bc4-4248-a2de-b303d2e93aa4</a></td>
-<td style="text-align: center;">DtaReader</td>
-<td style="text-align: center;">.DTA</td>
-<td style="text-align: center;">## Nameless (04/12/2025 14:33:36)</td>
-<td style="text-align: center;">Test</td>
-<td style="text-align: center;">['g', 'a']</td>
-<td style="text-align: center;">['windows', 'x', 'linux']</td>
-<td style="text-align: center;">[('file_name', 'DHM-12-CV-1mM+1mMFc-N2_100mVps-No9.DTA')]</td>
-</tr>
-<tr>
-<td style="text-align: center;"><a href="atch/server/profiles/12b1ff4b-e295-4377-ba11-c602d855a644.json" download>12b1ff4b-e295-4377-ba11-c602d855a644</a></td>
+<td style="text-align: center;">12b1ff4b-e295-4377-ba11-c602d855a644</td>
 <td style="text-align: center;">HplcReader</td>
 <td style="text-align: center;">.gz</td>
 <td style="text-align: center;">Chemstation</td>
@@ -452,7 +484,7 @@
 <td style="text-align: center;">[('reader', 'HplcReader'), ('mime_type', 'application/gzip'), ('internal_reader_name', 'chemstation')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/8c8c4b18-143a-4245-a8d4-29e47c6b86a1.json" download>8c8c4b18-143a-4245-a8d4-29e47c6b86a1</a></td>
+<td style="text-align: center;">8c8c4b18-143a-4245-a8d4-29e47c6b86a1</td>
 <td style="text-align: center;">BioLogic</td>
 <td style="text-align: center;">.gz</td>
 <td style="text-align: center;">Biologic as tar gz</td>
@@ -462,7 +494,7 @@
 <td style="text-align: center;">[('reader', 'BioLogic'), ('settings.technique', 'CV')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/d7729388-8350-402c-b617-82a6fa4900dd.json" download>d7729388-8350-402c-b617-82a6fa4900dd</a></td>
+<td style="text-align: center;">d7729388-8350-402c-b617-82a6fa4900dd</td>
 <td style="text-align: center;">LcmsReader</td>
 <td style="text-align: center;">.gz</td>
 <td style="text-align: center;">LcmsReader</td>
@@ -472,7 +504,7 @@
 <td style="text-align: center;">[('content_type', 'application/x-gzip'), ('extension', '.gz'), ('reader', 'LcmsReader')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/c6573972-cb06-484d-a529-9dd2424fc408.json" download>c6573972-cb06-484d-a529-9dd2424fc408</a></td>
+<td style="text-align: center;">c6573972-cb06-484d-a529-9dd2424fc408</td>
 <td style="text-align: center;">PsSessionReader</td>
 <td style="text-align: center;">.pssession</td>
 <td style="text-align: center;">CV data from pssession, data: +, metadata: +</td>
@@ -482,7 +514,7 @@
 <td style="text-align: center;">[('extension', '.pssession'), ('title', '(Cyclic Voltammetry)')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/2a913039-c48d-4fd5-9fbb-706733e53f76.json" download>2a913039-c48d-4fd5-9fbb-706733e53f76</a></td>
+<td style="text-align: center;">2a913039-c48d-4fd5-9fbb-706733e53f76</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">UV-Vis</td>
@@ -492,7 +524,7 @@
 <td style="text-align: center;">[('reader', 'CSVReader')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/44f5bfbb-ae1f-4da0-b43b-0d33b649c24a.json" download>44f5bfbb-ae1f-4da0-b43b-0d33b649c24a</a></td>
+<td style="text-align: center;">44f5bfbb-ae1f-4da0-b43b-0d33b649c24a</td>
 <td style="text-align: center;">SecReader</td>
 <td style="text-align: center;">.TXT</td>
 <td style="text-align: center;">SEC 1</td>
@@ -502,7 +534,7 @@
 <td style="text-align: center;">[('reader', 'SecReader'), ('table_name', 'MWD'), ('Detector 1', 'I1')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/5a413afd-cb77-40e4-99b1-c044d94eaa51.json" download>5a413afd-cb77-40e4-99b1-c044d94eaa51</a></td>
+<td style="text-align: center;">5a413afd-cb77-40e4-99b1-c044d94eaa51</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">UV-VIS data from general txt, data: +, metadata: -</td>
@@ -512,7 +544,7 @@
 <td style="text-align: center;">[]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/5cb879d1-2b3f-4778-8e06-1a198500c8db.json" download>5cb879d1-2b3f-4778-8e06-1a198500c8db</a></td>
+<td style="text-align: center;">5cb879d1-2b3f-4778-8e06-1a198500c8db</td>
 <td style="text-align: center;">AifReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">(AIF) Sorption-Desorption Measurement from txt, data: +, metadata: +</td>
@@ -522,7 +554,7 @@
 <td style="text-align: center;">[('reader', 'AifReader'), ('Unit_column_#0', '_adsorp_pressure')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/6bb4fea5-3a59-4b95-8956-d977a4d8b6a7.json" download>6bb4fea5-3a59-4b95-8956-d977a4d8b6a7</a></td>
+<td style="text-align: center;">6bb4fea5-3a59-4b95-8956-d977a4d8b6a7</td>
 <td style="text-align: center;">NovaReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">CV data from txt, data: +, metadata: (+)</td>
@@ -532,7 +564,7 @@
 <td style="text-align: center;">[('reader', 'NovaReader'), ('column_00', 'Potential applied (V)'), ('column_02', 'WE(1).Current (A)')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/6be46fd7-59a2-4b02-829b-cbfef8c19646.json" download>6be46fd7-59a2-4b02-829b-cbfef8c19646</a></td>
+<td style="text-align: center;">6be46fd7-59a2-4b02-829b-cbfef8c19646</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">UV-VIS data from txt, data: +, metadata: -</td>
@@ -542,7 +574,7 @@
 <td style="text-align: center;">[('extension', '.txt')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/6d344bc4-c4fb-4306-9d56-1e754e7e0590.json" download>6d344bc4-c4fb-4306-9d56-1e754e7e0590</a></td>
+<td style="text-align: center;">6d344bc4-c4fb-4306-9d56-1e754e7e0590</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">Tensile test data from txt, data: +, metadata: -</td>
@@ -552,7 +584,7 @@
 <td style="text-align: center;">[('column_01', 'Force_N'), ('column_05', 'Elongation_%'), ('column_02', 'Strain_mm')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/71883827-4472-48d8-becf-64ea89324f3e.json" download>71883827-4472-48d8-becf-64ea89324f3e</a></td>
+<td style="text-align: center;">71883827-4472-48d8-becf-64ea89324f3e</td>
 <td style="text-align: center;">SecReader</td>
 <td style="text-align: center;">.TXT</td>
 <td style="text-align: center;">SEC 2</td>
@@ -562,7 +594,7 @@
 <td style="text-align: center;">[('reader', 'SecReader'), ('table_name', 'MWD'), ('Detector 2', 'I2')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/a5b05507-aed2-462b-a526-3fee53c87a48.json" download>a5b05507-aed2-462b-a526-3fee53c87a48</a></td>
+<td style="text-align: center;">a5b05507-aed2-462b-a526-3fee53c87a48</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">DLS data from txt, data: +, metadata: -</td>
@@ -572,7 +604,7 @@
 <td style="text-align: center;">[('file_name', 'SSP-0'), ('extension', '.txt')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/af891148-ebcc-4e5d-a481-fa6acc853699.json" download>af891148-ebcc-4e5d-a481-fa6acc853699</a></td>
+<td style="text-align: center;">af891148-ebcc-4e5d-a481-fa6acc853699</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">UV-VIS data from txt, data: +, metadata: -</td>
@@ -582,7 +614,7 @@
 <td style="text-align: center;">[]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/b31ef3df-eacf-4440-bbb3-34b073be9eb9.json" download>b31ef3df-eacf-4440-bbb3-34b073be9eb9</a></td>
+<td style="text-align: center;">b31ef3df-eacf-4440-bbb3-34b073be9eb9</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">CD MS Spectra data from txt, data: +, metadata: -</td>
@@ -592,7 +624,7 @@
 <td style="text-align: center;">[('reader', 'CSVReader')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/c7e3130f-6c23-432a-a886-a82d11632da2.json" download>c7e3130f-6c23-432a-a886-a82d11632da2</a></td>
+<td style="text-align: center;">c7e3130f-6c23-432a-a886-a82d11632da2</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">UV-Vis</td>
@@ -602,7 +634,7 @@
 <td style="text-align: center;">[('reader', 'CSVReader')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/c9d63af9-2ce7-425e-895c-c04b8497c26c.json" download>c9d63af9-2ce7-425e-895c-c04b8497c26c</a></td>
+<td style="text-align: center;">c9d63af9-2ce7-425e-895c-c04b8497c26c</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">Tensile test data from txt, data: +, metadata: -</td>
@@ -612,7 +644,7 @@
 <td style="text-align: center;">[('column_01', 'Force_N'), ('column_02', 'Deformation (fine)_mm'), ('column_05', 'Strain_mm')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/cddfe1ff-ef5a-44fb-a6ba-443a870c7a27.json" download>cddfe1ff-ef5a-44fb-a6ba-443a870c7a27</a></td>
+<td style="text-align: center;">cddfe1ff-ef5a-44fb-a6ba-443a870c7a27</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">Emission spectrum</td>
@@ -622,7 +654,7 @@
 <td style="text-align: center;">[('reader', 'CSVReader')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/d9be2928-fd8e-4abe-bbe0-3e419330875f.json" download>d9be2928-fd8e-4abe-bbe0-3e419330875f</a></td>
+<td style="text-align: center;">d9be2928-fd8e-4abe-bbe0-3e419330875f</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">DLS data from txt, data: +, metadata: -</td>
@@ -632,7 +664,7 @@
 <td style="text-align: center;">[('extension', '.txt'), ('file_name', 'IW-SPEGA')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/fb19f78e-8d87-4c5f-a4e1-ac90994300d7.json" download>fb19f78e-8d87-4c5f-a4e1-ac90994300d7</a></td>
+<td style="text-align: center;">fb19f78e-8d87-4c5f-a4e1-ac90994300d7</td>
 <td style="text-align: center;">CSVReader</td>
 <td style="text-align: center;">.txt</td>
 <td style="text-align: center;">CD MS Spectra data from txt, data: +, metadata: -</td>
@@ -642,7 +674,7 @@
 <td style="text-align: center;">[('reader', 'CSVReader'), ('column_00', 'm/z')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/e7a4ee04-cdf6-4da6-a82c-ba6909af6cee.json" download>e7a4ee04-cdf6-4da6-a82c-ba6909af6cee</a></td>
+<td style="text-align: center;">e7a4ee04-cdf6-4da6-a82c-ba6909af6cee</td>
 <td style="text-align: center;">OldExcelReader</td>
 <td style="text-align: center;">.xls</td>
 <td style="text-align: center;">TGA</td>
@@ -652,7 +684,7 @@
 <td style="text-align: center;">[('reader', 'OldExcelReader'), ('Instrument Type', 'TGA5500')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/e845bc85-07b9-4e21-8bdf-4daa4a74fa15.json" download>e845bc85-07b9-4e21-8bdf-4daa4a74fa15</a></td>
+<td style="text-align: center;">e845bc85-07b9-4e21-8bdf-4daa4a74fa15</td>
 <td style="text-align: center;">OldExcelReader</td>
 <td style="text-align: center;">.xls</td>
 <td style="text-align: center;">TGA with derivative</td>
@@ -662,7 +694,7 @@
 <td style="text-align: center;">[('reader', 'OldExcelReader'), ('Instrument Type', 'TGA5500')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/fb63e718-3842-4d45-9b39-84a53b27e483.json" download>fb63e718-3842-4d45-9b39-84a53b27e483</a></td>
+<td style="text-align: center;">fb63e718-3842-4d45-9b39-84a53b27e483</td>
 <td style="text-align: center;">OldExcelReader</td>
 <td style="text-align: center;">.xls</td>
 <td style="text-align: center;">TGA 2</td>
@@ -672,7 +704,7 @@
 <td style="text-align: center;">[('reader', 'OldExcelReader'), ('Instrument Type', 'TGA5500')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/15400217-b730-47db-9d5c-a300bce7ae95.json" download>15400217-b730-47db-9d5c-a300bce7ae95</a></td>
+<td style="text-align: center;">15400217-b730-47db-9d5c-a300bce7ae95</td>
 <td style="text-align: center;">ExcelReader</td>
 <td style="text-align: center;">.xlsx</td>
 <td style="text-align: center;">UVVIS CS</td>
@@ -682,7 +714,7 @@
 <td style="text-align: center;">[('reader', 'ExcelReader'), ('extension', '.xlsx')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/e10cd71e-b44f-4493-b7ad-ca231ccd324f.json" download>e10cd71e-b44f-4493-b7ad-ca231ccd324f</a></td>
+<td style="text-align: center;">e10cd71e-b44f-4493-b7ad-ca231ccd324f</td>
 <td style="text-align: center;">ExcelReader</td>
 <td style="text-align: center;">.xlsx</td>
 <td style="text-align: center;">DLS</td>
@@ -692,7 +724,7 @@
 <td style="text-align: center;">[('reader', 'ExcelReader')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/fbbe088a-b688-4609-8c00-086a149f61ba.json" download>fbbe088a-b688-4609-8c00-086a149f61ba</a></td>
+<td style="text-align: center;">fbbe088a-b688-4609-8c00-086a149f61ba</td>
 <td style="text-align: center;">ExcelReader</td>
 <td style="text-align: center;">.xlsx</td>
 <td style="text-align: center;">DLS-ACF</td>
@@ -702,7 +734,7 @@
 <td style="text-align: center;">[('reader', 'ExcelReader')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/4d4f72ef-3708-4516-b110-2fa6869565ce.json" download>4d4f72ef-3708-4516-b110-2fa6869565ce</a></td>
+<td style="text-align: center;">4d4f72ef-3708-4516-b110-2fa6869565ce</td>
 <td style="text-align: center;">AsciiReader</td>
 <td style="text-align: center;">.xy</td>
 <td style="text-align: center;">PXRD data from xy, data: +, metadata: -</td>
@@ -712,7 +744,7 @@
 <td style="text-align: center;">[('extension', '.xy'), ('reader', 'AsciiReader')]</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="atch/server/profiles/5b206281-49f6-437b-99ca-c64a621eb903.json" download>5b206281-49f6-437b-99ca-c64a621eb903</a></td>
+<td style="text-align: center;">5b206281-49f6-437b-99ca-c64a621eb903</td>
 <td style="text-align: center;">AsciiReader</td>
 <td style="text-align: center;">.xy</td>
 <td style="text-align: center;">Mass spectrometry from general xy format, data: +, metadata: -</td>
@@ -724,6 +756,55 @@
 </tbody>
 </table>
       </article>
+      <div id="readersGrid" class="ag-theme-alpine" style="height: 300px; width: 100%;"></div>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css">
+        <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+        
+        <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        
+          function codeCellRenderer(params) {
+            if (!params.value) return "";
+        
+            return `
+              <code style="
+                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+                white-space: pre-wrap;
+                display: block;
+                font-size: 12px;
+                background: #f6f8fa;
+                padding: 6px 8px;
+                border-radius: 6px;
+                line-height: 1.4;
+              ">${params.value}</code>
+            `;
+          }
+        
+          const gridOptions = {
+            theme: "legacy",
+            columnDefs: [{"field": "file name", "pinned": "left"}, {"field": "class name"}, {"field": "identifier"}, {"field": "priority"}, {"field": "check", "cellRenderer": "codeCellRenderer"}],
+            rowData: [{"file name": "__init__", "class name": null, "identifier": null, "priority": null, "check": ""}, {"file name": "afm", "class name": "AfmReader", "identifier": "afm_reader", "priority": 10, "check": "def check(self):\n    return self.file.suffix.lower() == '.spm'"}, {"file name": "aif", "class name": "AifReader", "identifier": "aif_reader", "priority": 95, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    if self.file.suffix.lower() in ('.txt', '.aif') and self.file.mime_type == 'text/plain':\n        first_line = self.file.string.splitlines()[0]\n        return 'raw2aif' in first_line\n    return False"}, {"file name": "asc_zip", "class name": "AscZipReader", "identifier": "asc_zip_reader", "priority": 10, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    result = False\n    if self.file.suffix.lower() == '.zip' and self.file.mime_type == 'application/zip':\n        with ZipFile(self.file.fp, 'r') as zip_obj:\n            list_of_file_names = zip_obj.namelist()\n            if any((fileName.lower().endswith('.asc') for fileName in list_of_file_names)):\n                with tempfile.TemporaryDirectory() as td:\n                    zipdir = os.path.join(td, os.path.basename(self.file.name))\n                    os.makedirs(zipdir)\n                    result = True\n                    for file_name in list_of_file_names:\n                        if file_name.lower().endswith('.asc'):\n                            path_file_name = zip_obj.extract(file_name, zipdir)\n                            with open(path_file_name, mode='r', encoding='latin_1') as f:\n                                self.filedata[file_name] = f.readlines()\n    return result"}, {"file name": "ascii", "class name": "AsciiReader", "identifier": "ascii_reader", "priority": 1000, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    return not self.file.encoding == 'binary'"}, {"file name": "bio_logic_reader", "class name": "BioLogic", "identifier": "bio_logic_080ecac4-8fa2-4c47-b7cc-4ef5db082b07", "priority": 20, "check": "def check(self):\n    mpr_found = False\n    if self.file.is_tar_archive:\n        for file in self.file_content:\n            self.mpr_reader = MprReader(file)\n            if self.mpr_reader.check():\n                mpr_found = True\n                break\n        if not mpr_found:\n            return False\n        for file in self.file_content:\n            file.fp.seek(0)\n            self.mpl_reader = MplReader(file)\n            if self.mpl_reader.check():\n                break\n            self.mpl_reader = None\n        return True\n    return False"}, {"file name": "brml", "class name": "BrmlReader", "identifier": "brml_reader", "priority": 10, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    return self.file.suffix == '.brml'"}, {"file name": "brucker_dotzero", "class name": "DotZeroReader", "identifier": "dot_zero_reader", "priority": 79, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    dotzero_extentions = ['.0']\n    if self.is_tar_ball:\n        for x in self.file_content:\n            try:\n                if opusFC.isOpusFile(x.fp.filename):\n                    self._dotzero_file = x.fp.filename\n                    return True\n            except (ValueError, TypeError, FileNotFoundError):\n                pass\n        dx_file = next((x for x in self.file_content if x.suffix.lower() == '.dx'), None)\n        if dx_file is not None:\n            self._dx_name = dx_file.name[:-3]\n    elif self.file.suffix.lower() in dotzero_extentions:\n        with tempfile.NamedTemporaryFile(suffix='.0', delete=False) as temp_file:\n            self._dotzero_file = temp_file.name\n            self.file.fp.save(self._dotzero_file)\n            self._has_temp_copy = True\n            if opusFC.isOpusFile(self._dotzero_file):\n                return True\n            return False\n    return self._dotzero_file is not None"}, {"file name": "cary", "class name": "CaryReader", "identifier": "cary_reader", "priority": 90, "check": "def check(self):\n    result = self.check_csv()\n    if result:\n        split = re.split('(?:\\\\r?\\\\n){2,}', self.file.string.strip())\n        metadata_string = data_string = None\n        try:\n            data_string, metadata_string = split\n        except ValueError:\n            result = False\n        if result and 'Instrument  Cary' in metadata_string:\n            self.rows = list(csv.reader(io.StringIO(data_string), self.file.features('csv_dialect')))\n            self.lines = data_string.splitlines()\n            self.metadata_lines = metadata_string.splitlines()\n        else:\n            result = False\n    logger.debug('result=%s', result)\n    return result"}, {"file name": "cfx", "class name": "CfxReader", "identifier": "cfx_reader", "priority": 11, "check": ""}, {"file name": "cif", "class name": "CifReader", "identifier": "cif_reader", "priority": 10, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    if self.file.suffix.lower() == '.zip' and self.file.mime_type == 'application/zip':\n        with ZipFile(self.file.fp, 'r') as zip_obj:\n            try:\n                file_name = next((x for x in zip_obj.namelist() if x.lower().endswith(self.file_prefix)))\n                with os.path.join(tempfile.TemporaryDirectory().name, self.file.name) as zipdir:\n                    os.makedirs(zipdir)\n                    path_file_name = zip_obj.extract(file_name, zipdir)\n                    with open(path_file_name, 'rb') as f:\n                        fs = FileStorage(stream=f, filename=os.path.basename(file_name), content_type='chemical/x-cif')\n                        self.file = File(fs)\n            except:\n                logger.debug('result=%s', False)\n                return False\n    result = self.file.suffix.lower() == self.file_prefix and self.file.mime_type == 'text/plain'\n    if result:\n        try:\n            self.cif = cif.read_string(self.file.content)\n        except ValueError as e:\n            if str(e).endswith('expected block header (data_)'):\n                content = 'data_' + re.split('^data_', self.file.string, flags=re.M)[-1]\n                try:\n                    self.cif = cif.read_string(content)\n                except ValueError:\n                    result = False\n    return result"}, {"file name": "csm", "class name": "CsmReader", "identifier": "csm_reader", "priority": 10, "check": "def check(self):\n    is_check = super().check()\n    if is_check:\n        return '<div id=\"metainfo\">' in self.file.string"}, {"file name": "csv_reader", "class name": "CSVReader", "identifier": "csv_reader", "priority": 100, "check": "def check(self):\n    result = self.check_csv()\n    if result:\n        self.lines = self.file.string.splitlines()\n        try:\n            self.rows = list(csv.reader(io.StringIO(self.file.string), self.file.features('csv_dialect')))\n        except:\n            self.rows = list(csv.reader(self.lines, self.file.features('csv_dialect')))\n    logger.debug('result=%s', result)\n    return result"}, {"file name": "dsp", "class name": "DSPReader", "identifier": "dsp_reader", "priority": 95, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    if self.file.suffix.lower() == '.dsp' and self.file.mime_type == 'text/plain':\n        first_line = self.file.string.splitlines()[0]\n        return 'sinacsa' in first_line\n    return False"}, {"file name": "dta", "class name": "DtaReader", "identifier": "dta_reader", "priority": 10, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    return self.file.encoding != 'binary' and self.file.suffix.lower() == '.dta'"}, {"file name": "dwl", "class name": "_ReaderSate", "identifier": "dwl-reader", "priority": 11, "check": "def check(self):\n    result = self.file.suffix.lower() == '.result' and self.file.mime_type == 'text/plain'\n    if result:\n        self.lines = self.file.string.splitlines()\n        try:\n            result = re.match('^<[^>]+>$', self.lines[0]) is not None or self.lines[1].startswith('Start') or self.lines[2].startswith('Status')\n        except IndexError:\n            result = False\n    if result:\n        self._check_next_tag(self.lines[0])\n    return result"}, {"file name": "ea_pdf", "class name": "EaPdfReader", "identifier": "pdf_ea_reader", "priority": 99, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    res = super().check()\n    if res:\n        res = len(self.text_data) == 1 and '_' in self.text_data and self.text_data['_'][-1]['text'].strip().startswith('Signature')\n    return res"}, {"file name": "ebl", "class name": "_State", "identifier": "ebl_reader", "priority": 50, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    result = self.file.suffix.lower() == '.log' and self.file.mime_type == 'text/plain'\n    if result:\n        self.lines = self.file.string.splitlines()\n        self.pre_header, self.pre_script, result = self._PreProcessor.process_header(self.lines[:self._PreProcessor.header_lines])\n    return result"}, {"file name": "excel", "class name": "ExcelReader", "identifier": "excel_reader", "priority": 15, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    if self.file.encoding != 'binary':\n        result = False\n    elif self.file.suffix != '.xlsx':\n        result = False\n    else:\n        try:\n            self.wb = openpyxl.load_workbook(filename=self.file.fp)\n            result = True\n        except (openpyxl.utils.exceptions.InvalidFileException, zipfile.BadZipFile):\n            result = False\n    logger.debug('result=%s', result)\n    return result"}, {"file name": "gcd", "class name": "GcdReader", "identifier": "gcd_reader", "priority": 5, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    if self.is_tar_ball:\n        self.file = next((x for x in self.file_content if x.name.lower().endswith('.gcd.txt')), None)\n        if self.file is None:\n            return False\n    result = self.file.suffix.lower() == '.txt'\n    if result:\n        try:\n            self.lines = self._parse_input()\n        except AttributeError:\n            return False\n        result = '[Chromatogram (Ch1)]' in self.lines and '[Compound Results(Ch1)]' in self.lines\n    return result"}, {"file name": "hplc_reader", "class name": "HplcReader", "identifier": "hplc_reader", "priority": 5, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    if self.is_tar_ball:\n        try:\n            if len(self.file_content) > 1:\n                self.df = ph.read_chromatograms(self.file_content[0].file_path)\n            else:\n                return False\n            return True\n        except ValueError:\n            pass\n    return False"}, {"file name": "html", "class name": "HtmlReader", "identifier": "html_reader", "priority": 100, "check": "def check(self):\n    return self.file.suffix.lower() == '.html'"}, {"file name": "jasco", "class name": "JascoReader", "identifier": "jasco_reader", "priority": 99, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    result = False\n    if self.file.string is not None:\n        if len(self.file.string.splitlines()) == 1:\n            file_lines = self.file.string.split(',')\n            if len(file_lines) > self.header_length - 1 and file_lines[self.header_length - 1] == str(len(file_lines) - self.header_length):\n                result = True\n                self.lines = file_lines\n    return result"}, {"file name": "jcamp_conv_reader", "class name": "JcampReader", "identifier": "jcamp_reader", "priority": 80, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    jsamp_extentions = ['.dx', '.jdx', '.jcm']\n    if self.is_tar_ball:\n        self.file = next((x for x in self.file_content if x.suffix.lower() in jsamp_extentions), None)\n        if self.file is None:\n            return False\n    result = self.file.suffix.lower() in jsamp_extentions\n    logger.debug('result=%s', result)\n    return result"}, {"file name": "json_reader", "class name": "JsonReader", "identifier": "json_reader", "priority": 20, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    return self.file.suffix.lower() == '.json'"}, {"file name": "lithoz_pdf", "class name": "PdfLithozReader", "identifier": "pdf_lithoz_reader", "priority": 99, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    res = super().check()\n    if res:\n        res = len(self.text_data) == 6 and 'Zusammenfassung' in self.text_data\n    return res"}, {"file name": "mpl", "class name": "MplReader", "identifier": "mps_reader", "priority": 10, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    return self.file.suffix in ('.mpl',)"}, {"file name": "mpr", "class name": "MprReader", "identifier": "mpr_reader", "priority": 10, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    check_result = self.file.encoding == 'binary' and self.file.suffix == '.mpr'\n    if check_result:\n        with tempfile.NamedTemporaryFile() as tp:\n            try:\n                tp.write(self.file.content)\n                result = yadg.extractors.extract(filetype='eclab.mpr', path=tp.name)\n                self._numpy_data = result.to_dict()\n            except (NotImplementedError, AssertionError, ValueError) as e:\n                return False\n    return check_result"}, {"file name": "nova", "class name": "NovaReader", "identifier": "nova_reader", "priority": 90, "check": "def check(self):\n    result = self.check_csv()\n    if result:\n        first_line = self.file.string.splitlines()[0]\n        first_row = next(csv.reader(io.StringIO(first_line), self.file.features('csv_dialect')))\n        if first_row[:8] == self.first_row:\n            self.rows = list(csv.reader(io.StringIO(self.file.string), self.file.features('csv_dialect')))\n            self.lines = self.file.string.splitlines()\n        else:\n            result = False\n    logger.debug('result=%s', result)\n    return result"}, {"file name": "old_excel", "class name": "OldExcelReader", "identifier": "old_excel_reader", "priority": 16, "check": "def check(self):\n    if self.file.encoding != 'binary' or self.file.suffix != '.xls':\n        return False\n    try:\n        self.wb = xlrd.open_workbook(file_contents=self.file.content)\n        return True\n    except:\n        return False"}, {"file name": "pdf", "class name": "PdfReader", "identifier": "pdf_reader", "priority": 100, "check": "def check(self):\n    result = self.file.suffix == '.pdf'\n    if result:\n        self.text_data = self._read_pdf()\n    return result"}, {"file name": "pssession", "class name": "PsSessionReader", "identifier": "pssession_reader", "priority": 10, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    return self.file.suffix == '.pssession'"}, {"file name": "sec", "class name": "SecReader", "identifier": "sec_reader", "priority": 95, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    result = False\n    if self.file.suffix.lower() == '.txt' and self.file.mime_type == 'text/plain':\n        first_lines = [self.file.string.splitlines()[0], self.file.string.splitlines()[1], self.file.string.splitlines()[2]]\n        result_a = 'Sample :' in first_lines[0] and 'Method settings :' in first_lines[1] and ('Sequence table :' in first_lines[2])\n        result_b = 'Sample :' in first_lines[0] and 'Inject date :' in first_lines[1] and ('Inject volume :' in first_lines[2])\n        result = result_a or result_b\n    return result"}, {"file name": "sem", "class name": "SemReader", "identifier": "sem_reader", "priority": 95, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    result = False\n    if super().check():\n        first_line = self.file.string.splitlines()[0]\n        result = first_line.startswith('$SEM_DATA_VERSION')\n    return result"}, {"file name": "squid", "class name": "SquidReader", "identifier": "squid_reader", "priority": 10, "check": "def check(self):\n    return self.file.encoding != 'binary' and self.file.suffix.lower() == '.dat'"}, {"file name": "stoe_raw", "class name": "StoeRawReader", "identifier": "stoe_raw_reader", "priority": 5, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    return self.file.suffix.lower() == '.raw' and self.file.encoding.lower() == 'binary' and (self.file_type == 'RAW_1.06Powdat')"}, {"file name": "tif", "class name": "TifReader", "identifier": "tif_reader", "priority": 96, "check": "def check(self):\n    result = False\n    if self.file.suffix.lower() == '.tif' and self.file.mime_type == 'image/tiff':\n        self._parsed_values = self._read_img()\n        result = self._parsed_values is not None and len(self._parsed_values) > 0\n    return result"}, {"file name": "tvb", "class name": "TvbReader", "identifier": "tvb_reader", "priority": 5, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    return self.file.suffix.lower() == '.tvb' and self.file.encoding.lower() == 'binary'"}, {"file name": "uvvis", "class name": "UvvisReader", "identifier": "uvvis_reader", "priority": 10, "check": "def check(self):\n    \"\"\"\n        :return: True if it fits\n        \"\"\"\n    result = super().check()\n    if result:\n        metadata_begin = self.lines[-2] if len(self.lines) > 1 else ''\n        return 'Properties' in metadata_begin\n    return result"}, {"file name": "uxd_reader", "class name": "UXDReader", "identifier": "uxd_reader", "priority": 10, "check": "def check(self):\n    return self.file.suffix.lower() in self._file_extensions"}, {"file name": "vsi", "class name": "VsiReader", "identifier": "vsi_reader", "priority": 8, "check": "def check(self):\n    if not super().check():\n        return False\n    text = self.file.string[:500]\n    result = '<DataContainer key=\"MetaData\" typeid=' in text\n    result &= '<DataContainer typeid=' in text\n    return result"}, {"file name": "xml_reader", "class name": "XMLReader", "identifier": "xml_reader", "priority": 10, "check": "def check(self):\n    return self.file.suffix.lower() in self._file_extensions"}, {"file name": "xrdml", "class name": "XRDMLReader", "identifier": "xrdml_reader", "priority": null, "check": ""}],
+            defaultColDef: {
+              sortable: true,
+              filter: true,
+              resizable: true,
+              wrapText: true,
+              autoHeight: true
+            },
+            components: {
+              codeCellRenderer: codeCellRenderer
+            }
+          };
+        
+          agGrid.createGrid(
+            document.getElementById("readersGrid"),
+            gridOptions
+          );
+        
+        });
+        </script>
+        
     </main>
   </body>
 </html>
