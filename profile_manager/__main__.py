@@ -26,14 +26,19 @@ def clean_value(val):
 def get_identifiers(json_file):
     identifiers = json_file.get("identifiers", [])
 
-    # Filter and extract tuples where optional == False
-    required_identifiers = [
-        (entry.get("key"), entry.get("value"))
-        for entry in identifiers
-        if not entry.get("optional", True)
-           and entry.get("key") is not None
-           and entry.get("value") is not None
-    ]
+    required_identifiers = []
+    for entry in identifiers:
+        if entry.get("optional", True):
+            continue
+
+        key = entry.get("key")
+        if key is None and entry.get("type") == "tableHeader":
+            key = f"tableHeader (line{entry.get('lineNumber')})"
+
+        if key is None or entry.get("value") is None:
+            continue
+
+        required_identifiers.append((key, entry.get("value")))
 
     return required_identifiers
 
