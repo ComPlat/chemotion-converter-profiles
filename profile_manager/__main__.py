@@ -13,6 +13,7 @@ from converter_app.validation import validate_profile
 
 from mdutils.mdutils import MdUtils # https://github.com/didix21/mdutils
 
+from profile_manager import get_chmo
 from profile_manager.parse_ast import read_metadata_from_readercode
 
 program_name = "Chemotion Converter"
@@ -118,6 +119,14 @@ def build_index():
 
         # Extract relevant fields
         profile_id = json_profile.get("id")
+
+        ols, _ = get_chmo.find_chmo_id(json_profile)
+        try:
+            ontology = get_chmo.fetch_chmo_entity(ols) if ols else {}
+        except Exception as e :
+            print(f"Error fetching ontology for {profile_id}: {e}, setting ontology to empty dict")
+            ontology = {}
+
         profile_entry = {
             "reader": json_profile["data"]["metadata"].get("reader"),
             "extension": json_profile["data"]["metadata"].get("extension"),
@@ -125,7 +134,8 @@ def build_index():
             "description": json_profile.get("description"),
             "devices": json_profile.get("devices"),
             "software": json_profile.get("software"),
-            "identifiers": get_identifiers(json_profile)
+            "identifiers": get_identifiers(json_profile),
+            "ontology": ontology.get("label")
         }
 
         # Copy profile JSON to docs and link to the local docs path
