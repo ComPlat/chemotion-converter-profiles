@@ -219,6 +219,7 @@ def dict_to_ag_grid_html(row_data, column_defs, dict_type):
             theme: "legacy",
             columnDefs: {json.dumps(column_defs)},
             rowData: {json.dumps(row_data)},
+            enableCellTextSelection: true,
             defaultColDef: {{
               flex: 1,
               sortable: true,
