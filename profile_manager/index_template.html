@@ -38,10 +38,13 @@
     </header>
 
     <main>
-      <!-- Replace this with HTML produced by your Markdown renderer -->
-      <article class="markdown">
-        {{  TABLE_CONTENT  }}
-      </article>
+      <p>Chemotion Converter is a very powerful python file converter running as a stand-alone flask server or included in an ELN or scientific Repository (like the <a href="https://chemotion.net/">Chemotion ELN</a>, other ELNs we cannot guarantee) and called via API during file upload. For local and offline users, it is also possible to use it as an CLI tool.</p>
+      <h1>Readers</h1>
+      <p>A reader is a python class file handling the translation of your input file format to a usable python object. It is created by providing an example file to the developers or python coders and used and defined by the <a href="https://github.com/ComPlat/chemotion-converter-app">converter app backend</a>.</p>
+      {{ READERS_TABLE }}
+      <h1>Profiles</h1>
+      <p>A profile is JSON file defining a ruleset on how to convert your input file. Normally, it is created by uploading an example of your input file to the GUI of the <a href="https://github.com/ComPlat/chemotion-converter-client">converter client frontend</a>.</p>
+      {{ PROFILES_TABLE }}
     </main>
   </body>
 </html>

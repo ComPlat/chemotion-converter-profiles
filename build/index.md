@@ -2,8 +2,6 @@
 Chemotion Converter
 ===================
 
-
-Chemotion Converter is a very powerful python file converter running as a stand-alone flask server or included in an ELN and called via API during file upload. For local and offline users, it is also possible to use it as an CLI tool.
 # Profiles
 
 

@@ -66,7 +66,7 @@ def read_metadata_from_readercode(reader: Union[Path, Traversable]):
         mv.reader_name,
         mv.identifier,
         mv.priority,
-        f"<pre>{mv.check}</pre>" if mv.check else "",
+        mv.check if mv.check else "",
         mv.prepare_tables,
     )
 

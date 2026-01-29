@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Loop Docu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; }
+    pre { overflow-x: auto; }
+    code { font-family: "Courier New", monospace; }
+    table { border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; }
+  </style>
+</head>
+<body>
+<h1>Converter Loop Documentation</h1>
+<hr />
+<h1>Backend</h1>
+<h2>Overview</h2>
+<p>The code contains two methods (functions inside a class):</p>
+<ol>
+<li>
+<p><code>_has_loop(index)</code><br />
+   Checks whether a certain output table has a “loop” configuration (i.e. is meant to be repeated for multiple input tables).</p>
+</li>
+<li>
+<p><code>_check_loop_condition(index, input_table_index)</code><br />
+   Checks whether a specific input table matches the conditions of that loop and is therefore allowed to be used in it.</p>
+</li>
+</ol>
+<p>In simple terms:<br />
+You have several <strong>input tables</strong> (<code>input_tables</code>) and several <strong>output table configurations</strong> (<code>profile_output_tables</code>). Some output tables are configured so that they will be created multiple times, once for each input table that fits certain rules. These two methods help answer:</p>
+<ul>
+<li><strong>Does this output table have a loop at all?</strong>  </li>
+<li><strong>Does this particular input table fit the loop conditions for that output table?</strong></li>
+</ul>
+<hr />
+<h2>Data Structures Involved</h2>
+<p>The class that contains these methods uses at least these two properties:</p>
+<ul>
+<li><code>self.profile_output_tables</code><br />
+  A list of <strong>output table configurations</strong>.<br />
+  Each configuration can contain, among other things:</li>
+<li><code>loopType</code> – the type of loop, e.g. <code>'all'</code></li>
+<li><code>matchTables</code> – which tables are targeted when <code>loopType = 'all'</code></li>
+<li>
+<p><code>table</code> – detailed configuration, including:</p>
+<ul>
+<li><code>loop_header</code> – rules based on columns (table headers)</li>
+<li><code>loop_theader</code> – rules based on text / pattern matches</li>
+<li><code>loop_metadata</code> – rules based on metadata</li>
+</ul>
+</li>
+<li>
+<p><code>self.input_tables</code><br />
+  A list of the actual <strong>input tables</strong>.<br />
+  Each input table can contain:</p>
+</li>
+<li><code>columns</code> – a list of columns (with names, etc.)</li>
+<li><code>metadata</code> – additional key–value information about the table</li>
+</ul>
+<hr />
+<h2>Method: <code>_has_loop(self, index)</code></h2>
+<h3>Purpose</h3>
+<p>Determine whether the output table at position <code>index</code> has a loop configuration, and if so, what kind of loop it is.</p>
+<h3>Step-by-step behavior</h3>
+<ol>
+<li><strong>Check if the output table exists at this index</strong>  </li>
+<li>
+<p>If there is no configuration at <code>index</code>, the method returns <code>False</code>.<br />
+     Meaning: There is no output table here, so there can’t be any loop.</p>
+</li>
+<li>
+<p><strong>Case 1: <code>loopType</code> is <code>'all'</code></strong>  </p>
+</li>
+<li>This usually means:<br />
+     “This output table should be produced for all relevant input tables (or a defined group of tables).”</li>
+<li>
+<p>In this case, the method returns the value of <code>matchTables</code>.<br />
+<code>matchTables</code> describes which tables this loop applies to (for example “all” or a specific subset).</p>
+</li>
+<li>
+<p><strong>Case 2: <code>loopType</code> is not <code>'all'</code></strong>  </p>
+</li>
+<li>The method checks the <code>table</code> configuration for any of these fields:<ul>
+<li><code>loop_header</code></li>
+<li><code>loop_metadata</code></li>
+<li><code>loop_theader</code></li>
+</ul>
+</li>
+<li>If at least one of these has a value (is not empty), the method returns <code>True</code>.<br />
+     Meaning: Some kind of loop configuration exists (based on headers, metadata, or text patterns).</li>
+<li>If all three are empty or missing, the method returns <code>False</code>.</li>
+</ol>
+<h3>Result summary</h3>
+<ul>
+<li><code>False</code>:<br />
+  There is no loop configuration for this output table.</li>
+<li><code>True</code>:<br />
+  There is some loop configuration (via header, metadata, or text pattern).</li>
+<li>A value / list (e.g. <code>matchTables</code>):<br />
+  If <code>loopType = 'all'</code>, the method directly returns the configured table selection.</li>
+</ul>
+<hr />
+<h2>Method: <code>_check_loop_condition(self, index, input_table_index)</code></h2>
+<h3>Purpose</h3>
+<p>Check if a specific input table (given by <code>input_table_index</code>) fulfills all the rules defined for the loop of the output table at position <code>index</code>.</p>
+<p>Only if <strong>all</strong> conditions are satisfied, the method returns <code>True</code>.<br />
+Otherwise, it returns <code>False</code>.</p>
+<h3>Special case: <code>loopType = 'all'</code></h3>
+<p>If the output table’s <code>loopType</code> is <code>'all'</code>, then at the end of the method it simply returns <code>True</code>.<br />
+Meaning: In this mode, detailed conditions are not enforced here – all targeted tables are treated as matching.</p>
+<p>The detailed checks described next only apply when <code>loopType</code> is <strong>not</strong> <code>'all'</code>.</p>
+<hr />
+<h3>Detailed Checks (when <code>loopType</code> ≠ <code>'all'</code>)</h3>
+<h4>1. <code>loop_header</code> – Column / header conditions</h4>
+<ul>
+<li>The method reads a list of rules from <code>loop_header</code>.</li>
+<li>For each rule:</li>
+<li>It checks that a column reference is provided (with <code>tableIndex</code> and <code>columnIndex</code>).<br />
+    If any of this is missing or invalid, it returns <code>False</code>.</li>
+<li>It checks that the referenced column actually exists in the specified input table.</li>
+<li>If the rule points to a different input table than the one currently being checked (<code>input_table_index</code>):<ul>
+<li>It compares the column name in that other table with the column name in the current table at the same column position.</li>
+<li>If the names do not match, it returns <code>False</code>.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Plain-language interpretation:</strong><br />
+All the column rules in <code>loop_header</code> must pass.<br />
+Typically, this means that certain columns (by position) must exist and have the same names across different input tables.</p>
+<hr />
+<h4>2. <code>loop_theader</code> – Text / pattern conditions</h4>
+<ul>
+<li>The method reads a list of rules from <code>loop_theader</code>.</li>
+<li>For each rule, it uses an internal helper (<code>_search_regex</code>) to check whether a particular text or pattern is found in the current input table header.</li>
+<li>If the pattern is not found (i.e. no match), it returns <code>False</code>.</li>
+</ul>
+<p><strong>Plain-language interpretation:</strong><br />
+The input table must contain certain texts or patterns (for example in headers or specific rows), as defined in the configuration.</p>
+<hr />
+<h4>3. <code>loop_metadata</code> – Metadata conditions</h4>
+<ul>
+<li>The method reads a list of rules from <code>loop_metadata</code>.</li>
+<li>For each metadata rule:</li>
+<li>A <code>value</code> (the metadata key) and a <code>table</code> must be provided.<br />
+    If either is missing, it returns <code>False</code>.</li>
+<li>Then there are two modes:<ol>
+<li><strong>If <code>ignoreValue</code> is set to true:</strong>  </li>
+<li>The rule only requires that the current input table (<code>input_table_index</code>) has this metadata key at all.<br />
+     If the key is missing, the method returns <code>False</code>.</li>
+<li><strong>If <code>ignoreValue</code> is not set:</strong>  </li>
+<li>The rule identifies a “reference table” by the provided table index.</li>
+<li>It looks up the metadata value for the given key in that reference table.</li>
+<li>It compares that value with the value under the same key in the current input table.</li>
+<li>If the values differ, the method returns <code>False</code>.</li>
+</ol>
+</li>
+</ul>
+<p><strong>Plain-language interpretation:</strong><br />
+The current input table’s metadata must either:
+- contain certain keys, or
+- contain keys with values that match those in another table,</p>
+<p>depending on the configuration.</p>
+<hr />
+<h2>Overall Summary</h2>
+<ul>
+<li>
+<p><code>_has_loop(index)</code> answers:<br />
+  “Does this output table have a loop configuration, and what kind is it?”</p>
+</li>
+<li>
+<p><code>_check_loop_condition(index, input_table_index)</code> answers:<br />
+  “Does this particular input table fulfill all conditions to be used in the loop for this output table?”</p>
+</li>
+</ul>
+<p>Typically, the system would:</p>
+<ol>
+<li>Use <code>_has_loop</code> to see whether an output table is supposed to be repeated for multiple input tables.</li>
+<li>For each input table, use <code>_check_loop_condition</code> to decide whether that table is included in the loop.</li>
+</ol>
+<p>Only if <code>_has_loop</code> identifies a loop <strong>and</strong> <code>_check_loop_condition</code> returns <code>True</code> for a certain input table will that table be processed as part of the repeated output.</p>
+<h1>Frontend</h1>
+<p>This part of the frontend is the visual configuration for the loop logic you saw in the backend.</p>
+<p>It lets a user decide:</p>
+<ol>
+<li><strong>Whether an output table should be repeated for multiple input tables</strong>, and  </li>
+<li><strong>According to which rule those input tables should be selected.</strong></li>
+</ol>
+<p>Below is what each visible element means and how it connects to the backend behavior.</p>
+<hr />
+<h2>1. The “Select looping” dropdown (<code>loopType</code>)</h2>
+<pre><code class="language-jsx">&lt;Form.Select
+  id=&quot;loop_select&quot;
+  aria-label=&quot;Select looping&quot;
+  value={profile.tables[index].loopType}
+  onChange={(e) =&gt; this.handleChangeLoop(e.target.value, index)}
+&gt;
+  &lt;option value=&quot;all&quot;&gt;all input tables.&lt;/option&gt;
+  &lt;option value=&quot;header&quot;&gt;all input tables that have the same column header.&lt;/option&gt;
+  &lt;option value=&quot;theader&quot;&gt;all input tables that have the same table header.&lt;/option&gt;
+  &lt;option value=&quot;metadata&quot;&gt;all input tables that have the same metadata.&lt;/option&gt;
+&lt;/Form.Select&gt;
+</code></pre>
+<h3>What the user sees</h3>
+<p>A dropdown with these options:</p>
+<ul>
+<li><strong>“all input tables.”</strong></li>
+<li><strong>“all input tables that have the same column header.”</strong></li>
+<li><strong>“all input tables that have the same table header.”</strong></li>
+<li><strong>“all input tables that have the same metadata.”</strong></li>
+</ul>
+<p>The user chooses one of these options for each output table.</p>
+<p><img width="785" height="443" alt="grafik" src="https://github.com/user-attachments/assets/02b32599-05c6-4f22-adca-d9cbb5e5cb32" /></p>
+<h3>How this relates to the backend</h3>
+<p>The selected value is stored as <code>loopType</code> in <code>profile.tables[index].loopType</code>. In the backend, this corresponds to:</p>
+<ul>
+<li><code>self.profile_output_tables[index].get('loopType')</code></li>
+</ul>
+<p>The options mean:</p>
+<ul>
+<li>
+<p><strong><code>all</code></strong><br />
+  Backend: <code>loopType = 'all'</code><br />
+  → The output table is generated for <em>all</em> input tables (no detailed conditions are checked in <code>_check_loop_condition</code>; it effectively always returns <code>True</code>).</p>
+</li>
+<li>
+<p><strong><code>header</code></strong><br />
+  Backend: <code>loopType</code> is not <code>'all'</code>, and the frontend uses <code>loop_header</code> rules.<br />
+  → The backend uses <code>loop_header</code> to check if input tables have matching <strong>column headers</strong> (column names and positions).</p>
+</li>
+</ul>
+<p><img width="1626" height="414" alt="grafik" src="https://github.com/user-attachments/assets/43d39f23-4b86-4067-8aef-ada996008947" /></p>
+<ul>
+<li><strong><code>theader</code></strong><br />
+  Backend: <code>loopType</code> is not <code>'all'</code>, and the frontend uses <code>loop_theader</code>.<br />
+  → The backend uses <code>loop_theader</code> and <code>_search_regex</code> to check for <strong>matching table header text/patterns</strong>.</li>
+</ul>
+<p><img width="742" height="106" alt="grafik" src="https://github.com/user-attachments/assets/91eb1a42-f501-47da-aedb-068eb2692699" /></p>
+<ul>
+<li><strong><code>metadata</code></strong><br />
+  Backend: <code>loopType</code> is not <code>'all'</code>, and the frontend uses <code>loop_metadata</code>.<br />
+  → The backend uses <code>loop_metadata</code> to compare <strong>metadata values</strong> between tables.</li>
+</ul>
+<p><img width="760" height="112" alt="grafik" src="https://github.com/user-attachments/assets/1e6145cb-9829-4845-a24f-3fd51c21a368" /></p>
+<ul>
+<li><strong>it is also possible to combine all settings with a logical "&amp;"</strong></li>
+</ul>
+<p><img width="754" height="184" alt="grafik" src="https://github.com/user-attachments/assets/1ab58e89-7f59-4421-9718-dae5087fc625" /></p>
+<p>So, this dropdown directly controls <strong>which type of loop condition</strong> the backend will apply.</p>
+<hr />
+<h2>2. Column-based rules: <code>loop_header</code> (for “same column header”)</h2>
+<pre><code class="language-jsx">{profile.tables[index].loopType !== &quot;all&quot; &amp;&amp;
+ profile.tables[index].table['loop_header'] &amp;&amp;
+ profile.tables[index].table['loop_header'].map((operation, op_index) =&gt; (
+  &lt;InputGroup key={op_index}&gt;
+    &lt;InputGroup.Text&gt;&amp;#8627;&lt;/InputGroup.Text&gt;
+    &lt;Button
+      variant=&quot;outline-danger&quot;
+      onClick={() =&gt; this.removeOperation(index, 'loop_header', op_index)}
+    &gt;
+      &amp;times;
+    &lt;/Button&gt;
+    &lt;Select
+      ...
+      value={distInputColumns.flatMap(group =&gt; group.options)
+        .find(col =&gt; isEqual(col.value, operation.column))}
+      options={distInputColumns}
+      onChange={selectedOption =&gt;
+        this.updateOperation(index, 'loop_header', op_index, 'column', selectedOption.value)
+      }
+    /&gt;
+  &lt;/InputGroup&gt;
+))}
+</code></pre>
+<h3>What the user sees</h3>
+<p>Only shown when <code>loopType</code> is <strong>not</strong> <code>"all"</code>, and there are <code>loop_header</code> rules.</p>
+<p>For each rule, the user sees:</p>
+<ul>
+<li>An arrow-like symbol (<code>↧</code> style via <code>&amp;#8627;</code>) indicating “this is part of the loop configuration”.</li>
+<li>A red <strong>X button</strong> to remove this rule.</li>
+<li>A dropdown (React <code>Select</code>) showing all available input columns, grouped by table. The user picks one column.</li>
+</ul>
+<p>The user can create or remove several such rules (each rule picks one column).</p>
+<h3>How this relates to the backend</h3>
+<p>Each selected column is stored as one entry in:</p>
+<ul>
+<li><code>profile.tables[index].table['loop_header'][op_index].column</code></li>
+</ul>
+<p>In the backend, <code>_check_loop_condition</code> uses:</p>
+<pre><code class="language-python">loop_header = self.profile_output_tables[index]['table'].get('loop_header', [])
+for header in loop_header:
+    header['column'] -&gt; { tableIndex, columnIndex }
+</code></pre>
+<p>The backend then:</p>
+<ul>
+<li>Checks that this column exists in the referenced input table.</li>
+<li>Ensures that in the current input table being tested, the column at the same position has the <strong>same name</strong>, unless it is the same table.</li>
+</ul>
+<p><strong>Effect:</strong><br />
+You are telling the system:<br />
+“Only treat input tables as belonging to the same loop if these specific columns match across the tables.”</p>
+<p>The frontend control is exactly how you specify <em>which</em> columns must match.</p>
+<hr />
+<h2>3. Metadata-based rules: <code>loop_metadata</code> (for “same metadata”)</h2>
+<pre><code class="language-jsx">{profile.tables[index].loopType !== &quot;all&quot; &amp;&amp;
+ profile.tables[index].table['loop_metadata'] &amp;&amp;
+ profile.tables[index].table['loop_metadata'].map((operation, op_index) =&gt; (
+  &lt;InputGroup key={op_index}&gt;
+    &lt;InputGroup.Text&gt;&amp;#8627;&lt;/InputGroup.Text&gt;
+    &lt;Button
+      variant=&quot;outline-danger&quot;
+      onClick={() =&gt; this.removeOperation(index, 'loop_metadata', op_index)}
+    &gt;
+      &amp;times;
+    &lt;/Button&gt;
+    &lt;Form.Select
+      size=&quot;sm&quot;
+      value={operation.metadata || ''}
+      onChange={(event) =&gt; {
+        this.updateOperation(
+          index,
+          'loop_metadata',
+          op_index,
+          'metadata',
+          `${event.target.value}:${tableMetadataOptions[event.target.value].key}:${tableMetadataOptions[event.target.value].tableIndex}`
+        );
+      }}
+    &gt;
+      {tableMetadataOptions.map((option, optionIndex) =&gt; (
+        &lt;option key={optionIndex} value={optionIndex}&gt;{option.label}&lt;/option&gt;
+      ))}
+    &lt;/Form.Select&gt;
+    &lt;OverlayTrigger
+      placement=&quot;bottom-end&quot;
+      overlay={&lt;Tooltip&gt;Ignore Value&lt;/Tooltip&gt;}
+    &gt;
+      &lt;div className=&quot;input-group-text&quot; style={{cursor: 'pointer'}}&gt;
+        &lt;input
+          type=&quot;checkbox&quot;
+          checked={profile.tables[index].table.loop_metadata[op_index].ignoreValue || false}
+          onChange={() =&gt; this.toggleMatchTables(index, op_index)}
+        /&gt;
+      &lt;/div&gt;
+    &lt;/OverlayTrigger&gt;
+  &lt;/InputGroup&gt;
+))}
+</code></pre>
+<h3>What the user sees</h3>
+<p>Again, only shown when <code>loopType</code> is <strong>not</strong> <code>"all"</code> and there are <code>loop_metadata</code> entries.</p>
+<p>For each metadata rule, the user sees:</p>
+<ul>
+<li>The arrow-like symbol.</li>
+<li>A red <strong>X button</strong> to remove this metadata rule.</li>
+<li>A small dropdown with <strong>metadata fields</strong> (from <code>tableMetadataOptions</code>), each with a label (for example “File Name”, “Source System”, etc.).</li>
+<li>A checkbox labeled via tooltip “Ignore Value”.</li>
+</ul>
+<p>The user configures:</p>
+<ol>
+<li><strong>Which metadata field to use</strong> (via the dropdown).</li>
+<li>Whether to <strong>“Ignore Value”</strong> for that field (via the checkbox).</li>
+</ol>
+<h3>How this relates to the backend</h3>
+<p>Each selection builds an entry like:</p>
+<pre><code class="language-js">profile.tables[index].table['loop_metadata'][op_index] = {
+  metadata: &quot;...&quot;,   // packed info: index:key:tableIndex
+  ignoreValue: true/false
+}
+</code></pre>
+<p>In the backend, this connects to:</p>
+<pre><code class="language-python">loop_metadata = self.profile_output_tables[index]['table'].get('loop_metadata', [])
+for metadata in loop_metadata:
+    key = metadata.get('value')
+    ignoreValue = metadata.get('ignoreValue')
+    table = metadata.get('table')
+</code></pre>
+<p>The backend then:</p>
+<ul>
+<li>Uses <code>key</code> and <code>table</code> to identify the metadata field and (if needed) a reference table.</li>
+<li>If <strong>Ignore Value is checked</strong>:</li>
+<li>The backend only checks if the current input table has this metadata key at all.</li>
+<li>If <strong>Ignore Value is not checked</strong>:</li>
+<li>The backend compares the metadata value in the current table with the value from the reference table.</li>
+<li>If they differ, the table does <em>not</em> join the loop.</li>
+</ul>
+<p><strong>Effect:</strong><br />
+You are telling the system:<br />
+“Group tables in this loop based on this metadata field: either they just need to have it, or they need to have the same value.”</p>
+<p>The checkbox determines whether you require <strong>presence</strong> of the field or <strong>exact matching value</strong>.</p>
+<hr />
+<h2>4. Text/Pattern-based rules: <code>loop_theader</code> (for “same table header”)</h2>
+<pre><code class="language-jsx">{profile.tables[index].loopType !== &quot;all&quot; &amp;&amp;
+ profile.tables[index].table['loop_theader'] &amp;&amp;
+ profile.tables[index].table['loop_theader'].map((operation, op_index) =&gt; (
+  &lt;InputGroup&gt;
+    &lt;InputGroup.Text&gt;&amp;#8627;&lt;/InputGroup.Text&gt;
+    &lt;Button
+      variant=&quot;outline-danger&quot;
+      onClick={() =&gt; this.removeOperation(index, 'loop_theader', op_index)}
+    &gt;
+      &amp;times;
+    &lt;/Button&gt;
+    &lt;Form.Control
+      value={operation.line || ''}
+      placeholder='Line'
+      onChange={(event) =&gt; {
+        this.updateOperation(index, 'loop_theader', op_index, 'line', event.target.value)
+      }}
+    /&gt;
+    &lt;Form.Control
+      value={operation.regex || ''}
+      placeholder='Regex'
+      onChange={(event) =&gt; {
+        this.updateOperation(index, 'loop_theader', op_index, 'regex', event.target.value)
+      }}
+    /&gt;
+  &lt;/InputGroup&gt;
+))}
+</code></pre>
+<h3>What the user sees</h3>
+<p>Only shown when <code>loopType</code> is <strong>not</strong> <code>"all"</code> and there are <code>loop_theader</code> rules.</p>
+<p>For each rule, the user sees:</p>
+<ul>
+<li>The arrow-like symbol.</li>
+<li>A red <strong>X button</strong> to remove the rule.</li>
+<li>A text input labeled by placeholder <strong>“Line”</strong>.</li>
+<li>A text input labeled by placeholder <strong>“Regex”</strong> (regular expression; a text pattern).</li>
+</ul>
+<p>The user enters:</p>
+<ul>
+<li>A line indicator (for example which line or section to look at in the table header).</li>
+<li>A pattern (regex) that describes what text should appear there.</li>
+</ul>
+<h3>How this relates to the backend</h3>
+<p>Each rule is stored as something like:</p>
+<pre><code class="language-js">profile.tables[index].table['loop_theader'][op_index] = {
+  line: '...',
+  regex: '...'
+}
+</code></pre>
+<p>In the backend, <code>_check_loop_condition</code> does:</p>
+<pre><code class="language-python">loop_theader = self.profile_output_tables[index]['table'].get('loop_theader', [])
+for theader in loop_theader:
+    match, _ = self._search_regex(theader, input_table_index)
+    if match is None:
+        return False
+</code></pre>
+<p>This means:</p>
+<ul>
+<li>For each rule, it runs a search (with <code>_search_regex</code>) on the current input table.</li>
+<li>If the pattern is <strong>not</strong> found in the specified line or area, the table fails the condition.</li>
+</ul>
+<p><strong>Effect:</strong><br />
+You are telling the system:<br />
+“Only use input tables in this loop if their header text matches this pattern at this line/position.”</p>
+<p>This is a flexible way to match based on specific text in the table header.</p>
+<hr />
+<h2>Putting it all together</h2>
+<p>From the user’s perspective:</p>
+<ol>
+<li><strong>Choose how the output table should loop:</strong></li>
+<li>For all tables,</li>
+<li>Or only for tables that share the same column headers,</li>
+<li>Or share the same table header text,</li>
+<li>
+<p>Or share certain metadata.</p>
+</li>
+<li>
+<p><strong>If you choose anything other than “all”:</strong></p>
+</li>
+<li>Additional configuration fields appear:<ul>
+<li>For <strong>column header</strong> loops, you pick the column(s) that must match.</li>
+<li>For <strong>metadata</strong> loops, you pick the metadata field(s) and whether to require the same value or just the presence of the field.</li>
+<li>For <strong>table header</strong> loops, you specify header lines and text patterns that must be found.</li>
+</ul>
+</li>
+</ol>
+<p>From the backend’s perspective:</p>
+<ul>
+<li>Your choices fill <code>loopType</code>, <code>loop_header</code>, <code>loop_metadata</code>, and <code>loop_theader</code> inside <code>profile_output_tables</code>.</li>
+<li><code>_has_loop</code> and <code>_check_loop_condition</code> then use exactly those fields to decide:</li>
+<li>Whether a loop exists, and</li>
+<li>Which input tables fulfill the conditions and belong to that loop.</li>
+</ul>
+<p>In short:<br />
+The frontend elements you see are a user-friendly way to configure the rules that the backend code enforces when grouping input tables into repeated output tables.</p>
+</body>
+</html>
