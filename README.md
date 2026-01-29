@@ -1,10 +1,11 @@
 # Chemotion Converter Profiles & Readers Index
 
-This repository builds and publishes a GitHub Pages site that documents Chemotion Converter profiles and readers. It collects metadata from JSON profiles and reader code, renders a Markdown index, and then produces a static HTML page in `docs/`.
+This repository builds and publishes a GitHub Pages site that documents Chemotion Converter profiles and readers. It collects metadata from JSON profiles and reader code, enriches profile metadata with CHMO ontology labels, and produces a static HTML page in `docs/`.
 
 ## What This Repo Does
-- Generates a readable index of available profiles and readers.
+- Generates a readable index of available profiles and readers (interactive tables).
 - Publishes the index to GitHub Pages on every push to `main`.
+- Mirrors profiles and reader source files into `docs/atch/server/` for download links.
 - Keeps profile metadata and readers in sync with the Converter package.
 
 ## Installation
@@ -49,9 +50,20 @@ python -m profile_manager build_index
 
 This command:
 - Reads profiles from `profiles/public/`.
-- Scans reader classes from the Converter package.
-- Renders a Markdown index (`index.md`) and injects it into `docs/index.html`
-  using `profile_manager/index_template.html`.
+- Scans reader classes from the installed `converter_app` package (via `importlib.resources`).
+- Extracts reader metadata (class name, identifier, priority, and `check()` code) from AST parsing.
+- Detects CHMO identifiers anywhere in a profile and fetches the ontology label from OLS4.
+- Copies profiles and reader source files into `docs/atch/server/` for download links.
+- Renders an HTML index in `docs/index.html` using `profile_manager/index_template.html`.
+
+## Generated Output
+Build artifacts are written to:
+- `docs/index.html` (GitHub Pages landing page with interactive tables)
+- `docs/atch/server/profiles/` (downloadable profile JSON files)
+- `docs/atch/server/readers/` (downloadable reader source files)
+
+## AG Grid (Frontend)
+The interactive tables in `docs/index.html` run entirely in the browser. AG Grid is not bundled in this repo; it is loaded at runtime from a CDN via external `<link>` and `<script>` tags that are injected by the build step (`profile_manager.__main__.py` in `dict_to_ag_grid_html`).
 
 ## GitHub Pages Workflow (Rebuild on Push)
 The GitHub Actions workflow in `/.github/workflows/build_and_deploy.yml` runs on:
@@ -64,4 +76,4 @@ that gets pushed to `main` automatically triggers a rebuild and redeploy.
 
 ---
 Created: 2026-01-22  
-Last updated: 2026-01-22
+Last updated: 2026-01-29
