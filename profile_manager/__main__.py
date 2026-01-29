@@ -120,18 +120,13 @@ def build_index():
             "devices": json_profile.get("devices"),
             "software": json_profile.get("software"),
             "identifiers": get_identifiers(json_profile),
-            "ontology": ontology.get("label")
+            "ontology": (str(ols) if ols else "n.d.") + ": " + ( str(ontology.get("label") if ols else "") )
         }
 
         # Copy profile JSON to docs and link to the local docs path
         shutil.copy2(profile, docs_profile_dir / profile.name)
         profiles_dict[profile_id] = profile_entry
 
-    table_header = ["id (click to download from this GitHub.io mirror)"] + list(profile_entry.keys())
-    profiles_sorted = dict(sorted(
-        profiles_dict.items(),
-        key=lambda item: (item[1].get("extension") or "").lower(),
-    ))
     profiles_row_data, profiles_column_defs = profiles_dict_to_grid_config()
     profiles_table = dict_to_ag_grid_html(profiles_row_data, profiles_column_defs, "profiles")
 
@@ -265,6 +260,42 @@ def validate_profiles():
 def migrate_profiles():
     profile_dir = Path(__file__).parent.parent.joinpath('profiles')
     Migrations().run_migration(str(profile_dir))
+
+
+"""Will convert all md files in docs folder to html files, to be added an updated later
+def convert_docs_md_to_html():
+    docs_dir = Path(__file__).parent.parent.joinpath("docs")
+    if not docs_dir.exists():
+        return
+    for md_file in docs_dir.glob("*.md"):
+        with open(md_file, "r") as file:
+            md_text = file.read()
+        html_body = markdown.markdown(md_text, extensions=["tables", "fenced_code"])
+        html_title = md_file.stem.replace("_", " ").title()
+        html_text = (
+            "<!doctype html>\n"
+            "<html lang=\"en\">\n"
+            "<head>\n"
+            "  <meta charset=\"utf-8\">\n"
+            f"  <title>{html_title}</title>\n"
+            "  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+            "  <style>\n"
+            "    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; }\n"
+            "    pre { overflow-x: auto; }\n"
+            "    code { font-family: \"Courier New\", monospace; }\n"
+            "    table { border-collapse: collapse; }\n"
+            "    th, td { border: 1px solid #ccc; padding: 0.4rem 0.6rem; }\n"
+            "  </style>\n"
+            "</head>\n"
+            "<body>\n"
+            f"{html_body}\n"
+            "</body>\n"
+            "</html>\n"
+        )
+        html_path = md_file.with_suffix(".html")
+        with open(html_path, "w") as file:
+            file.write(html_text)
+"""
 
 if __name__ == '__main__':
     sysargs = list(sys.argv)
