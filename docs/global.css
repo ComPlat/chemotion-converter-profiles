@@ -66,6 +66,10 @@ a {
   color: inherit;
 }
 
+header nav a + a {
+  margin-left: 12px;
+}
+
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));

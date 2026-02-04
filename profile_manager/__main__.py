@@ -2,6 +2,7 @@ import json
 import os
 import shutil
 import sys
+from html import escape
 from typing import BinaryIO, cast
 from importlib.resources import files
 from pathlib import Path
@@ -137,6 +138,7 @@ def build_index():
 
     template_path = Path(__file__).parent.joinpath("index_template.html")
     fill_data_into_html(template_path, readers_table, profiles_table)
+    build_html_links_page(base_path)
 
 
 def readers_dict_to_grid_config():
@@ -254,6 +256,75 @@ def fill_data_into_html(html_file: Path, readers_table, profiles_table):
     os.makedirs(os.path.join(base_path, "docs"), exist_ok=True)
     index_path = Path(base_path, "docs", "index.html")
     with open(index_path, "w") as file:
+        file.write(html_content)
+
+
+def build_html_links_page(base_path: Path):
+    docs_dir = Path(base_path, "docs")
+    atch_dir = docs_dir / "atch"
+    links_page_name = "all-pages.html"
+
+    # Keep these customizable for future filtering needs.
+    additional_folder_blacklist = {".git", "__pycache__"}
+    extension_blacklist = {".md", ".png", ".jpg", ".jpeg", ".gif", ".css", ".js", ".json", ".txt", ".py", ".exe", ".sh"}
+    folder_blacklist = {"server", *additional_folder_blacklist}
+
+    root_links = []
+    atch_links = []
+
+    for page in sorted(docs_dir.iterdir()):
+        if not page.is_file():
+            continue
+        if page.name == links_page_name or page.suffix.lower() in extension_blacklist:
+            continue
+        root_links.append(page.relative_to(docs_dir).as_posix())
+
+    if atch_dir.exists():
+        for page in sorted(atch_dir.rglob("*")):
+            if not page.is_file() or page.suffix.lower() in extension_blacklist:
+                continue
+            rel_to_atch = page.relative_to(atch_dir)
+            if any(part in folder_blacklist for part in rel_to_atch.parts[:-1]):
+                continue
+            atch_links.append(page.relative_to(docs_dir).as_posix())
+
+    def render_links(paths):
+        if not paths:
+            return "<li>No matching files found.</li>"
+        return "\n".join(
+            f'        <li><a href="{escape(path)}">{escape(path)}</a></li>' for path in paths
+        )
+
+    html_content = f"""<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>All Pages</title>
+    <link rel="stylesheet" href="global.css" />
+  </head>
+  <body>
+    <header>
+      <h1>All Pages</h1>
+      <nav>
+        <a href="index.html">Back</a>
+      </nav>
+    </header>
+    <main>
+      <h2>docs root</h2>
+      <ul>
+{render_links(root_links)}
+      </ul>
+      <h2>docs/atch (without docs/atch/server)</h2>
+      <ul>
+{render_links(atch_links)}
+      </ul>
+    </main>
+  </body>
+</html>
+"""
+
+    with open(docs_dir / links_page_name, "w") as file:
         file.write(html_content)
 
 def validate_profiles():
