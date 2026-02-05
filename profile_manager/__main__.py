@@ -97,9 +97,9 @@ def build_index():
     # Attach explanation (dict: { "<reader filename>": <explanation> }) to readers_dict entries, if available
     for reader_filename, entry in readers_dict.items():
         if reader_filename in check_translation:
-            entry["check_explanation"] = check_translation[reader_filename]
+            entry["check explanation"] = check_translation[reader_filename]
         else:
-            entry["check_explanation"] = "No explanation or no valid check Function available."
+            entry["check explanation"] = "No explanation or no valid check Function available."
 
 
     table_header = ["file name (click to download from this GitHub.io mirror)"]
@@ -162,15 +162,26 @@ def readers_dict_to_grid_config():
         for k, v in readers_dict.items()
     ]
 
+    header_tooltips = {
+        "priority": "Priority of the reader if two or more reader checks would fit for the same file. Lower values are prioritized over higher ones.",
+        "class name": "Name of the reader class in python code.",
+        "check": "Python code block that checks whether a given file is supported by the reader.",
+        "check explanation": "AI supported explanation of the reader's check function.",
+    }
+
+    special_column_defs = {
+        "file name": {"field": "file name", "pinned": "left",  "cellRenderer": "linkRenderer"},
+        "check": {"cellRenderer": "codeCellRenderer", "flex": 2},
+        "check explanation": {"cellRenderer": "codeCellRenderer", "flex": 2},
+    }
+
     column_defs = [
-        {"field": "file name", "pinned": "left",  "cellRenderer": "linkRenderer"},
-        *[
-            {
-                "field": key,
-                **({"cellRenderer": "codeCellRenderer", "flex": 2} if key in ["check", "check_explanation"] else {})
-            }
-            for key in next(iter(readers_dict.values()))
-        ],
+        special_column_defs["file name"],
+        *[{
+            "field": key,
+            **special_column_defs.get(key, {}),
+            **({"headerTooltip": header_tooltips[key]} if key in header_tooltips else {})
+        } for key in next(iter(readers_dict.values()))],
     ]
     return row_data, column_defs
 
@@ -179,17 +190,18 @@ def profiles_dict_to_grid_config():
         {"id": k, **v}
         for k, v in profiles_dict.items()
     ]
+    special_column_defs = {
+        "id": {"field": "id", "pinned": "left", "cellRenderer": "linkRenderer"},
+        "identifiers": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
+        "software": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
+        "devices": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
+    }
     column_defs = [
-        {"field": "id", "pinned": "left", "cellRenderer": "linkRenderer"},
-        *[
-            {
-                "field": key,
-                **({"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"}
-                   if key in ["identifiers", "software", "devices"] else {}
-                )
-            }
-            for key in next(iter(profiles_dict.values()))
-        ],
+        special_column_defs["id"],
+        *[{
+            "field": key,
+            **special_column_defs.get(key, {})
+        } for key in next(iter(profiles_dict.values()))],
     ]
     return row_data, column_defs
 

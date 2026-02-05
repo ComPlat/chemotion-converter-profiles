@@ -98,3 +98,12 @@ body.loop-docu {
   margin: 2rem;
   font-family: Arial, sans-serif;
 }
+
+/* AG Grid header hover */
+.ag-theme-alpine .ag-header-cell:hover {
+  background-color: #eef3ff;
+}
+
+.ag-theme-alpine .ag-header-cell:hover .ag-header-cell-label {
+  color: #1f2a44;
+}
