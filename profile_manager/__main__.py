@@ -20,6 +20,9 @@ program_name = "Chemotion Converter"
 profiles_dict = {}
 readers_dict = {}
 
+should_translate_code = False
+code_explainer_json_path: Path = Path(__file__).parent.parent.joinpath("code_explainer.json")
+
 def clean_value(val):
     # Convert to string and replace line breaks with space
     return str(val).replace("\n", "<br>").replace("\r", " ").strip()
@@ -74,11 +77,13 @@ def build_index():
                             cast(BinaryIO, source), cast(BinaryIO, dest)
                         )
 
+                check_fkt_block = my_ast[3].strip() if my_ast[3] else ""
+
                 reader_entry = {
                     "class name": my_ast[0],
                     "identifier": my_ast[1],
                     "priority": my_ast[2],
-                    "check": my_ast[3].strip() if my_ast[3] else "",
+                    "check": check_fkt_block,
                 }
 
                 readers_dict[reader.name] = reader_entry
@@ -338,6 +343,56 @@ def migrate_profiles():
     profile_dir = Path(__file__).parent.parent.joinpath('profiles')
     Migrations().run_migration(str(profile_dir))
 
+import json
+
+def update_code_explainer_json():
+    translation = {}
+
+    if not should_translate_code:
+        print(
+            "Skipping code translation, because should_translate_code is False. "
+            "This is only needed for the explain_code_blocks command and only runs locally on good hardware."
+        )
+        return translation
+
+    try:
+        import llm_tools
+        import llm_tools.code_translator
+
+        explainer = llm_tools.code_translator.ReaderFunctionBlockExplainer(
+            llm_tools.code_translator.OllamaConfig(
+                host="http://localhost:11434",
+                model="qwen3:8B",
+                temperature=0.2,
+                num_ctx=4096,
+            )
+        )
+    except Exception as e:
+        print(f"Skipping code translation: {e}")
+        return translation
+
+    for name, reader in readers_dict.items():
+        check_code = reader.get("check")
+        if not isinstance(check_code, str) or not check_code.strip():
+            print(f"Skipping {name}: invalid or missing 'check'")
+            continue
+
+        print(f"Translating code for {name}")
+        result = explainer.explain(check_code)
+
+        # Make it JSON-safe if needed
+        try:
+            json.dumps(result)
+            translation[name] = result
+        except TypeError:
+            translation[name] = str(result)
+
+    with open(code_explainer_json_path, "w", encoding="utf-8") as ce:
+        json.dump(translation, ce, ensure_ascii=False, indent=2)
+
+    return translation
+
+
 
 """Will convert all md files in docs folder to html files, to be added an updated later
 def convert_docs_md_to_html():
@@ -380,4 +435,18 @@ if __name__ == '__main__':
     if len(sysargs) >= 2:
         if sys.argv[1] == 'build_index':
             build_index()
+    if len(sysargs) >= 3:
+        try:
+            import ollama
+            has_ollama = True
+        except ImportError:
+            has_ollama = False
+        if sys.argv[2] == 'explain_code_blocks' and has_ollama:
+            should_translate_code = True
+            update_code_explainer_json()
+        else:
+            print("Invalid argument or ollama package not installed. "
+                  "This is only needed for the explain_code_blocks command and only runs locally on good hardware.")
+            print(sys.modules.keys())
+
     print("EOC reached")
