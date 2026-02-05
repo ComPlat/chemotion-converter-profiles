@@ -17,7 +17,7 @@ class OllamaConfig:
         - Ensure you pulled the model locally (e.g., `ollama pull llama3:8b`)
     """
     host: str = "http://localhost:11434"
-    model: str = "llama3:8b"
+    model: str = "qwen3:8B"
     temperature: float = 0.2
     num_ctx: Optional[int] = 4096
 

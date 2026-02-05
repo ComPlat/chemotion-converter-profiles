@@ -92,6 +92,16 @@ def build_index():
                 print(f"Skipping {reader.name}: {e}")
                 continue
 
+    check_translation = update_code_explainer_json() # if should_translate_code else load from disk or return empty dict
+
+    # Attach explanation (dict: { "<reader filename>": <explanation> }) to readers_dict entries, if available
+    for reader_filename, entry in readers_dict.items():
+        if reader_filename in check_translation:
+            entry["check_explanation"] = check_translation[reader_filename]
+        else:
+            entry["check_explanation"] = "No explanation or no valid check Function available."
+
+
     table_header = ["file name (click to download from this GitHub.io mirror)"]
     if reader_entry:
         table_header += list(reader_entry.keys())
@@ -157,7 +167,7 @@ def readers_dict_to_grid_config():
         *[
             {
                 "field": key,
-                **({"cellRenderer": "codeCellRenderer", "flex": 3} if key == "check" else {})
+                **({"cellRenderer": "codeCellRenderer", "flex": 2} if key in ["check", "check_explanation"] else {})
             }
             for key in next(iter(readers_dict.values()))
         ],
@@ -346,14 +356,53 @@ def migrate_profiles():
 import json
 
 def update_code_explainer_json():
+    """
+    Load or (re)generate a JSON cache of LLM-produced explanations for reader code blocks.
+
+    This function has two modes controlled by the global flag `should_translate_code`:
+
+    1) Translation disabled (`should_translate_code` is False)
+       - Attempts to load an existing JSON file located at `code_explainer_json_path`.
+       - If the file does not exist, returns an empty dict.
+       - If the file exists but contains invalid JSON (e.g., empty/corrupted), returns an empty dict.
+
+    2) Translation enabled (`should_translate_code` is True)
+       - Creates a `ReaderFunctionBlockExplainer` backed by an Ollama LLM endpoint using the
+         configuration in `OllamaConfig` (host/model/temperature/num_ctx).
+       - Iterates over `readers_dict` (a dict of reader definitions). For each entry:
+           * Reads the "check" field (expected to be a non-empty string).
+           * Skips entries with missing/invalid "check" content.
+           * Calls `explainer.explain(check_code)` and stores the result under the reader name.
+           * Ensures the stored value is JSON-serializable; non-serializable results are coerced to `str`.
+       - Writes the resulting mapping to `code_explainer_json_path` as UTF-8 JSON.
+
+    Returns:
+        dict: A mapping from the reader name to the explanation result (loaded from disk or freshly generated).
+
+    Notes:
+        - Requires the globals: `should_translate_code`, `readers_dict`, and `code_explainer_json_path`.
+        - Translation mode requires `llm_tools` and a working local Ollama server at the configured host.
+        - The output file is overwritten when translation mode is enabled.
+    """
+
     translation = {}
 
     if not should_translate_code:
         print(
-            "Skipping code translation, because should_translate_code is False. "
-            "This is only needed for the explain_code_blocks command and only runs locally on good hardware."
+            "Skipping code translation and load local file if exists, because should_translate_code is False. "
+            "Update is only possible and only runs locally on good hardware with a working Ollama server."
         )
-        return translation
+        path = Path(code_explainer_json_path)
+
+        if not path.exists():
+            return {}  # JSON doesn't exist yet
+
+        try:
+            with path.open("r", encoding="utf-8") as ce:
+                return json.load(ce)
+        except json.JSONDecodeError:
+            # File exists but is not valid JSON (empty/corrupted)
+            return {}
 
     try:
         import llm_tools
@@ -362,7 +411,7 @@ def update_code_explainer_json():
         explainer = llm_tools.code_translator.ReaderFunctionBlockExplainer(
             llm_tools.code_translator.OllamaConfig(
                 host="http://localhost:11434",
-                model="qwen3:8B",
+                model="devstral-small-2:latest", # change this to a smaller model if needed, devstral-small-2 requires 17 GB RAM while qwen3:8B needs ~ 6 GB
                 temperature=0.2,
                 num_ctx=4096,
             )
@@ -386,6 +435,8 @@ def update_code_explainer_json():
             translation[name] = result
         except TypeError:
             translation[name] = str(result)
+
+    Path(code_explainer_json_path).parent.mkdir(parents=True, exist_ok=True)
 
     with open(code_explainer_json_path, "w", encoding="utf-8") as ce:
         json.dump(translation, ce, ensure_ascii=False, indent=2)
@@ -432,9 +483,6 @@ def convert_docs_md_to_html():
 if __name__ == '__main__':
     sysargs = list(sys.argv)
     # print(sysargs)
-    if len(sysargs) >= 2:
-        if sys.argv[1] == 'build_index':
-            build_index()
     if len(sysargs) >= 3:
         try:
             import ollama
@@ -443,10 +491,14 @@ if __name__ == '__main__':
             has_ollama = False
         if sys.argv[2] == 'explain_code_blocks' and has_ollama:
             should_translate_code = True
-            update_code_explainer_json()
+            print("Running explain_code_blocks with translation enabled.")
         else:
             print("Invalid argument or ollama package not installed. "
                   "This is only needed for the explain_code_blocks command and only runs locally on good hardware.")
             print(sys.modules.keys())
+    if len(sysargs) >= 2:
+        if sys.argv[1] == 'build_index':
+            print("Building index.html")
+            build_index()
 
     print("EOC reached")
