@@ -20,6 +20,9 @@ program_name = "Chemotion Converter"
 profiles_dict = {}
 readers_dict = {}
 
+should_translate_code = False
+code_explainer_json_path: Path = Path(__file__).parent.parent.joinpath("code_explainer.json")
+
 def clean_value(val):
     # Convert to string and replace line breaks with space
     return str(val).replace("\n", "<br>").replace("\r", " ").strip()
@@ -58,7 +61,7 @@ def build_index():
     reader_dir = files("converter_app") / "readers"
 
     for reader in sorted(reader_dir.iterdir(), key=lambda r: r.name):
-        if reader.is_file() and reader.name.endswith(".py"):
+        if reader.is_file() and reader.name.endswith(".py") and not reader.name.endswith("__.py"):
             try:
                 my_ast = read_metadata_from_readercode(reader)
 
@@ -74,11 +77,13 @@ def build_index():
                             cast(BinaryIO, source), cast(BinaryIO, dest)
                         )
 
+                check_fkt_block = my_ast[3].strip() if my_ast[3] else ""
+
                 reader_entry = {
                     "class name": my_ast[0],
                     "identifier": my_ast[1],
                     "priority": my_ast[2],
-                    "check": my_ast[3].strip() if my_ast[3] else "",
+                    "check": check_fkt_block,
                 }
 
                 readers_dict[reader.name] = reader_entry
@@ -86,6 +91,16 @@ def build_index():
             except Exception as e:
                 print(f"Skipping {reader.name}: {e}")
                 continue
+
+    check_translation = update_code_explainer_json() # if should_translate_code else load from disk or return empty dict
+
+    # Attach explanation (dict: { "<reader filename>": <explanation> }) to readers_dict entries, if available
+    for reader_filename, entry in readers_dict.items():
+        if reader_filename in check_translation:
+            entry["check explanation"] = check_translation[reader_filename]
+        else:
+            entry["check explanation"] = "No explanation or no valid check Function available."
+
 
     table_header = ["file name (click to download from this GitHub.io mirror)"]
     if reader_entry:
@@ -147,15 +162,30 @@ def readers_dict_to_grid_config():
         for k, v in readers_dict.items()
     ]
 
+    header_tooltips = {
+        "priority": "Priority of the reader if two or more reader checks would fit for the same file. Lower values are prioritized over higher ones.",
+        "identifier": "Unique identifier string of the reader.",
+        "class name": "Name of the reader class in python code.",
+        "check": "Python code block that checks whether a given file is supported by the reader.",
+        "check explanation": "AI supported explanation of the reader's check function.",
+    }
+
+    special_column_defs = {
+        "file name": {"field": "file name", "pinned": "left",  "cellRenderer": "linkRenderer"},
+        "check": {"cellRenderer": "codeCellRenderer", "flex": 2},
+        "check explanation": {"cellRenderer": "pulletPointCellRenderer", "flex": 2},
+    }
+
     column_defs = [
-        {"field": "file name", "pinned": "left",  "cellRenderer": "linkRenderer"},
-        *[
-            {
-                "field": key,
-                **({"cellRenderer": "codeCellRenderer", "flex": 3} if key == "check" else {})
-            }
-            for key in next(iter(readers_dict.values()))
-        ],
+        special_column_defs["file name"],
+        *[{
+            "field": key,
+            **special_column_defs.get(key, {}),
+            **({
+                "headerComponent": "HeaderWithInfo",
+                "headerComponentParams": {"infoText": header_tooltips[key]}
+            } if key in header_tooltips else {})
+        } for key in next(iter(readers_dict.values()))],
     ]
     return row_data, column_defs
 
@@ -164,17 +194,41 @@ def profiles_dict_to_grid_config():
         {"id": k, **v}
         for k, v in profiles_dict.items()
     ]
+
+    header_tooltips = {
+        "id": "Unique hexadecimal identifier string of the profile.",
+        "reader": "Name of the reader class that is used to convert the file.",
+        "extension": "File extension that is supported by the profile.",
+        "title": "Given title of the profile by the creator.",
+        "description": "Description of the profile given by the creator.",
+        "devices": "List of devices that are supported by the profile.",
+        "software": "List of software that produces the data that is converted by the profile.",
+        "identifiers": "List of identifiers that are required in the given file to identify the right profile.",
+        "ontology": "Ontology term that is used to describe the Metadata used for extraction and assigment in this profile, if the profile is based on a ChMO ontology and already used in an ELN.",
+    }
+
+    special_column_defs = {
+        "id": {"field": "id", "pinned": "left", "cellRenderer": "linkRenderer"},
+        "identifiers": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
+        "software": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
+        "devices": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
+    }
     column_defs = [
-        {"field": "id", "pinned": "left", "cellRenderer": "linkRenderer"},
-        *[
-            {
-                "field": key,
-                **({"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"}
-                   if key in ["identifiers", "software", "devices"] else {}
-                )
-            }
-            for key in next(iter(profiles_dict.values()))
-        ],
+        {
+            **special_column_defs["id"],
+            **({
+                "headerComponent": "HeaderWithInfo",
+                "headerComponentParams": {"infoText": header_tooltips["id"]}
+            } if "id" in header_tooltips else {})
+        },
+        *[{
+            "field": key,
+            **special_column_defs.get(key, {}),
+            **({
+                "headerComponent": "HeaderWithInfo",
+                "headerComponentParams": {"infoText": header_tooltips[key]}
+            } if key in header_tooltips else {})
+        } for key in next(iter(profiles_dict.values()))],
     ]
     return row_data, column_defs
 
@@ -182,66 +236,9 @@ def profiles_dict_to_grid_config():
 def dict_to_ag_grid_html(row_data, column_defs, dict_type):
     grid_id = f"""{dict_type}Grid"""
 
-    return f"""<div id="{grid_id}" class="ag-theme-alpine" style="height: 400px; width: 100%;"></div>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css">
-        <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
-        
-        <script>
-        document.addEventListener("DOMContentLoaded", function () {{
-        
-          function codeCellRenderer(params) {{
-            if (!params.value) return "";
-        
-            return `
-              <code style="
-                font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-                white-space: pre-wrap;
-                display: block;
-                font-size: 12px;
-                background: #f6f8fa;
-                padding: 6px 8px;
-                border-radius: 6px;
-                line-height: 1.4;
-              ">${{params.value}}</code>
-            `;
-          }}
-          
-          function linkRenderer(params) {{
-            if (!params.value) return "";
-              return `<a href="atch/server/{dict_type}/${{params.value}}{'.json' if dict_type == 'profiles' else ''}" download
-                         target="_blank"
-                         rel="noopener"
-                      >
-                ${{params.value}}
-              </a>`;
-          }}
-        
-          const gridOptions = {{
-            theme: "legacy",
-            columnDefs: {json.dumps(column_defs)},
-            rowData: {json.dumps(row_data)},
-            enableCellTextSelection: true,
-            defaultColDef: {{
-              flex: 1,
-              sortable: true,
-              filter: true,
-              resizable: true,
-              wrapText: true,
-              autoHeight: true
-            }},
-            components: {{
-              codeCellRenderer: codeCellRenderer,
-              linkRenderer: linkRenderer,
-            }}
-          }};
-        
-          agGrid.createGrid(
-            document.getElementById("{grid_id}"),
-            gridOptions
-          );
-        }});
-        </script>
+    return f"""<div id="{grid_id}" class="ag-theme-alpine" style="height: 400px; width: 100%;" data-dict-type="{dict_type}"></div>
+        <script type="application/json" id="{grid_id}-column-defs">{json.dumps(column_defs)}</script>
+        <script type="application/json" id="{grid_id}-row-data">{json.dumps(row_data)}</script>
         """
 
 
@@ -266,7 +263,7 @@ def build_html_links_page(base_path: Path):
 
     # Keep these customizable for future filtering needs.
     additional_folder_blacklist = {".git", "__pycache__"}
-    extension_blacklist = {".md", ".png", ".jpg", ".jpeg", ".gif", ".css", ".js", ".json", ".txt", ".py", ".exe", ".sh"}
+    extension_blacklist = {".md", ".jpg", ".jpeg", ".gif", ".css", ".js", ".json", ".txt", ".py", ".exe", ".sh"}
     folder_blacklist = {"server", *additional_folder_blacklist}
 
     root_links = []
@@ -338,6 +335,97 @@ def migrate_profiles():
     profile_dir = Path(__file__).parent.parent.joinpath('profiles')
     Migrations().run_migration(str(profile_dir))
 
+import json
+
+def update_code_explainer_json():
+    """
+    Load or (re)generate a JSON cache of LLM-produced explanations for reader code blocks.
+
+    This function has two modes controlled by the global flag `should_translate_code`:
+
+    1) Translation disabled (`should_translate_code` is False)
+       - Attempts to load an existing JSON file located at `code_explainer_json_path`.
+       - If the file does not exist, returns an empty dict.
+       - If the file exists but contains invalid JSON (e.g., empty/corrupted), returns an empty dict.
+
+    2) Translation enabled (`should_translate_code` is True)
+       - Creates a `ReaderFunctionBlockExplainer` backed by an Ollama LLM endpoint using the
+         configuration in `OllamaConfig` (host/model/temperature/num_ctx).
+       - Iterates over `readers_dict` (a dict of reader definitions). For each entry:
+           * Reads the "check" field (expected to be a non-empty string).
+           * Skips entries with missing/invalid "check" content.
+           * Calls `explainer.explain(check_code)` and stores the result under the reader name.
+           * Ensures the stored value is JSON-serializable; non-serializable results are coerced to `str`.
+       - Writes the resulting mapping to `code_explainer_json_path` as UTF-8 JSON.
+
+    Returns:
+        dict: A mapping from the reader name to the explanation result (loaded from disk or freshly generated).
+
+    Notes:
+        - Requires the globals: `should_translate_code`, `readers_dict`, and `code_explainer_json_path`.
+        - Translation mode requires `llm_tools` and a working local Ollama server at the configured host.
+        - The output file is overwritten when translation mode is enabled.
+    """
+
+    translation = {}
+
+    if not should_translate_code:
+        print(
+            "Skipping code translation and load local file if exists, because should_translate_code is False. "
+            "Update is only possible and only runs locally on good hardware with a working Ollama server."
+        )
+        path = Path(code_explainer_json_path)
+
+        if not path.exists():
+            return {}  # JSON doesn't exist yet
+
+        try:
+            with path.open("r", encoding="utf-8") as ce:
+                return json.load(ce)
+        except json.JSONDecodeError:
+            # File exists but is not valid JSON (empty/corrupted)
+            return {}
+
+    try:
+        import llm_tools
+        import llm_tools.code_translator
+
+        explainer = llm_tools.code_translator.ReaderFunctionBlockExplainer(
+            llm_tools.code_translator.OllamaConfig(
+                host="http://localhost:11434",
+                model="devstral-small-2:latest", # change this to a smaller model if needed, devstral-small-2 requires 17 GB RAM while qwen3:8B needs ~ 6 GB
+                temperature=0.2,
+                num_ctx=4096,
+            )
+        )
+    except Exception as e:
+        print(f"Skipping code translation: {e}")
+        return translation
+
+    for name, reader in readers_dict.items():
+        check_code = reader.get("check")
+        if not isinstance(check_code, str) or not check_code.strip():
+            print(f"Skipping {name}: invalid or missing 'check'")
+            continue
+
+        print(f"Translating code for {name}")
+        result = explainer.explain(check_code)
+
+        # Make it JSON-safe if needed
+        try:
+            json.dumps(result)
+            translation[name] = result
+        except TypeError:
+            translation[name] = str(result)
+
+    Path(code_explainer_json_path).parent.mkdir(parents=True, exist_ok=True)
+
+    with open(code_explainer_json_path, "w", encoding="utf-8") as ce:
+        json.dump(translation, ce, ensure_ascii=False, indent=2)
+
+    return translation
+
+
 
 """Will convert all md files in docs folder to html files, to be added an updated later
 def convert_docs_md_to_html():
@@ -377,7 +465,22 @@ def convert_docs_md_to_html():
 if __name__ == '__main__':
     sysargs = list(sys.argv)
     # print(sysargs)
+    if len(sysargs) >= 3:
+        try:
+            import ollama
+            has_ollama = True
+        except ImportError:
+            has_ollama = False
+        if sys.argv[2] == 'explain_code_blocks' and has_ollama:
+            should_translate_code = True
+            print("Running explain_code_blocks with translation enabled.")
+        else:
+            print("Invalid argument or ollama package not installed. "
+                  "This is only needed for the explain_code_blocks command and only runs locally on good hardware.")
+            print(sys.modules.keys())
     if len(sysargs) >= 2:
         if sys.argv[1] == 'build_index':
+            print("Building index.html")
             build_index()
+
     print("EOC reached")
