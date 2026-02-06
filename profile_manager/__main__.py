@@ -164,6 +164,7 @@ def readers_dict_to_grid_config():
 
     header_tooltips = {
         "priority": "Priority of the reader if two or more reader checks would fit for the same file. Lower values are prioritized over higher ones.",
+        "identifier": "Unique identifier string of the reader.",
         "class name": "Name of the reader class in python code.",
         "check": "Python code block that checks whether a given file is supported by the reader.",
         "check explanation": "AI supported explanation of the reader's check function.",
@@ -193,6 +194,19 @@ def profiles_dict_to_grid_config():
         {"id": k, **v}
         for k, v in profiles_dict.items()
     ]
+
+    header_tooltips = {
+        "id": "Unique hexadecimal identifier string of the profile.",
+        "reader": "Name of the reader class that is used to convert the file.",
+        "extension": "File extension that is supported by the profile.",
+        "title": "Given title of the profile by the creator.",
+        "description": "Description of the profile given by the creator.",
+        "devices": "List of devices that are supported by the profile.",
+        "software": "List of software that produces the data that is converted by the profile.",
+        "identifiers": "List of identifiers that are required in the given file to identify the right profile.",
+        "ontology": "Ontology term that is used to describe the Metadata used for extraction and assigment in this profile, if the profile is based on a ChMO ontology and already used in an ELN.",
+    }
+
     special_column_defs = {
         "id": {"field": "id", "pinned": "left", "cellRenderer": "linkRenderer"},
         "identifiers": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
@@ -200,10 +214,20 @@ def profiles_dict_to_grid_config():
         "devices": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
     }
     column_defs = [
-        special_column_defs["id"],
+        {
+            **special_column_defs["id"],
+            **({
+                "headerComponent": "HeaderWithInfo",
+                "headerComponentParams": {"infoText": header_tooltips["id"]}
+            } if "id" in header_tooltips else {})
+        },
         *[{
             "field": key,
-            **special_column_defs.get(key, {})
+            **special_column_defs.get(key, {}),
+            **({
+                "headerComponent": "HeaderWithInfo",
+                "headerComponentParams": {"infoText": header_tooltips[key]}
+            } if key in header_tooltips else {})
         } for key in next(iter(profiles_dict.values()))],
     ]
     return row_data, column_defs
