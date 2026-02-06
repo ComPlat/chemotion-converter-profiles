@@ -61,7 +61,7 @@ def build_index():
     reader_dir = files("converter_app") / "readers"
 
     for reader in sorted(reader_dir.iterdir(), key=lambda r: r.name):
-        if reader.is_file() and reader.name.endswith(".py"):
+        if reader.is_file() and reader.name.endswith(".py") and not reader.name.endswith("__.py"):
             try:
                 my_ast = read_metadata_from_readercode(reader)
 
@@ -173,7 +173,7 @@ def readers_dict_to_grid_config():
     special_column_defs = {
         "file name": {"field": "file name", "pinned": "left",  "cellRenderer": "linkRenderer"},
         "check": {"cellRenderer": "codeCellRenderer", "flex": 2},
-        "check explanation": {"cellRenderer": "codeCellRenderer", "flex": 2},
+        "check explanation": {"cellRenderer": "pulletPointCellRenderer", "flex": 2},
     }
 
     column_defs = [

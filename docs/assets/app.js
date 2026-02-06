@@ -12,6 +12,17 @@
     }
   }
 
+  function pulletPointCellRenderer(params) {
+    if (!params.value) return "";
+
+    return `
+      <p style="
+        white-space: pre-wrap;
+        line-height: 1.4;
+      ">${params.value}</p>
+    `;
+  }
+
   function codeCellRenderer(params) {
     if (!params.value) return "";
 
@@ -206,9 +217,10 @@
         autoHeight: true
       },
       components: {
-        codeCellRenderer: codeCellRenderer,
-        linkRenderer: linkRenderer,
-        HeaderWithInfo: HeaderWithInfo
+        codeCellRenderer,
+        linkRenderer,
+        HeaderWithInfo,
+        pulletPointCellRenderer
       },
       context: {
         dictType
