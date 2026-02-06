@@ -107,3 +107,53 @@ body.loop-docu {
 .ag-theme-alpine .ag-header-cell:hover .ag-header-cell-label {
   color: #1f2a44;
 }
+
+.ag-header-with-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ag-header-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #7a8aa6;
+  color: #4a5a78;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ag-header-info:hover {
+  background: #eef3ff;
+  color: #1f2a44;
+  border-color: #5f6f8b;
+}
+
+.ag-header-popover {
+  position: absolute;
+  z-index: 9999;
+  max-width: 320px;
+  background: #ffffff;
+  color: #1f2a44;
+  border: 1px solid #d5ddea;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(25, 35, 55, 0.18);
+  padding: 10px 12px;
+}
+
+.ag-header-popover-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.ag-header-popover-body {
+  font-size: 12px;
+  line-height: 1.4;
+}
