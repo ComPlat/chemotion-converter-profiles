@@ -114,6 +114,23 @@ body.loop-docu {
   gap: 6px;
 }
 
+.ag-header-menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  color: #4a5a78;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ag-header-menu-button:hover {
+  background: #eef3ff;
+  color: #1f2a44;
+}
+
 .ag-header-info {
   display: inline-flex;
   align-items: center;
