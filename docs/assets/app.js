@@ -69,6 +69,14 @@
       title.textContent = displayName;
       eGui.appendChild(title);
 
+      const menuButton = document.createElement("span");
+      menuButton.className = "ag-header-cell-menu-button ag-header-menu-button";
+      menuButton.setAttribute("role", "button");
+      menuButton.setAttribute("tabindex", "0");
+      menuButton.setAttribute("aria-label", `${displayName} menu`);
+      menuButton.innerHTML = '<span class="ag-icon ag-icon-menu"></span>';
+      eGui.appendChild(menuButton);
+
       const icon = document.createElement("span");
       icon.className = "ag-header-info";
       icon.setAttribute("role", "button");
@@ -79,6 +87,10 @@
 
       if (!infoText) {
         icon.style.display = "none";
+      }
+
+      if (!params.enableMenu) {
+        menuButton.style.display = "none";
       }
 
       const popover = document.createElement("div");
@@ -130,6 +142,16 @@
       const onIconLeave = () => scheduleHide();
       const onPopoverEnter = () => clearTimeout(hideTimeout);
       const onPopoverLeave = () => scheduleHide();
+      const onMenuClick = (event) => {
+        event.stopPropagation();
+        params.showColumnMenu(menuButton);
+      };
+      const onMenuKey = (event) => {
+        if (event.key === "Enter" || event.key === " " || event.key === "ArrowDown") {
+          event.preventDefault();
+          onMenuClick(event);
+        }
+      };
       const onIconClick = (event) => {
         event.stopPropagation();
         isPinned = !isPinned;
@@ -157,6 +179,8 @@
       };
       const onResize = () => onScroll();
 
+      menuButton.addEventListener("click", onMenuClick);
+      menuButton.addEventListener("keydown", onMenuKey);
       icon.addEventListener("mouseenter", onIconEnter);
       icon.addEventListener("mouseleave", onIconLeave);
       icon.addEventListener("click", onIconClick);
@@ -167,6 +191,8 @@
       window.addEventListener("scroll", onScroll, true);
       window.addEventListener("resize", onResize);
 
+      this._destroyFns.push(() => menuButton.removeEventListener("click", onMenuClick));
+      this._destroyFns.push(() => menuButton.removeEventListener("keydown", onMenuKey));
       this._destroyFns.push(() => icon.removeEventListener("mouseenter", onIconEnter));
       this._destroyFns.push(() => icon.removeEventListener("mouseleave", onIconLeave));
       this._destroyFns.push(() => icon.removeEventListener("click", onIconClick));
@@ -212,6 +238,7 @@
         flex: 1,
         sortable: true,
         filter: true,
+        floatingFilter: true,
         resizable: true,
         wrapText: true,
         autoHeight: true
