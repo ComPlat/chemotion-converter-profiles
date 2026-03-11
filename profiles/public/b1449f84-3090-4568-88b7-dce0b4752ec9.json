@@ -1,0 +1,132 @@
+{
+  "data": {
+    "metadata": {
+      "content_type": "text/csv",
+      "delimiter": "semicolon",
+      "doublequote": "False",
+      "extension": ".csv",
+      "file_name": "PF-1-034.csv",
+      "lineterminator": "\\r\\n",
+      "mime_type": "text/plain",
+      "quotechar": "\"",
+      "quoting": "0",
+      "reader": "CSVReader",
+      "skipinitialspace": "False",
+      "uploaded": "2026-03-11T09:02:27.580429"
+    },
+    "tables": [
+      {
+        "columns": [
+          {
+            "key": "0",
+            "name": "Column #0 (cm-1)"
+          },
+          {
+            "key": "1",
+            "name": "Column #1 (%T)"
+          }
+        ],
+        "header": [
+          "﻿Erstellt als neuer Datensatz;Sample 001 By Administrator date Freitag, Juli 28 2023"
+        ],
+        "metadata": {
+          "column_00": "cm-1",
+          "column_01": "%T",
+          "columns": "2",
+          "rows": "3351"
+        },
+        "rows": [
+          [
+            "4000.00",
+            "90.45"
+          ],
+          [
+            "3999.00",
+            "90.46"
+          ],
+          [
+            "3998.00",
+            "90.47"
+          ],
+          [
+            "3997.00",
+            "90.48"
+          ],
+          [
+            "3996.00",
+            "90.48"
+          ],
+          [
+            "3995.00",
+            "90.47"
+          ],
+          [
+            "3994.00",
+            "90.46"
+          ],
+          [
+            "3993.00",
+            "90.45"
+          ],
+          [
+            "3992.00",
+            "90.43"
+          ],
+          [
+            "3991.00",
+            "90.41"
+          ]
+        ]
+      }
+    ]
+  },
+  "description": "generic; ref location: ???, data: +, metadata: -",
+  "id": "b1449f84-3090-4568-88b7-dce0b4752ec9",
+  "identifiers": [
+    {
+      "key": "column_00",
+      "match": "exact",
+      "optional": false,
+      "tableIndex": 0,
+      "type": "tableMetadata",
+      "value": "cm-1"
+    },
+    {
+      "key": "column_01",
+      "match": "exact",
+      "optional": false,
+      "tableIndex": 0,
+      "type": "tableMetadata",
+      "value": "%T"
+    },
+    {
+      "key": "reader",
+      "match": "exact",
+      "optional": false,
+      "type": "fileMetadata",
+      "value": "CSVReader"
+    }
+  ],
+  "ols": "CHMO:0000630",
+  "tables": [
+    {
+      "header": {
+        "DATA CLASS": "XYPOINTS",
+        "DATA TYPE": "INFRARED SPECTRUM",
+        "XUNITS": "1/CM",
+        "YUNITS": "TRANSMITTANCE"
+      },
+      "table": {
+        "xColumn": {
+          "columnIndex": 0,
+          "tableIndex": 0
+        },
+        "yColumn": {
+          "columnIndex": 1,
+          "tableIndex": 0
+        }
+      }
+    }
+  ],
+  "title": "IR data from generic csv, data: +, metadata: -"
+}

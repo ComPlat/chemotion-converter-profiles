@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Operator Docu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="global.css" />
+</head>
+<body class="loop-docu">
+<h1>Converter Operator Documentation</h1>
+<hr />
+<h1>Backend</h1>
+<h2>Overview</h2>
+<p>The converter can apply additional calculations to the selected <strong>x-values</strong> and <strong>y-values</strong>. These calculations are stored in <code>xOperations</code> and <code>yOperations</code> and are executed when an output table is processed.</p>
+<p>There are two layers involved:</p>
+<ol>
+<li><strong>Four operation types</strong>, which define <em>where</em> the right-hand value comes from.</li>
+<li><strong>Four mathematical operators</strong>, which define <em>how</em> that value is applied to the current x- or y-value.</li>
+</ol>
+<p>The four operation types are:</p>
+<ul>
+<li><code>column</code></li>
+<li><code>value</code></li>
+<li><code>metadata_value</code></li>
+<li><code>header_value</code></li>
+</ul>
+<p>The four mathematical operators are:</p>
+<ul>
+<li><code>+</code> addition</li>
+<li><code>-</code> subtraction</li>
+<li><code>*</code> multiplication</li>
+<li><code>:</code> division</li>
+</ul>
+<p>In other words:<br />
+A profile can say things like:</p>
+<ul>
+<li>“Take the x-values and add a fixed number.”</li>
+<li>“Take the y-values and multiply them by values from another column.”</li>
+<li>“Take the y-values and divide them by a value found in metadata.”</li>
+<li>“Take the x-values and subtract a number extracted from the table header.”</li>
+</ul>
+<hr />
+<h2>Data Structures Involved</h2>
+<p>For each output table, the converter uses these fields in the table configuration:</p>
+<ul>
+<li><code>xColumn</code><br />
+  The base source of the x-values.</li>
+<li><code>yColumn</code><br />
+  The base source of the y-values.</li>
+<li><code>xOperations</code><br />
+  A list of operations that are applied to all x-values.</li>
+<li><code>yOperations</code><br />
+  A list of operations that are applied to all y-values.</li>
+<li><code>xOperationsDescription</code> and <code>yOperationsDescription</code><br />
+  Auto-generated and user-editable descriptions of the configured operations.</li>
+</ul>
+<p>Each entry in <code>xOperations</code> or <code>yOperations</code> contains at least:</p>
+<ul>
+<li><code>type</code> – the operation type</li>
+<li><code>operator</code> – one of <code>+</code>, <code>-</code>, <code>*</code>, <code>:</code></li>
+</ul>
+<p>Depending on the type, additional fields are used, such as <code>column</code>, <code>value</code>, <code>table</code>, <code>regex</code>, <code>line</code>, and <code>ignore_missing_values</code>.</p>
+<hr />
+<h2>Method: <code>process(self)</code></h2>
+<h3>Purpose</h3>
+<p>Prepare the raw x/y data, apply all configured x/y operations, and build the final output table.</p>
+<h3>Step-by-step behavior</h3>
+<ol>
+<li><strong>Read the base x and y columns</strong><br />
+  The converter reads the values from <code>xColumn</code> into <code>x_rows</code> and from <code>yColumn</code> into <code>y_rows</code>.</li>
+<li><strong>Prepare data for column-based operations</strong><br />
+  If an operation has type <code>column</code>, the converter preloads the referenced column values into <code>operation['rows']</code>.</li>
+<li><strong>Apply x-operations</strong><br />
+  All entries from <code>xOperations</code> are executed in their stored order.</li>
+<li><strong>Apply y-operations</strong><br />
+  All entries from <code>yOperations</code> are executed in their stored order.</li>
+<li><strong>Handle calculation failures</strong><br />
+  If an operation fails and the failure must not be ignored, the converter marks the calculation as failed and clears the output rows.</li>
+</ol>
+<h3>Important consequence</h3>
+<p><strong>The order of operations matters.</strong><br />
+If several operations are configured, each one works on the result of the previous one. So <code>* 2</code> followed by <code>+ 5</code> is not the same as <code>+ 5</code> followed by <code>* 2</code>.</p>
+<hr />
+<h2>Method: <code>_run_operation(self, rows, operation)</code></h2>
+<h3>Purpose</h3>
+<p>Execute one configured operation on all values of one target row set, meaning either all x-values or all y-values.</p>
+<p>For each row, the method first determines the right-hand operand based on <code>operation.type</code>. Then it applies the selected mathematical operator by calling <code>apply_operation</code>.</p>
+<hr />
+<h3>The four operation types</h3>
+<h4>1. <code>column</code> – Value from another table column</h4>
+<ul>
+<li>The operation points to a column using <code>operation.column.tableIndex</code> and <code>operation.column.columnIndex</code>.</li>
+<li>During preparation, all values from that referenced column are stored in <code>operation['rows']</code>.</li>
+<li>During execution, the converter reads the value at the same row position from that preloaded list.</li>
+</ul>
+<p><strong>Plain-language interpretation:</strong><br />
+The current x- or y-value is combined with the value from another column at the same row index.</p>
+<hr />
+<h4>2. <code>value</code> – Fixed scalar value</h4>
+<ul>
+<li>The operation stores a direct numeric value in <code>operation.value</code>.</li>
+<li>The same number is used for every row.</li>
+</ul>
+<p><strong>Plain-language interpretation:</strong><br />
+All x- or y-values are modified by the same fixed number, such as <code>+ 5</code> or <code>* 1000</code>.</p>
+<hr />
+<h4>3. <code>metadata_value</code> – Value from table metadata</h4>
+<ul>
+<li>The operation stores a metadata key in <code>operation.value</code> and a reference table index in <code>operation.table</code>.</li>
+<li>The converter reads the metadata value from <code>self.input_tables[int(operation.table)]['metadata']</code>.</li>
+<li>That metadata value is then used as the right-hand operand for all rows.</li>
+<li>If the metadata value is missing or not numeric, behavior depends on <code>ignore_missing_values</code>.</li>
+</ul>
+<p><strong>Plain-language interpretation:</strong><br />
+The current x- or y-value is combined with a numeric value taken from the metadata of a selected input table.</p>
+<hr />
+<h4>4. <code>header_value</code> – Value extracted from the table header via regex</h4>
+<ul>
+<li>The operation stores a table index, an optional line number, and a regex pattern.</li>
+<li>The helper method <code>_search_regex</code> searches either a specific header line or the whole header text.</li>
+<li>If a regex match is found and the regex contains a capture group, the first capture group is used.</li>
+<li>If there is no capture group, the full match is used.</li>
+<li>The extracted text must be numeric to be usable in the calculation.</li>
+</ul>
+<p><strong>Plain-language interpretation:</strong><br />
+The current x- or y-value is combined with a number that is found somewhere in the selected table header.</p>
+<hr />
+<h3>How missing or invalid values are handled</h3>
+<p>After the right-hand value has been determined, the converter tries to convert it to a float.</p>
+<ul>
+<li>If conversion succeeds, the operation can continue.</li>
+<li>If conversion fails and <code>ignore_missing_values</code> is <strong>false</strong>, a <code>CalculationError</code> is raised.</li>
+<li>If conversion fails and <code>ignore_missing_values</code> is <strong>true</strong>, that operation is skipped.</li>
+</ul>
+<p>This special handling is mainly relevant for <code>metadata_value</code> and <code>header_value</code>, because those two types may depend on metadata or free text that is missing or non-numeric.</p>
+<hr />
+<h2>Method: <code>apply_operation(self, value, op_value, op_operator)</code></h2>
+<h3>Purpose</h3>
+<p>Apply the mathematical operator to the current row value (<code>value</code>) and the resolved operation value (<code>op_value</code>).</p>
+<h3>Supported operators</h3>
+<pre><code class="language-python">if op_operator == '+':
+    return float_value + float(op_value)
+if op_operator == '-':
+    return float_value - float(op_value)
+if op_operator == '*':
+    return float_value * float(op_value)
+if op_operator == ':':
+    return float_value / float(op_value)
+</code></pre>
+<h3>Meaning of the operators</h3>
+<ul>
+<li><strong><code>+</code></strong><br />
+  Adds the operation value to the current x/y value.</li>
+<li><strong><code>-</code></strong><br />
+  Subtracts the operation value from the current x/y value.</li>
+<li><strong><code>*</code></strong><br />
+  Multiplies the current x/y value by the operation value.</li>
+<li><strong><code>:</code></strong><br />
+  Divides the current x/y value by the operation value.</li>
+</ul>
+<h3>Important implementation detail</h3>
+<p>The current implementation only applies the operation when <code>op_value</code> is truthy. This means that a right-hand value of <code>0</code> will not be applied and will leave the current row unchanged.</p>
+<hr />
+<h2>Overall Summary</h2>
+<ul>
+<li><code>process(self)</code> prepares the x/y data and executes all configured operations in order.</li>
+<li><code>_run_operation(self, rows, operation)</code> determines the right-hand value depending on the operation type.</li>
+<li><code>apply_operation(self, value, op_value, op_operator)</code> performs the actual mathematical calculation.</li>
+</ul>
+<p>So the backend logic can be summarized like this:</p>
+<ol>
+<li>Start with the selected x/y column values.</li>
+<li>For each configured operation, determine where the right-hand value comes from.</li>
+<li>Apply one of the four mathematical operators.</li>
+<li>Store the updated x/y values in the final output table.</li>
+</ol>
+
+<hr />
+<h1>Frontend</h1>
+<p>This part of the frontend is the visual configuration for the x/y operations you saw in the backend.</p>
+<p>It lets a user decide:</p>
+<ol>
+<li><strong>Which column should be used as the base x- or y-values</strong>, and</li>
+<li><strong>Which additional operations should be applied to those values before export.</strong></li>
+</ol>
+<hr />
+<h2>1. Choosing the base x- and y-columns</h2>
+<pre><code class="language-jsx">&lt;TableColumn
+  table={table.table}
+  label="Which column should be used as x-values?"
+  columnKey="xColumn"
+  operationsKey="xOperations"
+  ...
+/&gt;
+
+&lt;TableColumn
+  table={table.table}
+  label="Which column should be used as y-values?"
+  columnKey="yColumn"
+  operationsKey="yOperations"
+  ...
+/&gt;
+</code></pre>
+<h3>What the user sees</h3>
+<p>A selection field for the x-column and a selection field for the y-column.</p>
+<p>These define the <strong>starting values</strong> before any operation is applied.</p>
+<h3>How this relates to the backend</h3>
+<p>The selections are stored as:</p>
+<ul>
+<li><code>table.xColumn</code></li>
+<li><code>table.yColumn</code></li>
+</ul>
+<p>The backend reads these values first, then applies <code>xOperations</code> and <code>yOperations</code> on top of them.</p>
+<p><strong>Special case:</strong><br />
+If the table header says <code>DATA CLASS = XYDATA</code>, the x-values are configured differently in the frontend, via metadata-related identifiers such as <code>FIRSTX</code>, <code>LASTX</code>, and <code>DELTAX</code>, instead of the normal x-column operation block.</p>
+<hr />
+<h2>2. The operator dropdown</h2>
+<pre><code class="language-jsx">&lt;Form.Select size="sm" value={value} onChange={event =&gt; onChange(event.target.value)}&gt;
+  &lt;option value="+"&gt;+&lt;/option&gt;
+  &lt;option value="-"&gt;-&lt;/option&gt;
+  &lt;option value="*"&gt;*&lt;/option&gt;
+  &lt;option value=":"&gt;:&lt;/option&gt;
+&lt;/Form.Select&gt;
+</code></pre>
+<h3>What the user sees</h3>
+<p>Each configured operation row starts with a small dropdown containing:</p>
+<ul>
+<li><code>+</code></li>
+<li><code>-</code></li>
+<li><code>*</code></li>
+<li><code>:</code></li>
+</ul>
+<h3>How this relates to the backend</h3>
+<p>The selected symbol is stored in <code>operation.operator</code>. In the backend, this value is passed to <code>apply_operation</code>, where it determines whether the calculation becomes addition, subtraction, multiplication, or division.</p>
+<hr />
+<h2>3. The four operation types</h2>
+<p>The frontend offers four buttons for creating operations. Each new operation is added either to <code>xOperations</code> or to <code>yOperations</code>.</p>
+<pre><code class="language-jsx">&lt;Button onClick={() =&gt; addOperation(operationsKey, 'column')}&gt;
+  Add column operation
+&lt;/Button&gt;
+&lt;Button onClick={() =&gt; addOperation(operationsKey, 'value')}&gt;
+  Add scalar operation
+&lt;/Button&gt;
+&lt;Button onClick={() =&gt; addOperation(operationsKey, 'metadata_value')}&gt;
+  Add table metadata operation
+&lt;/Button&gt;
+&lt;Button onClick={() =&gt; addOperation(operationsKey, 'header_value')}&gt;
+  Add table header operation
+&lt;/Button&gt;
+</code></pre>
+<p>These correspond directly to the four backend operation types.</p>
+<hr />
+<h3>3.1 Column operation: <code>column</code></h3>
+<h4>What the user sees</h4>
+<p>After adding a column operation, the user sees:</p>
+<ul>
+<li>the operator dropdown</li>
+<li>a column selector listing available input columns</li>
+<li>a red remove button</li>
+</ul>
+<h4>How this relates to the backend</h4>
+<p>The selected column is stored in:</p>
+<pre><code class="language-js">operation = {
+  type: 'column',
+  operator: '+',
+  column: {
+    tableIndex: ...,
+    columnIndex: ...
+  }
+}
+</code></pre>
+<p>The backend then reads the referenced column values row by row and combines them with the current x- or y-values.</p>
+<hr />
+<h3>3.2 Scalar operation: <code>value</code></h3>
+<h4>What the user sees</h4>
+<p>After adding a scalar operation, the user sees:</p>
+<ul>
+<li>the operator dropdown</li>
+<li>a text input for entering a fixed numeric value</li>
+<li>a red remove button</li>
+</ul>
+<h4>How this relates to the backend</h4>
+<p>The entered value is stored in:</p>
+<pre><code class="language-js">operation = {
+  type: 'value',
+  operator: '+',
+  value: '...'
+}
+</code></pre>
+<p>The backend uses this same scalar for every row.</p>
+<hr />
+<h3>3.3 Table metadata operation: <code>metadata_value</code></h3>
+<h4>What the user sees</h4>
+<p>After adding a metadata operation, the user sees:</p>
+<ul>
+<li>the operator dropdown</li>
+<li>a dropdown of available metadata fields</li>
+<li>a checkbox for <code>ignore_missing_values</code></li>
+<li>a preview of the current numeric value</li>
+<li>a warning that metadata-based calculations should be used with caution</li>
+<li>a red remove button</li>
+</ul>
+<h4>How this relates to the backend</h4>
+<p>The selected metadata field is stored using fields such as <code>metadata</code>, <code>value</code>, and <code>table</code>. The backend uses <code>value</code> as the metadata key and <code>table</code> as the table reference.</p>
+<p>If the metadata is missing or not numeric:</p>
+<ul>
+<li>with <code>ignore_missing_values = true</code>, the operation is skipped</li>
+<li>with <code>ignore_missing_values = false</code>, the calculation fails</li>
+</ul>
+<hr />
+<h3>3.4 Table header operation: <code>header_value</code></h3>
+<h4>What the user sees</h4>
+<p>After adding a header operation, the user sees:</p>
+<ul>
+<li>the operator dropdown</li>
+<li>a dropdown to choose the input table</li>
+<li>a text field for <strong>Line</strong></li>
+<li>a text field for <strong>Regex</strong></li>
+<li>a checkbox for <code>ignore_missing_values</code></li>
+<li>a preview of the current extracted numeric value</li>
+<li>a warning that header-based calculations should be used with caution</li>
+<li>a red remove button</li>
+</ul>
+<h4>How this relates to the backend</h4>
+<p>The entered fields are stored in something like:</p>
+<pre><code class="language-js">operation = {
+  type: 'header_value',
+  operator: '+',
+  table: '0',
+  line: '...',
+  regex: '...',
+  ignore_missing_values: false
+}
+</code></pre>
+<p>The backend uses <code>_search_regex</code> to search the selected table header. If the regex returns a numeric match, that value is used in the calculation.</p>
+<hr />
+<h2>4. Operation description</h2>
+<p>The frontend also shows an operation description area when operations are configured.</p>
+<h3>What the user sees</h3>
+<ul>
+<li>An automatically generated summary of the configured operations</li>
+<li>A text area where the user can add a manual explanation</li>
+</ul>
+<h3>How this relates to the backend</h3>
+<p>The summary is stored in:</p>
+<ul>
+<li><code>xOperationsDescription</code></li>
+<li><code>yOperationsDescription</code></li>
+</ul>
+<p>This description is later included in the exported JCAMP comment.</p>
+<hr />
+<h2>Putting it all together</h2>
+<p>From the user’s perspective:</p>
+<ol>
+<li>Select the base x-column and y-column.</li>
+<li>Add zero or more operations to x and/or y.</li>
+<li>For each operation, choose:</li>
+<li>which mathematical operator should be used, and</li>
+<li>which kind of source should provide the right-hand value:
+<ul>
+<li>another column</li>
+<li>a fixed scalar</li>
+<li>a metadata field</li>
+<li>a header regex match</li>
+</ul>
+</li>
+<li>Optionally provide an explanation of the operation chain.</li>
+</ol>
+<p>From the backend’s perspective:</p>
+<ul>
+<li>The selected base columns fill <code>xColumn</code> and <code>yColumn</code>.</li>
+<li>The added operation rows fill <code>xOperations</code> and <code>yOperations</code>.</li>
+<li>Each operation is executed in order.</li>
+<li>The final transformed values are stored in the output table as <code>x</code> and <code>y</code>.</li>
+</ul>
+<p>In short:<br />
+The frontend provides a user-friendly way to build a calculation chain for x- and y-values, while the backend executes that chain using one of four operation types and one of four mathematical operators.</p>
+</body>
+</html>
