@@ -1,0 +1,234 @@
+{
+  "converter_version": "1.8.0",
+  "data": {
+    "metadata": {
+      "content_type": "text/plain",
+      "delimiter": "tab",
+      "doublequote": "False",
+      "extension": ".txt",
+      "file_name": "KA46.6_no8_15_UV_VIS_1.txt",
+      "lineterminator": "\\r\\n",
+      "mime_type": "text/plain",
+      "quotechar": "\"",
+      "quoting": "0",
+      "reader": "CSVReader",
+      "skipinitialspace": "False",
+      "uploaded": "2024-04-11T06:50:30.988933"
+    },
+    "tables": [
+      {
+        "columns": [
+          {
+            "key": "0",
+            "name": "Column #0 (Time (min))"
+          },
+          {
+            "key": "1",
+            "name": "Column #1 (Step (s))"
+          },
+          {
+            "key": "2",
+            "name": "Column #2 (Value (mAU))"
+          }
+        ],
+        "header": [
+          "﻿URL\tchrom://pc-bxj7d73/ChromeleonLocal/AKBräse/KA/20230320.seq/944.smp/UV_VIS_1.channel/UV_VIS_1.chm",
+          "Channel\tUV_VIS_1",
+          "",
+          "Injection Information:",
+          "Data Vault\tChromeleonLocal",
+          "Sequence\t20230320",
+          "Name\tKA46.6_no8",
+          "Number\t15",
+          "Position\tRC6",
+          "Comment\t",
+          "Processing Method\t",
+          "Instrument Method\tLCMS_MUST be used",
+          "Type\tUnknown",
+          "Status\tFinished",
+          "Inject Time\t3/20/2023 4:49:11 PM +01:00",
+          "Volume (µl)\t5.000",
+          "Dilution Factor\t1.0000",
+          "Weight\t1.0000",
+          "",
+          "Chromatogram Data Information:",
+          "Time Min. (min)\t0.000000",
+          "Time Max. (min)\t10.000000",
+          "Data Points\t3001",
+          "Detector\tUV",
+          "Generating Data System\tChromeleon 7.2.10.24543",
+          "Exporting Data System\tChromeleon 7.2.10.0",
+          "Operator\tInstrument Controller",
+          "Signal Quantity\tAbsorbance",
+          "Signal Unit\tmAU",
+          "Signal Min.\t-265.399221",
+          "Signal Max.\t1,101.231545",
+          "Channel\tUV_VIS_1",
+          "Driver Name\tDAD3000.dll",
+          "Channel Type\tEvaluation",
+          "Min. Step (s)\t0.2",
+          "Max. Step (s)\t0.2",
+          "Average Step (s)\t0.2",
+          "",
+          "Signal Parameter Information:",
+          "Signal Info\tWVL:214 nm",
+          "",
+          "Chromatogram Data:"
+        ],
+        "metadata": {
+          "column_00": "Time (min)",
+          "column_01": "Step (s)",
+          "column_02": "Value (mAU)",
+          "columns": "3",
+          "rows": "3001"
+        },
+        "rows": [
+          [
+            "0.000000",
+            "n.a.",
+            "0.000000"
+          ],
+          [
+            "0.003333",
+            "0.2",
+            "0.001663"
+          ],
+          [
+            "0.006667",
+            "0.2",
+            "0.012828"
+          ],
+          [
+            "0.010000",
+            "0.2",
+            "0.048843"
+          ],
+          [
+            "0.013333",
+            "0.2",
+            "0.124597"
+          ],
+          [
+            "0.016667",
+            "0.2",
+            "0.244160"
+          ],
+          [
+            "0.020000",
+            "0.2",
+            "0.400023"
+          ],
+          [
+            "0.023333",
+            "0.2",
+            "0.579921"
+          ],
+          [
+            "0.026667",
+            "0.2",
+            "0.769950"
+          ],
+          [
+            "0.030000",
+            "0.2",
+            "0.955307"
+          ]
+        ]
+      }
+    ]
+  },
+  "datatypes": [],
+  "description": "Chromeleon Chromatogram ; ref location: KIT AKBräse, data: +, metadata: +",
+  "devices": [
+    "Thermo UltiMate 3000 HPLC"
+  ],
+  "id": "0c5ddfaa-d253-412e-977a-5a44ef20ce77",
+  "identifiers": [
+    {
+      "editable": true,
+      "id": "#0fileMetadata",
+      "key": "extension",
+      "match": "regex",
+      "optional": false,
+      "type": "fileMetadata",
+      "value": "\\.[tT][xX][tT]$"
+    },
+    {
+      "editable": true,
+      "id": "#1tableHeader",
+      "lineNumber": "",
+      "match": "regex",
+      "optional": false,
+      "tableIndex": 0,
+      "type": "tableHeader",
+      "value": "Chromeleon"
+    },
+    {
+      "editable": true,
+      "id": "#2tableHeader",
+      "lineNumber": "",
+      "match": "regex",
+      "optional": false,
+      "tableIndex": 0,
+      "type": "tableHeader",
+      "value": "DAD3000.dll"
+    },
+    {
+      "editable": true,
+      "id": "#3tableMetadata",
+      "key": "column_02",
+      "match": "regex",
+      "optional": false,
+      "tableIndex": 0,
+      "type": "tableMetadata",
+      "value": "Value\\s?\\(mAU\\)"
+    }
+  ],
+  "isDefaultProfile": false,
+  "isDisabled": false,
+  "last_migration": "20260113143334",
+  "ols": "CHMO:0001009",
+  "ontology": "",
+  "predicates": [],
+  "rootOntology": {
+    "description": [
+      "Column chromatography where the mobile phase is a liquid, the stationary phase consists of very small particles and the inlet pressure is relatively high."
+    ],
+    "id": "CHMO:properties:http://purl.obolibrary.org/obo/CHMO_0001009",
+    "iri": "http://purl.obolibrary.org/obo/CHMO_0001009",
+    "label": "high-performance liquid chromatography",
+    "namespace": "http://purl.obolibrary.org/obo/",
+    "obo_id": "CHMO:0001009",
+    "ontology_name": "chmo",
+    "ontology_prefix": "CHMO",
+    "short_form": "CHMO_0001009",
+    "type": "class"
+  },
+  "software": [
+    "Chromeleon"
+  ],
+  "subjectInstances": {},
+  "subjects": [],
+  "tables": [
+    {
+      "header": {
+        "DATA CLASS": "XYPOINTS",
+        "DATA TYPE": "UV-VIS",
+        "XUNITS": "MINUTES",
+        "YUNITS": "mAU"
+      },
+      "loopType": "all",
+      "table": {
+        "xColumn": {
+          "columnIndex": 0,
+          "tableIndex": 0
+        },
+        "yColumn": {
+          "columnIndex": 2,
+          "tableIndex": 0
+        }
+      }
+    }
+  ],
+  "title": "UV-VIS data from HPLC txt, data: +, metadata: -"
+}
