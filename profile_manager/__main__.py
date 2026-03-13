@@ -210,8 +210,8 @@ def profiles_dict_to_grid_config():
     special_column_defs = {
         "id": {"field": "id", "pinned": "left", "cellRenderer": "linkRenderer"},
         "identifiers": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
-        "software": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
-        "devices": {"valueFormatter": "value && value.map(v => `${v[0]}: ${v[1]}`).join(', ')"},
+        "software": {"valueFormatter": "value && value.join(', ')"},
+        "devices": {"valueFormatter": "value && value.join(', ')"},
     }
     column_defs = [
         {
