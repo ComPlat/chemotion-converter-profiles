@@ -1,10 +1,20 @@
 from __future__ import annotations
 
+import html
+import json
 import re
 from dataclasses import dataclass
-from typing import Optional, List
+from pathlib import Path
+from typing import Dict, Optional, List, Union
 
-from ollama import Client  # Official Ollama Python library
+try:
+    from ollama import Client  # Official Ollama Python library
+except ImportError:  # optional, local-only dependency (deliberately not in requirements.txt)
+    Client = None
+
+
+class ExplainError(RuntimeError):
+    """Raised when an explanation could not be produced (bad input, no client, LLM failure)."""
 
 
 @dataclass(frozen=True)
@@ -34,6 +44,11 @@ class ReaderFunctionBlockExplainer:
     """
 
     def __init__(self, config: OllamaConfig):
+        if Client is None:
+            raise ExplainError(
+                "The 'ollama' package is not installed. Install it locally with `pip install ollama` "
+                "to regenerate explanations."
+            )
         self.config = config
         self.client = Client(host=config.host)
 
@@ -47,6 +62,7 @@ class ReaderFunctionBlockExplainer:
 
         Raises:
             ValueError: If the input doesn't look like a Python function definition.
+            ExplainError: If the LLM call itself fails (server down, model missing, timeout).
         """
         code = self._extract_python_from_fences(code_block).strip()
         if not self._looks_like_function(code):
@@ -75,17 +91,41 @@ class ReaderFunctionBlockExplainer:
         if self.config.num_ctx is not None:
             options["num_ctx"] = self.config.num_ctx
 
-        response = self.client.chat(
-            model=self.config.model,
-            messages=[
-                {"role": "system", "content": system_msg},
-                {"role": "user", "content": user_msg},
-            ],
-            options=options,
-        )
+        try:
+            response = self.client.chat(
+                model=self.config.model,
+                messages=[
+                    {"role": "system", "content": system_msg},
+                    {"role": "user", "content": user_msg},
+                ],
+                options=options,
+            )
+        except KeyboardInterrupt:
+            # Never swallow an interrupt; the caller keeps whatever it has cached so far.
+            raise
+        except Exception as exc:
+            raise ExplainError(
+                f"Ollama call failed for model {self.config.model!r} at {self.config.host}: {exc}"
+            ) from exc
 
         content = self._extract_chat_content(response)
         return self._normalize_to_3_5_bullets(content)
+
+    def explain_safe(self, code_block: str, name: str = "") -> Optional[str]:
+        """
+        Guarded variant of `explain`: never raises (except on KeyboardInterrupt), returns
+        None on failure so a single bad reader cannot abort a whole build run.
+        """
+        label = name or "<unnamed block>"
+        try:
+            return self.explain(code_block)
+        except KeyboardInterrupt:
+            raise
+        except (ValueError, ExplainError) as exc:
+            print(f"Skipping {label}: {exc}")
+        except Exception as exc:  # unexpected shapes from the client library
+            print(f"Skipping {label}: unexpected error during explanation: {exc}")
+        return None
 
     @staticmethod
     def _extract_chat_content(chat_response: dict) -> str:
@@ -150,6 +190,95 @@ class ReaderFunctionBlockExplainer:
 
         bullets = bullets[:5]
         return "\n".join(f"- {b}" for b in bullets)
+
+
+# --- Translation cache (code_explainer.json) -------------------------------------------
+# These helpers deliberately do not touch the Ollama client, so they stay importable in
+# CI where the optional `ollama` package is absent.
+
+def load_translations(path: Union[str, Path]) -> Dict[str, str]:
+    """
+    Load the explanation cache. Returns an empty dict if the file is missing, unreadable
+    or contains invalid/unexpected JSON - a broken cache must never break the build.
+    """
+    cache_path = Path(path)
+    if not cache_path.exists():
+        return {}
+
+    try:
+        with cache_path.open("r", encoding="utf-8") as handle:
+            data = json.load(handle)
+    except (json.JSONDecodeError, OSError, UnicodeDecodeError) as exc:
+        print(f"Ignoring unreadable translation cache {cache_path}: {exc}")
+        return {}
+
+    if not isinstance(data, dict):
+        print(f"Ignoring translation cache {cache_path}: expected a JSON object")
+        return {}
+
+    return {str(k): v for k, v in data.items() if isinstance(v, str)}
+
+
+def save_translations(path: Union[str, Path], translations: Dict[str, str]) -> bool:
+    """
+    Write the cache atomically (temp file + replace) so an interrupted run cannot leave a
+    truncated JSON behind. Returns True on success, False if writing failed.
+    """
+    cache_path = Path(path)
+    tmp_path = cache_path.with_suffix(cache_path.suffix + ".tmp")
+
+    try:
+        cache_path.parent.mkdir(parents=True, exist_ok=True)
+        with tmp_path.open("w", encoding="utf-8") as handle:
+            json.dump(translations, handle, ensure_ascii=False, indent=2)
+        tmp_path.replace(cache_path)
+        return True
+    except OSError as exc:
+        print(f"Could not write translation cache {cache_path}: {exc}")
+        try:
+            tmp_path.unlink(missing_ok=True)
+        except OSError:
+            pass
+        return False
+
+
+_BULLET_MARKER_RE = re.compile(r"^[-*•]\s+")
+_INLINE_CODE_RE = re.compile(r"(`[^`]+`)")
+
+
+def bullets_to_html(text: str) -> str:
+    """
+    Render a cached bullet block for display in an HTML table cell.
+
+    The cache keeps the raw LLM answer (markdown-ish, with `backticks`), so this
+    conversion happens at render time and stays re-runnable. The output is HTML-escaped
+    and uses inline elements only, which keeps it compatible with the existing
+    `pulletPointCellRenderer` in docs/assets/app.js (a <p> with white-space: pre-wrap) -
+    no frontend change required.
+    """
+    if not isinstance(text, str) or not text.strip():
+        return ""
+
+    rendered_lines = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+
+        marker = ""
+        if _BULLET_MARKER_RE.match(stripped):
+            stripped = _BULLET_MARKER_RE.sub("", stripped)
+            marker = "• "
+
+        body = "".join(
+            f"<code>{html.escape(part[1:-1])}</code>"
+            if part.startswith("`") and part.endswith("`") and len(part) > 2
+            else html.escape(part)
+            for part in _INLINE_CODE_RE.split(stripped)
+        )
+        rendered_lines.append(marker + body)
+
+    return "\n".join(rendered_lines)
 
 
 if __name__ == "__main__":

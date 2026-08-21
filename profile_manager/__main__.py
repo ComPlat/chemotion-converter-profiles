@@ -15,12 +15,15 @@ from mdutils.mdutils import MdUtils # https://github.com/didix21/mdutils
 
 from profile_manager import get_chmo
 from profile_manager.parse_ast import read_metadata_from_readercode
+# Cache + rendering helpers only; they do not import the optional `ollama` package.
+from llm_tools.code_translator import bullets_to_html, load_translations, save_translations
 
 program_name = "Chemotion Converter"
 profiles_dict = {}
 readers_dict = {}
 
 should_translate_code = False
+overwrite_translation = False
 code_explainer_json_path: Path = Path(__file__).parent.parent.joinpath("code_explainer.json")
 
 def clean_value(val):
@@ -92,12 +95,14 @@ def build_index():
                 print(f"Skipping {reader.name}: {e}")
                 continue
 
-    check_translation = update_code_explainer_json() # if should_translate_code else load from disk or return empty dict
+    check_translation = update_code_explainer_json(overwrite_translation) # if should_translate_code else load from disk or return empty dict
 
     # Attach explanation (dict: { "<reader filename>": <explanation> }) to readers_dict entries, if available
+    # bullets_to_html escapes the raw LLM text and turns `backticks` into <code> for the grid cell.
     for reader_filename, entry in readers_dict.items():
-        if reader_filename in check_translation:
-            entry["check explanation"] = check_translation[reader_filename]
+        rendered = bullets_to_html(check_translation.get(reader_filename, ""))
+        if rendered:
+            entry["check explanation"] = rendered
         else:
             entry["check explanation"] = "No explanation or no valid check Function available."
 
@@ -338,56 +343,49 @@ def migrate_profiles():
     profile_dir = Path(__file__).parent.parent.joinpath('profiles')
     Migrations().run_migration(str(profile_dir))
 
-import json
-
-def update_code_explainer_json():
+def update_code_explainer_json(overwrite_translation: bool = False):
     """
-    Load or (re)generate a JSON cache of LLM-produced explanations for reader code blocks.
+    Load and incrementally extend a JSON cache of LLM-produced explanations for reader code blocks.
 
-    This function has two modes controlled by the global flag `should_translate_code`:
+    `code_explainer_json_path` is the persistent cache. It is never rebuilt from scratch:
+    entries of readers that are not processed in this run are always carried over.
 
-    1) Translation disabled (`should_translate_code` is False)
-       - Attempts to load an existing JSON file located at `code_explainer_json_path`.
-       - If the file does not exist, returns an empty dict.
-       - If the file exists but contains invalid JSON (e.g., empty/corrupted), returns an empty dict.
+    Modes:
 
-    2) Translation enabled (`should_translate_code` is True)
-       - Creates a `ReaderFunctionBlockExplainer` backed by an Ollama LLM endpoint using the
-         configuration in `OllamaConfig` (host/model/temperature/num_ctx).
-       - Iterates over `readers_dict` (a dict of reader definitions). For each entry:
-           * Reads the "check" field (expected to be a non-empty string).
-           * Skips entries with missing/invalid "check" content.
-           * Calls `explainer.explain(check_code)` and stores the result under the reader name.
-           * Ensures the stored value is JSON-serializable; non-serializable results are coerced to `str`.
-       - Writes the resulting mapping to `code_explainer_json_path` as UTF-8 JSON.
+    1) Translation disabled (`should_translate_code` is False, the default and the CI case)
+       - Loads and returns the cache. Missing/corrupted file -> empty dict, never an error.
+       - No Ollama server and no `ollama` package required.
+
+    2) Translation enabled (`should_translate_code` is True, via `explain_code_blocks`)
+       - Creates a `ReaderFunctionBlockExplainer` for a local Ollama endpoint.
+       - Iterates over `readers_dict`, translating the "check" code block of each reader:
+           * readers with a missing/empty "check" are skipped,
+           * readers already present in the cache are skipped unless `overwrite_translation`,
+           * failures (server down, model missing, bad input) are logged and skipped; the
+             cached value of that reader survives,
+           * after every new translation the cache is written back to disk, so an aborted
+             run keeps all work done so far.
+
+    Args:
+        overwrite_translation: Retranslate readers that already have a cached explanation.
+            Defaults to False, i.e. a normal run only fills the gaps.
 
     Returns:
-        dict: A mapping from the reader name to the explanation result (loaded from disk or freshly generated).
+        dict: Mapping of reader filename -> explanation (raw bullet text as produced by the LLM).
 
     Notes:
-        - Requires the globals: `should_translate_code`, `readers_dict`, and `code_explainer_json_path`.
-        - Translation mode requires `llm_tools` and a working local Ollama server at the configured host.
-        - The output file is overwritten when translation mode is enabled.
+        - Requires the globals: `should_translate_code`, `readers_dict`, `code_explainer_json_path`.
+        - Translation mode requires the optional `ollama` package plus a working local server.
     """
 
-    translation = {}
+    translation = load_translations(code_explainer_json_path)
 
     if not should_translate_code:
         print(
             "Skipping code translation and load local file if exists, because should_translate_code is False. "
             "Update is only possible and only runs locally on good hardware with a working Ollama server."
         )
-        path = Path(code_explainer_json_path)
-
-        if not path.exists():
-            return {}  # JSON doesn't exist yet
-
-        try:
-            with path.open("r", encoding="utf-8") as ce:
-                return json.load(ce)
-        except json.JSONDecodeError:
-            # File exists but is not valid JSON (empty/corrupted)
-            return {}
+        return translation
 
     try:
         import llm_tools
@@ -405,26 +403,42 @@ def update_code_explainer_json():
         print(f"Skipping code translation: {e}")
         return translation
 
+    if overwrite_translation:
+        print("overwrite_translation is True: retranslating every reader, cached values are replaced.")
+
+    translated_count = 0
     for name, reader in readers_dict.items():
         check_code = reader.get("check")
         if not isinstance(check_code, str) or not check_code.strip():
             print(f"Skipping {name}: invalid or missing 'check'")
             continue
 
+        cached = translation.get(name)
+        if not overwrite_translation and isinstance(cached, str) and cached.strip():
+            print(f"Skipping {name}: already translated (use overwrite to refresh)")
+            continue
+
         print(f"Translating code for {name}")
-        result = explainer.explain(check_code)
-
-        # Make it JSON-safe if needed
         try:
-            json.dumps(result)
-            translation[name] = result
-        except TypeError:
-            translation[name] = str(result)
+            result = explainer.explain_safe(check_code, name)
+        except KeyboardInterrupt:
+            print(f"Interrupted while translating {name}; keeping {translated_count} new translation(s).")
+            break
 
-    Path(code_explainer_json_path).parent.mkdir(parents=True, exist_ok=True)
+        if result is None:
+            # explain_safe already reported the reason; keep any previously cached value.
+            continue
 
-    with open(code_explainer_json_path, "w", encoding="utf-8") as ce:
-        json.dump(translation, ce, ensure_ascii=False, indent=2)
+        translation[name] = result
+        translated_count += 1
+        # Persist after every reader so an aborted run does not lose finished work.
+        save_translations(code_explainer_json_path, translation)
+
+    if translated_count:
+        save_translations(code_explainer_json_path, translation)
+        print(f"Translation cache updated with {translated_count} new entry/entries.")
+    else:
+        print("No new translations; translation cache left unchanged.")
 
     return translation
 
@@ -477,6 +491,13 @@ if __name__ == '__main__':
         if sys.argv[2] == 'explain_code_blocks' and has_ollama:
             should_translate_code = True
             print("Running explain_code_blocks with translation enabled.")
+            # Optional third token: retranslate readers that are already cached.
+            if len(sysargs) >= 4:
+                if sys.argv[3] in ('overwrite', '--overwrite', 'overwrite_translation'):
+                    overwrite_translation = True
+                    print("Running with overwrite_translation enabled: cached explanations will be replaced.")
+                else:
+                    print(f"Ignoring unknown argument {sys.argv[3]!r}; expected 'overwrite' to force retranslation.")
         else:
             print("Invalid argument or ollama package not installed. "
                   "This is only needed for the explain_code_blocks command and only runs locally on good hardware.")
