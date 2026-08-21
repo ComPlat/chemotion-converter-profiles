@@ -1,0 +1,527 @@
+{
+  "converter_version": "1.8.0",
+  "data": [
+    {
+      "metadata": {
+        "content_type": "application/gzip",
+        "extension": ".gz",
+        "file_name": "X3346.D.tar.gz",
+        "mime_type": "application/gzip",
+        "reader": "HplcReader",
+        "uploaded": "2025-11-25T09:48:59.719792"
+      },
+      "tables": [
+        {
+          "columns": [
+            {
+              "key": "0",
+              "name": "Time"
+            },
+            {
+              "key": "1",
+              "name": "Wavelength"
+            }
+          ],
+          "header": [],
+          "metadata": {
+            "AllWaves": "['Wavelength_230', 'Wavelength_254', 'Wavelength_280', 'Wavelength_300', 'Wavelength_400']",
+            "Wavelength": "230",
+            "__UNIT_%": "%",
+            "__UNIT_PPM": "ppm",
+            "__UNIT_gram": "g",
+            "__UNIT_liter": "l",
+            "__UNIT_mol": "mol",
+            "columns": "2",
+            "rows": "3451"
+          },
+          "rows": [
+            [
+              -0.043166666666666666,
+              96841385
+            ],
+            [
+              -0.0365,
+              71578415
+            ],
+            [
+              -0.02983333333333333,
+              54736435
+            ],
+            [
+              -0.023166666666666665,
+              67367920
+            ],
+            [
+              -0.016499999999999997,
+              92630890
+            ],
+            [
+              -0.009833333333333333,
+              92630890
+            ],
+            [
+              -0.003166666666666665,
+              42104950
+            ],
+            [
+              0.003500000000000003,
+              -42104950
+            ],
+            [
+              0.010166666666666671,
+              -126314850
+            ],
+            [
+              0.01683333333333334,
+              -155788315
+            ]
+          ]
+        },
+        {
+          "columns": [
+            {
+              "key": "0",
+              "name": "Time"
+            },
+            {
+              "key": "1",
+              "name": "Wavelength"
+            }
+          ],
+          "header": [],
+          "metadata": {
+            "AllWaves": "['Wavelength_230', 'Wavelength_254', 'Wavelength_280', 'Wavelength_300', 'Wavelength_400']",
+            "Wavelength": "254",
+            "columns": "2",
+            "rows": "3451"
+          },
+          "rows": [
+            [
+              -0.043166666666666666,
+              151577820
+            ],
+            [
+              -0.0365,
+              96841385
+            ],
+            [
+              -0.02983333333333333,
+              46315445
+            ],
+            [
+              -0.023166666666666665,
+              33683960
+            ],
+            [
+              -0.016499999999999997,
+              79999405
+            ],
+            [
+              -0.009833333333333333,
+              151577820
+            ],
+            [
+              -0.003166666666666665,
+              223156235
+            ],
+            [
+              0.003500000000000003,
+              315787125
+            ],
+            [
+              0.010166666666666671,
+              395786530
+            ],
+            [
+              0.01683333333333334,
+              471575440
+            ]
+          ]
+        },
+        {
+          "columns": [
+            {
+              "key": "0",
+              "name": "Time"
+            },
+            {
+              "key": "1",
+              "name": "Wavelength"
+            }
+          ],
+          "header": [],
+          "metadata": {
+            "AllWaves": "['Wavelength_230', 'Wavelength_254', 'Wavelength_280', 'Wavelength_300', 'Wavelength_400']",
+            "Wavelength": "280",
+            "columns": "2",
+            "rows": "3451"
+          },
+          "rows": [
+            [
+              -0.043166666666666666,
+              -505259400
+            ],
+            [
+              -0.0365,
+              -454733460
+            ],
+            [
+              -0.02983333333333333,
+              -391576035
+            ],
+            [
+              -0.023166666666666665,
+              -315787125
+            ],
+            [
+              -0.016499999999999997,
+              -206314255
+            ],
+            [
+              -0.009833333333333333,
+              -84209900
+            ],
+            [
+              -0.003166666666666665,
+              -16841980
+            ],
+            [
+              0.003500000000000003,
+              12631485
+            ],
+            [
+              0.010166666666666671,
+              21052475
+            ],
+            [
+              0.01683333333333334,
+              50525940
+            ]
+          ]
+        },
+        {
+          "columns": [
+            {
+              "key": "0",
+              "name": "Time"
+            },
+            {
+              "key": "1",
+              "name": "Wavelength"
+            }
+          ],
+          "header": [],
+          "metadata": {
+            "AllWaves": "['Wavelength_230', 'Wavelength_254', 'Wavelength_280', 'Wavelength_300', 'Wavelength_400']",
+            "Wavelength": "300",
+            "columns": "2",
+            "rows": "3451"
+          },
+          "rows": [
+            [
+              -0.043166666666666666,
+              231577225
+            ],
+            [
+              -0.0365,
+              231577225
+            ],
+            [
+              -0.02983333333333333,
+              164209305
+            ],
+            [
+              -0.023166666666666665,
+              37894455
+            ],
+            [
+              -0.016499999999999997,
+              -42104950
+            ],
+            [
+              -0.009833333333333333,
+              -71578415
+            ],
+            [
+              -0.003166666666666665,
+              -117893860
+            ],
+            [
+              0.003500000000000003,
+              -130525345
+            ],
+            [
+              0.010166666666666671,
+              -105262375
+            ],
+            [
+              0.01683333333333334,
+              54736435
+            ]
+          ]
+        },
+        {
+          "columns": [
+            {
+              "key": "0",
+              "name": "Time"
+            },
+            {
+              "key": "1",
+              "name": "Wavelength"
+            }
+          ],
+          "header": [],
+          "metadata": {
+            "AllWaves": "['Wavelength_230', 'Wavelength_254', 'Wavelength_280', 'Wavelength_300', 'Wavelength_400']",
+            "Wavelength": "400",
+            "columns": "2",
+            "rows": "3451"
+          },
+          "rows": [
+            [
+              -0.043166666666666666,
+              -214735245
+            ],
+            [
+              -0.0365,
+              -227366730
+            ],
+            [
+              -0.02983333333333333,
+              -202103760
+            ],
+            [
+              -0.023166666666666665,
+              -130525345
+            ],
+            [
+              -0.016499999999999997,
+              -58946930
+            ],
+            [
+              -0.009833333333333333,
+              37894455
+            ],
+            [
+              -0.003166666666666665,
+              126314850
+            ],
+            [
+              0.003500000000000003,
+              189472275
+            ],
+            [
+              0.010166666666666671,
+              239998215
+            ],
+            [
+              0.01683333333333334,
+              252629700
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "datatypes": [],
+  "description": "",
+  "devices": [],
+  "diff_history": [
+    {
+      "at": "2026-05-11T12:23:47.646114+00:00",
+      "diff": [
+        {
+          "from": "/tables/0/inputTableIndex",
+          "op": "move",
+          "path": "/tables/0/table/xColumn/tableIndex"
+        },
+        {
+          "op": "add",
+          "path": "/tables/0/table/yColumn/tableIndex",
+          "value": 0
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/1/isDatatableOutput"
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/1/isLoobDatatableOutput"
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/1/isDatasetOutput"
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/1/isRdfOutput"
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/1/outputDatatableKey"
+        },
+        {
+          "op": "replace",
+          "path": "/identifiers/1/outputTableIndex",
+          "value": null
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/2/isDatatableOutput"
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/2/isLoobDatatableOutput"
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/2/isDatasetOutput"
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/2/isRdfOutput"
+        },
+        {
+          "op": "remove",
+          "path": "/identifiers/2/outputDatatableKey"
+        },
+        {
+          "op": "replace",
+          "path": "/identifiers/2/outputTableIndex",
+          "value": 0
+        }
+      ],
+      "profile_version": "1.0",
+      "trigger": "migration:20260506160404"
+    },
+    {
+      "at": "2026-05-18T03:37:05.431112+00:00",
+      "diff": [
+        {
+          "op": "remove",
+          "path": "/tables/0/uuid"
+        },
+        {
+          "op": "remove",
+          "path": "/tables/0/tableName"
+        }
+      ],
+      "profile_version": "1.1",
+      "trigger": "migration:20260513094819"
+    }
+  ],
+  "id": "f35d9a84-059a-4ac7-b78d-25cd756f40c3",
+  "identifiers": [
+    {
+      "editable": true,
+      "id": "#612a7dca-66d2-419e-bde3-f0f9fd67dc4b",
+      "key": "reader",
+      "match": "exact",
+      "optional": false,
+      "type": "fileMetadata",
+      "value": "HplcReader"
+    },
+    {
+      "datatype": null,
+      "editable": true,
+      "id": "#e663f97f-b39d-4f09-b9f4-373a039b5ef5",
+      "isDatasetOutput": true,
+      "isDatatableOutput": false,
+      "isLoobDatatableOutput": true,
+      "isRdfOutput": false,
+      "key": "AllWaves",
+      "match": "any",
+      "object": null,
+      "optional": true,
+      "outputDatatableKey": "AllWaves",
+      "outputKey": "AllWaves",
+      "outputLayer": "",
+      "outputTableIndex": [
+        null
+      ],
+      "predicate": null,
+      "subject": null,
+      "tableIndex": 0,
+      "type": "tableMetadata",
+      "value": "['Wavelength_230', 'Wavelength_254', 'Wavelength_280', 'Wavelength_300', 'Wavelength_400']"
+    },
+    {
+      "datatype": null,
+      "editable": true,
+      "id": "#19e1a52d-93ff-4d8c-bb29-2b195d1850dc",
+      "isDatasetOutput": true,
+      "isDatatableOutput": false,
+      "isLoobDatatableOutput": true,
+      "isRdfOutput": false,
+      "key": "Wavelength",
+      "match": "any",
+      "object": null,
+      "optional": true,
+      "outputDatatableKey": "Wavelength",
+      "outputKey": "Wavelength",
+      "outputLayer": "",
+      "outputTableIndex": [
+        0
+      ],
+      "predicate": null,
+      "subject": null,
+      "tableIndex": 0,
+      "type": "tableMetadata",
+      "value": "230"
+    }
+  ],
+  "isDefaultProfile": false,
+  "isDisabled": false,
+  "last_migration": "20260513094819",
+  "objects": [],
+  "ols": null,
+  "ontology": "",
+  "predicates": [],
+  "profile_version": "1.2",
+  "reactionVariations": {
+    "elements": [],
+    "identifiers": []
+  },
+  "rootOntology": {
+    "description": [
+      "A planned process that has the objective to produce information about a material entity (the evaluant) by examining it."
+    ],
+    "id": "obi:class:http://purl.obolibrary.org/obo/OBI_0000070",
+    "iri": "http://purl.obolibrary.org/obo/OBI_0000070",
+    "label": "assay",
+    "namespace": "http://purl.obolibrary.org/obo/",
+    "obo_id": "OBI:0000070",
+    "ontology_name": "obi",
+    "ontology_prefix": "OBI",
+    "short_form": "OBI_0000070",
+    "type": "class"
+  },
+  "software": [],
+  "subjectInstances": {},
+  "subjects": [],
+  "tables": [
+    {
+      "header": {
+        "DATA CLASS": "XYPOINTS",
+        "DATA TYPE": "HPLC UV-VIS",
+        "XUNITS": "MINUTES",
+        "YUNITS": "SIGNAL"
+      },
+      "inputTableIndex": 0,
+      "loopType": "all",
+      "matchTables": true,
+      "table": {
+        "xColumn": {
+          "columnIndex": 0
+        },
+        "yColumn": {
+          "columnIndex": 1
+        }
+      },
+      "tableName": "Table #1",
+      "uuid": "dfd37954-a2df-4a94-b622-06466d004f77"
+    }
+  ],
+  "title": "HplcReader as .tar.gz"
+}

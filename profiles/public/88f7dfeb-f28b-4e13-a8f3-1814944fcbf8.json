@@ -1,0 +1,666 @@
+{
+    "converter_version": "1.7.0",
+    "data": [
+        {
+            "metadata": {
+                "content_type": "application/zip",
+                "extension": ".zip",
+                "file_name": "20210118_AP-Hol5-01.zip",
+                "mime_type": "application/zip",
+                "reader": "AscZipReader",
+                "uploaded": "2023-07-14T06:07:15.859920"
+            },
+            "tables": [
+                {
+                    "columns": [
+                        {
+                            "key": "0",
+                            "name": "duration [s]"
+                        },
+                        {
+                            "key": "1",
+                            "name": "refractive index"
+                        },
+                        {
+                            "key": "2",
+                            "name": "temperature [K]"
+                        },
+                        {
+                            "key": "3",
+                            "name": "viscosity [mPas]"
+                        },
+                        {
+                            "key": "4",
+                            "name": "detection angle [degrees]"
+                        },
+                        {
+                            "key": "5",
+                            "name": "average diffusion coefficient [micron^2/s]"
+                        },
+                        {
+                            "key": "6",
+                            "name": "second cumulant (expansion parameter)"
+                        },
+                        {
+                            "key": "7",
+                            "name": "hydrodynamic radius [nm]"
+                        }
+                    ],
+                    "header": [],
+                    "metadata": {
+                        "Device Info": "ALV-6000",
+                        "Samplename": "Samplename needed.",
+                        "__UNIT_%": "%",
+                        "__UNIT_PPM": "ppm",
+                        "__UNIT_gram": "g",
+                        "__UNIT_liter": "l",
+                        "__UNIT_mol": "mol",
+                        "average diffusion coefficient [micron^2/s]": "0.84745, 0.8787, 0.8606, 0.86939, 0.88367, 0.8804, 0.9281, 0.86754, 0.86566, 0.96769, 0.93814",
+                        "columns": "8",
+                        "detection angle [degrees]": "30.001, 39.998, 49.998, 59.998, 69.998, 79.998, 89.998, 99.998, 109.998, 30.001, 39.998",
+                        "duration [s]": "60.0",
+                        "hydrodynamic radius [nm]": "252.91, 243.74, 248.93, 246.47, 242.53, 243.44, 230.94, 247.06, 247.58, 233.86, 241.38",
+                        "measurement starting time": "2021-01-18 12:02:26",
+                        "refractive index": "1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332",
+                        "rows": "11",
+                        "second cumulant (expansion parameter)": "2.584e-05, 0.00020445, 0.0010844, 0.0021807, 1.0459e-05, 0.0079368, 0.022425, 0.022754, 0.028955, 0.0014629, 0.0013745",
+                        "temperature [K]": "293.16525, 293.13908, 293.14824, 293.15678, 293.16289, 293.16358, 293.16618, 293.16512, 293.16415, 295.14277, 295.16652",
+                        "viscosity [mPas]": "1.00139, 1.00203, 1.00181, 1.0016, 1.00145, 1.00143, 1.00137, 1.0014, 1.00142, 0.95483, 0.95429",
+                        "wavelength [nm]": "633.0"
+                    },
+                    "rows": [
+                        [
+                            0,
+                            "1.332",
+                            "293.16525",
+                            "1.00139",
+                            "30.001",
+                            "0.84745",
+                            "2.584e-05",
+                            "252.91"
+                        ],
+                        [
+                            130,
+                            "1.332",
+                            "293.13908",
+                            "1.00203",
+                            "39.998",
+                            "0.8787",
+                            "0.00020445",
+                            "243.74"
+                        ],
+                        [
+                            259,
+                            "1.332",
+                            "293.14824",
+                            "1.00181",
+                            "49.998",
+                            "0.8606",
+                            "0.0010844",
+                            "248.93"
+                        ],
+                        [
+                            389,
+                            "1.332",
+                            "293.15678",
+                            "1.0016",
+                            "59.998",
+                            "0.86939",
+                            "0.0021807",
+                            "246.47"
+                        ],
+                        [
+                            519,
+                            "1.332",
+                            "293.16289",
+                            "1.00145",
+                            "69.998",
+                            "0.88367",
+                            "1.0459e-05",
+                            "242.53"
+                        ],
+                        [
+                            650,
+                            "1.332",
+                            "293.16358",
+                            "1.00143",
+                            "79.998",
+                            "0.8804",
+                            "0.0079368",
+                            "243.44"
+                        ],
+                        [
+                            780,
+                            "1.332",
+                            "293.16618",
+                            "1.00137",
+                            "89.998",
+                            "0.9281",
+                            "0.022425",
+                            "230.94"
+                        ],
+                        [
+                            911,
+                            "1.332",
+                            "293.16512",
+                            "1.0014",
+                            "99.998",
+                            "0.86754",
+                            "0.022754",
+                            "247.06"
+                        ],
+                        [
+                            1041,
+                            "1.332",
+                            "293.16415",
+                            "1.00142",
+                            "109.998",
+                            "0.86566",
+                            "0.028955",
+                            "247.58"
+                        ],
+                        [
+                            1494,
+                            "1.332",
+                            "295.14277",
+                            "0.95483",
+                            "30.001",
+                            "0.96769",
+                            "0.0014629",
+                            "233.86"
+                        ]
+                    ]
+                }
+            ]
+        }
+    ],
+    "datatypes": [],
+    "description": "",
+    "devices": [],
+    "diff_history": [
+        {
+            "at": "2026-07-22T08:50:19.551101+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/predicates"
+                },
+                {
+                    "op": "remove",
+                    "path": "/objects"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/object"
+                }
+            ],
+            "profile_version": "1.0",
+            "trigger": "migration:20260319060352"
+        },
+        {
+            "at": "2026-07-22T08:50:19.551423+00:00",
+            "diff": [
+                {
+                    "op": "replace",
+                    "path": "/data",
+                    "value": {
+                        "metadata": {
+                            "content_type": "application/zip",
+                            "extension": ".zip",
+                            "file_name": "20210118_AP-Hol5-01.zip",
+                            "mime_type": "application/zip",
+                            "reader": "AscZipReader",
+                            "uploaded": "2023-07-14T06:07:15.859920"
+                        },
+                        "tables": [
+                            {
+                                "columns": [
+                                    {
+                                        "key": "0",
+                                        "name": "duration [s]"
+                                    },
+                                    {
+                                        "key": "1",
+                                        "name": "refractive index"
+                                    },
+                                    {
+                                        "key": "2",
+                                        "name": "temperature [K]"
+                                    },
+                                    {
+                                        "key": "3",
+                                        "name": "viscosity [mPas]"
+                                    },
+                                    {
+                                        "key": "4",
+                                        "name": "detection angle [degrees]"
+                                    },
+                                    {
+                                        "key": "5",
+                                        "name": "average diffusion coefficient [micron^2/s]"
+                                    },
+                                    {
+                                        "key": "6",
+                                        "name": "second cumulant (expansion parameter)"
+                                    },
+                                    {
+                                        "key": "7",
+                                        "name": "hydrodynamic radius [nm]"
+                                    }
+                                ],
+                                "header": [],
+                                "metadata": {
+                                    "Device Info": "ALV-6000",
+                                    "Samplename": "Samplename needed.",
+                                    "average diffusion coefficient [micron^2/s]": "0.84745, 0.8787, 0.8606, 0.86939, 0.88367, 0.8804, 0.9281, 0.86754, 0.86566, 0.96769, 0.93814",
+                                    "columns": "8",
+                                    "detection angle [degrees]": "30.001, 39.998, 49.998, 59.998, 69.998, 79.998, 89.998, 99.998, 109.998, 30.001, 39.998",
+                                    "duration [s]": "60.0",
+                                    "hydrodynamic radius [nm]": "252.91, 243.74, 248.93, 246.47, 242.53, 243.44, 230.94, 247.06, 247.58, 233.86, 241.38",
+                                    "measurement starting time": "2021-01-18 12:02:26",
+                                    "refractive index": "1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332, 1.332",
+                                    "rows": "11",
+                                    "second cumulant (expansion parameter)": "2.584e-05, 0.00020445, 0.0010844, 0.0021807, 1.0459e-05, 0.0079368, 0.022425, 0.022754, 0.028955, 0.0014629, 0.0013745",
+                                    "temperature [K]": "293.16525, 293.13908, 293.14824, 293.15678, 293.16289, 293.16358, 293.16618, 293.16512, 293.16415, 295.14277, 295.16652",
+                                    "viscosity [mPas]": "1.00139, 1.00203, 1.00181, 1.0016, 1.00145, 1.00143, 1.00137, 1.0014, 1.00142, 0.95483, 0.95429",
+                                    "wavelength [nm]": "633.0"
+                                },
+                                "rows": [
+                                    [
+                                        0,
+                                        "1.332",
+                                        "293.16525",
+                                        "1.00139",
+                                        "30.001",
+                                        "0.84745",
+                                        "2.584e-05",
+                                        "252.91"
+                                    ],
+                                    [
+                                        130,
+                                        "1.332",
+                                        "293.13908",
+                                        "1.00203",
+                                        "39.998",
+                                        "0.8787",
+                                        "0.00020445",
+                                        "243.74"
+                                    ],
+                                    [
+                                        259,
+                                        "1.332",
+                                        "293.14824",
+                                        "1.00181",
+                                        "49.998",
+                                        "0.8606",
+                                        "0.0010844",
+                                        "248.93"
+                                    ],
+                                    [
+                                        389,
+                                        "1.332",
+                                        "293.15678",
+                                        "1.0016",
+                                        "59.998",
+                                        "0.86939",
+                                        "0.0021807",
+                                        "246.47"
+                                    ],
+                                    [
+                                        519,
+                                        "1.332",
+                                        "293.16289",
+                                        "1.00145",
+                                        "69.998",
+                                        "0.88367",
+                                        "1.0459e-05",
+                                        "242.53"
+                                    ],
+                                    [
+                                        650,
+                                        "1.332",
+                                        "293.16358",
+                                        "1.00143",
+                                        "79.998",
+                                        "0.8804",
+                                        "0.0079368",
+                                        "243.44"
+                                    ],
+                                    [
+                                        780,
+                                        "1.332",
+                                        "293.16618",
+                                        "1.00137",
+                                        "89.998",
+                                        "0.9281",
+                                        "0.022425",
+                                        "230.94"
+                                    ],
+                                    [
+                                        911,
+                                        "1.332",
+                                        "293.16512",
+                                        "1.0014",
+                                        "99.998",
+                                        "0.86754",
+                                        "0.022754",
+                                        "247.06"
+                                    ],
+                                    [
+                                        1041,
+                                        "1.332",
+                                        "293.16415",
+                                        "1.00142",
+                                        "109.998",
+                                        "0.86566",
+                                        "0.028955",
+                                        "247.58"
+                                    ],
+                                    [
+                                        1494,
+                                        "1.332",
+                                        "295.14277",
+                                        "0.95483",
+                                        "30.001",
+                                        "0.96769",
+                                        "0.0014629",
+                                        "233.86"
+                                    ]
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "profile_version": "1.1",
+            "trigger": "migration:20260401123327"
+        },
+        {
+            "at": "2026-07-22T08:50:19.551623+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/reactionVariations"
+                }
+            ],
+            "profile_version": "1.2",
+            "trigger": "migration:20260417132254"
+        },
+        {
+            "at": "2026-07-22T08:50:19.551917+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_%"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_liter"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_mol"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_PPM"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_gram"
+                }
+            ],
+            "profile_version": "1.3",
+            "trigger": "migration:20260422063146"
+        },
+        {
+            "at": "2026-07-22T08:50:19.552477+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/loopType"
+                },
+                {
+                    "from": "/tables/0/inputTableIndex",
+                    "op": "move",
+                    "path": "/tables/0/table/yColumn/tableIndex"
+                },
+                {
+                    "op": "add",
+                    "path": "/tables/0/table/xColumn/tableIndex",
+                    "value": 0
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isDatasetOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isLoobDatatableOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isRdfOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isFirstMatch"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/outputDatatableKey"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isDatatableOutput"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/2/outputTableIndex",
+                    "value": null
+                }
+            ],
+            "profile_version": "1.4",
+            "trigger": "migration:20260506160404"
+        },
+        {
+            "at": "2026-07-22T08:50:19.552832+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/tableName"
+                },
+                {
+                    "op": "remove",
+                    "path": "/tables/0/uuid"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/2/outputTableIndex/0",
+                    "value": 0
+                }
+            ],
+            "profile_version": "1.5",
+            "trigger": "migration:20260513094819"
+        },
+        {
+            "at": "2026-07-22T08:59:45.496067+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/datatypes"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjectInstances"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjects"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/datatype"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/predicate"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/subject"
+                }
+            ],
+            "profile_version": "1.6",
+            "trigger": "migration:20250822110356"
+        },
+        {
+            "at": "2026-07-22T08:59:45.496358+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/rootOntology"
+                },
+                {
+                    "op": "remove",
+                    "path": "/ols"
+                }
+            ],
+            "profile_version": "1.7",
+            "trigger": "migration:20250908063445"
+        },
+        {
+            "at": "2026-07-22T08:59:45.497850+00:00",
+            "diff": [
+                {
+                    "op": "replace",
+                    "path": "/rootOntology/id",
+                    "value": "OBI:property:http://purl.obolibrary.org/obo/OBI_0000070"
+                },
+                {
+                    "op": "replace",
+                    "path": "/rootOntology/ontology_name",
+                    "value": "chmo"
+                },
+                {
+                    "op": "replace",
+                    "path": "/rootOntology/ontology_prefix",
+                    "value": "CHMO"
+                }
+            ],
+            "profile_version": "1.8",
+            "trigger": "migration:20260323144702"
+        },
+        {
+            "at": "2026-07-22T08:59:45.499411+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/loopOutput"
+                }
+            ],
+            "profile_version": "1.9",
+            "trigger": "migration:20260506160404"
+        }
+    ],
+    "id": "88f7dfeb-f28b-4e13-a8f3-1814944fcbf8",
+    "identifiers": [
+        {
+            "editable": true,
+            "id": "#0fileMetadata",
+            "key": "reader",
+            "match": "exact",
+            "optional": false,
+            "type": "fileMetadata",
+            "value": "AscZipReader"
+        },
+        {
+            "editable": true,
+            "id": "#1tableMetadata",
+            "key": "Device Info",
+            "match": "exact",
+            "optional": false,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "ALV-6000"
+        },
+        {
+            "datatype": null,
+            "editable": true,
+            "id": "#2tableMetadata",
+            "isDatasetOutput": true,
+            "isDatatableOutput": true,
+            "isFirstMatch": true,
+            "isLoobDatatableOutput": true,
+            "isRdfOutput": false,
+            "key": "Device Info",
+            "match": "any",
+            "object": null,
+            "optional": true,
+            "outputDatatableKey": "dev",
+            "outputKey": "dev",
+            "outputLayer": "hardware",
+            "outputTableIndex": [
+                "59c4420e-9f92-4f38-a3aa-a921232834e0"
+            ],
+            "predicate": null,
+            "subject": null,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "ALV-6000"
+        }
+    ],
+    "isDefaultProfile": false,
+    "isDisabled": false,
+    "last_migration": "20260513094819",
+    "objects": [],
+    "ols": null,
+    "ontology": "",
+    "predicates": [],
+    "profile_version": "1.10",
+    "reactionVariations": {
+        "elements": [],
+        "identifiers": []
+    },
+    "rootOntology": {
+        "description": [
+            "A planned process that has the objective to produce information about a material entity (the evaluant) by examining it."
+        ],
+        "id": "obi:class:http://purl.obolibrary.org/obo/OBI_0000070",
+        "iri": "http://purl.obolibrary.org/obo/OBI_0000070",
+        "label": "assay",
+        "namespace": "http://purl.obolibrary.org/obo/",
+        "obo_id": "OBI:0000070",
+        "ontology_name": "obi",
+        "ontology_prefix": "OBI",
+        "short_form": "OBI_0000070",
+        "type": "class"
+    },
+    "software": [],
+    "subjectInstances": {},
+    "subjects": [],
+    "tables": [
+        {
+            "header": {
+                "DATA CLASS": "XYPOINTS",
+                "DATA TYPE": "AIF",
+                "XUNITS": "SECONDS",
+                "YUNITS": "Newton"
+            },
+            "inputTableIndex": 0,
+            "loopOutput": "MULTI FILE",
+            "loopType": "none",
+            "table": {
+                "xColumn": {
+                    "columnIndex": 0
+                },
+                "yColumn": {
+                    "columnIndex": 1
+                }
+            },
+            "tableName": "Table #1",
+            "uuid": "59c4420e-9f92-4f38-a3aa-a921232834e0"
+        }
+    ],
+    "title": "Asc"
+}

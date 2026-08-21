@@ -1,0 +1,455 @@
+{
+    "converter_version": "1.7.0",
+    "data": [
+        {
+            "metadata": {
+                "content_type": "text/plain",
+                "delimiter": "tab",
+                "doublequote": false,
+                "extension": ".txt",
+                "file_name": "LSH-R698A_Tol_Abs.txt",
+                "lineterminator": "\\r\\n",
+                "mime_type": "text/plain",
+                "quotechar": "\"",
+                "quoting": 0,
+                "reader": "CSVReader",
+                "skipinitialspace": true
+            },
+            "tables": [
+                {
+                    "columns": [
+                        {
+                            "key": "0",
+                            "name": "Column #0 (X)"
+                        },
+                        {
+                            "key": "1",
+                            "name": "Column #1 (Y)"
+                        }
+                    ],
+                    "header": [
+                        "1",
+                        "301\t",
+                        "LSH-R698A_Tol_10\u00c2\u00b5M_Abs 200-800 Absorbance\t"
+                    ],
+                    "metadata": {
+                        "__UNIT_%": "%",
+                        "__UNIT_PPM": "ppm",
+                        "__UNIT_gram": "g",
+                        "__UNIT_liter": "l",
+                        "__UNIT_mol": "mol",
+                        "column_00": "X",
+                        "column_01": "Y",
+                        "columns": 2,
+                        "rows": 301
+                    },
+                    "rows": [
+                        [
+                            "200",
+                            "1.34782210563549"
+                        ],
+                        [
+                            "202",
+                            "1.19518556430195"
+                        ],
+                        [
+                            "204",
+                            "1.20648375346629"
+                        ],
+                        [
+                            "206",
+                            "1.07363051082357"
+                        ],
+                        [
+                            "208",
+                            "1.02923333628373"
+                        ],
+                        [
+                            "210",
+                            "1.01258451755815"
+                        ],
+                        [
+                            "212",
+                            "0.926085551565772"
+                        ],
+                        [
+                            "214",
+                            "0.902044332887181"
+                        ],
+                        [
+                            "216",
+                            "0.884631023729073"
+                        ],
+                        [
+                            "218",
+                            "0.86524148035792"
+                        ]
+                    ]
+                },
+                {
+                    "columns": [],
+                    "header": [
+                        "Properties\t",
+                        "#STR:EzSpec.Trace.SourceFilePath\tD:/Data/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec_2023-03-29T13-28-22/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec.ezspec_data\t#STR:File.Path\tD:/Data/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec_2023-03-29T13-28-22/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec.ezspec_data\t#STR:acq.AcqAxisLabel.X\tWavelength%20[nm]\t#STR:acq.AcqAxisLabel.Y\tAbsorbance%20[a.u.]\t#STR:acq.AcqDetSummingIndex\t0\t#STR:acq.AcqDetector\tAbs./T\t#STR:acq.AcqEmiBandwidth\t5\t#STR:acq.AcqEmiFilter\tOpen\t#STR:acq.AcqEmiPolarizer\tOpen\t#STR:acq.AcqEmiShutter\tOpen\t#STR:acq.AcqExcBandwidth\t5\t#STR:acq.AcqExcFilter\t525LP\t#STR:acq.AcqExcPolarizer\tOpen\t#STR:acq.AcqExcShutter\tOpen\t#NUM:acq.AcqExcWavelength\t800\t#STR:acq.AcqPhase\tSample\t#NUM:acq.AcqTimestamp\t0\t#UTC:acq.DateTime\t2023-03-29T11:36:22.517Z\t#STR:acq.HardwareConfig\t<?xml%20version=%221.0%22%20encoding=%22UTF-8%22?>%0A<instrument%20uid=%2234%22%20version=%221.0%22%20acqStatus=%22Idle%22%20lastHdwInitResult=%22Success%22>%0A<ex_monochromator%20uid=%222%22%20low_limit=%22-500%22%20high_limit=%221600%22%20grating=%22true%22%20resolution=%220.1%22/>%0A<em_monochormator_1%20uid=%223%22%20low_limit=%22231.082%22%20high_limit=%221118.62%22%20grating=%22false%22/>%0A<ex_polarizer%20uid=%225%22%20position_list=%22Open%2COpen%2CND%200.5%2CND%201%2COpen%22/>%0A<em_polarizer_1%20uid=%226%22%20position_list=%22Open%2COpen%2COpen%2CClosed%2COpen%22/>%0A<ex_filterwheel%20uid=%228%22%20position_list=%22Closed%2C410LP%2C525LP%2CClosed%2COpen%22/>%0A<em_filterwheel_1%20uid=%229%22%20position_list=%22Open%2C15mm%20Aperture%2COpen%2COpen%2COpen%22/>%0A<ex_bandwidth%20uid=%2211%22%20position_list=%221%2C2%2C3%2C5%2C10%2C20%22/>%0A<em_bandwidth_1%20uid=%2212%22%20position_list=%221%2C2%2C3%2C5%2C10%2C20%22/>%0A<ex_shutter%20uid=%2214%22%20openTime=%222000%22%20closeTime=%222000%22/>%0A<em_shutter_1%20uid=%2215%22%20openTime=%222000%22%20closeTime=%222000%22/>%0A<ex_lamp%20uid=%221%22%20serial_number=%221349-DL%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%20total_on_hours=%2215.7%22%20max_hours=%22800%22%20start_count=%2222%22/>%0A<lmb%20uid=%2231%22%20instrument_type=%220%22%20firmware_version=%222.78%20Jan%2011%202022%2013:15:21%22%20fpga_version=%22A.014%22%20board_revision=%22D%22%20system_id=%22DU5310020527A00365%22%20serial_number=%22TMFRRCMB%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22/>%0A<sample_plate%20uid=%2222%22%20serial_number=%221443%20-%201Pelt%22%20plate_type=%226%22/>%0A<ccd%20uid=%2227%22%20info=%22Camera%20SN:%20564%22%20coefficients=%221118.62%2C-0.315354%2C-6.73997e-05%2C4.71128e-09%2C0%22%20firmware_version=%22Elite%20Ver%203.005.4%20%20DFLTE%22/>%0A</instrument>%0A%0A\t#STR:app.ConcentrationCurveUnits\t\t#STR:app.PrePromptType\tInsertSample\t#INT:chart.Dot\t0\t#INT:chart.Line\t1\t#STR:dbl.Attenuation\tAbsorbance\t#STR:dbl.Corrected\ttrue\t#STR:dbl.DateTime\t2023-03-29T11:32:57Z\t#STR:ibl.AuxInputMode\t0\t#STR:ibl.AveragingMode\tAverage_Off\t#STR:ibl.CcdXBinningSize\t1\t#STR:ibl.Collect_Aux\tfalse\t#STR:ibl.Collect_CCD\tfalse\t#STR:ibl.Collect_ProbeTempr\tfalse\t#STR:ibl.Collect_Reference\ttrue\t#STR:ibl.Collect_SetpointTempr\tfalse\t#STR:ibl.Collect_Tempr\tfalse\t#STR:ibl.Collect_Transmission\ttrue\t#STR:ibl.EmiFilterWheel\tOpen\t#STR:ibl.EmiPolarizer\tOpen\t#STR:ibl.EnableEventMarkers\tfalse\t#STR:ibl.ExcBandwidth\t5\t#STR:ibl.ExcEndWavelength\t800\t#STR:ibl.ExcPolarizer\tOpen\t#STR:ibl.ExcStartWavelength\t200\t#STR:ibl.ExcWavelengthStep\t2\t#STR:ibl.IntegrationTime\t0.05\t#STR:ibl.MethodType\tMethodType_AbsT_Spectra\t#STR:ibl.MinimumPointInterval\t4779\t#STR:ibl.Phase\tSample\t#STR:ibl.ShutterMode\tAuto\t#STR:ibl.StirrerOn\tfalse\t#STR:ibl.StirrerSpeed\t0\t#STR:ibl.TotalPointsToCollect\t301\t#STR:ibl.TriggerInEnable\ttrue\t#STR:ibl.TriggerInStart\tfalse\t#STR:ibl.UseOrderSortingFilter\ttrue\t#STR:ui.Absorbance_Spectra.AbsorbanceMode\tAbsorbance\t#STR:ui.Absorbance_Spectra.Batch_Repetitions.Number_Repetitions\t1\t#STR:ui.Absorbance_Spectra.Batch_Repetitions.Time_Between_Repetitions\t0\t#STR:ui.Absorbance_Spectra.Batch_Repetitions.Time_Between_Repetitions.Units\ts\t#STR:ui.Absorbance_Spectra.Excitation_Bandpass\t5\t#STR:ui.Absorbance_Spectra.Excitation_Bandpass.Units\tnm\t#STR:ui.Absorbance_Spectra.Excitation_Range_End\t800\t#STR:ui.Absorbance_Spectra.Excitation_Range_End.Units\tnm\t#STR:ui.Absorbance_Spectra.Excitation_Range_Start\t200\t#STR:ui.Absorbance_Spectra.Excitation_Range_Start.Units\tnm\t#STR:ui.Absorbance_Spectra.Excitation_Range_Step_Increment\t2\t#STR:ui.Absorbance_Spectra.Excitation_Range_Step_Increment.Units\tnm\t#STR:ui.Absorbance_Spectra.Integration_Time\t0.05\t#STR:ui.Absorbance_Spectra.Integration_Time.Units\ts\t#STR:ui.Absorbance_Spectra.Options_List.Count\t0\t#STR:ui.Absorbance_Spectra.Other.Anti-photobleaching_Mode\tfalse\t#STR:ui.Absorbance_Spectra.Other.Load_Previous_GFactor\tfalse\t#STR:ui.Absorbance_Spectra.Other.Measure_GFactor\ttrue\t#STR:ui.Absorbance_Spectra.Other.ND_filter_0.5_on_excitation\tfalse\t#STR:ui.Absorbance_Spectra.Other.ND_filter_1.0_on_excitation\tfalse\t#STR:ui.Absorbance_Spectra.Other.None_of_the_Above\ttrue\t#STR:ui.Absorbance_Spectra.Other.Previous_GFactor_Data_File\t\t#STR:ui.Absorbance_Spectra.Other.Use_Anisotropy_Mode\tfalse\t#STR:ui.Absorbance_Spectra.Other.Use_VM_to_eliminate_polarization_effects\tfalse\t#STR:ui.Absorbance_Spectra.SetupMethodFilePath\tD:/Data/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec_2023-03-29T13-28-22/SML-Default.ezspec_method\t#STR:ui.Absorbance_Spectra.SideMenu.Sample_Name\tLSH-R698A_Tol_10%FFFFFFB5M_Abs\t#STR:ui.Absorbance_Spectra.Stirrer_Speed\t0\t#STR:ui.Absorbance_Spectra.Subtract_Blank.Load_Previous_Blank\tfalse\t#STR:ui.Absorbance_Spectra.Subtract_Blank.Measure_Blank\ttrue\t#STR:ui.Absorbance_Spectra.Subtract_Blank.Measure_Blank_Action\tBefore\t#STR:ui.Absorbance_Spectra.Subtract_Blank.None_of_the_Above\tfalse\t#STR:ui.Absorbance_Spectra.Subtract_Blank.Previous_Blank_Data_File\t\t#STR:ui.Absorbance_Spectra.Subtract_Blank.UI_State\tMeasureBlank\t#STR:ui.Absorbance_Spectra.Trigger.InStart\tfalse\t#STR:ui.Absorbance_Spectra.Trigger.Out\tfalse\t#STR:ui.Absorbance_Spectra.UI_State\tLess\t#STR:ui.Absorbance_Spectra.Use_Stirrer\tfalse\t"
+                    ],
+                    "metadata": {
+                        "columns": 0,
+                        "rows": 0
+                    },
+                    "rows": []
+                }
+            ]
+        }
+    ],
+    "datatypes": [],
+    "description": "UV-Vis",
+    "devices": [],
+    "diff_history": [
+        {
+            "at": "2026-07-22T08:50:19.500782+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/predicates"
+                },
+                {
+                    "op": "remove",
+                    "path": "/objects"
+                }
+            ],
+            "profile_version": "1.0",
+            "trigger": "migration:20260319060352"
+        },
+        {
+            "at": "2026-07-22T08:50:19.501116+00:00",
+            "diff": [
+                {
+                    "op": "replace",
+                    "path": "/data",
+                    "value": {
+                        "metadata": {
+                            "content_type": "text/plain",
+                            "delimiter": "tab",
+                            "doublequote": false,
+                            "extension": ".txt",
+                            "file_name": "LSH-R698A_Tol_Abs.txt",
+                            "lineterminator": "\\r\\n",
+                            "mime_type": "text/plain",
+                            "quotechar": "\"",
+                            "quoting": 0,
+                            "reader": "CSVReader",
+                            "skipinitialspace": true
+                        },
+                        "tables": [
+                            {
+                                "columns": [
+                                    {
+                                        "key": "0",
+                                        "name": "Column #0 (X)"
+                                    },
+                                    {
+                                        "key": "1",
+                                        "name": "Column #1 (Y)"
+                                    }
+                                ],
+                                "header": [
+                                    "1",
+                                    "301\t",
+                                    "LSH-R698A_Tol_10\u00c2\u00b5M_Abs 200-800 Absorbance\t"
+                                ],
+                                "metadata": {
+                                    "column_00": "X",
+                                    "column_01": "Y",
+                                    "columns": 2,
+                                    "rows": 301
+                                },
+                                "rows": [
+                                    [
+                                        "200",
+                                        "1.34782210563549"
+                                    ],
+                                    [
+                                        "202",
+                                        "1.19518556430195"
+                                    ],
+                                    [
+                                        "204",
+                                        "1.20648375346629"
+                                    ],
+                                    [
+                                        "206",
+                                        "1.07363051082357"
+                                    ],
+                                    [
+                                        "208",
+                                        "1.02923333628373"
+                                    ],
+                                    [
+                                        "210",
+                                        "1.01258451755815"
+                                    ],
+                                    [
+                                        "212",
+                                        "0.926085551565772"
+                                    ],
+                                    [
+                                        "214",
+                                        "0.902044332887181"
+                                    ],
+                                    [
+                                        "216",
+                                        "0.884631023729073"
+                                    ],
+                                    [
+                                        "218",
+                                        "0.86524148035792"
+                                    ]
+                                ]
+                            },
+                            {
+                                "columns": [],
+                                "header": [
+                                    "Properties\t",
+                                    "#STR:EzSpec.Trace.SourceFilePath\tD:/Data/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec_2023-03-29T13-28-22/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec.ezspec_data\t#STR:File.Path\tD:/Data/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec_2023-03-29T13-28-22/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec.ezspec_data\t#STR:acq.AcqAxisLabel.X\tWavelength%20[nm]\t#STR:acq.AcqAxisLabel.Y\tAbsorbance%20[a.u.]\t#STR:acq.AcqDetSummingIndex\t0\t#STR:acq.AcqDetector\tAbs./T\t#STR:acq.AcqEmiBandwidth\t5\t#STR:acq.AcqEmiFilter\tOpen\t#STR:acq.AcqEmiPolarizer\tOpen\t#STR:acq.AcqEmiShutter\tOpen\t#STR:acq.AcqExcBandwidth\t5\t#STR:acq.AcqExcFilter\t525LP\t#STR:acq.AcqExcPolarizer\tOpen\t#STR:acq.AcqExcShutter\tOpen\t#NUM:acq.AcqExcWavelength\t800\t#STR:acq.AcqPhase\tSample\t#NUM:acq.AcqTimestamp\t0\t#UTC:acq.DateTime\t2023-03-29T11:36:22.517Z\t#STR:acq.HardwareConfig\t<?xml%20version=%221.0%22%20encoding=%22UTF-8%22?>%0A<instrument%20uid=%2234%22%20version=%221.0%22%20acqStatus=%22Idle%22%20lastHdwInitResult=%22Success%22>%0A<ex_monochromator%20uid=%222%22%20low_limit=%22-500%22%20high_limit=%221600%22%20grating=%22true%22%20resolution=%220.1%22/>%0A<em_monochormator_1%20uid=%223%22%20low_limit=%22231.082%22%20high_limit=%221118.62%22%20grating=%22false%22/>%0A<ex_polarizer%20uid=%225%22%20position_list=%22Open%2COpen%2CND%200.5%2CND%201%2COpen%22/>%0A<em_polarizer_1%20uid=%226%22%20position_list=%22Open%2COpen%2COpen%2CClosed%2COpen%22/>%0A<ex_filterwheel%20uid=%228%22%20position_list=%22Closed%2C410LP%2C525LP%2CClosed%2COpen%22/>%0A<em_filterwheel_1%20uid=%229%22%20position_list=%22Open%2C15mm%20Aperture%2COpen%2COpen%2COpen%22/>%0A<ex_bandwidth%20uid=%2211%22%20position_list=%221%2C2%2C3%2C5%2C10%2C20%22/>%0A<em_bandwidth_1%20uid=%2212%22%20position_list=%221%2C2%2C3%2C5%2C10%2C20%22/>%0A<ex_shutter%20uid=%2214%22%20openTime=%222000%22%20closeTime=%222000%22/>%0A<em_shutter_1%20uid=%2215%22%20openTime=%222000%22%20closeTime=%222000%22/>%0A<ex_lamp%20uid=%221%22%20serial_number=%221349-DL%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22%20total_on_hours=%2215.7%22%20max_hours=%22800%22%20start_count=%2222%22/>%0A<lmb%20uid=%2231%22%20instrument_type=%220%22%20firmware_version=%222.78%20Jan%2011%202022%2013:15:21%22%20fpga_version=%22A.014%22%20board_revision=%22D%22%20system_id=%22DU5310020527A00365%22%20serial_number=%22TMFRRCMB%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22/>%0A<sample_plate%20uid=%2222%22%20serial_number=%221443%20-%201Pelt%22%20plate_type=%226%22/>%0A<ccd%20uid=%2227%22%20info=%22Camera%20SN:%20564%22%20coefficients=%221118.62%2C-0.315354%2C-6.73997e-05%2C4.71128e-09%2C0%22%20firmware_version=%22Elite%20Ver%203.005.4%20%20DFLTE%22/>%0A</instrument>%0A%0A\t#STR:app.ConcentrationCurveUnits\t\t#STR:app.PrePromptType\tInsertSample\t#INT:chart.Dot\t0\t#INT:chart.Line\t1\t#STR:dbl.Attenuation\tAbsorbance\t#STR:dbl.Corrected\ttrue\t#STR:dbl.DateTime\t2023-03-29T11:32:57Z\t#STR:ibl.AuxInputMode\t0\t#STR:ibl.AveragingMode\tAverage_Off\t#STR:ibl.CcdXBinningSize\t1\t#STR:ibl.Collect_Aux\tfalse\t#STR:ibl.Collect_CCD\tfalse\t#STR:ibl.Collect_ProbeTempr\tfalse\t#STR:ibl.Collect_Reference\ttrue\t#STR:ibl.Collect_SetpointTempr\tfalse\t#STR:ibl.Collect_Tempr\tfalse\t#STR:ibl.Collect_Transmission\ttrue\t#STR:ibl.EmiFilterWheel\tOpen\t#STR:ibl.EmiPolarizer\tOpen\t#STR:ibl.EnableEventMarkers\tfalse\t#STR:ibl.ExcBandwidth\t5\t#STR:ibl.ExcEndWavelength\t800\t#STR:ibl.ExcPolarizer\tOpen\t#STR:ibl.ExcStartWavelength\t200\t#STR:ibl.ExcWavelengthStep\t2\t#STR:ibl.IntegrationTime\t0.05\t#STR:ibl.MethodType\tMethodType_AbsT_Spectra\t#STR:ibl.MinimumPointInterval\t4779\t#STR:ibl.Phase\tSample\t#STR:ibl.ShutterMode\tAuto\t#STR:ibl.StirrerOn\tfalse\t#STR:ibl.StirrerSpeed\t0\t#STR:ibl.TotalPointsToCollect\t301\t#STR:ibl.TriggerInEnable\ttrue\t#STR:ibl.TriggerInStart\tfalse\t#STR:ibl.UseOrderSortingFilter\ttrue\t#STR:ui.Absorbance_Spectra.AbsorbanceMode\tAbsorbance\t#STR:ui.Absorbance_Spectra.Batch_Repetitions.Number_Repetitions\t1\t#STR:ui.Absorbance_Spectra.Batch_Repetitions.Time_Between_Repetitions\t0\t#STR:ui.Absorbance_Spectra.Batch_Repetitions.Time_Between_Repetitions.Units\ts\t#STR:ui.Absorbance_Spectra.Excitation_Bandpass\t5\t#STR:ui.Absorbance_Spectra.Excitation_Bandpass.Units\tnm\t#STR:ui.Absorbance_Spectra.Excitation_Range_End\t800\t#STR:ui.Absorbance_Spectra.Excitation_Range_End.Units\tnm\t#STR:ui.Absorbance_Spectra.Excitation_Range_Start\t200\t#STR:ui.Absorbance_Spectra.Excitation_Range_Start.Units\tnm\t#STR:ui.Absorbance_Spectra.Excitation_Range_Step_Increment\t2\t#STR:ui.Absorbance_Spectra.Excitation_Range_Step_Increment.Units\tnm\t#STR:ui.Absorbance_Spectra.Integration_Time\t0.05\t#STR:ui.Absorbance_Spectra.Integration_Time.Units\ts\t#STR:ui.Absorbance_Spectra.Options_List.Count\t0\t#STR:ui.Absorbance_Spectra.Other.Anti-photobleaching_Mode\tfalse\t#STR:ui.Absorbance_Spectra.Other.Load_Previous_GFactor\tfalse\t#STR:ui.Absorbance_Spectra.Other.Measure_GFactor\ttrue\t#STR:ui.Absorbance_Spectra.Other.ND_filter_0.5_on_excitation\tfalse\t#STR:ui.Absorbance_Spectra.Other.ND_filter_1.0_on_excitation\tfalse\t#STR:ui.Absorbance_Spectra.Other.None_of_the_Above\ttrue\t#STR:ui.Absorbance_Spectra.Other.Previous_GFactor_Data_File\t\t#STR:ui.Absorbance_Spectra.Other.Use_Anisotropy_Mode\tfalse\t#STR:ui.Absorbance_Spectra.Other.Use_VM_to_eliminate_polarization_effects\tfalse\t#STR:ui.Absorbance_Spectra.SetupMethodFilePath\tD:/Data/LSH-R698A_Tol_10%FFFFFFB5M_Abs_AbsTSpec_2023-03-29T13-28-22/SML-Default.ezspec_method\t#STR:ui.Absorbance_Spectra.SideMenu.Sample_Name\tLSH-R698A_Tol_10%FFFFFFB5M_Abs\t#STR:ui.Absorbance_Spectra.Stirrer_Speed\t0\t#STR:ui.Absorbance_Spectra.Subtract_Blank.Load_Previous_Blank\tfalse\t#STR:ui.Absorbance_Spectra.Subtract_Blank.Measure_Blank\ttrue\t#STR:ui.Absorbance_Spectra.Subtract_Blank.Measure_Blank_Action\tBefore\t#STR:ui.Absorbance_Spectra.Subtract_Blank.None_of_the_Above\tfalse\t#STR:ui.Absorbance_Spectra.Subtract_Blank.Previous_Blank_Data_File\t\t#STR:ui.Absorbance_Spectra.Subtract_Blank.UI_State\tMeasureBlank\t#STR:ui.Absorbance_Spectra.Trigger.InStart\tfalse\t#STR:ui.Absorbance_Spectra.Trigger.Out\tfalse\t#STR:ui.Absorbance_Spectra.UI_State\tLess\t#STR:ui.Absorbance_Spectra.Use_Stirrer\tfalse\t"
+                                ],
+                                "metadata": {
+                                    "columns": 0,
+                                    "rows": 0
+                                },
+                                "rows": []
+                            }
+                        ]
+                    }
+                }
+            ],
+            "profile_version": "1.1",
+            "trigger": "migration:20260401123327"
+        },
+        {
+            "at": "2026-07-22T08:50:19.501279+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/reactionVariations"
+                }
+            ],
+            "profile_version": "1.2",
+            "trigger": "migration:20260417132254"
+        },
+        {
+            "at": "2026-07-22T08:50:19.501525+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_%"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_liter"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_mol"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_PPM"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_gram"
+                }
+            ],
+            "profile_version": "1.3",
+            "trigger": "migration:20260422063146"
+        },
+        {
+            "at": "2026-07-22T08:50:19.501965+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/loopType"
+                },
+                {
+                    "from": "/tables/0/inputTableIndex",
+                    "op": "move",
+                    "path": "/tables/0/table/yColumn/tableIndex"
+                },
+                {
+                    "op": "add",
+                    "path": "/tables/0/table/xColumn/tableIndex",
+                    "value": 0
+                }
+            ],
+            "profile_version": "1.4",
+            "trigger": "migration:20260506160404"
+        },
+        {
+            "at": "2026-07-22T08:50:19.502216+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/tableName"
+                },
+                {
+                    "op": "remove",
+                    "path": "/tables/0/uuid"
+                }
+            ],
+            "profile_version": "1.5",
+            "trigger": "migration:20260513094819"
+        },
+        {
+            "at": "2026-07-22T08:59:44.981552+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/datatypes"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjectInstances"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjects"
+                }
+            ],
+            "profile_version": "1.6",
+            "trigger": "migration:20250822110356"
+        },
+        {
+            "at": "2026-07-22T08:59:44.981783+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/rootOntology"
+                },
+                {
+                    "op": "remove",
+                    "path": "/ols"
+                }
+            ],
+            "profile_version": "1.7",
+            "trigger": "migration:20250908063445"
+        },
+        {
+            "at": "2026-07-22T08:59:44.982991+00:00",
+            "diff": [
+                {
+                    "op": "replace",
+                    "path": "/rootOntology/id",
+                    "value": "OBI:property:http://purl.obolibrary.org/obo/OBI_0000070"
+                },
+                {
+                    "op": "replace",
+                    "path": "/rootOntology/ontology_name",
+                    "value": "chmo"
+                },
+                {
+                    "op": "replace",
+                    "path": "/rootOntology/ontology_prefix",
+                    "value": "CHMO"
+                }
+            ],
+            "profile_version": "1.8",
+            "trigger": "migration:20260323144702"
+        },
+        {
+            "at": "2026-07-22T08:59:44.984285+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/loopOutput"
+                }
+            ],
+            "profile_version": "1.9",
+            "trigger": "migration:20260506160404"
+        }
+    ],
+    "id": "615dc314-5fc5-44c4-a2b4-9929de75446e",
+    "identifiers": [
+        {
+            "editable": true,
+            "id": "#0fileMetadata",
+            "key": "extension",
+            "match": "exact",
+            "optional": false,
+            "type": "fileMetadata",
+            "value": ".txt"
+        },
+        {
+            "editable": true,
+            "id": "#1tableMetadata",
+            "key": "column_00",
+            "match": "exact",
+            "optional": false,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "X"
+        },
+        {
+            "editable": true,
+            "id": "#2tableMetadata",
+            "key": "column_01",
+            "match": "exact",
+            "optional": false,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "Y"
+        }
+    ],
+    "isDefaultProfile": false,
+    "isDisabled": false,
+    "last_migration": "20260513094819",
+    "objects": [],
+    "ols": null,
+    "ontology": "",
+    "predicates": [],
+    "profile_version": "1.10",
+    "reactionVariations": {
+        "elements": [],
+        "identifiers": []
+    },
+    "rootOntology": {
+        "description": [
+            "A planned process that has the objective to produce information about a material entity (the evaluant) by examining it."
+        ],
+        "id": "obi:class:http://purl.obolibrary.org/obo/OBI_0000070",
+        "iri": "http://purl.obolibrary.org/obo/OBI_0000070",
+        "label": "assay",
+        "namespace": "http://purl.obolibrary.org/obo/",
+        "obo_id": "OBI:0000070",
+        "ontology_name": "obi",
+        "ontology_prefix": "OBI",
+        "short_form": "OBI_0000070",
+        "type": "class"
+    },
+    "software": [],
+    "subjectInstances": {},
+    "subjects": [],
+    "tables": [
+        {
+            "header": {
+                "DATA CLASS": "XYPOINTS",
+                "DATA TYPE": "UV-VIS",
+                "XUNITS": "NANOMETERS",
+                "YUNITS": "ABSORBANCE"
+            },
+            "inputTableIndex": 0,
+            "loopOutput": "MULTI FILE",
+            "loopType": "none",
+            "table": {
+                "xColumn": {
+                    "columnIndex": 0
+                },
+                "yColumn": {
+                    "columnIndex": 1
+                }
+            },
+            "tableName": "Table #1",
+            "uuid": "41bfb9cf-1d0d-40c5-b699-27d6fecd49c2"
+        }
+    ],
+    "title": "UV-Vis"
+}

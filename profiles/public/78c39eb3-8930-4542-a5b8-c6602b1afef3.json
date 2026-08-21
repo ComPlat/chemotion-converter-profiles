@@ -1,0 +1,699 @@
+{
+    "converter_version": "1.7.0",
+    "data": [
+        {
+            "metadata": {
+                "content_type": "application/octet-stream",
+                "extension": ".jcp",
+                "file_name": "lgi384_SCD.jcp",
+                "mime_type": "text/plain",
+                "reader": "AsciiReader",
+                "uploaded": "2023-03-21T15:48:20.464738"
+            },
+            "tables": [
+                {
+                    "columns": [
+                        {
+                            "key": "0",
+                            "name": "Column #0"
+                        },
+                        {
+                            "key": "1",
+                            "name": "Column #1"
+                        },
+                        {
+                            "key": "2",
+                            "name": "Column #2"
+                        },
+                        {
+                            "key": "3",
+                            "name": "Column #3"
+                        },
+                        {
+                            "key": "4",
+                            "name": "Column #4"
+                        },
+                        {
+                            "key": "5",
+                            "name": "Column #5"
+                        }
+                    ],
+                    "header": [
+                        "$$ -----------------------",
+                        "$$ Labels defined by JCAMP",
+                        "$$ -----------------------",
+                        "",
+                        "## TITLE= Unknown",
+                        "## JCAMP-DX= 4.24",
+                        "## DATA TYPE= RD",
+                        "## BLOCKS= 1",
+                        "## ORIGIN= PANalytical B.V.",
+                        "## OWNER= Copyright(C) 2004 by PANalytical B.V.",
+                        "## DATE= 22/11/02",
+                        "## TIME= 20:55:07",
+                        "## SAMPLE DESCRIPTION= lgi384_SCD",
+                        "## SOURCE REFERENCE= Converted XRDML file",
+                        "##= Configuration=Reflection-transmission spinner 3.0, Owner=user-1, Creation date=09.01.2019 10:55:39",
+                        "Goniometer=Omega/2Theta; Minimum step size 2Theta:0.0001; Minimum step size Omega:0.0001",
+                        "Sample stage=Reflection-transmission spinner 3.0; Minimum step size Phi:0.1",
+                        "Diffractometer system=EMPYREAN",
+                        "Measurement program=E:\\XRD Programs\\Leisan\\Carbayole-COF-2-50-3scans-90min.xrdmp, Identifier={7CCE4DB7-4D81-44BA-B1AC-3801A176A120}",
+                        "Batch program=E:\\XRD Programs\\Leisan\\sample changer 4.xrdmp, Identifier={D6A90AD3-F82F-4DBC-9450-D587D4533ABF}",
+                        "",
+                        "$$ ------------------------------------",
+                        "$$ Labels defined by PANalytical",
+                        "$$ ------------------------------------",
+                        "",
+                        "$$ Wavelengths are given in Angstrom.",
+                        "##$WAVELENGTH ALPHA1= 1.5405980",
+                        "##$WAVELENGTH ALPHA2= 1.5444260",
+                        "##$INTENSITY RATIO ALPHA2/ALPHA1= 0.0000000",
+                        "##$MONOCHROMATOR= YES",
+                        "##$SPINNING= YES",
+                        "##$REVOLUTION TIME= 4.0",
+                        "##$GENERATOR VOLTAGE= 40",
+                        "##$TUBE CURRENT= 40",
+                        "##$ANODE MATERIAL= Cu",
+                        "##$TUBE FOCUS= LONG FINE",
+                        "##$SCAN TYPE= CONTINUOUS",
+                        "##$COUNT TIME= 293.760",
+                        "##$DIVERGENCE SLIT= Automatic",
+                        "##$ILLUMINATION=15.0",
+                        "",
+                        "$$ -----------------------------------------------------",
+                        "$$ Labels defined by PANalytical for PC-APD files",
+                        "$$ -----------------------------------------------------",
+                        "",
+                        "##$DIFFRACTOMETER= XPERT",
+                        "",
+                        "$$ ------------------------------------------------------",
+                        "$$ Labels defined by PANalytical for APD1700 files",
+                        "$$ ------------------------------------------------------",
+                        "",
+                        "##$TAKE OFF ANGLE= 6.000",
+                        "##$DETECTOR TYPE= PIXcel1D-Medipix3 detector",
+                        "",
+                        "$$ -----------------------",
+                        "$$ Labels defined by JCAMP",
+                        "$$ -----------------------",
+                        "",
+                        "## XUNITS= TWO-THETA",
+                        "## YUNITS= COUNTS",
+                        "## XFACTOR= 1.0",
+                        "## YFACTOR= 1.0",
+                        "## FIRSTX= 1.0043651",
+                        "## LASTX= 49.9934498",
+                        "## DELTAX= 0.0131303",
+                        "## NPOINTS= 3732",
+                        "## FIRSTY= 3173.000",
+                        "## MINX= 1.00437",
+                        "## MAXX= 49.99345",
+                        "## MINY= 234.000",
+                        "## MAXY= 3173.000",
+                        "## XYDATA= X++<Y..Y>"
+                    ],
+                    "metadata": {
+                        "__UNIT_%": "%",
+                        "__UNIT_PPM": "ppm",
+                        "__UNIT_gram": "g",
+                        "__UNIT_liter": "l",
+                        "__UNIT_mol": "mol",
+                        "columns": "6",
+                        "rows": "746"
+                    },
+                    "rows": [
+                        [
+                            "1.0044",
+                            "3173.000",
+                            "2153.000",
+                            "1378.000",
+                            "969.000",
+                            "718.000"
+                        ],
+                        [
+                            "1.0700",
+                            "585.000",
+                            "516.000",
+                            "555.000",
+                            "509.000",
+                            "447.000"
+                        ],
+                        [
+                            "1.1357",
+                            "380.000",
+                            "406.000",
+                            "339.000",
+                            "297.000",
+                            "321.000"
+                        ],
+                        [
+                            "1.2013",
+                            "335.000",
+                            "279.000",
+                            "285.000",
+                            "272.000",
+                            "276.000"
+                        ],
+                        [
+                            "1.2670",
+                            "292.000",
+                            "288.000",
+                            "285.000",
+                            "261.000",
+                            "280.000"
+                        ],
+                        [
+                            "1.3326",
+                            "302.000",
+                            "308.000",
+                            "279.000",
+                            "271.000",
+                            "276.000"
+                        ],
+                        [
+                            "1.3983",
+                            "296.000",
+                            "270.000",
+                            "305.000",
+                            "284.000",
+                            "310.000"
+                        ],
+                        [
+                            "1.4639",
+                            "294.000",
+                            "268.000",
+                            "240.000",
+                            "292.000",
+                            "260.000"
+                        ],
+                        [
+                            "1.5296",
+                            "297.000",
+                            "288.000",
+                            "305.000",
+                            "339.000",
+                            "280.000"
+                        ],
+                        [
+                            "1.5952",
+                            "334.000",
+                            "318.000",
+                            "285.000",
+                            "305.000",
+                            "325.000"
+                        ]
+                    ]
+                },
+                {
+                    "columns": [
+                        {
+                            "key": "0",
+                            "name": "Column #0"
+                        },
+                        {
+                            "key": "1",
+                            "name": "Column #1"
+                        },
+                        {
+                            "key": "2",
+                            "name": "Column #2"
+                        }
+                    ],
+                    "header": [],
+                    "metadata": {
+                        "columns": "3",
+                        "rows": "1"
+                    },
+                    "rows": [
+                        [
+                            "49.9803",
+                            "327.000",
+                            "322.000"
+                        ]
+                    ]
+                },
+                {
+                    "columns": [],
+                    "header": [
+                        "## END="
+                    ],
+                    "metadata": {
+                        "columns": "0",
+                        "rows": "0"
+                    },
+                    "rows": []
+                }
+            ]
+        }
+    ],
+    "datatypes": [],
+    "description": "PXRD",
+    "devices": [],
+    "diff_history": [
+        {
+            "at": "2026-07-22T08:50:19.441455+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/predicates"
+                },
+                {
+                    "op": "remove",
+                    "path": "/objects"
+                }
+            ],
+            "profile_version": "1.0",
+            "trigger": "migration:20260319060352"
+        },
+        {
+            "at": "2026-07-22T08:50:19.441807+00:00",
+            "diff": [
+                {
+                    "op": "replace",
+                    "path": "/data",
+                    "value": {
+                        "metadata": {
+                            "content_type": "application/octet-stream",
+                            "extension": ".jcp",
+                            "file_name": "lgi384_SCD.jcp",
+                            "mime_type": "text/plain",
+                            "reader": "AsciiReader",
+                            "uploaded": "2023-03-21T15:48:20.464738"
+                        },
+                        "tables": [
+                            {
+                                "columns": [
+                                    {
+                                        "key": "0",
+                                        "name": "Column #0"
+                                    },
+                                    {
+                                        "key": "1",
+                                        "name": "Column #1"
+                                    },
+                                    {
+                                        "key": "2",
+                                        "name": "Column #2"
+                                    },
+                                    {
+                                        "key": "3",
+                                        "name": "Column #3"
+                                    },
+                                    {
+                                        "key": "4",
+                                        "name": "Column #4"
+                                    },
+                                    {
+                                        "key": "5",
+                                        "name": "Column #5"
+                                    }
+                                ],
+                                "header": [
+                                    "$$ -----------------------",
+                                    "$$ Labels defined by JCAMP",
+                                    "$$ -----------------------",
+                                    "",
+                                    "## TITLE= Unknown",
+                                    "## JCAMP-DX= 4.24",
+                                    "## DATA TYPE= RD",
+                                    "## BLOCKS= 1",
+                                    "## ORIGIN= PANalytical B.V.",
+                                    "## OWNER= Copyright(C) 2004 by PANalytical B.V.",
+                                    "## DATE= 22/11/02",
+                                    "## TIME= 20:55:07",
+                                    "## SAMPLE DESCRIPTION= lgi384_SCD",
+                                    "## SOURCE REFERENCE= Converted XRDML file",
+                                    "##= Configuration=Reflection-transmission spinner 3.0, Owner=user-1, Creation date=09.01.2019 10:55:39",
+                                    "Goniometer=Omega/2Theta; Minimum step size 2Theta:0.0001; Minimum step size Omega:0.0001",
+                                    "Sample stage=Reflection-transmission spinner 3.0; Minimum step size Phi:0.1",
+                                    "Diffractometer system=EMPYREAN",
+                                    "Measurement program=E:\\XRD Programs\\Leisan\\Carbayole-COF-2-50-3scans-90min.xrdmp, Identifier={7CCE4DB7-4D81-44BA-B1AC-3801A176A120}",
+                                    "Batch program=E:\\XRD Programs\\Leisan\\sample changer 4.xrdmp, Identifier={D6A90AD3-F82F-4DBC-9450-D587D4533ABF}",
+                                    "",
+                                    "$$ ------------------------------------",
+                                    "$$ Labels defined by PANalytical",
+                                    "$$ ------------------------------------",
+                                    "",
+                                    "$$ Wavelengths are given in Angstrom.",
+                                    "##$WAVELENGTH ALPHA1= 1.5405980",
+                                    "##$WAVELENGTH ALPHA2= 1.5444260",
+                                    "##$INTENSITY RATIO ALPHA2/ALPHA1= 0.0000000",
+                                    "##$MONOCHROMATOR= YES",
+                                    "##$SPINNING= YES",
+                                    "##$REVOLUTION TIME= 4.0",
+                                    "##$GENERATOR VOLTAGE= 40",
+                                    "##$TUBE CURRENT= 40",
+                                    "##$ANODE MATERIAL= Cu",
+                                    "##$TUBE FOCUS= LONG FINE",
+                                    "##$SCAN TYPE= CONTINUOUS",
+                                    "##$COUNT TIME= 293.760",
+                                    "##$DIVERGENCE SLIT= Automatic",
+                                    "##$ILLUMINATION=15.0",
+                                    "",
+                                    "$$ -----------------------------------------------------",
+                                    "$$ Labels defined by PANalytical for PC-APD files",
+                                    "$$ -----------------------------------------------------",
+                                    "",
+                                    "##$DIFFRACTOMETER= XPERT",
+                                    "",
+                                    "$$ ------------------------------------------------------",
+                                    "$$ Labels defined by PANalytical for APD1700 files",
+                                    "$$ ------------------------------------------------------",
+                                    "",
+                                    "##$TAKE OFF ANGLE= 6.000",
+                                    "##$DETECTOR TYPE= PIXcel1D-Medipix3 detector",
+                                    "",
+                                    "$$ -----------------------",
+                                    "$$ Labels defined by JCAMP",
+                                    "$$ -----------------------",
+                                    "",
+                                    "## XUNITS= TWO-THETA",
+                                    "## YUNITS= COUNTS",
+                                    "## XFACTOR= 1.0",
+                                    "## YFACTOR= 1.0",
+                                    "## FIRSTX= 1.0043651",
+                                    "## LASTX= 49.9934498",
+                                    "## DELTAX= 0.0131303",
+                                    "## NPOINTS= 3732",
+                                    "## FIRSTY= 3173.000",
+                                    "## MINX= 1.00437",
+                                    "## MAXX= 49.99345",
+                                    "## MINY= 234.000",
+                                    "## MAXY= 3173.000",
+                                    "## XYDATA= X++<Y..Y>"
+                                ],
+                                "metadata": {
+                                    "columns": "6",
+                                    "rows": "746"
+                                },
+                                "rows": [
+                                    [
+                                        "1.0044",
+                                        "3173.000",
+                                        "2153.000",
+                                        "1378.000",
+                                        "969.000",
+                                        "718.000"
+                                    ],
+                                    [
+                                        "1.0700",
+                                        "585.000",
+                                        "516.000",
+                                        "555.000",
+                                        "509.000",
+                                        "447.000"
+                                    ],
+                                    [
+                                        "1.1357",
+                                        "380.000",
+                                        "406.000",
+                                        "339.000",
+                                        "297.000",
+                                        "321.000"
+                                    ],
+                                    [
+                                        "1.2013",
+                                        "335.000",
+                                        "279.000",
+                                        "285.000",
+                                        "272.000",
+                                        "276.000"
+                                    ],
+                                    [
+                                        "1.2670",
+                                        "292.000",
+                                        "288.000",
+                                        "285.000",
+                                        "261.000",
+                                        "280.000"
+                                    ],
+                                    [
+                                        "1.3326",
+                                        "302.000",
+                                        "308.000",
+                                        "279.000",
+                                        "271.000",
+                                        "276.000"
+                                    ],
+                                    [
+                                        "1.3983",
+                                        "296.000",
+                                        "270.000",
+                                        "305.000",
+                                        "284.000",
+                                        "310.000"
+                                    ],
+                                    [
+                                        "1.4639",
+                                        "294.000",
+                                        "268.000",
+                                        "240.000",
+                                        "292.000",
+                                        "260.000"
+                                    ],
+                                    [
+                                        "1.5296",
+                                        "297.000",
+                                        "288.000",
+                                        "305.000",
+                                        "339.000",
+                                        "280.000"
+                                    ],
+                                    [
+                                        "1.5952",
+                                        "334.000",
+                                        "318.000",
+                                        "285.000",
+                                        "305.000",
+                                        "325.000"
+                                    ]
+                                ]
+                            },
+                            {
+                                "columns": [
+                                    {
+                                        "key": "0",
+                                        "name": "Column #0"
+                                    },
+                                    {
+                                        "key": "1",
+                                        "name": "Column #1"
+                                    },
+                                    {
+                                        "key": "2",
+                                        "name": "Column #2"
+                                    }
+                                ],
+                                "header": [],
+                                "metadata": {
+                                    "columns": "3",
+                                    "rows": "1"
+                                },
+                                "rows": [
+                                    [
+                                        "49.9803",
+                                        "327.000",
+                                        "322.000"
+                                    ]
+                                ]
+                            },
+                            {
+                                "columns": [],
+                                "header": [
+                                    "## END="
+                                ],
+                                "metadata": {
+                                    "columns": "0",
+                                    "rows": "0"
+                                },
+                                "rows": []
+                            }
+                        ]
+                    }
+                }
+            ],
+            "profile_version": "1.1",
+            "trigger": "migration:20260401123327"
+        },
+        {
+            "at": "2026-07-22T08:50:19.442056+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/reactionVariations"
+                }
+            ],
+            "profile_version": "1.2",
+            "trigger": "migration:20260417132254"
+        },
+        {
+            "at": "2026-07-22T08:50:19.442344+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_%"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_liter"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_mol"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_PPM"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_gram"
+                }
+            ],
+            "profile_version": "1.3",
+            "trigger": "migration:20260422063146"
+        },
+        {
+            "at": "2026-07-22T08:50:19.442883+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/loopType"
+                },
+                {
+                    "from": "/tables/0/inputTableIndex",
+                    "op": "move",
+                    "path": "/tables/0/table/yColumn/tableIndex"
+                },
+                {
+                    "op": "add",
+                    "path": "/tables/0/table/xColumn/tableIndex",
+                    "value": 0
+                }
+            ],
+            "profile_version": "1.4",
+            "trigger": "migration:20260506160404"
+        },
+        {
+            "at": "2026-07-22T08:50:19.443288+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/tableName"
+                },
+                {
+                    "op": "remove",
+                    "path": "/tables/0/uuid"
+                }
+            ],
+            "profile_version": "1.5",
+            "trigger": "migration:20260513094819"
+        },
+        {
+            "at": "2026-07-22T08:59:44.243146+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/datatypes"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjectInstances"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjects"
+                }
+            ],
+            "profile_version": "1.6",
+            "trigger": "migration:20250822110356"
+        },
+        {
+            "at": "2026-07-22T08:59:44.344230+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/rootOntology"
+                }
+            ],
+            "profile_version": "1.7",
+            "trigger": "migration:20250908063445"
+        },
+        {
+            "at": "2026-07-22T08:59:44.347882+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/loopOutput"
+                }
+            ],
+            "profile_version": "1.8",
+            "trigger": "migration:20260506160404"
+        }
+    ],
+    "id": "78c39eb3-8930-4542-a5b8-c6602b1afef3",
+    "identifiers": [
+        {
+            "editable": true,
+            "id": "#0fileMetadata",
+            "key": "extension",
+            "match": "exact",
+            "optional": false,
+            "type": "fileMetadata",
+            "value": ".jcp"
+        }
+    ],
+    "isDefaultProfile": false,
+    "isDisabled": false,
+    "last_migration": "20260513094819",
+    "objects": [],
+    "ols": "CHMO:0000156",
+    "ontology": "",
+    "predicates": [],
+    "profile_version": "1.9",
+    "reactionVariations": {
+        "elements": [],
+        "identifiers": []
+    },
+    "rootOntology": {
+        "description": [
+            "A diffraction method that directs a beam of X-rays at the sample and detects the positions and intensities of the diffracted X-rays as a pattern of spots on a photographic plate."
+        ],
+        "id": "CHMO:properties:http://purl.obolibrary.org/obo/CHMO_0000156",
+        "iri": "http://purl.obolibrary.org/obo/CHMO_0000156",
+        "label": "X-ray diffraction",
+        "namespace": "http://purl.obolibrary.org/obo/",
+        "obo_id": "CHMO:0000156",
+        "ontology_name": "chmo",
+        "ontology_prefix": "CHMO",
+        "short_form": "CHMO_0000156",
+        "type": "class"
+    },
+    "software": [],
+    "subjectInstances": {},
+    "subjects": [],
+    "tables": [
+        {
+            "header": {
+                "DATA CLASS": "XYPOINTS",
+                "DATA TYPE": "X-RAY DIFFRACTION",
+                "XUNITS": "2Theta",
+                "YUNITS": "Intensity"
+            },
+            "inputTableIndex": 0,
+            "loopOutput": "MULTI FILE",
+            "loopType": "none",
+            "table": {
+                "xColumn": {
+                    "columnIndex": 0
+                },
+                "yColumn": {
+                    "columnIndex": 1
+                }
+            },
+            "tableName": "Table #1",
+            "uuid": "e3d6b5d8-a55a-4a96-bc09-c26903d5d7ac"
+        }
+    ],
+    "title": "PXRD"
+}

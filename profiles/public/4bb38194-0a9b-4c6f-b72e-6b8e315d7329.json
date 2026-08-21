@@ -1,0 +1,664 @@
+{
+    "converter_version": "1.7.0",
+    "data": [
+        {
+            "metadata": {
+                "content_type": "application/octet-stream",
+                "extension": ".brml",
+                "file_name": "2021-09-24_IW-SPGA-4.brml",
+                "mime_type": "application/zip",
+                "reader": "BrmlReader",
+                "uploaded": "2023-02-09T13:34:01.647641"
+            },
+            "tables": [
+                {
+                    "columns": [
+                        {
+                            "key": "0",
+                            "name": "Column #0"
+                        },
+                        {
+                            "key": "1",
+                            "name": "Column #1"
+                        },
+                        {
+                            "key": "2",
+                            "name": "Column #2"
+                        },
+                        {
+                            "key": "3",
+                            "name": "Column #3"
+                        },
+                        {
+                            "key": "4",
+                            "name": "Column #4"
+                        }
+                    ],
+                    "header": [],
+                    "metadata": {
+                        "__UNIT_%": "%",
+                        "__UNIT_PPM": "ppm",
+                        "__UNIT_gram": "g",
+                        "__UNIT_liter": "l",
+                        "__UNIT_mol": "mol",
+                        "columns": "5",
+                        "rows": "1135"
+                    },
+                    "rows": [
+                        [
+                            "384",
+                            "1",
+                            "3",
+                            "1.5",
+                            "3071"
+                        ],
+                        [
+                            "384",
+                            "1",
+                            "3.0194",
+                            "1.5097",
+                            "3088"
+                        ],
+                        [
+                            "384",
+                            "1",
+                            "3.0388",
+                            "1.5194",
+                            "3014"
+                        ],
+                        [
+                            "384",
+                            "1",
+                            "3.0582",
+                            "1.5291",
+                            "3073"
+                        ],
+                        [
+                            "384",
+                            "1",
+                            "3.0777",
+                            "1.5388",
+                            "3015"
+                        ],
+                        [
+                            "384",
+                            "1",
+                            "3.0971",
+                            "1.5485",
+                            "3000"
+                        ],
+                        [
+                            "384",
+                            "1",
+                            "3.1165",
+                            "1.5582",
+                            "2941"
+                        ],
+                        [
+                            "384",
+                            "1",
+                            "3.1359",
+                            "1.5679",
+                            "2892"
+                        ],
+                        [
+                            "384",
+                            "1",
+                            "3.1553",
+                            "1.5777",
+                            "2843"
+                        ],
+                        [
+                            "384",
+                            "1",
+                            "3.1747",
+                            "1.5874",
+                            "2762"
+                        ]
+                    ]
+                },
+                {
+                    "columns": [
+                        {
+                            "key": "0",
+                            "name": "Column #0"
+                        },
+                        {
+                            "key": "1",
+                            "name": "Column #1"
+                        },
+                        {
+                            "key": "2",
+                            "name": "Column #2"
+                        },
+                        {
+                            "key": "3",
+                            "name": "Column #3"
+                        },
+                        {
+                            "key": "4",
+                            "name": "Column #4"
+                        }
+                    ],
+                    "header": [],
+                    "metadata": {
+                        "columns": "5",
+                        "rows": "246"
+                    },
+                    "rows": [
+                        [
+                            "9.6",
+                            "1",
+                            "37.5",
+                            "18.75",
+                            "3010"
+                        ],
+                        [
+                            "9.6",
+                            "1",
+                            "37.5102",
+                            "18.7551",
+                            "3089"
+                        ],
+                        [
+                            "9.6",
+                            "1",
+                            "37.5204",
+                            "18.7602",
+                            "3221"
+                        ],
+                        [
+                            "9.6",
+                            "1",
+                            "37.5307",
+                            "18.7653",
+                            "3233"
+                        ],
+                        [
+                            "9.6",
+                            "1",
+                            "37.5409",
+                            "18.7704",
+                            "3367"
+                        ],
+                        [
+                            "9.6",
+                            "1",
+                            "37.5511",
+                            "18.7755",
+                            "3402"
+                        ],
+                        [
+                            "9.6",
+                            "1",
+                            "37.5613",
+                            "18.7807",
+                            "3494"
+                        ],
+                        [
+                            "9.6",
+                            "1",
+                            "37.5715",
+                            "18.7858",
+                            "3499"
+                        ],
+                        [
+                            "9.6",
+                            "1",
+                            "37.5817",
+                            "18.7909",
+                            "3549"
+                        ],
+                        [
+                            "9.6",
+                            "1",
+                            "37.592",
+                            "18.796",
+                            "3497"
+                        ]
+                    ]
+                }
+            ]
+        }
+    ],
+    "datatypes": [],
+    "description": "brml",
+    "devices": [],
+    "diff_history": [
+        {
+            "at": "2026-07-22T08:50:19.535182+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/predicates"
+                },
+                {
+                    "op": "remove",
+                    "path": "/objects"
+                }
+            ],
+            "profile_version": "1.0",
+            "trigger": "migration:20260319060352"
+        },
+        {
+            "at": "2026-07-22T08:50:19.535538+00:00",
+            "diff": [
+                {
+                    "op": "replace",
+                    "path": "/data",
+                    "value": {
+                        "metadata": {
+                            "content_type": "application/octet-stream",
+                            "extension": ".brml",
+                            "file_name": "2021-09-24_IW-SPGA-4.brml",
+                            "mime_type": "application/zip",
+                            "reader": "BrmlReader",
+                            "uploaded": "2023-02-09T13:34:01.647641"
+                        },
+                        "tables": [
+                            {
+                                "columns": [
+                                    {
+                                        "key": "0",
+                                        "name": "Column #0"
+                                    },
+                                    {
+                                        "key": "1",
+                                        "name": "Column #1"
+                                    },
+                                    {
+                                        "key": "2",
+                                        "name": "Column #2"
+                                    },
+                                    {
+                                        "key": "3",
+                                        "name": "Column #3"
+                                    },
+                                    {
+                                        "key": "4",
+                                        "name": "Column #4"
+                                    }
+                                ],
+                                "header": [],
+                                "metadata": {
+                                    "columns": "5",
+                                    "rows": "1135"
+                                },
+                                "rows": [
+                                    [
+                                        "384",
+                                        "1",
+                                        "3",
+                                        "1.5",
+                                        "3071"
+                                    ],
+                                    [
+                                        "384",
+                                        "1",
+                                        "3.0194",
+                                        "1.5097",
+                                        "3088"
+                                    ],
+                                    [
+                                        "384",
+                                        "1",
+                                        "3.0388",
+                                        "1.5194",
+                                        "3014"
+                                    ],
+                                    [
+                                        "384",
+                                        "1",
+                                        "3.0582",
+                                        "1.5291",
+                                        "3073"
+                                    ],
+                                    [
+                                        "384",
+                                        "1",
+                                        "3.0777",
+                                        "1.5388",
+                                        "3015"
+                                    ],
+                                    [
+                                        "384",
+                                        "1",
+                                        "3.0971",
+                                        "1.5485",
+                                        "3000"
+                                    ],
+                                    [
+                                        "384",
+                                        "1",
+                                        "3.1165",
+                                        "1.5582",
+                                        "2941"
+                                    ],
+                                    [
+                                        "384",
+                                        "1",
+                                        "3.1359",
+                                        "1.5679",
+                                        "2892"
+                                    ],
+                                    [
+                                        "384",
+                                        "1",
+                                        "3.1553",
+                                        "1.5777",
+                                        "2843"
+                                    ],
+                                    [
+                                        "384",
+                                        "1",
+                                        "3.1747",
+                                        "1.5874",
+                                        "2762"
+                                    ]
+                                ]
+                            },
+                            {
+                                "columns": [
+                                    {
+                                        "key": "0",
+                                        "name": "Column #0"
+                                    },
+                                    {
+                                        "key": "1",
+                                        "name": "Column #1"
+                                    },
+                                    {
+                                        "key": "2",
+                                        "name": "Column #2"
+                                    },
+                                    {
+                                        "key": "3",
+                                        "name": "Column #3"
+                                    },
+                                    {
+                                        "key": "4",
+                                        "name": "Column #4"
+                                    }
+                                ],
+                                "header": [],
+                                "metadata": {
+                                    "columns": "5",
+                                    "rows": "246"
+                                },
+                                "rows": [
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.5",
+                                        "18.75",
+                                        "3010"
+                                    ],
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.5102",
+                                        "18.7551",
+                                        "3089"
+                                    ],
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.5204",
+                                        "18.7602",
+                                        "3221"
+                                    ],
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.5307",
+                                        "18.7653",
+                                        "3233"
+                                    ],
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.5409",
+                                        "18.7704",
+                                        "3367"
+                                    ],
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.5511",
+                                        "18.7755",
+                                        "3402"
+                                    ],
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.5613",
+                                        "18.7807",
+                                        "3494"
+                                    ],
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.5715",
+                                        "18.7858",
+                                        "3499"
+                                    ],
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.5817",
+                                        "18.7909",
+                                        "3549"
+                                    ],
+                                    [
+                                        "9.6",
+                                        "1",
+                                        "37.592",
+                                        "18.796",
+                                        "3497"
+                                    ]
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "profile_version": "1.1",
+            "trigger": "migration:20260401123327"
+        },
+        {
+            "at": "2026-07-22T08:50:19.535762+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/reactionVariations"
+                }
+            ],
+            "profile_version": "1.2",
+            "trigger": "migration:20260417132254"
+        },
+        {
+            "at": "2026-07-22T08:50:19.536081+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_%"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_liter"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_mol"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_PPM"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_gram"
+                }
+            ],
+            "profile_version": "1.3",
+            "trigger": "migration:20260422063146"
+        },
+        {
+            "at": "2026-07-22T08:50:19.536626+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/loopType"
+                },
+                {
+                    "from": "/tables/0/inputTableIndex",
+                    "op": "move",
+                    "path": "/tables/0/table/yColumn/tableIndex"
+                },
+                {
+                    "op": "add",
+                    "path": "/tables/0/table/xColumn/tableIndex",
+                    "value": 0
+                }
+            ],
+            "profile_version": "1.4",
+            "trigger": "migration:20260506160404"
+        },
+        {
+            "at": "2026-07-22T08:50:19.537015+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/tableName"
+                },
+                {
+                    "op": "remove",
+                    "path": "/tables/0/uuid"
+                }
+            ],
+            "profile_version": "1.5",
+            "trigger": "migration:20260513094819"
+        },
+        {
+            "at": "2026-07-22T08:59:45.252411+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/datatypes"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjectInstances"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjects"
+                }
+            ],
+            "profile_version": "1.6",
+            "trigger": "migration:20250822110356"
+        },
+        {
+            "at": "2026-07-22T08:59:45.362707+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/rootOntology"
+                }
+            ],
+            "profile_version": "1.7",
+            "trigger": "migration:20250908063445"
+        },
+        {
+            "at": "2026-07-22T08:59:45.366250+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/tables/0/loopOutput"
+                }
+            ],
+            "profile_version": "1.8",
+            "trigger": "migration:20260506160404"
+        }
+    ],
+    "id": "4bb38194-0a9b-4c6f-b72e-6b8e315d7329",
+    "identifiers": [
+        {
+            "editable": true,
+            "id": "#0fileMetadata",
+            "key": "extension",
+            "match": "exact",
+            "optional": false,
+            "type": "fileMetadata",
+            "value": ".brml"
+        }
+    ],
+    "isDefaultProfile": false,
+    "isDisabled": false,
+    "last_migration": "20260513094819",
+    "objects": [],
+    "ols": "CHMO:0000156",
+    "ontology": "",
+    "predicates": [],
+    "profile_version": "1.9",
+    "reactionVariations": {
+        "elements": [],
+        "identifiers": []
+    },
+    "rootOntology": {
+        "description": [
+            "A diffraction method that directs a beam of X-rays at the sample and detects the positions and intensities of the diffracted X-rays as a pattern of spots on a photographic plate."
+        ],
+        "id": "CHMO:properties:http://purl.obolibrary.org/obo/CHMO_0000156",
+        "iri": "http://purl.obolibrary.org/obo/CHMO_0000156",
+        "label": "X-ray diffraction",
+        "namespace": "http://purl.obolibrary.org/obo/",
+        "obo_id": "CHMO:0000156",
+        "ontology_name": "chmo",
+        "ontology_prefix": "CHMO",
+        "short_form": "CHMO_0000156",
+        "type": "class"
+    },
+    "software": [],
+    "subjectInstances": {},
+    "subjects": [],
+    "tables": [
+        {
+            "header": {
+                "DATA CLASS": "XYPOINTS",
+                "DATA TYPE": "X-RAY DIFFRACTION",
+                "XUNITS": "2Theta",
+                "YUNITS": "Intensity"
+            },
+            "inputTableIndex": 0,
+            "loopOutput": "MULTI FILE",
+            "loopType": "none",
+            "table": {
+                "xColumn": {
+                    "columnIndex": 2
+                },
+                "yColumn": {
+                    "columnIndex": 4
+                },
+                "yOperations": [
+                    {
+                        "column": {
+                            "columnIndex": 0,
+                            "tableIndex": 0
+                        },
+                        "operator": ":",
+                        "type": "column"
+                    },
+                    {
+                        "operator": ":",
+                        "type": "value",
+                        "value": "5"
+                    }
+                ]
+            },
+            "tableName": "Table #1",
+            "uuid": "15b850ed-64f2-4413-a180-52e45babe97f"
+        }
+    ],
+    "title": "brml"
+}

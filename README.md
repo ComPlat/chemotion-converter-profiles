@@ -20,7 +20,7 @@ Steps:
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install --no-cache-dir -r requirements.txt
+python -m pip install --no-cache-dir --upgrade -r requirements.txt
 ```
 
 The dependency on `chemotion-converter-app` is declared in `requirements.txt` and pulled from:

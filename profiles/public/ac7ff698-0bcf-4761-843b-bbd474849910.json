@@ -6,105 +6,111 @@
                 "content_type": "text/plain",
                 "delimiter": "tab",
                 "doublequote": "False",
-                "extension": ".txt",
-                "file_name": "Absorbance_14-42-39-645.txt",
+                "extension": ".TXT",
+                "file_name": "HPLC-Testfile.TXT",
                 "lineterminator": "\\r\\n",
                 "mime_type": "text/plain",
                 "quotechar": "\"",
                 "quoting": "0",
                 "reader": "CSVReader",
-                "skipinitialspace": "True",
-                "uploaded": "2023-08-09T08:07:01.753910"
+                "skipinitialspace": "False",
+                "uploaded": "2023-12-06T07:50:29.004439"
             },
             "tables": [
                 {
                     "columns": [
                         {
                             "key": "0",
-                            "name": "Column #0 (>>>>>Begin Spectral Data<<<<<)"
+                            "name": "Column #0 (Time)"
                         },
                         {
                             "key": "1",
-                            "name": "Column #1"
+                            "name": "Column #1 (Value)"
                         }
                     ],
-                    "header": [
-                        "Data from Absorbance_14-42-39-645.txt Node",
-                        "",
-                        "Date: Mon Jul 24 14:42:39 CEST 2023",
-                        "User: AK Th\u00c3\u00a9ato Seminar",
-                        "Spectrometer: HDX00655",
-                        "Trigger mode: 0",
-                        "Integration Time (sec): 1.000000E-1",
-                        "Scans to average: 1",
-                        "Nonlinearity correction enabled: false",
-                        "Boxcar width: 0",
-                        "Storing dark spectrum: false",
-                        "XAxis mode: Wavelengths",
-                        "Number of Pixels in Spectrum: 2068"
-                    ],
+                    "header": [],
                     "metadata": {
                         "__UNIT_%": "%",
                         "__UNIT_PPM": "ppm",
                         "__UNIT_gram": "g",
                         "__UNIT_liter": "l",
                         "__UNIT_mol": "mol",
-                        "column_00": ">>>>>Begin Spectral Data<<<<<",
+                        "column_00": "Time",
+                        "column_01": "Value",
                         "columns": "2",
-                        "rows": "2068"
+                        "rows": "1501"
                     },
                     "rows": [
                         [
-                            "194.076",
-                            "-0.37"
+                            "0",
+                            "93"
                         ],
                         [
-                            "194.628",
-                            "-0"
+                            "0.00333333333333333",
+                            "92"
                         ],
                         [
-                            "195.18",
-                            "-0"
+                            "0.00666666666666667",
+                            "47"
                         ],
                         [
-                            "195.732",
-                            "-0"
+                            "0.01",
+                            "49"
                         ],
                         [
-                            "196.284",
-                            "-0.33"
+                            "0.0133333333333333",
+                            "47"
                         ],
                         [
-                            "196.835",
-                            "-0.09"
+                            "0.0166666666666667",
+                            "44"
                         ],
                         [
-                            "197.387",
-                            "-0.11"
+                            "0.02",
+                            "43"
                         ],
                         [
-                            "197.938",
-                            "-0.01"
+                            "0.0233333333333333",
+                            "36"
                         ],
                         [
-                            "198.49",
-                            "0.18"
+                            "0.0266666666666667",
+                            "34"
                         ],
                         [
-                            "199.041",
-                            "-0.08"
+                            "0.03",
+                            "31"
                         ]
                     ]
+                },
+                {
+                    "columns": [],
+                    "header": [
+                        "",
+                        "Index\tName\tTime\tQuantity\tHeight\tArea\tArea %",
+                        "\t\t[Min]\t[% Area]\t[\u00c2\u00b5V]\t[\u00c2\u00b5V.Min]\t[%]",
+                        "1\tUNKNOWN\t0,25\t74,34\t331978,6\t25157,6\t74,342",
+                        "2\tUNKNOWN\t1,83\t24,36\t92972,2\t8244,0\t24,361",
+                        "3\tUNKNOWN\t2,59\t1,30\t6292,2\t438,8\t1,297",
+                        "\t\t\t\t\t\t",
+                        "Total\t-\t-\t100,00\t431243,0\t33840,4\t100,000",
+                        ""
+                    ],
+                    "metadata": {
+                        "columns": "0",
+                        "rows": "0"
+                    },
+                    "rows": []
                 }
             ]
         }
     ],
     "datatypes": [],
-    "description": "UV-Vis (AK Th\u00c3\u00a9ato Seminar) - Campus West, KIT",
+    "description": "as TXT file",
     "devices": [],
     "diff_history": [
         {
-            "at": "2026-07-22T08:50:19.598557+00:00",
+            "at": "2026-07-22T08:50:19.403749+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -119,7 +125,7 @@
             "trigger": "migration:20260319060352"
         },
         {
-            "at": "2026-07-22T08:50:19.598823+00:00",
+            "at": "2026-07-22T08:50:19.404082+00:00",
             "diff": [
                 {
                     "op": "replace",
@@ -129,90 +135,96 @@
                             "content_type": "text/plain",
                             "delimiter": "tab",
                             "doublequote": "False",
-                            "extension": ".txt",
-                            "file_name": "Absorbance_14-42-39-645.txt",
+                            "extension": ".TXT",
+                            "file_name": "HPLC-Testfile.TXT",
                             "lineterminator": "\\r\\n",
                             "mime_type": "text/plain",
                             "quotechar": "\"",
                             "quoting": "0",
                             "reader": "CSVReader",
-                            "skipinitialspace": "True",
-                            "uploaded": "2023-08-09T08:07:01.753910"
+                            "skipinitialspace": "False",
+                            "uploaded": "2023-12-06T07:50:29.004439"
                         },
                         "tables": [
                             {
                                 "columns": [
                                     {
                                         "key": "0",
-                                        "name": "Column #0 (>>>>>Begin Spectral Data<<<<<)"
+                                        "name": "Column #0 (Time)"
                                     },
                                     {
                                         "key": "1",
-                                        "name": "Column #1"
+                                        "name": "Column #1 (Value)"
                                     }
                                 ],
-                                "header": [
-                                    "Data from Absorbance_14-42-39-645.txt Node",
-                                    "",
-                                    "Date: Mon Jul 24 14:42:39 CEST 2023",
-                                    "User: AK Th\u00c3\u00a9ato Seminar",
-                                    "Spectrometer: HDX00655",
-                                    "Trigger mode: 0",
-                                    "Integration Time (sec): 1.000000E-1",
-                                    "Scans to average: 1",
-                                    "Nonlinearity correction enabled: false",
-                                    "Boxcar width: 0",
-                                    "Storing dark spectrum: false",
-                                    "XAxis mode: Wavelengths",
-                                    "Number of Pixels in Spectrum: 2068"
-                                ],
+                                "header": [],
                                 "metadata": {
-                                    "column_00": ">>>>>Begin Spectral Data<<<<<",
+                                    "column_00": "Time",
+                                    "column_01": "Value",
                                     "columns": "2",
-                                    "rows": "2068"
+                                    "rows": "1501"
                                 },
                                 "rows": [
                                     [
-                                        "194.076",
-                                        "-0.37"
+                                        "0",
+                                        "93"
                                     ],
                                     [
-                                        "194.628",
-                                        "-0"
+                                        "0.00333333333333333",
+                                        "92"
                                     ],
                                     [
-                                        "195.18",
-                                        "-0"
+                                        "0.00666666666666667",
+                                        "47"
                                     ],
                                     [
-                                        "195.732",
-                                        "-0"
+                                        "0.01",
+                                        "49"
                                     ],
                                     [
-                                        "196.284",
-                                        "-0.33"
+                                        "0.0133333333333333",
+                                        "47"
                                     ],
                                     [
-                                        "196.835",
-                                        "-0.09"
+                                        "0.0166666666666667",
+                                        "44"
                                     ],
                                     [
-                                        "197.387",
-                                        "-0.11"
+                                        "0.02",
+                                        "43"
                                     ],
                                     [
-                                        "197.938",
-                                        "-0.01"
+                                        "0.0233333333333333",
+                                        "36"
                                     ],
                                     [
-                                        "198.49",
-                                        "0.18"
+                                        "0.0266666666666667",
+                                        "34"
                                     ],
                                     [
-                                        "199.041",
-                                        "-0.08"
+                                        "0.03",
+                                        "31"
                                     ]
                                 ]
+                            },
+                            {
+                                "columns": [],
+                                "header": [
+                                    "",
+                                    "Index\tName\tTime\tQuantity\tHeight\tArea\tArea %",
+                                    "\t\t[Min]\t[% Area]\t[\u00c2\u00b5V]\t[\u00c2\u00b5V.Min]\t[%]",
+                                    "1\tUNKNOWN\t0,25\t74,34\t331978,6\t25157,6\t74,342",
+                                    "2\tUNKNOWN\t1,83\t24,36\t92972,2\t8244,0\t24,361",
+                                    "3\tUNKNOWN\t2,59\t1,30\t6292,2\t438,8\t1,297",
+                                    "\t\t\t\t\t\t",
+                                    "Total\t-\t-\t100,00\t431243,0\t33840,4\t100,000",
+                                    ""
+                                ],
+                                "metadata": {
+                                    "columns": "0",
+                                    "rows": "0"
+                                },
+                                "rows": []
                             }
                         ]
                     }
@@ -222,7 +234,7 @@
             "trigger": "migration:20260401123327"
         },
         {
-            "at": "2026-07-22T08:50:19.598984+00:00",
+            "at": "2026-07-22T08:50:19.404258+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -233,7 +245,7 @@
             "trigger": "migration:20260417132254"
         },
         {
-            "at": "2026-07-22T08:50:19.599202+00:00",
+            "at": "2026-07-22T08:50:19.404501+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -260,7 +272,7 @@
             "trigger": "migration:20260422063146"
         },
         {
-            "at": "2026-07-22T08:50:19.599597+00:00",
+            "at": "2026-07-22T08:50:19.404949+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -281,7 +293,7 @@
             "trigger": "migration:20260506160404"
         },
         {
-            "at": "2026-07-22T08:50:19.599830+00:00",
+            "at": "2026-07-22T08:50:19.405209+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -296,7 +308,7 @@
             "trigger": "migration:20260513094819"
         },
         {
-            "at": "2026-07-22T08:59:45.914251+00:00",
+            "at": "2026-07-22T08:59:43.630065+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -315,100 +327,105 @@
             "trigger": "migration:20250822110356"
         },
         {
-            "at": "2026-07-22T08:59:45.914472+00:00",
+            "at": "2026-07-22T08:59:43.733688+00:00",
             "diff": [
                 {
                     "op": "remove",
                     "path": "/rootOntology"
-                },
-                {
-                    "op": "remove",
-                    "path": "/ols"
                 }
             ],
             "profile_version": "1.7",
             "trigger": "migration:20250908063445"
         },
         {
-            "at": "2026-07-22T08:59:45.915651+00:00",
-            "diff": [
-                {
-                    "op": "replace",
-                    "path": "/rootOntology/id",
-                    "value": "OBI:property:http://purl.obolibrary.org/obo/OBI_0000070"
-                },
-                {
-                    "op": "replace",
-                    "path": "/rootOntology/ontology_name",
-                    "value": "chmo"
-                },
-                {
-                    "op": "replace",
-                    "path": "/rootOntology/ontology_prefix",
-                    "value": "CHMO"
-                }
-            ],
-            "profile_version": "1.8",
-            "trigger": "migration:20260323144702"
-        },
-        {
-            "at": "2026-07-22T08:59:45.916876+00:00",
+            "at": "2026-07-22T08:59:43.736671+00:00",
             "diff": [
                 {
                     "op": "remove",
                     "path": "/tables/0/loopOutput"
                 }
             ],
-            "profile_version": "1.9",
+            "profile_version": "1.8",
             "trigger": "migration:20260506160404"
         }
     ],
-    "id": "c7e3130f-6c23-432a-a886-a82d11632da2",
+    "id": "ac7ff698-0bcf-4761-843b-bbd474849910",
     "identifiers": [
         {
             "editable": true,
-            "id": "#0fileMetadata",
-            "key": "reader",
-            "match": "exact",
+            "id": "#0tableHeader",
+            "lineNumber": 2,
+            "match": "regex",
             "optional": false,
-            "type": "fileMetadata",
-            "value": "CSVReader"
+            "tableIndex": 1,
+            "type": "tableHeader",
+            "value": "Index\\sName\\sTime\\sQuantity\\sHeight\\sArea\\sArea\\s"
         },
         {
             "editable": true,
             "id": "#1tableHeader",
-            "lineNumber": 4,
+            "lineNumber": "",
+            "match": "regex",
+            "optional": false,
+            "tableIndex": 1,
+            "type": "tableHeader",
+            "value": "Total"
+        },
+        {
+            "editable": true,
+            "id": "#2tableMetadata",
+            "key": "column_00",
             "match": "exact",
             "optional": false,
             "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "Time"
+        },
+        {
+            "editable": true,
+            "id": "#3tableMetadata",
+            "key": "column_01",
+            "match": "exact",
+            "optional": false,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "Value"
+        },
+        {
+            "editable": true,
+            "id": "#4tableHeader",
+            "lineNumber": 3,
+            "match": "regex",
+            "optional": false,
+            "tableIndex": 1,
             "type": "tableHeader",
-            "value": "User: AK Th\u00c3\u00a9ato Seminar"
+            "value": "\\t\\[Min]\\t\\[\\% Area]"
         }
     ],
     "isDefaultProfile": false,
     "isDisabled": false,
     "last_migration": "20260513094819",
     "objects": [],
-    "ols": null,
+    "ols": "CHMO:0001009",
     "ontology": "",
     "predicates": [],
-    "profile_version": "1.10",
+    "profile_version": "1.9",
     "reactionVariations": {
         "elements": [],
         "identifiers": []
     },
     "rootOntology": {
         "description": [
-            "A planned process that has the objective to produce information about a material entity (the evaluant) by examining it."
+            "A liquid\u00e2\u20ac\u201csolid chromatography in which the stationary phase consists of very small particles and the inlet pressure is relatively high."
         ],
-        "id": "obi:class:http://purl.obolibrary.org/obo/OBI_0000070",
-        "iri": "http://purl.obolibrary.org/obo/OBI_0000070",
-        "label": "assay",
+        "id": "CHMO:properties:http://purl.obolibrary.org/obo/CHMO_0001009",
+        "iri": "http://purl.obolibrary.org/obo/CHMO_0001009",
+        "label": "high-performance liquid chromatography",
         "namespace": "http://purl.obolibrary.org/obo/",
-        "obo_id": "OBI:0000070",
-        "ontology_name": "obi",
-        "ontology_prefix": "OBI",
-        "short_form": "OBI_0000070",
+        "obo_id": "CHMO:0001009",
+        "ontology_name": "chmo",
+        "ontology_prefix": "CHMO",
+        "short_form": "CHMO_0001009",
         "type": "class"
     },
     "software": [],
@@ -418,9 +435,9 @@
         {
             "header": {
                 "DATA CLASS": "XYPOINTS",
-                "DATA TYPE": "UV-VIS",
-                "XUNITS": "%",
-                "YUNITS": "ABSORBANCE"
+                "DATA TYPE": "HPLC UV-VIS",
+                "XUNITS": "MINUTES",
+                "YUNITS": "SIGNAL"
             },
             "inputTableIndex": 0,
             "loopOutput": "MULTI FILE",
@@ -434,8 +451,8 @@
                 }
             },
             "tableName": "Table #1",
-            "uuid": "2c32d8cd-662c-4352-9c50-6562d806f703"
+            "uuid": "50d41ec5-29a7-49d3-b96d-1cdd5c881a18"
         }
     ],
-    "title": "UV-Vis"
+    "title": "preparative HPLC"
 }

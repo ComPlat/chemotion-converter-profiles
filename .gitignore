@@ -7,3 +7,5 @@ __pycache__/
 /readers/
 /docs/atch/server/
 *bkp
+*claude*
+*codex*

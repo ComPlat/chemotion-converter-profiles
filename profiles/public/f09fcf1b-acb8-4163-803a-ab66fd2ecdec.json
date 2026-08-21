@@ -1,0 +1,1198 @@
+{
+    "converter_version": "1.7.0",
+    "data": [
+        {
+            "metadata": {
+                "content_type": "application/octet-stream",
+                "extension": ".cfx_LANA",
+                "file_name": "SG-V3551-15-19.cfx_LANA",
+                "mime_type": "text/plain",
+                "reader": "CfxReader",
+                "uploaded": "2023-07-14T11:23:36.875083"
+            },
+            "tables": [
+                {
+                    "columns": [],
+                    "header": [
+                        "Block_name = SG-V3551-15-19",
+                        "_audit_creation_date = '2022-01-17'",
+                        "_audit_creation_method = 'STOE LANA'",
+                        "_audit_author_name = 'J. Richter'",
+                        "_audit_contact_author = 'J. Richter'",
+                        "_audit_contact_author_address = ;\r\n   STOE & CIE GmbH\r\n   Hilpertstr. 10\r\n   D-64295 Darmstadt\r\n   Germany\r\n;",
+                        "_audit_contact_author_email = richter@stoe.com",
+                        "_audit_contact_author_fax = '+49 6151 988788'",
+                        "_audit_contact_author_phone = '+49 6151 988720'",
+                        "_computing_data_collection = ;\r\nX-Area Pilatus3_SV 1.31.170.0 (STOE, 2020)\r\n;",
+                        "_computing_cell_refinement = ;\r\nX-Area Recipe 1.36.0.0 (STOE, 2020)\r\n;",
+                        "_computing_data_reduction = ;\r\nX-Area Integrate 1.78.3.0 (STOE, 2020)\r\nX-Area LANA 1.83.8.0 (STOE, 2020)\r\n;",
+                        "_computing_publication_material = ;\r\nSTOE & Cie GmbH, X-Area, software package for collecting single-crystal or\r\nmulti-domain crystal data on STOE area-detector diffractometers, for image \r\nprocessing, for the correction and scaling of reflection intensities and \r\nfor outlier rejection, version 1.90, Darmstadt 2020\r\n;",
+                        "_chemical_name_systematic = ?",
+                        "_chemical_name_common = ?",
+                        "_chemical_formula_moiety = ?",
+                        "_chemical_formula_structural = ?",
+                        "_chemical_formula_analytical = ?",
+                        "_chemical_formula_sum = 'C14 H8 N2 F3 Cl'",
+                        "_chemical_formula_weight = 296.67",
+                        "_chemical_melting_point = ?",
+                        "_chemical_compound_source = ?",
+                        "_symmetry_cell_setting = monoclinic",
+                        "_symmetry_space_group_name_H-M = 'P 21/c'",
+                        "_symmetry_Int_Tables_number = 14",
+                        "_cell_length_a = 10.6224(12)",
+                        "_cell_length_b = 15.1386(19)",
+                        "_cell_length_c = 8.1382(9)",
+                        "_cell_angle_alpha = 90.00",
+                        "_cell_angle_beta = 108.692(8)",
+                        "_cell_angle_gamma = 90.00",
+                        "_cell_volume = 1239.67(25)",
+                        "_cell_formula_units_Z = 4",
+                        "_cell_measurement_temperature = 150",
+                        "_cell_measurement_reflns_used = 2354",
+                        "_cell_measurement_theta_min = 20.66",
+                        "_cell_measurement_theta_max = 63.86",
+                        "_exptl_crystal_description = 'Platte'",
+                        "_exptl_crystal_colour = 'farblos'",
+                        "_exptl_crystal_size_max = 0.15",
+                        "_exptl_crystal_size_mid = 0.13",
+                        "_exptl_crystal_size_min = 0.03",
+                        "_exptl_crystal_density_diffrn = 1.590",
+                        "_exptl_crystal_density_meas = ?",
+                        "_exptl_crystal_density_method = 'not measured'",
+                        "_exptl_crystal_F_000 = 600",
+                        "_exptl_absorpt_coefficient_mu = 2.04",
+                        "_exptl_absorpt_correction_type = multi-scan",
+                        "_exptl_absorpt_process_details = ;\r\nSTOE LANA, absorption correction by scaling of reflection intensities.\r\nJ. Koziskova, F. Hahn, J. Richter, J. Kozisek, \"Comparison of different\r\nabsorption corrections on the model structure of tetrakis(\\m~2~-acetato)-\r\ndiaqua-di-copper(II)\", Acta Chimica Slovaca, vol. 9, no. 2, 2016, pp. 136 - 140.\r\n;",
+                        "_exptl_absorpt_correction_T_min = 0.2316",
+                        "_exptl_absorpt_correction_T_max = 1.0000",
+                        "_diffrn_measurement_device = 'Eulerian 4-circle diffractometer'",
+                        "_diffrn_measurement_device_type = 'STOE STADIVARI'",
+                        "_diffrn_detector = 'EIGER4M'",
+                        "_diffrn_detector_type = ?",
+                        "_diffrn_detector_area_resol_mean = 13.33",
+                        "_diffrn_source = 'Metaljet D2'",
+                        "_diffrn_source_type = ?",
+                        "_diffrn_radiation_probe = x-ray",
+                        "_diffrn_source_target = ?",
+                        "_diffrn_source_voltage = 70",
+                        "_diffrn_source_current = 3.570",
+                        "_diffrn_source_power = 0.250",
+                        "_diffrn_radiation_type = '1.3401270, 1.34 K\\a'",
+                        "_diffrn_radiation_wavelength = 1.34143",
+                        "_diffrn_radiation_monochromator = 'Graded multilayer mirror'",
+                        "_diffrn_radiation_polarisn_norm = 0",
+                        "_diffrn_radiation_collimation = '1.2 0.6 mm diameter'",
+                        "_diffrn_ambient_temperature = 150",
+                        "_diffrn_measurement_method = 'rotation method, \\w scans'",
+                        "_diffrn_measurement_details = ; 770 frames, detector distance = 80 mm\r\n;",
+                        "_diffrn_reflns_theta_min = 3.82",
+                        "_diffrn_reflns_theta_max = 62.45",
+                        "_reflns_number_total = 6890",
+                        "_reflns_number_gt = 4390",
+                        "_reflns_threshold_expression = 'I>4u(I)'",
+                        "_reflns_d_resolution_high = 0.756",
+                        "_reflns_d_resolution_low = 10.062",
+                        "_reflns_special_details = 'reflections have not been merged'",
+                        "_reflns_limit_h_min = -11",
+                        "_reflns_limit_h_max = 14",
+                        "_reflns_limit_k_min = -6",
+                        "_reflns_limit_k_max = 19",
+                        "_reflns_limit_l_min = -10",
+                        "_reflns_limit_l_max = 10"
+                    ],
+                    "metadata": {
+                        "Block_name": "SG-V3551-15-19",
+                        "Loop_name": "_symmetry_equiv_pos_as_xyz",
+                        "__UNIT_%": "%",
+                        "__UNIT_PPM": "ppm",
+                        "__UNIT_gram": "g",
+                        "__UNIT_liter": "l",
+                        "__UNIT_mol": "mol",
+                        "_audit_author_name": "J. Richter",
+                        "_audit_contact_author": "J. Richter",
+                        "_audit_contact_author_address": "STOE & CIE GmbH\r\n   Hilpertstr. 10\r\n   D-64295 Darmstadt\r\n   Germany",
+                        "_audit_contact_author_email": "richter@stoe.com",
+                        "_audit_contact_author_fax": "+49 6151 988788",
+                        "_audit_contact_author_phone": "+49 6151 988720",
+                        "_audit_creation_date": "2022-01-17",
+                        "_audit_creation_method": "STOE LANA",
+                        "_cell_angle_alpha": "90.00",
+                        "_cell_angle_beta": "108.692(8)",
+                        "_cell_angle_gamma": "90.00",
+                        "_cell_formula_units_Z": "4",
+                        "_cell_length_a": "10.6224(12)",
+                        "_cell_length_b": "15.1386(19)",
+                        "_cell_length_c": "8.1382(9)",
+                        "_cell_measurement_reflns_used": "2354",
+                        "_cell_measurement_temperature": "150",
+                        "_cell_measurement_theta_max": "63.86",
+                        "_cell_measurement_theta_min": "20.66",
+                        "_cell_volume": "1239.67(25)",
+                        "_chemical_compound_source": "?",
+                        "_chemical_formula_analytical": "?",
+                        "_chemical_formula_moiety": "?",
+                        "_chemical_formula_structural": "?",
+                        "_chemical_formula_sum": "C14 H8 N2 F3 Cl",
+                        "_chemical_formula_weight": "296.67",
+                        "_chemical_melting_point": "?",
+                        "_chemical_name_common": "?",
+                        "_chemical_name_systematic": "?",
+                        "_computing_cell_refinement": "X-Area Recipe 1.36.0.0 (STOE, 2020)",
+                        "_computing_data_collection": "X-Area Pilatus3_SV 1.31.170.0 (STOE, 2020)",
+                        "_computing_data_reduction": "X-Area Integrate 1.78.3.0 (STOE, 2020)\r\nX-Area LANA 1.83.8.0 (STOE, 2020)",
+                        "_computing_publication_material": "STOE & Cie GmbH, X-Area, software package for collecting single-crystal or\r\nmulti-domain crystal data on STOE area-detector diffractometers, for image \r\nprocessing, for the correction and scaling of reflection intensities and \r\nfor outlier rejection, version 1.90, Darmstadt 2020",
+                        "_diffrn_ambient_temperature": "150",
+                        "_diffrn_detector": "EIGER4M",
+                        "_diffrn_detector_area_resol_mean": "13.33",
+                        "_diffrn_detector_type": "?",
+                        "_diffrn_measurement_details": "770 frames, detector distance = 80 mm",
+                        "_diffrn_measurement_device": "Eulerian 4-circle diffractometer",
+                        "_diffrn_measurement_device_type": "STOE STADIVARI",
+                        "_diffrn_measurement_method": "rotation method, \\w scans",
+                        "_diffrn_radiation_collimation": "1.2 0.6 mm diameter",
+                        "_diffrn_radiation_monochromator": "Graded multilayer mirror",
+                        "_diffrn_radiation_polarisn_norm": "0",
+                        "_diffrn_radiation_probe": "x-ray",
+                        "_diffrn_radiation_type": "1.3401270, 1.34 K\\a",
+                        "_diffrn_radiation_wavelength": "1.34143",
+                        "_diffrn_reflns_theta_max": "62.45",
+                        "_diffrn_reflns_theta_min": "3.82",
+                        "_diffrn_source": "Metaljet D2",
+                        "_diffrn_source_current": "3.570",
+                        "_diffrn_source_power": "0.250",
+                        "_diffrn_source_target": "?",
+                        "_diffrn_source_type": "?",
+                        "_diffrn_source_voltage": "70",
+                        "_exptl_absorpt_coefficient_mu": "2.04",
+                        "_exptl_absorpt_correction_T_max": "1.0000",
+                        "_exptl_absorpt_correction_T_min": "0.2316",
+                        "_exptl_absorpt_correction_type": "multi-scan",
+                        "_exptl_absorpt_process_details": "STOE LANA, absorption correction by scaling of reflection intensities.\r\nJ. Koziskova, F. Hahn, J. Richter, J. Kozisek, \"Comparison of different\r\nabsorption corrections on the model structure of tetrakis(\\m~2~-acetato)-\r\ndiaqua-di-copper(II)\", Acta Chimica Slovaca, vol. 9, no. 2, 2016, pp. 136 - 140.",
+                        "_exptl_crystal_F_000": "600",
+                        "_exptl_crystal_colour": "farblos",
+                        "_exptl_crystal_density_diffrn": "1.590",
+                        "_exptl_crystal_density_meas": "?",
+                        "_exptl_crystal_density_method": "not measured",
+                        "_exptl_crystal_description": "Platte",
+                        "_exptl_crystal_size_max": "0.15",
+                        "_exptl_crystal_size_mid": "0.13",
+                        "_exptl_crystal_size_min": "0.03",
+                        "_reflns_d_resolution_high": "0.756",
+                        "_reflns_d_resolution_low": "10.062",
+                        "_reflns_limit_h_max": "14",
+                        "_reflns_limit_h_min": "-11",
+                        "_reflns_limit_k_max": "19",
+                        "_reflns_limit_k_min": "-6",
+                        "_reflns_limit_l_max": "10",
+                        "_reflns_limit_l_min": "-10",
+                        "_reflns_number_gt": "4390",
+                        "_reflns_number_total": "6890",
+                        "_reflns_special_details": "reflections have not been merged",
+                        "_reflns_threshold_expression": "I>4u(I)",
+                        "_symmetry_Int_Tables_number": "14",
+                        "_symmetry_cell_setting": "monoclinic",
+                        "_symmetry_space_group_name_H-M": "P 21/c"
+                    },
+                    "rows": []
+                },
+                {
+                    "columns": [
+                        {
+                            "key": "1",
+                            "name": "_symmetry_equiv_pos_as_xyz"
+                        }
+                    ],
+                    "header": [
+                        "_symmetry_equiv_pos_as_xyz"
+                    ],
+                    "metadata": {
+                        "columns": "1",
+                        "rows": "4"
+                    },
+                    "rows": [
+                        [
+                            "R0",
+                            "'x,y,z'"
+                        ],
+                        [
+                            "R1",
+                            "'-x,1/2+y,1/2-z'"
+                        ],
+                        [
+                            "R2",
+                            "'-x,-y,-z'"
+                        ],
+                        [
+                            "R3",
+                            "'x,1/2-y,1/2+z'"
+                        ]
+                    ]
+                }
+            ]
+        }
+    ],
+    "datatypes": [],
+    "description": "with LANA",
+    "devices": [],
+    "diff_history": [
+        {
+            "at": "2026-07-22T08:50:19.562075+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/predicates"
+                },
+                {
+                    "op": "remove",
+                    "path": "/objects"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/object"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/object"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/object"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/object"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/object"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/object"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/object"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/object"
+                }
+            ],
+            "profile_version": "1.0",
+            "trigger": "migration:20260319060352"
+        },
+        {
+            "at": "2026-07-22T08:50:19.562578+00:00",
+            "diff": [
+                {
+                    "op": "replace",
+                    "path": "/data",
+                    "value": {
+                        "metadata": {
+                            "content_type": "application/octet-stream",
+                            "extension": ".cfx_LANA",
+                            "file_name": "SG-V3551-15-19.cfx_LANA",
+                            "mime_type": "text/plain",
+                            "reader": "CfxReader",
+                            "uploaded": "2023-07-14T11:23:36.875083"
+                        },
+                        "tables": [
+                            {
+                                "columns": [],
+                                "header": [
+                                    "Block_name = SG-V3551-15-19",
+                                    "_audit_creation_date = '2022-01-17'",
+                                    "_audit_creation_method = 'STOE LANA'",
+                                    "_audit_author_name = 'J. Richter'",
+                                    "_audit_contact_author = 'J. Richter'",
+                                    "_audit_contact_author_address = ;\r\n   STOE & CIE GmbH\r\n   Hilpertstr. 10\r\n   D-64295 Darmstadt\r\n   Germany\r\n;",
+                                    "_audit_contact_author_email = richter@stoe.com",
+                                    "_audit_contact_author_fax = '+49 6151 988788'",
+                                    "_audit_contact_author_phone = '+49 6151 988720'",
+                                    "_computing_data_collection = ;\r\nX-Area Pilatus3_SV 1.31.170.0 (STOE, 2020)\r\n;",
+                                    "_computing_cell_refinement = ;\r\nX-Area Recipe 1.36.0.0 (STOE, 2020)\r\n;",
+                                    "_computing_data_reduction = ;\r\nX-Area Integrate 1.78.3.0 (STOE, 2020)\r\nX-Area LANA 1.83.8.0 (STOE, 2020)\r\n;",
+                                    "_computing_publication_material = ;\r\nSTOE & Cie GmbH, X-Area, software package for collecting single-crystal or\r\nmulti-domain crystal data on STOE area-detector diffractometers, for image \r\nprocessing, for the correction and scaling of reflection intensities and \r\nfor outlier rejection, version 1.90, Darmstadt 2020\r\n;",
+                                    "_chemical_name_systematic = ?",
+                                    "_chemical_name_common = ?",
+                                    "_chemical_formula_moiety = ?",
+                                    "_chemical_formula_structural = ?",
+                                    "_chemical_formula_analytical = ?",
+                                    "_chemical_formula_sum = 'C14 H8 N2 F3 Cl'",
+                                    "_chemical_formula_weight = 296.67",
+                                    "_chemical_melting_point = ?",
+                                    "_chemical_compound_source = ?",
+                                    "_symmetry_cell_setting = monoclinic",
+                                    "_symmetry_space_group_name_H-M = 'P 21/c'",
+                                    "_symmetry_Int_Tables_number = 14",
+                                    "_cell_length_a = 10.6224(12)",
+                                    "_cell_length_b = 15.1386(19)",
+                                    "_cell_length_c = 8.1382(9)",
+                                    "_cell_angle_alpha = 90.00",
+                                    "_cell_angle_beta = 108.692(8)",
+                                    "_cell_angle_gamma = 90.00",
+                                    "_cell_volume = 1239.67(25)",
+                                    "_cell_formula_units_Z = 4",
+                                    "_cell_measurement_temperature = 150",
+                                    "_cell_measurement_reflns_used = 2354",
+                                    "_cell_measurement_theta_min = 20.66",
+                                    "_cell_measurement_theta_max = 63.86",
+                                    "_exptl_crystal_description = 'Platte'",
+                                    "_exptl_crystal_colour = 'farblos'",
+                                    "_exptl_crystal_size_max = 0.15",
+                                    "_exptl_crystal_size_mid = 0.13",
+                                    "_exptl_crystal_size_min = 0.03",
+                                    "_exptl_crystal_density_diffrn = 1.590",
+                                    "_exptl_crystal_density_meas = ?",
+                                    "_exptl_crystal_density_method = 'not measured'",
+                                    "_exptl_crystal_F_000 = 600",
+                                    "_exptl_absorpt_coefficient_mu = 2.04",
+                                    "_exptl_absorpt_correction_type = multi-scan",
+                                    "_exptl_absorpt_process_details = ;\r\nSTOE LANA, absorption correction by scaling of reflection intensities.\r\nJ. Koziskova, F. Hahn, J. Richter, J. Kozisek, \"Comparison of different\r\nabsorption corrections on the model structure of tetrakis(\\m~2~-acetato)-\r\ndiaqua-di-copper(II)\", Acta Chimica Slovaca, vol. 9, no. 2, 2016, pp. 136 - 140.\r\n;",
+                                    "_exptl_absorpt_correction_T_min = 0.2316",
+                                    "_exptl_absorpt_correction_T_max = 1.0000",
+                                    "_diffrn_measurement_device = 'Eulerian 4-circle diffractometer'",
+                                    "_diffrn_measurement_device_type = 'STOE STADIVARI'",
+                                    "_diffrn_detector = 'EIGER4M'",
+                                    "_diffrn_detector_type = ?",
+                                    "_diffrn_detector_area_resol_mean = 13.33",
+                                    "_diffrn_source = 'Metaljet D2'",
+                                    "_diffrn_source_type = ?",
+                                    "_diffrn_radiation_probe = x-ray",
+                                    "_diffrn_source_target = ?",
+                                    "_diffrn_source_voltage = 70",
+                                    "_diffrn_source_current = 3.570",
+                                    "_diffrn_source_power = 0.250",
+                                    "_diffrn_radiation_type = '1.3401270, 1.34 K\\a'",
+                                    "_diffrn_radiation_wavelength = 1.34143",
+                                    "_diffrn_radiation_monochromator = 'Graded multilayer mirror'",
+                                    "_diffrn_radiation_polarisn_norm = 0",
+                                    "_diffrn_radiation_collimation = '1.2 0.6 mm diameter'",
+                                    "_diffrn_ambient_temperature = 150",
+                                    "_diffrn_measurement_method = 'rotation method, \\w scans'",
+                                    "_diffrn_measurement_details = ; 770 frames, detector distance = 80 mm\r\n;",
+                                    "_diffrn_reflns_theta_min = 3.82",
+                                    "_diffrn_reflns_theta_max = 62.45",
+                                    "_reflns_number_total = 6890",
+                                    "_reflns_number_gt = 4390",
+                                    "_reflns_threshold_expression = 'I>4u(I)'",
+                                    "_reflns_d_resolution_high = 0.756",
+                                    "_reflns_d_resolution_low = 10.062",
+                                    "_reflns_special_details = 'reflections have not been merged'",
+                                    "_reflns_limit_h_min = -11",
+                                    "_reflns_limit_h_max = 14",
+                                    "_reflns_limit_k_min = -6",
+                                    "_reflns_limit_k_max = 19",
+                                    "_reflns_limit_l_min = -10",
+                                    "_reflns_limit_l_max = 10"
+                                ],
+                                "metadata": {
+                                    "Block_name": "SG-V3551-15-19",
+                                    "Loop_name": "_symmetry_equiv_pos_as_xyz",
+                                    "_audit_author_name": "J. Richter",
+                                    "_audit_contact_author": "J. Richter",
+                                    "_audit_contact_author_address": "STOE & CIE GmbH\r\n   Hilpertstr. 10\r\n   D-64295 Darmstadt\r\n   Germany",
+                                    "_audit_contact_author_email": "richter@stoe.com",
+                                    "_audit_contact_author_fax": "+49 6151 988788",
+                                    "_audit_contact_author_phone": "+49 6151 988720",
+                                    "_audit_creation_date": "2022-01-17",
+                                    "_audit_creation_method": "STOE LANA",
+                                    "_cell_angle_alpha": "90.00",
+                                    "_cell_angle_beta": "108.692(8)",
+                                    "_cell_angle_gamma": "90.00",
+                                    "_cell_formula_units_Z": "4",
+                                    "_cell_length_a": "10.6224(12)",
+                                    "_cell_length_b": "15.1386(19)",
+                                    "_cell_length_c": "8.1382(9)",
+                                    "_cell_measurement_reflns_used": "2354",
+                                    "_cell_measurement_temperature": "150",
+                                    "_cell_measurement_theta_max": "63.86",
+                                    "_cell_measurement_theta_min": "20.66",
+                                    "_cell_volume": "1239.67(25)",
+                                    "_chemical_compound_source": "?",
+                                    "_chemical_formula_analytical": "?",
+                                    "_chemical_formula_moiety": "?",
+                                    "_chemical_formula_structural": "?",
+                                    "_chemical_formula_sum": "C14 H8 N2 F3 Cl",
+                                    "_chemical_formula_weight": "296.67",
+                                    "_chemical_melting_point": "?",
+                                    "_chemical_name_common": "?",
+                                    "_chemical_name_systematic": "?",
+                                    "_computing_cell_refinement": "X-Area Recipe 1.36.0.0 (STOE, 2020)",
+                                    "_computing_data_collection": "X-Area Pilatus3_SV 1.31.170.0 (STOE, 2020)",
+                                    "_computing_data_reduction": "X-Area Integrate 1.78.3.0 (STOE, 2020)\r\nX-Area LANA 1.83.8.0 (STOE, 2020)",
+                                    "_computing_publication_material": "STOE & Cie GmbH, X-Area, software package for collecting single-crystal or\r\nmulti-domain crystal data on STOE area-detector diffractometers, for image \r\nprocessing, for the correction and scaling of reflection intensities and \r\nfor outlier rejection, version 1.90, Darmstadt 2020",
+                                    "_diffrn_ambient_temperature": "150",
+                                    "_diffrn_detector": "EIGER4M",
+                                    "_diffrn_detector_area_resol_mean": "13.33",
+                                    "_diffrn_detector_type": "?",
+                                    "_diffrn_measurement_details": "770 frames, detector distance = 80 mm",
+                                    "_diffrn_measurement_device": "Eulerian 4-circle diffractometer",
+                                    "_diffrn_measurement_device_type": "STOE STADIVARI",
+                                    "_diffrn_measurement_method": "rotation method, \\w scans",
+                                    "_diffrn_radiation_collimation": "1.2 0.6 mm diameter",
+                                    "_diffrn_radiation_monochromator": "Graded multilayer mirror",
+                                    "_diffrn_radiation_polarisn_norm": "0",
+                                    "_diffrn_radiation_probe": "x-ray",
+                                    "_diffrn_radiation_type": "1.3401270, 1.34 K\\a",
+                                    "_diffrn_radiation_wavelength": "1.34143",
+                                    "_diffrn_reflns_theta_max": "62.45",
+                                    "_diffrn_reflns_theta_min": "3.82",
+                                    "_diffrn_source": "Metaljet D2",
+                                    "_diffrn_source_current": "3.570",
+                                    "_diffrn_source_power": "0.250",
+                                    "_diffrn_source_target": "?",
+                                    "_diffrn_source_type": "?",
+                                    "_diffrn_source_voltage": "70",
+                                    "_exptl_absorpt_coefficient_mu": "2.04",
+                                    "_exptl_absorpt_correction_T_max": "1.0000",
+                                    "_exptl_absorpt_correction_T_min": "0.2316",
+                                    "_exptl_absorpt_correction_type": "multi-scan",
+                                    "_exptl_absorpt_process_details": "STOE LANA, absorption correction by scaling of reflection intensities.\r\nJ. Koziskova, F. Hahn, J. Richter, J. Kozisek, \"Comparison of different\r\nabsorption corrections on the model structure of tetrakis(\\m~2~-acetato)-\r\ndiaqua-di-copper(II)\", Acta Chimica Slovaca, vol. 9, no. 2, 2016, pp. 136 - 140.",
+                                    "_exptl_crystal_F_000": "600",
+                                    "_exptl_crystal_colour": "farblos",
+                                    "_exptl_crystal_density_diffrn": "1.590",
+                                    "_exptl_crystal_density_meas": "?",
+                                    "_exptl_crystal_density_method": "not measured",
+                                    "_exptl_crystal_description": "Platte",
+                                    "_exptl_crystal_size_max": "0.15",
+                                    "_exptl_crystal_size_mid": "0.13",
+                                    "_exptl_crystal_size_min": "0.03",
+                                    "_reflns_d_resolution_high": "0.756",
+                                    "_reflns_d_resolution_low": "10.062",
+                                    "_reflns_limit_h_max": "14",
+                                    "_reflns_limit_h_min": "-11",
+                                    "_reflns_limit_k_max": "19",
+                                    "_reflns_limit_k_min": "-6",
+                                    "_reflns_limit_l_max": "10",
+                                    "_reflns_limit_l_min": "-10",
+                                    "_reflns_number_gt": "4390",
+                                    "_reflns_number_total": "6890",
+                                    "_reflns_special_details": "reflections have not been merged",
+                                    "_reflns_threshold_expression": "I>4u(I)",
+                                    "_symmetry_Int_Tables_number": "14",
+                                    "_symmetry_cell_setting": "monoclinic",
+                                    "_symmetry_space_group_name_H-M": "P 21/c"
+                                },
+                                "rows": []
+                            },
+                            {
+                                "columns": [
+                                    {
+                                        "key": "1",
+                                        "name": "_symmetry_equiv_pos_as_xyz"
+                                    }
+                                ],
+                                "header": [
+                                    "_symmetry_equiv_pos_as_xyz"
+                                ],
+                                "metadata": {
+                                    "columns": "1",
+                                    "rows": "4"
+                                },
+                                "rows": [
+                                    [
+                                        "R0",
+                                        "'x,y,z'"
+                                    ],
+                                    [
+                                        "R1",
+                                        "'-x,1/2+y,1/2-z'"
+                                    ],
+                                    [
+                                        "R2",
+                                        "'-x,-y,-z'"
+                                    ],
+                                    [
+                                        "R3",
+                                        "'x,1/2-y,1/2+z'"
+                                    ]
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ],
+            "profile_version": "1.1",
+            "trigger": "migration:20260401123327"
+        },
+        {
+            "at": "2026-07-22T08:50:19.562873+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/reactionVariations"
+                }
+            ],
+            "profile_version": "1.2",
+            "trigger": "migration:20260417132254"
+        },
+        {
+            "at": "2026-07-22T08:50:19.563351+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_%"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_liter"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_mol"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_PPM"
+                },
+                {
+                    "op": "remove",
+                    "path": "/data/0/tables/0/metadata/__UNIT_gram"
+                }
+            ],
+            "profile_version": "1.3",
+            "trigger": "migration:20260422063146"
+        },
+        {
+            "at": "2026-07-22T08:50:19.564517+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/isDatasetOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/isLoobDatatableOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/isRdfOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/isFirstMatch"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/outputDatatableKey"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/isDatatableOutput"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/1/outputTableIndex",
+                    "value": 0
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isDatasetOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isLoobDatatableOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isRdfOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isFirstMatch"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/outputDatatableKey"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/isDatatableOutput"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/2/outputTableIndex",
+                    "value": 0
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/isDatasetOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/isLoobDatatableOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/isRdfOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/isFirstMatch"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/outputDatatableKey"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/isDatatableOutput"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/3/outputTableIndex",
+                    "value": 0
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/isDatasetOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/isLoobDatatableOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/isRdfOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/isFirstMatch"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/outputDatatableKey"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/isDatatableOutput"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/4/outputTableIndex",
+                    "value": 0
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/isDatasetOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/isLoobDatatableOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/isRdfOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/isFirstMatch"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/outputDatatableKey"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/isDatatableOutput"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/5/outputTableIndex",
+                    "value": 0
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/isDatasetOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/isLoobDatatableOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/isRdfOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/isFirstMatch"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/outputDatatableKey"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/isDatatableOutput"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/6/outputTableIndex",
+                    "value": 0
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/isDatasetOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/isLoobDatatableOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/isRdfOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/isFirstMatch"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/outputDatatableKey"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/isDatatableOutput"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/7/outputTableIndex",
+                    "value": 0
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/isDatasetOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/isLoobDatatableOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/isRdfOutput"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/isFirstMatch"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/outputDatatableKey"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/isDatatableOutput"
+                },
+                {
+                    "op": "replace",
+                    "path": "/identifiers/8/outputTableIndex",
+                    "value": 0
+                }
+            ],
+            "profile_version": "1.4",
+            "trigger": "migration:20260506160404"
+        },
+        {
+            "at": "2026-07-22T08:50:19.565325+00:00",
+            "diff": [
+                {
+                    "op": "add",
+                    "path": "/identifiers/1/outputTableIndex/0",
+                    "value": 0
+                },
+                {
+                    "op": "add",
+                    "path": "/identifiers/2/outputTableIndex/0",
+                    "value": 0
+                },
+                {
+                    "op": "add",
+                    "path": "/identifiers/3/outputTableIndex/0",
+                    "value": 0
+                },
+                {
+                    "op": "add",
+                    "path": "/identifiers/4/outputTableIndex/0",
+                    "value": 0
+                },
+                {
+                    "op": "add",
+                    "path": "/identifiers/5/outputTableIndex/0",
+                    "value": 0
+                },
+                {
+                    "op": "add",
+                    "path": "/identifiers/6/outputTableIndex/0",
+                    "value": 0
+                },
+                {
+                    "op": "add",
+                    "path": "/identifiers/7/outputTableIndex/0",
+                    "value": 0
+                },
+                {
+                    "op": "add",
+                    "path": "/identifiers/8/outputTableIndex/0",
+                    "value": 0
+                }
+            ],
+            "profile_version": "1.5",
+            "trigger": "migration:20260513094819"
+        },
+        {
+            "at": "2026-07-22T08:59:45.626995+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/datatypes"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjectInstances"
+                },
+                {
+                    "op": "remove",
+                    "path": "/subjects"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/datatype"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/predicate"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/1/subject"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/datatype"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/predicate"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/2/subject"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/datatype"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/predicate"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/3/subject"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/datatype"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/predicate"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/4/subject"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/datatype"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/predicate"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/5/subject"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/datatype"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/predicate"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/6/subject"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/datatype"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/predicate"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/7/subject"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/datatype"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/predicate"
+                },
+                {
+                    "op": "remove",
+                    "path": "/identifiers/8/subject"
+                }
+            ],
+            "profile_version": "1.6",
+            "trigger": "migration:20250822110356"
+        },
+        {
+            "at": "2026-07-22T08:59:45.722930+00:00",
+            "diff": [
+                {
+                    "op": "remove",
+                    "path": "/rootOntology"
+                }
+            ],
+            "profile_version": "1.7",
+            "trigger": "migration:20250908063445"
+        }
+    ],
+    "id": "f09fcf1b-acb8-4163-803a-ab66fd2ecdec",
+    "identifiers": [
+        {
+            "editable": true,
+            "id": "#0fileMetadata",
+            "key": "reader",
+            "match": "exact",
+            "optional": false,
+            "type": "fileMetadata",
+            "value": "CfxReader"
+        },
+        {
+            "datatype": null,
+            "editable": true,
+            "id": "#1tableMetadata",
+            "isDatasetOutput": true,
+            "isDatatableOutput": true,
+            "isFirstMatch": true,
+            "isLoobDatatableOutput": true,
+            "isRdfOutput": false,
+            "key": "_cell_length_a",
+            "match": "any",
+            "object": null,
+            "optional": true,
+            "outputDatatableKey": "a",
+            "outputKey": "a",
+            "outputLayer": "res",
+            "outputTableIndex": [],
+            "predicate": null,
+            "subject": null,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "10.6224(12)"
+        },
+        {
+            "datatype": null,
+            "editable": true,
+            "id": "#2tableMetadata",
+            "isDatasetOutput": true,
+            "isDatatableOutput": true,
+            "isFirstMatch": true,
+            "isLoobDatatableOutput": true,
+            "isRdfOutput": false,
+            "key": "_cell_length_b",
+            "match": "any",
+            "object": null,
+            "optional": true,
+            "outputDatatableKey": "b",
+            "outputKey": "b",
+            "outputLayer": "res",
+            "outputTableIndex": [],
+            "predicate": null,
+            "subject": null,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "15.1386(19)"
+        },
+        {
+            "datatype": null,
+            "editable": true,
+            "id": "#3tableMetadata",
+            "isDatasetOutput": true,
+            "isDatatableOutput": true,
+            "isFirstMatch": true,
+            "isLoobDatatableOutput": true,
+            "isRdfOutput": false,
+            "key": "_cell_length_c",
+            "match": "any",
+            "object": null,
+            "optional": true,
+            "outputDatatableKey": "c",
+            "outputKey": "c",
+            "outputLayer": "res",
+            "outputTableIndex": [],
+            "predicate": null,
+            "subject": null,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "8.1382(9)"
+        },
+        {
+            "datatype": null,
+            "editable": true,
+            "id": "#4tableMetadata",
+            "isDatasetOutput": true,
+            "isDatatableOutput": true,
+            "isFirstMatch": true,
+            "isLoobDatatableOutput": true,
+            "isRdfOutput": false,
+            "key": "_cell_angle_alpha",
+            "match": "any",
+            "object": null,
+            "optional": true,
+            "outputDatatableKey": "alpha",
+            "outputKey": "alpha",
+            "outputLayer": "res",
+            "outputTableIndex": [],
+            "predicate": null,
+            "subject": null,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "90.00"
+        },
+        {
+            "datatype": null,
+            "editable": true,
+            "id": "#5tableMetadata",
+            "isDatasetOutput": true,
+            "isDatatableOutput": true,
+            "isFirstMatch": true,
+            "isLoobDatatableOutput": true,
+            "isRdfOutput": false,
+            "key": "_cell_angle_gamma",
+            "match": "any",
+            "object": null,
+            "optional": true,
+            "outputDatatableKey": "beta",
+            "outputKey": "beta",
+            "outputLayer": "res",
+            "outputTableIndex": [],
+            "predicate": null,
+            "subject": null,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "90.00"
+        },
+        {
+            "datatype": null,
+            "editable": true,
+            "id": "#6tableMetadata",
+            "isDatasetOutput": true,
+            "isDatatableOutput": true,
+            "isFirstMatch": true,
+            "isLoobDatatableOutput": true,
+            "isRdfOutput": false,
+            "key": "_cell_angle_gamma",
+            "match": "any",
+            "object": null,
+            "optional": true,
+            "outputDatatableKey": "gamma",
+            "outputKey": "gamma",
+            "outputLayer": "res",
+            "outputTableIndex": [],
+            "predicate": null,
+            "subject": null,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "90.00"
+        },
+        {
+            "datatype": null,
+            "editable": true,
+            "id": "#7tableMetadata",
+            "isDatasetOutput": true,
+            "isDatatableOutput": true,
+            "isFirstMatch": true,
+            "isLoobDatatableOutput": true,
+            "isRdfOutput": false,
+            "key": "_cell_volume",
+            "match": "any",
+            "object": null,
+            "optional": true,
+            "outputDatatableKey": "volume",
+            "outputKey": "volume",
+            "outputLayer": "res",
+            "outputTableIndex": [],
+            "predicate": null,
+            "subject": null,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "1239.67(25)"
+        },
+        {
+            "datatype": null,
+            "editable": true,
+            "id": "#8tableMetadata",
+            "isDatasetOutput": true,
+            "isDatatableOutput": true,
+            "isFirstMatch": true,
+            "isLoobDatatableOutput": true,
+            "isRdfOutput": false,
+            "key": "_symmetry_space_group_name_H-M",
+            "match": "any",
+            "object": null,
+            "optional": true,
+            "outputDatatableKey": "space",
+            "outputKey": "space",
+            "outputLayer": "res",
+            "outputTableIndex": [],
+            "predicate": null,
+            "subject": null,
+            "tableIndex": 0,
+            "type": "tableMetadata",
+            "value": "P 21/c"
+        }
+    ],
+    "isDefaultProfile": false,
+    "isDisabled": false,
+    "last_migration": "20260513094819",
+    "objects": [],
+    "ols": "CHMO:0000159",
+    "ontology": "",
+    "predicates": [],
+    "profile_version": "1.8",
+    "reactionVariations": {
+        "elements": [],
+        "identifiers": []
+    },
+    "rootOntology": {
+        "description": [
+            "A method for determining structure by directing a beam of X-rays at a single crystal sample and detecting the positions and intensities of the diffracted X-rays as a pattern of spots on a photographic plate. Single crystal X-ray diffraction is used for protein crystallography."
+        ],
+        "id": "CHMO:properties:http://purl.obolibrary.org/obo/CHMO_0000159",
+        "iri": "http://purl.obolibrary.org/obo/CHMO_0000159",
+        "label": "single crystal X-ray diffraction",
+        "namespace": "http://purl.obolibrary.org/obo/",
+        "obo_id": "CHMO:0000159",
+        "ontology_name": "chmo",
+        "ontology_prefix": "CHMO",
+        "short_form": "CHMO_0000159",
+        "type": "class"
+    },
+    "software": [],
+    "subjectInstances": {},
+    "subjects": [],
+    "tables": [],
+    "title": "CFX"
+}

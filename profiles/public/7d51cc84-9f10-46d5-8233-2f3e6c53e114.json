@@ -3,42 +3,42 @@
     "data": [
         {
             "metadata": {
-                "content_type": "application/vnd.ms-excel",
-                "extension": ".xls",
-                "file_name": "DD-F41.xls",
-                "mime_type": "application/vnd.ms-excel",
-                "reader": "OldExcelReader",
-                "uploaded": "2023-08-09T08:02:12.704186"
+                "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "extension": ".xlsx",
+                "file_name": "dd-f44-2.xlsx",
+                "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                "reader": "ExcelReader",
+                "uploaded": "2023-07-18T07:38:16.919341"
             },
             "tables": [
                 {
                     "columns": [],
                     "header": [
-                        "Filename\tDD-F41",
+                        "Filename\tdd-f44",
                         "Instrument name\t5500-0290 (192.168.1.99)",
-                        "Operator\t",
-                        "rundate\t28.06.2023",
-                        "Sample name\tDD-F41",
+                        "Operator\tNone",
+                        "rundate\t03.07.2023",
+                        "Sample name\tDD-F44",
                         "proceduresegments\tSelect Gas: Gas 1 ; Equilibrate 30.00 \u00c2\u00b0C; Isothermal 3.0 min; Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C; Isothermal 5.0 min; Select Gas: Gas 2 ; Isothermal 10.0 min",
-                        "[File Parameters]\t",
-                        "Run date\t28.06.2023 14:37:28",
+                        "[File Parameters]\tNone",
+                        "Run date\t03.07.2023 16:53:16",
                         "Trios version\t5.0.0.44608",
-                        "Original File Name\t",
-                        "Current File Name\tC:\\Users\\ITCP-AKT.ITCP-AKT-003\\Documents\\DD-F41.tri",
-                        "[Procedure]\t",
-                        "Procedure Name\tDD Standard 800 \u00c2\u00b0C",
-                        "Sample Name\tDD-F41",
-                        "Pan Number\t2.0",
-                        "Sample Mass\t9.960 mg",
+                        "Original File Name\tC:\\Users\\ITCP-AKT.ITCP-AKT-003\\Documents\\DD-F44.tri",
+                        "Current File Name\tc:\\users\\itcp-akt.itcp-akt-003\\documents\\dd-f44.tri",
+                        "[Procedure]\tNone",
+                        "Procedure Name\tDD MoO3",
+                        "Sample Name\tDD-F44",
+                        "Pan Number\t3.0",
+                        "Sample Mass\t14.866 mg",
                         "Pan Type\tPlatinum HT",
-                        "Comments\t",
-                        "Project Name\t",
-                        "Operator\t",
+                        "Comments\tNone",
+                        "Project Name\tNone",
+                        "Operator\tNone",
                         "Test\tCustom",
-                        "Skip Weight Stabilization\t1",
+                        "Skip Weight Stabilization\tTrue",
                         "Sample mass pre-weigh\tNot Available",
                         "Stop on Gas Flow Error\tYes",
-                        "[Signal List]\t",
+                        "[Signal List]\tNone",
                         "Signal #1\tTime (min)",
                         "Signal #2\tTemperature (\u00c2\u00b0C)",
                         "Signal #3\tWeight (\u00c2\u00b5g)",
@@ -48,7 +48,7 @@
                         "Signal #7\tSet Point Temperature (\u00c2\u00b0C)",
                         "Signal #8\tPower Delivered (W)",
                         "Signal #9\tRamp Rate (\u00c2\u00b0C/min)",
-                        "[Configuration]\t",
+                        "[Configuration]\tNone",
                         "Company Name\tKIT",
                         "Instrument Name\t5500-0290",
                         "Instrument Type\tTGA5500",
@@ -61,7 +61,7 @@
                         "Gas 2\tAir",
                         "Selected Gas Channel\t1.0",
                         "MTGA HiRes Licensed\tYes",
-                        "[Versions]\t",
+                        "[Versions]\tNone",
                         "Common IDD Version\t1.0",
                         "Cortex Version\tVER 2.1.2.69",
                         "Driver\t5.0.0.7",
@@ -69,7 +69,7 @@
                         "TouchscreenVersion\t1.0.0.14551",
                         "PCU Version\t1.2.0.22",
                         "Transducer Version\t1.1.0.32",
-                        "[Experiment Logs]\t",
+                        "[Experiment Logs]\tNone",
                         "Experiment Log Entry # 1\tGas Select Segment is 1",
                         "Experiment Log Entry # 3\tEquilibrate Segment 30 (C) Started",
                         "Experiment Log Entry # 5\tIsothermal Segment 3 min started",
@@ -77,7 +77,7 @@
                         "Experiment Log Entry # 9\tIsothermal Segment 5 min started",
                         "Experiment Log Entry # 11\tGas Select Segment is 2",
                         "Experiment Log Entry # 13\tIsothermal Segment 10 min started",
-                        "[Method Log]\t",
+                        "[Method Log]\tNone",
                         "Method Log Entry # 1\tGas Selected 1",
                         "Method Log Entry # 2\tEquilibrate 30 \u00c2\u00b0C",
                         "Method Log Entry # 3\tIsothermal 3 minutes",
@@ -85,7 +85,7 @@
                         "Method Log Entry # 5\tIsothermal 5 minutes",
                         "Method Log Entry # 6\tGas Selected 2",
                         "Method Log Entry # 7\tIsothermal 10 minutes",
-                        "[Weight Calibration]\t",
+                        "[Weight Calibration]\tNone",
                         "Date Applied\t14.06.2023 07:39:55",
                         "Empty Pan Number\t23.0",
                         "Empty Pan Weight\t325.000 mg",
@@ -97,7 +97,7 @@
                         "High Gain Meter Reading\t8.6100E-005 mg/count",
                         "Low Meter Offset\t47.9314 mg",
                         "High Meter Offset\t684.5124 mg",
-                        "[Curie Calibration]\t",
+                        "[Curie Calibration]\tNone",
                         "Date Applied\t14.06.2023 07:05:13",
                         "Description\tFrom 308.200 \u00c2\u00b0C to 408.200 \u00c2\u00b0C at 10.000\u00c2\u00b0C/min",
                         "Gas Type\tNitrogen",
@@ -107,104 +107,13 @@
                         "Known 1\t358.2"
                     ],
                     "metadata": {
-                        "Comments": "",
-                        "Common IDD Version": 1,
-                        "Company Name": "KIT",
-                        "Cortex Version": "VER 2.1.2.69",
-                        "Current File Name": "C:\\Users\\ITCP-AKT.ITCP-AKT-003\\Documents\\DD-F41.tri",
-                        "Date Applied": "14.06.2023 07:39:55",
-                        "Date Applied (1)": "14.06.2023 07:05:13",
-                        "Description": "From 308.200 \u00c2\u00b0C to 408.200 \u00c2\u00b0C at 10.000\u00c2\u00b0C/min",
-                        "DisplayType": "TianmaV2",
-                        "Driver": "5.0.0.7",
-                        "Empty Pan Number": 23,
-                        "Empty Pan Weight": "325.000 mg",
-                        "Experiment Log Entry # 1": "Gas Select Segment is 1",
-                        "Experiment Log Entry # 11": "Gas Select Segment is 2",
-                        "Experiment Log Entry # 13": "Isothermal Segment 10 min started",
-                        "Experiment Log Entry # 3": "Equilibrate Segment 30 (C) Started",
-                        "Experiment Log Entry # 5": "Isothermal Segment 3 min started",
-                        "Experiment Log Entry # 7": "Ramp Segment 10 C/min to 750 C Started",
-                        "Experiment Log Entry # 9": "Isothermal Segment 5 min started",
-                        "Filename": "DD-F41",
-                        "GDM Version": "1.2.1.2",
-                        "Gas 1": "Nitrogen",
-                        "Gas 2": "Air",
-                        "Gas Type": "Nitrogen",
-                        "High Gain Meter Reading": "8.6100E-005 mg/count",
-                        "High Meter Offset": "684.5124 mg",
-                        "High Reference Weight": "1,325.000 mg",
-                        "High Reference Weight Pan Number": 25,
-                        "IP": "192.168.1.99",
-                        "Instrument Name": "5500-0290",
-                        "Instrument Type": "TGA5500",
-                        "Instrument name": "5500-0290 (192.168.1.99)",
-                        "Known 1": 358.2,
-                        "Location of Instrument": "Manufacturing Test",
-                        "Low Gain Meter Reading": "9.5856E-006 mg/count",
-                        "Low Meter Offset": "47.9314 mg",
-                        "Low Reference Weight": "425.000 mg",
-                        "Low Reference Weight Pan Number": 24,
-                        "MTGA HiRes Licensed": "Yes",
-                        "Measured 1": 355.8379,
-                        "Method Log Entry # 1": "Gas Selected 1",
-                        "Method Log Entry # 2": "Equilibrate 30 \u00c2\u00b0C",
-                        "Method Log Entry # 3": "Isothermal 3 minutes",
-                        "Method Log Entry # 4": "(Ramp 88036) Ramp 10 \u00c2\u00b0C/minute to 750 \u00c2\u00b0C",
-                        "Method Log Entry # 5": "Isothermal 5 minutes",
-                        "Method Log Entry # 6": "Gas Selected 2",
-                        "Method Log Entry # 7": "Isothermal 10 minutes",
-                        "Operator": "",
-                        "Operator (1)": "",
-                        "Original File Name": "",
-                        "PCU Version": "1.2.0.22",
-                        "Pan Number": 2,
-                        "Pan Type": "Platinum HT",
-                        "Pan Type (1)": "Platinum HT",
-                        "Procedure Name": "DD Standard 800 \u00c2\u00b0C",
-                        "Project Name": "",
-                        "Run date": "28.06.2023 14:37:28",
-                        "Sample Mass": "9.960 mg",
-                        "Sample Name": "DD-F41",
-                        "Sample mass pre-weigh": "Not Available",
-                        "Sample name": "DD-F41",
-                        "Sampling Rate": 0.1,
-                        "Selected Gas Channel": 1,
-                        "Serial Number": "5500-0290",
-                        "Signal #1": "Time (min)",
-                        "Signal #2": "Temperature (\u00c2\u00b0C)",
-                        "Signal #3": "Weight (\u00c2\u00b5g)",
-                        "Signal #4": "Temperature Difference (\u00c2\u00b0C)",
-                        "Signal #5": "Sample Purge (mL/min)",
-                        "Signal #6": "Balance Purge (mL/min)",
-                        "Signal #7": "Set Point Temperature (\u00c2\u00b0C)",
-                        "Signal #8": "Power Delivered (W)",
-                        "Signal #9": "Ramp Rate (\u00c2\u00b0C/min)",
-                        "Skip Weight Stabilization": 1,
-                        "Source Files 1": "C:\\Users\\ITCP-AKT.ITCP-AKT-003\\Documents\\Nickel(6).tri",
-                        "Stop on Gas Flow Error": "Yes",
-                        "Test": "Custom",
-                        "TouchscreenVersion": "1.0.0.14551",
-                        "Transducer Version": "1.1.0.32",
-                        "Trios version": "5.0.0.44608",
-                        "[Configuration]": "",
-                        "[Curie Calibration]": "",
-                        "[Experiment Logs]": "",
-                        "[File Parameters]": "",
-                        "[Method Log]": "",
-                        "[Procedure]": "",
-                        "[Signal List]": "",
-                        "[Versions]": "",
-                        "[Weight Calibration]": "",
                         "__UNIT_%": "%",
                         "__UNIT_PPM": "ppm",
                         "__UNIT_gram": "g",
                         "__UNIT_liter": "l",
                         "__UNIT_mol": "mol",
                         "columns": "0",
-                        "proceduresegments": "Select Gas: Gas 1 ; Equilibrate 30.00 \u00c2\u00b0C; Isothermal 3.0 min; Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C; Isothermal 5.0 min; Select Gas: Gas 2 ; Isothermal 10.0 min",
-                        "rows": "0",
-                        "rundate": "28.06.2023"
+                        "rows": "0"
                     },
                     "rows": []
                 },
@@ -228,83 +137,74 @@
                         }
                     ],
                     "header": [
-                        "Isothermal 3.0 min\t\t\t",
+                        "Isothermal 3.0 min\tNone\tNone\tNone",
                         "Time\tTemperature\tWeight\tWeight",
                         "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%"
                     ],
                     "metadata": {
-                        "Isothermal 3.0 min": "",
-                        "Isothermal 3.0 min (1)": "",
-                        "Isothermal 3.0 min (2)": "",
-                        "Time": "Temperature",
-                        "Time (1)": "Weight",
-                        "Time (2)": "Weight",
                         "columns": "4",
-                        "min": "\u00c2\u00b0C",
-                        "min (1)": "\u00c2\u00b5g",
-                        "min (2)": "%",
                         "rows": "1800"
                     },
                     "rows": [
                         [
                             0,
-                            29.79,
-                            9916.2,
-                            99.56
+                            30.05,
+                            14863.02,
+                            99.98
                         ],
                         [
                             0.00166667,
-                            29.79,
-                            9916.16,
-                            99.56
+                            30.05,
+                            14862.96,
+                            99.98
                         ],
                         [
                             0.00333333,
-                            29.79,
-                            9916.13,
-                            99.56
+                            30.05,
+                            14862.9,
+                            99.98
                         ],
                         [
                             0.005,
-                            29.79,
-                            9916.09,
-                            99.56
+                            30.05,
+                            14862.84,
+                            99.98
                         ],
                         [
                             0.00666667,
-                            29.79,
-                            9916.05,
-                            99.56
+                            30.05,
+                            14862.77,
+                            99.98
                         ],
                         [
                             0.00833333,
-                            29.79,
-                            9916.01,
-                            99.56
+                            30.05,
+                            14862.7,
+                            99.98
                         ],
                         [
                             0.01,
-                            29.79,
-                            9915.97,
-                            99.56
+                            30.05,
+                            14862.64,
+                            99.98
                         ],
                         [
                             0.0116667,
-                            29.79,
-                            9915.93,
-                            99.56
+                            30.05,
+                            14862.58,
+                            99.98
                         ],
                         [
                             0.0133333,
-                            29.8,
-                            9915.9,
-                            99.56
+                            30.05,
+                            14862.53,
+                            99.98
                         ],
                         [
                             0.015,
-                            29.8,
-                            9915.86,
-                            99.56
+                            30.05,
+                            14862.47,
+                            99.98
                         ]
                     ]
                 },
@@ -328,83 +228,74 @@
                         }
                     ],
                     "header": [
-                        "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C\t\t\t",
+                        "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C\tNone\tNone\tNone",
                         "Time\tTemperature\tWeight\tWeight",
                         "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%"
                     ],
                     "metadata": {
-                        "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C": "",
-                        "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C (1)": "",
-                        "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C (2)": "",
-                        "Time": "Temperature",
-                        "Time (1)": "Weight",
-                        "Time (2)": "Weight",
                         "columns": "4",
-                        "min": "\u00c2\u00b0C",
-                        "min (1)": "\u00c2\u00b5g",
-                        "min (2)": "%",
-                        "rows": "43391"
+                        "rows": "43411"
                     },
                     "rows": [
                         [
                             3,
-                            29.73,
-                            9866.36,
-                            99.06
+                            29.62,
+                            14775.12,
+                            99.39
                         ],
                         [
                             3.00167,
-                            29.73,
-                            9866.34,
-                            99.06
+                            29.62,
+                            14775.08,
+                            99.39
                         ],
                         [
                             3.00333,
-                            29.73,
-                            9866.32,
-                            99.06
+                            29.62,
+                            14775.05,
+                            99.39
                         ],
                         [
                             3.005,
-                            29.73,
-                            9866.3,
-                            99.06
+                            29.62,
+                            14775.01,
+                            99.39
                         ],
                         [
                             3.00667,
-                            29.73,
-                            9866.28,
-                            99.06
+                            29.62,
+                            14774.97,
+                            99.39
                         ],
                         [
                             3.00833,
-                            29.73,
-                            9866.26,
-                            99.06
+                            29.62,
+                            14774.94,
+                            99.39
                         ],
                         [
                             3.01,
-                            29.73,
-                            9866.24,
-                            99.06
+                            29.62,
+                            14774.9,
+                            99.39
                         ],
                         [
                             3.01167,
-                            29.73,
-                            9866.22,
-                            99.06
+                            29.62,
+                            14774.86,
+                            99.39
                         ],
                         [
                             3.01333,
-                            29.73,
-                            9866.2,
-                            99.06
+                            29.62,
+                            14774.83,
+                            99.39
                         ],
                         [
                             3.015,
-                            29.73,
-                            9866.18,
-                            99.06
+                            29.62,
+                            14774.79,
+                            99.39
                         ]
                     ]
                 },
@@ -428,83 +319,74 @@
                         }
                     ],
                     "header": [
-                        "Isothermal 5.0 min\t\t\t",
+                        "Isothermal 5.0 min\tNone\tNone\tNone",
                         "Time\tTemperature\tWeight\tWeight",
                         "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%"
                     ],
                     "metadata": {
-                        "Isothermal 5.0 min": "",
-                        "Isothermal 5.0 min (1)": "",
-                        "Isothermal 5.0 min (2)": "",
-                        "Time": "Temperature",
-                        "Time (1)": "Weight",
-                        "Time (2)": "Weight",
                         "columns": "4",
-                        "min": "\u00c2\u00b0C",
-                        "min (1)": "\u00c2\u00b5g",
-                        "min (2)": "%",
                         "rows": "3000"
                     },
                     "rows": [
                         [
-                            75.3183,
+                            75.3517,
                             748.21,
-                            2669.97,
-                            26.81
+                            5169.76,
+                            34.78
                         ],
                         [
-                            75.32,
+                            75.3533,
                             748.23,
-                            2669.95,
-                            26.81
+                            5169.77,
+                            34.78
                         ],
                         [
-                            75.3217,
+                            75.355,
                             748.24,
-                            2669.92,
-                            26.81
+                            5169.78,
+                            34.78
                         ],
                         [
-                            75.3233,
+                            75.3567,
                             748.26,
-                            2669.89,
-                            26.81
+                            5169.8,
+                            34.78
                         ],
                         [
-                            75.325,
-                            748.27,
-                            2669.86,
-                            26.81
+                            75.3583,
+                            748.28,
+                            5169.81,
+                            34.78
                         ],
                         [
-                            75.3267,
+                            75.36,
                             748.29,
-                            2669.83,
-                            26.81
+                            5169.82,
+                            34.78
                         ],
                         [
-                            75.3283,
+                            75.3617,
                             748.31,
-                            2669.8,
-                            26.81
+                            5169.84,
+                            34.78
                         ],
                         [
-                            75.33,
-                            748.32,
-                            2669.77,
-                            26.81
+                            75.3633,
+                            748.33,
+                            5169.85,
+                            34.78
                         ],
                         [
-                            75.3317,
+                            75.365,
                             748.34,
-                            2669.75,
-                            26.81
+                            5169.86,
+                            34.78
                         ],
                         [
-                            75.3333,
+                            75.3667,
                             748.36,
-                            2669.72,
-                            26.81
+                            5169.88,
+                            34.78
                         ]
                     ]
                 },
@@ -525,86 +407,91 @@
                         {
                             "key": "3",
                             "name": "Column #3"
+                        },
+                        {
+                            "key": "4",
+                            "name": "Column #4"
                         }
                     ],
                     "header": [
-                        "Isothermal 10.0 min\t\t\t",
-                        "Time\tTemperature\tWeight\tWeight",
-                        "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%"
+                        "Isothermal 10.0 min\tNone\tNone\tNone\tNone",
+                        "Time\tTemperature\tWeight\tWeight\tDeriv. Weight",
+                        "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%\t% / \u00c2\u00b0C"
                     ],
                     "metadata": {
-                        "Isothermal 10.0 min": "",
-                        "Isothermal 10.0 min (1)": "",
-                        "Isothermal 10.0 min (2)": "",
-                        "Time": "Temperature",
-                        "Time (1)": "Weight",
-                        "Time (2)": "Weight",
-                        "columns": "4",
-                        "min": "\u00c2\u00b0C",
-                        "min (1)": "\u00c2\u00b5g",
-                        "min (2)": "%",
+                        "columns": "5",
                         "rows": "6000"
                     },
                     "rows": [
                         [
-                            80.3183,
+                            80.3517,
                             749.96,
-                            2613.37,
-                            26.24
+                            5139.81,
+                            34.57,
+                            -4.8125
                         ],
                         [
-                            80.32,
+                            80.3533,
                             749.96,
-                            2613.35,
-                            26.24
+                            5139.77,
+                            34.57,
+                            -6.10795
                         ],
                         [
-                            80.3217,
+                            80.355,
                             749.96,
-                            2613.33,
-                            26.24
+                            5139.73,
+                            34.57,
+                            -6.42308
                         ],
                         [
-                            80.3233,
+                            80.3567,
                             749.96,
-                            2613.31,
-                            26.24
+                            5139.68,
+                            34.57,
+                            -8.45536
                         ],
                         [
-                            80.325,
+                            80.3583,
                             749.96,
-                            2613.29,
-                            26.24
+                            5139.64,
+                            34.57,
+                            -8.44196
                         ],
                         [
-                            80.3267,
+                            80.36,
                             749.96,
-                            2613.26,
-                            26.24
+                            5139.6,
+                            34.57,
+                            -6.40144
                         ],
                         [
-                            80.3283,
+                            80.3617,
                             749.96,
-                            2613.24,
-                            26.24
+                            5139.56,
+                            34.57,
+                            -7.25
                         ],
                         [
-                            80.33,
+                            80.3633,
                             749.96,
-                            2613.23,
-                            26.24
+                            5139.51,
+                            34.57,
+                            -6.61538
                         ],
                         [
-                            80.3317,
+                            80.365,
                             749.96,
-                            2613.21,
-                            26.24
+                            5139.47,
+                            34.57,
+                            -8.89732
                         ],
                         [
-                            80.3333,
+                            80.3667,
                             749.96,
-                            2613.19,
-                            26.24
+                            5139.42,
+                            34.57,
+                            -8.97768
                         ]
                     ]
                 }
@@ -612,11 +499,11 @@
         }
     ],
     "datatypes": [],
-    "description": "TGA - Campus West, KIT with Isothermal",
+    "description": "TGA device - temp. solution",
     "devices": [],
     "diff_history": [
         {
-            "at": "2026-07-22T08:50:19.566976+00:00",
+            "at": "2026-07-22T08:50:19.432255+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -631,49 +518,49 @@
             "trigger": "migration:20260319060352"
         },
         {
-            "at": "2026-07-22T08:50:19.567744+00:00",
+            "at": "2026-07-22T08:50:19.432858+00:00",
             "diff": [
                 {
                     "op": "replace",
                     "path": "/data",
                     "value": {
                         "metadata": {
-                            "content_type": "application/vnd.ms-excel",
-                            "extension": ".xls",
-                            "file_name": "DD-F41.xls",
-                            "mime_type": "application/vnd.ms-excel",
-                            "reader": "OldExcelReader",
-                            "uploaded": "2023-08-09T08:02:12.704186"
+                            "content_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "extension": ".xlsx",
+                            "file_name": "dd-f44-2.xlsx",
+                            "mime_type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "reader": "ExcelReader",
+                            "uploaded": "2023-07-18T07:38:16.919341"
                         },
                         "tables": [
                             {
                                 "columns": [],
                                 "header": [
-                                    "Filename\tDD-F41",
+                                    "Filename\tdd-f44",
                                     "Instrument name\t5500-0290 (192.168.1.99)",
-                                    "Operator\t",
-                                    "rundate\t28.06.2023",
-                                    "Sample name\tDD-F41",
+                                    "Operator\tNone",
+                                    "rundate\t03.07.2023",
+                                    "Sample name\tDD-F44",
                                     "proceduresegments\tSelect Gas: Gas 1 ; Equilibrate 30.00 \u00c2\u00b0C; Isothermal 3.0 min; Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C; Isothermal 5.0 min; Select Gas: Gas 2 ; Isothermal 10.0 min",
-                                    "[File Parameters]\t",
-                                    "Run date\t28.06.2023 14:37:28",
+                                    "[File Parameters]\tNone",
+                                    "Run date\t03.07.2023 16:53:16",
                                     "Trios version\t5.0.0.44608",
-                                    "Original File Name\t",
-                                    "Current File Name\tC:\\Users\\ITCP-AKT.ITCP-AKT-003\\Documents\\DD-F41.tri",
-                                    "[Procedure]\t",
-                                    "Procedure Name\tDD Standard 800 \u00c2\u00b0C",
-                                    "Sample Name\tDD-F41",
-                                    "Pan Number\t2.0",
-                                    "Sample Mass\t9.960 mg",
+                                    "Original File Name\tC:\\Users\\ITCP-AKT.ITCP-AKT-003\\Documents\\DD-F44.tri",
+                                    "Current File Name\tc:\\users\\itcp-akt.itcp-akt-003\\documents\\dd-f44.tri",
+                                    "[Procedure]\tNone",
+                                    "Procedure Name\tDD MoO3",
+                                    "Sample Name\tDD-F44",
+                                    "Pan Number\t3.0",
+                                    "Sample Mass\t14.866 mg",
                                     "Pan Type\tPlatinum HT",
-                                    "Comments\t",
-                                    "Project Name\t",
-                                    "Operator\t",
+                                    "Comments\tNone",
+                                    "Project Name\tNone",
+                                    "Operator\tNone",
                                     "Test\tCustom",
-                                    "Skip Weight Stabilization\t1",
+                                    "Skip Weight Stabilization\tTrue",
                                     "Sample mass pre-weigh\tNot Available",
                                     "Stop on Gas Flow Error\tYes",
-                                    "[Signal List]\t",
+                                    "[Signal List]\tNone",
                                     "Signal #1\tTime (min)",
                                     "Signal #2\tTemperature (\u00c2\u00b0C)",
                                     "Signal #3\tWeight (\u00c2\u00b5g)",
@@ -683,7 +570,7 @@
                                     "Signal #7\tSet Point Temperature (\u00c2\u00b0C)",
                                     "Signal #8\tPower Delivered (W)",
                                     "Signal #9\tRamp Rate (\u00c2\u00b0C/min)",
-                                    "[Configuration]\t",
+                                    "[Configuration]\tNone",
                                     "Company Name\tKIT",
                                     "Instrument Name\t5500-0290",
                                     "Instrument Type\tTGA5500",
@@ -696,7 +583,7 @@
                                     "Gas 2\tAir",
                                     "Selected Gas Channel\t1.0",
                                     "MTGA HiRes Licensed\tYes",
-                                    "[Versions]\t",
+                                    "[Versions]\tNone",
                                     "Common IDD Version\t1.0",
                                     "Cortex Version\tVER 2.1.2.69",
                                     "Driver\t5.0.0.7",
@@ -704,7 +591,7 @@
                                     "TouchscreenVersion\t1.0.0.14551",
                                     "PCU Version\t1.2.0.22",
                                     "Transducer Version\t1.1.0.32",
-                                    "[Experiment Logs]\t",
+                                    "[Experiment Logs]\tNone",
                                     "Experiment Log Entry # 1\tGas Select Segment is 1",
                                     "Experiment Log Entry # 3\tEquilibrate Segment 30 (C) Started",
                                     "Experiment Log Entry # 5\tIsothermal Segment 3 min started",
@@ -712,7 +599,7 @@
                                     "Experiment Log Entry # 9\tIsothermal Segment 5 min started",
                                     "Experiment Log Entry # 11\tGas Select Segment is 2",
                                     "Experiment Log Entry # 13\tIsothermal Segment 10 min started",
-                                    "[Method Log]\t",
+                                    "[Method Log]\tNone",
                                     "Method Log Entry # 1\tGas Selected 1",
                                     "Method Log Entry # 2\tEquilibrate 30 \u00c2\u00b0C",
                                     "Method Log Entry # 3\tIsothermal 3 minutes",
@@ -720,7 +607,7 @@
                                     "Method Log Entry # 5\tIsothermal 5 minutes",
                                     "Method Log Entry # 6\tGas Selected 2",
                                     "Method Log Entry # 7\tIsothermal 10 minutes",
-                                    "[Weight Calibration]\t",
+                                    "[Weight Calibration]\tNone",
                                     "Date Applied\t14.06.2023 07:39:55",
                                     "Empty Pan Number\t23.0",
                                     "Empty Pan Weight\t325.000 mg",
@@ -732,7 +619,7 @@
                                     "High Gain Meter Reading\t8.6100E-005 mg/count",
                                     "Low Meter Offset\t47.9314 mg",
                                     "High Meter Offset\t684.5124 mg",
-                                    "[Curie Calibration]\t",
+                                    "[Curie Calibration]\tNone",
                                     "Date Applied\t14.06.2023 07:05:13",
                                     "Description\tFrom 308.200 \u00c2\u00b0C to 408.200 \u00c2\u00b0C at 10.000\u00c2\u00b0C/min",
                                     "Gas Type\tNitrogen",
@@ -742,99 +629,8 @@
                                     "Known 1\t358.2"
                                 ],
                                 "metadata": {
-                                    "Comments": "",
-                                    "Common IDD Version": 1,
-                                    "Company Name": "KIT",
-                                    "Cortex Version": "VER 2.1.2.69",
-                                    "Current File Name": "C:\\Users\\ITCP-AKT.ITCP-AKT-003\\Documents\\DD-F41.tri",
-                                    "Date Applied": "14.06.2023 07:39:55",
-                                    "Date Applied (1)": "14.06.2023 07:05:13",
-                                    "Description": "From 308.200 \u00c2\u00b0C to 408.200 \u00c2\u00b0C at 10.000\u00c2\u00b0C/min",
-                                    "DisplayType": "TianmaV2",
-                                    "Driver": "5.0.0.7",
-                                    "Empty Pan Number": 23,
-                                    "Empty Pan Weight": "325.000 mg",
-                                    "Experiment Log Entry # 1": "Gas Select Segment is 1",
-                                    "Experiment Log Entry # 11": "Gas Select Segment is 2",
-                                    "Experiment Log Entry # 13": "Isothermal Segment 10 min started",
-                                    "Experiment Log Entry # 3": "Equilibrate Segment 30 (C) Started",
-                                    "Experiment Log Entry # 5": "Isothermal Segment 3 min started",
-                                    "Experiment Log Entry # 7": "Ramp Segment 10 C/min to 750 C Started",
-                                    "Experiment Log Entry # 9": "Isothermal Segment 5 min started",
-                                    "Filename": "DD-F41",
-                                    "GDM Version": "1.2.1.2",
-                                    "Gas 1": "Nitrogen",
-                                    "Gas 2": "Air",
-                                    "Gas Type": "Nitrogen",
-                                    "High Gain Meter Reading": "8.6100E-005 mg/count",
-                                    "High Meter Offset": "684.5124 mg",
-                                    "High Reference Weight": "1,325.000 mg",
-                                    "High Reference Weight Pan Number": 25,
-                                    "IP": "192.168.1.99",
-                                    "Instrument Name": "5500-0290",
-                                    "Instrument Type": "TGA5500",
-                                    "Instrument name": "5500-0290 (192.168.1.99)",
-                                    "Known 1": 358.2,
-                                    "Location of Instrument": "Manufacturing Test",
-                                    "Low Gain Meter Reading": "9.5856E-006 mg/count",
-                                    "Low Meter Offset": "47.9314 mg",
-                                    "Low Reference Weight": "425.000 mg",
-                                    "Low Reference Weight Pan Number": 24,
-                                    "MTGA HiRes Licensed": "Yes",
-                                    "Measured 1": 355.8379,
-                                    "Method Log Entry # 1": "Gas Selected 1",
-                                    "Method Log Entry # 2": "Equilibrate 30 \u00c2\u00b0C",
-                                    "Method Log Entry # 3": "Isothermal 3 minutes",
-                                    "Method Log Entry # 4": "(Ramp 88036) Ramp 10 \u00c2\u00b0C/minute to 750 \u00c2\u00b0C",
-                                    "Method Log Entry # 5": "Isothermal 5 minutes",
-                                    "Method Log Entry # 6": "Gas Selected 2",
-                                    "Method Log Entry # 7": "Isothermal 10 minutes",
-                                    "Operator": "",
-                                    "Operator (1)": "",
-                                    "Original File Name": "",
-                                    "PCU Version": "1.2.0.22",
-                                    "Pan Number": 2,
-                                    "Pan Type": "Platinum HT",
-                                    "Pan Type (1)": "Platinum HT",
-                                    "Procedure Name": "DD Standard 800 \u00c2\u00b0C",
-                                    "Project Name": "",
-                                    "Run date": "28.06.2023 14:37:28",
-                                    "Sample Mass": "9.960 mg",
-                                    "Sample Name": "DD-F41",
-                                    "Sample mass pre-weigh": "Not Available",
-                                    "Sample name": "DD-F41",
-                                    "Sampling Rate": 0.1,
-                                    "Selected Gas Channel": 1,
-                                    "Serial Number": "5500-0290",
-                                    "Signal #1": "Time (min)",
-                                    "Signal #2": "Temperature (\u00c2\u00b0C)",
-                                    "Signal #3": "Weight (\u00c2\u00b5g)",
-                                    "Signal #4": "Temperature Difference (\u00c2\u00b0C)",
-                                    "Signal #5": "Sample Purge (mL/min)",
-                                    "Signal #6": "Balance Purge (mL/min)",
-                                    "Signal #7": "Set Point Temperature (\u00c2\u00b0C)",
-                                    "Signal #8": "Power Delivered (W)",
-                                    "Signal #9": "Ramp Rate (\u00c2\u00b0C/min)",
-                                    "Skip Weight Stabilization": 1,
-                                    "Source Files 1": "C:\\Users\\ITCP-AKT.ITCP-AKT-003\\Documents\\Nickel(6).tri",
-                                    "Stop on Gas Flow Error": "Yes",
-                                    "Test": "Custom",
-                                    "TouchscreenVersion": "1.0.0.14551",
-                                    "Transducer Version": "1.1.0.32",
-                                    "Trios version": "5.0.0.44608",
-                                    "[Configuration]": "",
-                                    "[Curie Calibration]": "",
-                                    "[Experiment Logs]": "",
-                                    "[File Parameters]": "",
-                                    "[Method Log]": "",
-                                    "[Procedure]": "",
-                                    "[Signal List]": "",
-                                    "[Versions]": "",
-                                    "[Weight Calibration]": "",
                                     "columns": "0",
-                                    "proceduresegments": "Select Gas: Gas 1 ; Equilibrate 30.00 \u00c2\u00b0C; Isothermal 3.0 min; Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C; Isothermal 5.0 min; Select Gas: Gas 2 ; Isothermal 10.0 min",
-                                    "rows": "0",
-                                    "rundate": "28.06.2023"
+                                    "rows": "0"
                                 },
                                 "rows": []
                             },
@@ -858,83 +654,74 @@
                                     }
                                 ],
                                 "header": [
-                                    "Isothermal 3.0 min\t\t\t",
+                                    "Isothermal 3.0 min\tNone\tNone\tNone",
                                     "Time\tTemperature\tWeight\tWeight",
                                     "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%"
                                 ],
                                 "metadata": {
-                                    "Isothermal 3.0 min": "",
-                                    "Isothermal 3.0 min (1)": "",
-                                    "Isothermal 3.0 min (2)": "",
-                                    "Time": "Temperature",
-                                    "Time (1)": "Weight",
-                                    "Time (2)": "Weight",
                                     "columns": "4",
-                                    "min": "\u00c2\u00b0C",
-                                    "min (1)": "\u00c2\u00b5g",
-                                    "min (2)": "%",
                                     "rows": "1800"
                                 },
                                 "rows": [
                                     [
                                         0,
-                                        29.79,
-                                        9916.2,
-                                        99.56
+                                        30.05,
+                                        14863.02,
+                                        99.98
                                     ],
                                     [
                                         0.00166667,
-                                        29.79,
-                                        9916.16,
-                                        99.56
+                                        30.05,
+                                        14862.96,
+                                        99.98
                                     ],
                                     [
                                         0.00333333,
-                                        29.79,
-                                        9916.13,
-                                        99.56
+                                        30.05,
+                                        14862.9,
+                                        99.98
                                     ],
                                     [
                                         0.005,
-                                        29.79,
-                                        9916.09,
-                                        99.56
+                                        30.05,
+                                        14862.84,
+                                        99.98
                                     ],
                                     [
                                         0.00666667,
-                                        29.79,
-                                        9916.05,
-                                        99.56
+                                        30.05,
+                                        14862.77,
+                                        99.98
                                     ],
                                     [
                                         0.00833333,
-                                        29.79,
-                                        9916.01,
-                                        99.56
+                                        30.05,
+                                        14862.7,
+                                        99.98
                                     ],
                                     [
                                         0.01,
-                                        29.79,
-                                        9915.97,
-                                        99.56
+                                        30.05,
+                                        14862.64,
+                                        99.98
                                     ],
                                     [
                                         0.0116667,
-                                        29.79,
-                                        9915.93,
-                                        99.56
+                                        30.05,
+                                        14862.58,
+                                        99.98
                                     ],
                                     [
                                         0.0133333,
-                                        29.8,
-                                        9915.9,
-                                        99.56
+                                        30.05,
+                                        14862.53,
+                                        99.98
                                     ],
                                     [
                                         0.015,
-                                        29.8,
-                                        9915.86,
-                                        99.56
+                                        30.05,
+                                        14862.47,
+                                        99.98
                                     ]
                                 ]
                             },
@@ -958,83 +745,74 @@
                                     }
                                 ],
                                 "header": [
-                                    "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C\t\t\t",
+                                    "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C\tNone\tNone\tNone",
                                     "Time\tTemperature\tWeight\tWeight",
                                     "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%"
                                 ],
                                 "metadata": {
-                                    "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C": "",
-                                    "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C (1)": "",
-                                    "Ramp 10.00 \u00c2\u00b0C/min to 750.00 \u00c2\u00b0C (2)": "",
-                                    "Time": "Temperature",
-                                    "Time (1)": "Weight",
-                                    "Time (2)": "Weight",
                                     "columns": "4",
-                                    "min": "\u00c2\u00b0C",
-                                    "min (1)": "\u00c2\u00b5g",
-                                    "min (2)": "%",
-                                    "rows": "43391"
+                                    "rows": "43411"
                                 },
                                 "rows": [
                                     [
                                         3,
-                                        29.73,
-                                        9866.36,
-                                        99.06
+                                        29.62,
+                                        14775.12,
+                                        99.39
                                     ],
                                     [
                                         3.00167,
-                                        29.73,
-                                        9866.34,
-                                        99.06
+                                        29.62,
+                                        14775.08,
+                                        99.39
                                     ],
                                     [
                                         3.00333,
-                                        29.73,
-                                        9866.32,
-                                        99.06
+                                        29.62,
+                                        14775.05,
+                                        99.39
                                     ],
                                     [
                                         3.005,
-                                        29.73,
-                                        9866.3,
-                                        99.06
+                                        29.62,
+                                        14775.01,
+                                        99.39
                                     ],
                                     [
                                         3.00667,
-                                        29.73,
-                                        9866.28,
-                                        99.06
+                                        29.62,
+                                        14774.97,
+                                        99.39
                                     ],
                                     [
                                         3.00833,
-                                        29.73,
-                                        9866.26,
-                                        99.06
+                                        29.62,
+                                        14774.94,
+                                        99.39
                                     ],
                                     [
                                         3.01,
-                                        29.73,
-                                        9866.24,
-                                        99.06
+                                        29.62,
+                                        14774.9,
+                                        99.39
                                     ],
                                     [
                                         3.01167,
-                                        29.73,
-                                        9866.22,
-                                        99.06
+                                        29.62,
+                                        14774.86,
+                                        99.39
                                     ],
                                     [
                                         3.01333,
-                                        29.73,
-                                        9866.2,
-                                        99.06
+                                        29.62,
+                                        14774.83,
+                                        99.39
                                     ],
                                     [
                                         3.015,
-                                        29.73,
-                                        9866.18,
-                                        99.06
+                                        29.62,
+                                        14774.79,
+                                        99.39
                                     ]
                                 ]
                             },
@@ -1058,83 +836,74 @@
                                     }
                                 ],
                                 "header": [
-                                    "Isothermal 5.0 min\t\t\t",
+                                    "Isothermal 5.0 min\tNone\tNone\tNone",
                                     "Time\tTemperature\tWeight\tWeight",
                                     "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%"
                                 ],
                                 "metadata": {
-                                    "Isothermal 5.0 min": "",
-                                    "Isothermal 5.0 min (1)": "",
-                                    "Isothermal 5.0 min (2)": "",
-                                    "Time": "Temperature",
-                                    "Time (1)": "Weight",
-                                    "Time (2)": "Weight",
                                     "columns": "4",
-                                    "min": "\u00c2\u00b0C",
-                                    "min (1)": "\u00c2\u00b5g",
-                                    "min (2)": "%",
                                     "rows": "3000"
                                 },
                                 "rows": [
                                     [
-                                        75.3183,
+                                        75.3517,
                                         748.21,
-                                        2669.97,
-                                        26.81
+                                        5169.76,
+                                        34.78
                                     ],
                                     [
-                                        75.32,
+                                        75.3533,
                                         748.23,
-                                        2669.95,
-                                        26.81
+                                        5169.77,
+                                        34.78
                                     ],
                                     [
-                                        75.3217,
+                                        75.355,
                                         748.24,
-                                        2669.92,
-                                        26.81
+                                        5169.78,
+                                        34.78
                                     ],
                                     [
-                                        75.3233,
+                                        75.3567,
                                         748.26,
-                                        2669.89,
-                                        26.81
+                                        5169.8,
+                                        34.78
                                     ],
                                     [
-                                        75.325,
-                                        748.27,
-                                        2669.86,
-                                        26.81
+                                        75.3583,
+                                        748.28,
+                                        5169.81,
+                                        34.78
                                     ],
                                     [
-                                        75.3267,
+                                        75.36,
                                         748.29,
-                                        2669.83,
-                                        26.81
+                                        5169.82,
+                                        34.78
                                     ],
                                     [
-                                        75.3283,
+                                        75.3617,
                                         748.31,
-                                        2669.8,
-                                        26.81
+                                        5169.84,
+                                        34.78
                                     ],
                                     [
-                                        75.33,
-                                        748.32,
-                                        2669.77,
-                                        26.81
+                                        75.3633,
+                                        748.33,
+                                        5169.85,
+                                        34.78
                                     ],
                                     [
-                                        75.3317,
+                                        75.365,
                                         748.34,
-                                        2669.75,
-                                        26.81
+                                        5169.86,
+                                        34.78
                                     ],
                                     [
-                                        75.3333,
+                                        75.3667,
                                         748.36,
-                                        2669.72,
-                                        26.81
+                                        5169.88,
+                                        34.78
                                     ]
                                 ]
                             },
@@ -1155,86 +924,91 @@
                                     {
                                         "key": "3",
                                         "name": "Column #3"
+                                    },
+                                    {
+                                        "key": "4",
+                                        "name": "Column #4"
                                     }
                                 ],
                                 "header": [
-                                    "Isothermal 10.0 min\t\t\t",
-                                    "Time\tTemperature\tWeight\tWeight",
-                                    "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%"
+                                    "Isothermal 10.0 min\tNone\tNone\tNone\tNone",
+                                    "Time\tTemperature\tWeight\tWeight\tDeriv. Weight",
+                                    "min\t\u00c2\u00b0C\t\u00c2\u00b5g\t%\t% / \u00c2\u00b0C"
                                 ],
                                 "metadata": {
-                                    "Isothermal 10.0 min": "",
-                                    "Isothermal 10.0 min (1)": "",
-                                    "Isothermal 10.0 min (2)": "",
-                                    "Time": "Temperature",
-                                    "Time (1)": "Weight",
-                                    "Time (2)": "Weight",
-                                    "columns": "4",
-                                    "min": "\u00c2\u00b0C",
-                                    "min (1)": "\u00c2\u00b5g",
-                                    "min (2)": "%",
+                                    "columns": "5",
                                     "rows": "6000"
                                 },
                                 "rows": [
                                     [
-                                        80.3183,
+                                        80.3517,
                                         749.96,
-                                        2613.37,
-                                        26.24
+                                        5139.81,
+                                        34.57,
+                                        -4.8125
                                     ],
                                     [
-                                        80.32,
+                                        80.3533,
                                         749.96,
-                                        2613.35,
-                                        26.24
+                                        5139.77,
+                                        34.57,
+                                        -6.10795
                                     ],
                                     [
-                                        80.3217,
+                                        80.355,
                                         749.96,
-                                        2613.33,
-                                        26.24
+                                        5139.73,
+                                        34.57,
+                                        -6.42308
                                     ],
                                     [
-                                        80.3233,
+                                        80.3567,
                                         749.96,
-                                        2613.31,
-                                        26.24
+                                        5139.68,
+                                        34.57,
+                                        -8.45536
                                     ],
                                     [
-                                        80.325,
+                                        80.3583,
                                         749.96,
-                                        2613.29,
-                                        26.24
+                                        5139.64,
+                                        34.57,
+                                        -8.44196
                                     ],
                                     [
-                                        80.3267,
+                                        80.36,
                                         749.96,
-                                        2613.26,
-                                        26.24
+                                        5139.6,
+                                        34.57,
+                                        -6.40144
                                     ],
                                     [
-                                        80.3283,
+                                        80.3617,
                                         749.96,
-                                        2613.24,
-                                        26.24
+                                        5139.56,
+                                        34.57,
+                                        -7.25
                                     ],
                                     [
-                                        80.33,
+                                        80.3633,
                                         749.96,
-                                        2613.23,
-                                        26.24
+                                        5139.51,
+                                        34.57,
+                                        -6.61538
                                     ],
                                     [
-                                        80.3317,
+                                        80.365,
                                         749.96,
-                                        2613.21,
-                                        26.24
+                                        5139.47,
+                                        34.57,
+                                        -8.89732
                                     ],
                                     [
-                                        80.3333,
+                                        80.3667,
                                         749.96,
-                                        2613.19,
-                                        26.24
+                                        5139.42,
+                                        34.57,
+                                        -8.97768
                                     ]
                                 ]
                             }
@@ -1246,7 +1020,7 @@
             "trigger": "migration:20260401123327"
         },
         {
-            "at": "2026-07-22T08:50:19.568252+00:00",
+            "at": "2026-07-22T08:50:19.433242+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -1257,7 +1031,7 @@
             "trigger": "migration:20260417132254"
         },
         {
-            "at": "2026-07-22T08:50:19.569008+00:00",
+            "at": "2026-07-22T08:50:19.433732+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -1284,7 +1058,7 @@
             "trigger": "migration:20260422063146"
         },
         {
-            "at": "2026-07-22T08:50:19.570147+00:00",
+            "at": "2026-07-22T08:50:19.434568+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -1299,27 +1073,13 @@
                     "op": "add",
                     "path": "/tables/0/table/xColumn/tableIndex",
                     "value": 2
-                },
-                {
-                    "op": "remove",
-                    "path": "/tables/1/loopType"
-                },
-                {
-                    "from": "/tables/1/inputTableIndex",
-                    "op": "move",
-                    "path": "/tables/1/table/yColumn/tableIndex"
-                },
-                {
-                    "op": "add",
-                    "path": "/tables/1/table/xColumn/tableIndex",
-                    "value": 1
                 }
             ],
             "profile_version": "1.4",
             "trigger": "migration:20260506160404"
         },
         {
-            "at": "2026-07-22T08:50:19.570823+00:00",
+            "at": "2026-07-22T08:50:19.435066+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -1328,21 +1088,13 @@
                 {
                     "op": "remove",
                     "path": "/tables/0/uuid"
-                },
-                {
-                    "op": "remove",
-                    "path": "/tables/1/tableName"
-                },
-                {
-                    "op": "remove",
-                    "path": "/tables/1/uuid"
                 }
             ],
             "profile_version": "1.5",
             "trigger": "migration:20260513094819"
         },
         {
-            "at": "2026-07-22T08:59:45.735062+00:00",
+            "at": "2026-07-22T08:59:44.124472+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -1361,7 +1113,7 @@
             "trigger": "migration:20250822110356"
         },
         {
-            "at": "2026-07-22T08:59:45.735675+00:00",
+            "at": "2026-07-22T08:59:44.124938+00:00",
             "diff": [
                 {
                     "op": "remove",
@@ -1376,7 +1128,7 @@
             "trigger": "migration:20250908063445"
         },
         {
-            "at": "2026-07-22T08:59:45.738525+00:00",
+            "at": "2026-07-22T08:59:44.127158+00:00",
             "diff": [
                 {
                     "op": "replace",
@@ -1398,51 +1150,37 @@
             "trigger": "migration:20260323144702"
         },
         {
-            "at": "2026-07-22T08:59:45.741499+00:00",
+            "at": "2026-07-22T08:59:44.129912+00:00",
             "diff": [
                 {
                     "op": "remove",
                     "path": "/tables/0/loopOutput"
-                },
-                {
-                    "op": "remove",
-                    "path": "/tables/1/loopOutput"
                 }
             ],
             "profile_version": "1.9",
             "trigger": "migration:20260506160404"
         }
     ],
-    "id": "e7a4ee04-cdf6-4da6-a82c-ba6909af6cee",
+    "id": "7d51cc84-9f10-46d5-8233-2f3e6c53e114",
     "identifiers": [
         {
             "editable": true,
             "id": "#0fileMetadata",
-            "key": "reader",
+            "key": "content_type",
             "match": "exact",
             "optional": false,
             "type": "fileMetadata",
-            "value": "OldExcelReader"
+            "value": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         },
         {
             "editable": true,
-            "id": "#1tableMetadata",
-            "key": "Instrument Type",
+            "id": "#1tableHeader",
+            "lineNumber": 2,
             "match": "exact",
             "optional": false,
             "tableIndex": 0,
-            "type": "tableMetadata",
-            "value": "TGA5500"
-        },
-        {
-            "editable": true,
-            "id": "#2tableHeader",
-            "lineNumber": 1,
-            "match": "regex",
-            "optional": false,
-            "tableIndex": 2,
             "type": "tableHeader",
-            "value": "Ramp"
+            "value": "Instrument name\t5500-0290 (192.168.1.99)"
         }
     ],
     "isDefaultProfile": false,
@@ -1480,7 +1218,7 @@
                 "DATA CLASS": "XYPOINTS",
                 "DATA TYPE": "THERMOGRAVIMETRIC ANALYSIS",
                 "XUNITS": "DEGREES CELSIUS",
-                "YUNITS": "Weight %"
+                "YUNITS": "ABSORBANCE"
             },
             "inputTableIndex": 2,
             "loopOutput": "MULTI FILE",
@@ -1494,29 +1232,8 @@
                 }
             },
             "tableName": "Table #1",
-            "uuid": "31b4575f-a6e2-4480-aada-59f3761c1d97"
-        },
-        {
-            "header": {
-                "DATA CLASS": "XYPOINTS",
-                "DATA TYPE": "THERMOGRAVIMETRIC ANALYSIS",
-                "XUNITS": "DEGREES CELSIUS",
-                "YUNITS": "Weight %"
-            },
-            "inputTableIndex": 1,
-            "loopOutput": "MULTI FILE",
-            "loopType": "none",
-            "table": {
-                "xColumn": {
-                    "columnIndex": 1
-                },
-                "yColumn": {
-                    "columnIndex": 3
-                }
-            },
-            "tableName": "Table #2",
-            "uuid": "2f4effe7-6312-4ed6-a679-1ebba109a603"
+            "uuid": "84bfd53b-b6a3-44f9-af0f-98b56f3f2838"
         }
     ],
-    "title": "TGA"
+    "title": "TGA temp. solution"
 }

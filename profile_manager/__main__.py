@@ -133,10 +133,13 @@ def build_index():
             print(f"Error fetching ontology for {profile_id}: {e}, setting ontology to empty dict")
             ontology = {}
 
+        data = json_profile["data"][0] if isinstance(json_profile["data"], list) else json_profile["data"]
+        title = f"{json_profile.get("title")} (v{json_profile.get('profile_version')})" if json_profile.get('profile_version') else json_profile.get("title")
+
         profile_entry = {
-            "reader": json_profile["data"]["metadata"].get("reader"),
-            "extension": json_profile["data"]["metadata"].get("extension"),
-            "title": json_profile.get("title"),
+            "reader": data["metadata"].get("reader"),
+            "extension": data["metadata"].get("extension"),
+            "title": title,
             "description": json_profile.get("description"),
             "devices": json_profile.get("devices"),
             "software": json_profile.get("software"),
