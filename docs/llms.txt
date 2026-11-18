@@ -1,0 +1,133 @@
+# Chemotion Converter – Readers & Profiles Index
+
+> Chemotion Converter (also: ChemConverter, chemotion-converter-app) is an open-source (AGPL-3.0) Python
+> service that converts raw analytical instrument files into standardised formats: JCAMP-DX, BagIt
+> ZIP containers, RDF/Turtle and metadata JSON. It runs integrated in the Chemotion ELN (automatic
+> conversion on upload) or standalone as REST server (Flask/gunicorn), desktop GUI
+> (`python -m converter_app`) and command-line tool (`python -m converter_app convert -i FILE -o jcampzip`).
+> Developed by ComPlat at the Karlsruhe Institute of Technology (KIT), funded by the DFG within NFDI4Chem.
+
+Readers are Python classes that parse a file format (`check()` decides if a reader accepts a file, the
+lowest `priority` wins). Profiles are JSON rule sets that recognise a file by `identifiers` and map
+its tables and metadata to the output, optionally annotated with CHMO ontology terms.
+This index was generated on 2026-11-18 and lists 45 readers and 55 public profiles.
+
+## Main pages
+
+- [Interactive index of readers and profiles](https://complat.github.io/chemotion-converter-profiles/): searchable tables, downloads
+- [Loop documentation](https://complat.github.io/chemotion-converter-profiles/loop_docu.html): repeated output tables
+- [Operator documentation](https://complat.github.io/chemotion-converter-profiles/operator_docu.html): x/y value operations in profiles
+- [ChemConverter user guide](https://chemotion.net/docs/services/chemconverter): official Chemotion documentation
+
+## Source code
+
+- [chemotion-converter-app](https://github.com/ComPlat/chemotion-converter-app): backend, readers, CLI (Python >= 3.12)
+- [chemotion-converter-client](https://github.com/ComPlat/chemotion-converter-client): React profile editor
+- [chemotion-converter-profiles](https://github.com/ComPlat/chemotion-converter-profiles): public profiles and this index
+- [chemotion_ELN](https://github.com/ComPlat/chemotion_ELN): Chemotion electronic lab notebook
+
+## Readers
+
+- [afm.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/afm.py): reader class `AfmReader`, identifier `afm_reader`, priority 10
+- [aif.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/aif.py): reader class `AifReader`, identifier `aif_reader`, priority 95
+- [asc_zip.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/asc_zip.py): reader class `AscZipReader`, identifier `asc_zip_reader`, priority 10
+- [ascii.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/ascii.py): reader class `AsciiReader`, identifier `ascii_reader`, priority 1000
+- [ascii_zip.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/ascii_zip.py): reader class `AsciiReaderArchive`, identifier `ascii_reader_archive`, priority 10001
+- [bio_logic_reader.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/bio_logic_reader.py): reader class `BioLogic`, identifier `bio_logic_080ecac4-8fa2-4c47-b7cc-4ef5db082b07`, priority 20
+- [brml.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/brml.py): reader class `BrmlReader`, identifier `brml_reader`, priority 10
+- [brucker_dotzero.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/brucker_dotzero.py): reader class `DotZeroReader`, identifier `dot_zero_reader`, priority 79
+- [cary.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/cary.py): reader class `CaryReader`, identifier `cary_reader`, priority 90
+- [cfx.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/cfx.py): reader class `CfxReader`, identifier `cfx_reader`, priority 11
+- [cif.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/cif.py): reader class `CifReader`, identifier `cif_reader`, priority 10
+- [csm.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/csm.py): reader class `CsmReader`, identifier `csm_reader`, priority 10
+- [csv_reader.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/csv_reader.py): reader class `CSVReader`, identifier `csv_reader`, priority 100
+- [dsp.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/dsp.py): reader class `DSPReader`, identifier `dsp_reader`, priority 95
+- [dta.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/dta.py): reader class `DtaReader`, identifier `dta_reader`, priority 10
+- [dwl.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/dwl.py): reader class `_ReaderSate`, identifier `dwl-reader`, priority 11
+- [ea_pdf.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/ea_pdf.py): reader class `EaPdfReader`, identifier `pdf_ea_reader`, priority 99
+- [ebl.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/ebl.py): reader class `_State`, identifier `ebl_reader`, priority 50
+- [excel.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/excel.py): reader class `ExcelReader`, identifier `excel_reader`, priority 15
+- [gcd.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/gcd.py): reader class `GcdReader`, identifier `gcd_reader`, priority 5
+- [gcode_reader.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/gcode_reader.py): reader class `GCodeReader`, identifier `gcode_reader`, priority 5
+- [hplc_reader.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/hplc_reader.py): reader class `HplcReader`, identifier `hplc_reader`, priority 5
+- [html.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/html.py): reader class `HtmlReader`, identifier `html_reader`, priority 100
+- [jasco.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/jasco.py): reader class `JascoReader`, identifier `jasco_reader`, priority 99
+- [jcamp_conv_reader.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/jcamp_conv_reader.py): reader class `JcampReader`, identifier `jcamp_reader`, priority 80
+- [json_reader.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/json_reader.py): reader class `JsonReader`, identifier `json_reader`, priority 20
+- [lcms_reader.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/lcms_reader.py): reader class `LcmsReader`, identifier `lcms_reader`, priority 10
+- [lithoz_pdf.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/lithoz_pdf.py): reader class `PdfLithozReader`, identifier `pdf_lithoz_reader`, priority 99
+- [mpl.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/mpl.py): reader class `MplReader`, identifier `mps_reader`, priority 10
+- [mpr.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/mpr.py): reader class `MprReader`, identifier `mpr_reader`, priority 10
+- [nova.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/nova.py): reader class `NovaReader`, identifier `nova_reader`, priority 90
+- [old_excel.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/old_excel.py): reader class `OldExcelReader`, identifier `old_excel_reader`, priority 16
+- [pdf.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/pdf.py): reader class `PdfReader`, identifier `pdf_reader`, priority 100
+- [pssession.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/pssession.py): reader class `PsSessionReader`, identifier `pssession_reader`, priority 10
+- [sec.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/sec.py): reader class `SecReader`, identifier `sec_reader`, priority 95
+- [sem.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/sem.py): reader class `SemReader`, identifier `sem_reader`, priority 95
+- [squid.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/squid.py): reader class `SquidReader`, identifier `squid_reader`, priority 10
+- [stoe_raw.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/stoe_raw.py): reader class `StoeRawReader`, identifier `stoe_raw_reader`, priority 5
+- [tif.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/tif.py): reader class `TifReader`, identifier `tif_reader`, priority 96
+- [tvb.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/tvb.py): reader class `TvbReader`, identifier `tvb_reader`, priority 5
+- [uvvis.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/uvvis.py): reader class `UvvisReader`, identifier `uvvis_reader`, priority 10
+- [uxd_reader.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/uxd_reader.py): reader class `UXDReader`, identifier `uxd_reader`, priority 10
+- [vsi.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/vsi.py): reader class `VsiReader`, identifier `vsi_reader`, priority 8
+- [xml_reader.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/xml_reader.py): reader class `XMLReader`, identifier `xml_reader`, priority 10
+- [xrdml.py](https://complat.github.io/chemotion-converter-profiles/atch/server/readers/xrdml.py): reader class `XRDMLReader`, identifier `xrdml_reader`
+
+## Profiles
+
+- [## Nameless (04/12/2025 14:33:36)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/8b00e934-9bc4-4248-a2de-b303d2e93aa4.json): reader DtaReader; extension .DTA; devices g, a; software windows, x, linux
+- [AIF (v1.8)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/5cb879d1-2b3f-4778-8e06-1a198500c8db.json): reader AifReader; extension .txt; ontology CHMO:0001167: ['sorption-desorption measurement']
+- [Asc (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/88f7dfeb-f28b-4e13-a8f3-1814944fcbf8.json): reader AscZipReader; extension .zip
+- [Biologic as tar gz](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/8c8c4b18-143a-4245-a8d4-29e47c6b86a1.json): reader BioLogic; extension .gz; ontology CHMO:0000025: ['cyclic voltammetry']
+- [brml (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/4bb38194-0a9b-4c6f-b72e-6b8e315d7329.json): reader BrmlReader; extension .brml; ontology CHMO:0000156: ['X-ray diffraction']
+- [CD MS Spectra data from txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/b31ef3df-eacf-4440-bbb3-34b073be9eb9.json): reader CSVReader; extension .txt
+- [CD MS Spectra data from txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/fb19f78e-8d87-4c5f-a4e1-ac90994300d7.json): reader CSVReader; extension .txt
+- [CD spectrometry (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/5ec4bf88-56e8-41ae-9503-adc5f3f3f106.json): reader CSVReader; extension .csv; ontology CHMO:0000323: ['circular dichroism spectroscopy']
+- [CDS (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/8dc07777-0d5b-4bdd-94ba-0379be524b4a.json): reader CSVReader; extension .csv; ontology CHMO:0000323: ['circular dichroism spectroscopy']
+- [CFX (v1.8)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/f09fcf1b-acb8-4163-803a-ab66fd2ecdec.json): reader CfxReader; extension .cfx_LANA; ontology CHMO:0000159: ['single crystal X-ray diffraction']
+- [Chemstation (v1.6)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/12b1ff4b-e295-4377-ba11-c602d855a644.json): reader HplcReader; extension .gz
+- [CIF (v1.8)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/df15f2b0-4133-4231-8b48-bec52fb6043c.json): reader CifReader; extension .cif; ontology CHMO:0000159: ['single crystal X-ray diffraction']
+- [CV data from DTA, data: +, metadata: + (v1.8)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/799f3db4-fd21-4aa7-a7bd-7c5548cbe316.json): reader DtaReader; extension .DTA; ontology CHMO:0000025: ['cyclic voltammetry']
+- [CV data from txt, data: +, metadata: (+) (v1.8)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/6bb4fea5-3a59-4b95-8956-d977a4d8b6a7.json): reader NovaReader; extension .txt; ontology CHMO:0000025: ['cyclic voltammetry']
+- [CV pssession (v1.8)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/c6573972-cb06-484d-a529-9dd2424fc408.json): reader PsSessionReader; extension .pssession; ontology CHMO:0000025: ['cyclic voltammetry']
+- [DLS](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/e10cd71e-b44f-4493-b7ad-ca231ccd324f.json): reader ExcelReader; extension .xlsx
+- [DLS data from txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/a5b05507-aed2-462b-a526-3fee53c87a48.json): reader CSVReader; extension .txt
+- [DLS data from txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/d9be2928-fd8e-4abe-bbe0-3e419330875f.json): reader CSVReader; extension .txt
+- [DLS-ACF](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/fbbe088a-b688-4609-8c00-086a149f61ba.json): reader ExcelReader; extension .xlsx
+- [DSC with Time (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/0d04f3c5-43d4-408a-85ef-34b33975020a.json): reader CSVReader; extension .csv; ontology CHMO:0000684: ['differential scanning calorimetry']
+- [DSC without time (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/3e2fb90e-b6b6-4152-9182-ed8e203a58b5.json): reader CSVReader; extension .csv; ontology CHMO:0000684: ['differential scanning calorimetry']
+- [ELN4EBL (v1.8)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/d55c644d-0724-4a26-8ba1-b0af6774d582.json): reader EblReader; extension .log; ontology CHMO:0000073: ['scanning electron microscopy']
+- [Emission spectrum](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/cddfe1ff-ef5a-44fb-a6ba-443a870c7a27.json): reader CSVReader; extension .txt; ontology CHMO:0000287: ['fluorescence spectroscopy']
+- [Excel UVVIS (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/990946bd-395e-4ce0-909b-2f2f871211bf.json): reader ExcelReader; extension .xlsx; ontology CHMO:0000025: ['cyclic voltammetry']
+- [File043.xy (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/43ef6a18-e339-44c1-853c-c6081e09a9be.json): reader CSVReader; extension .xy
+- [GC BID extended (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/4a9f5d43-c719-4eb7-88ea-a556dca00052.json): reader GcdReader; extension .txt; ontology CHMO:0001002: ['gas chromatography']
+- [HplcReader as .tar.gz (v1.2)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/f35d9a84-059a-4ac7-b78d-25cd756f40c3.json): reader HplcReader; extension .gz
+- [IR data from generic csv, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/b1449f84-3090-4568-88b7-dce0b4752ec9.json): reader CSVReader; extension .csv; ontology CHMO:0000630: ['infrared absorption spectroscopy']
+- [IR DPT (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/0cd6596c-83d2-49ab-a982-1dfec98d16ba.json): reader CSVReader; extension .dpt
+- [LcmsReader (v1.18)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/d7729388-8350-402c-b617-82a6fa4900dd.json): reader LcmsReader; extension .gz
+- [Mass spectrometry from general xy format, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/5b206281-49f6-437b-99ca-c64a621eb903.json): reader AsciiReader; extension .xy
+- [Mass spectrometry from txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/c498c925-61e0-455e-a4c6-c46ac9c2f5c6.json): reader CSVReader; extension .csv
+- [preparative HPLC (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/ac7ff698-0bcf-4761-843b-bbd474849910.json): reader CSVReader; extension .TXT; ontology CHMO:0001009: ['high-performance liquid chromatography']
+- [PXRD (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/78c39eb3-8930-4542-a5b8-c6602b1afef3.json): reader AsciiReader; extension .jcp; ontology CHMO:0000156: ['X-ray diffraction']
+- [PXRD data from xy, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/4d4f72ef-3708-4516-b110-2fa6869565ce.json): reader AsciiReader; extension .xy; ontology CHMO:0000156: ['X-ray diffraction']
+- [SEC 1 (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/44f5bfbb-ae1f-4da0-b43b-0d33b649c24a.json): reader SecReader; extension .TXT; ontology CHMO:0001013: ['size-exclusion chromatography']
+- [SEC 2](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/71883827-4472-48d8-becf-64ea89324f3e.json): reader SecReader; extension .TXT; ontology CHMO:0001013: ['size-exclusion chromatography']
+- [Tensile test (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/6d344bc4-c4fb-4306-9d56-1e754e7e0590.json): reader CSVReader; extension .txt; ontology CHMO:0001163: ['tensiometry']
+- [Tensile test data from txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/c9d63af9-2ce7-425e-895c-c04b8497c26c.json): reader CSVReader; extension .txt; ontology CHMO:0001163: ['tensiometry']
+- [TGA (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/e7a4ee04-cdf6-4da6-a82c-ba6909af6cee.json): reader OldExcelReader; extension .xls
+- [TGA 2 (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/fb63e718-3842-4d45-9b39-84a53b27e483.json): reader OldExcelReader; extension .xls
+- [TGA temp. solution (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/7d51cc84-9f10-46d5-8233-2f3e6c53e114.json): reader ExcelReader; extension .xlsx
+- [TGA with derivative (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/e845bc85-07b9-4e21-8bdf-4daa4a74fa15.json): reader OldExcelReader; extension .xls
+- [UV-Vis](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/2a913039-c48d-4fd5-9fbb-706733e53f76.json): reader CSVReader; extension .txt; ontology CHMO:0000292: ['ultraviolet-visible spectrophotometry']
+- [UV-Vis (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/615dc314-5fc5-44c4-a2b4-9929de75446e.json): reader CSVReader; extension .txt
+- [UV-Vis (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/c7e3130f-6c23-432a-a886-a82d11632da2.json): reader CSVReader; extension .txt
+- [UV-VIS data from csv, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/8079b064-6314-4d99-b13b-e4f590cf556f.json): reader CSVReader; extension .csv
+- [UV-VIS data from general txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/5a413afd-cb77-40e4-99b1-c044d94eaa51.json): reader CSVReader; extension .txt
+- [UV-VIS data from HPLC txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/0c5ddfaa-d253-412e-977a-5a44ef20ce77.json): reader CSVReader; extension .txt; devices Thermo UltiMate 3000 HPLC; software Chromeleon; ontology CHMO:0001009: ['high-performance liquid chromatography']
+- [UV-VIS data from multi-column csv, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/db05bfb4-6829-4339-bec1-54065710f211.json): reader CSVReader; extension .csv
+- [UV-VIS data from txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/6be46fd7-59a2-4b02-829b-cbfef8c19646.json): reader CSVReader; extension .txt
+- [UV-VIS data from txt, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/af891148-ebcc-4e5d-a481-fa6acc853699.json): reader CSVReader; extension .txt
+- [UVVIS CS (v1.10)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/15400217-b730-47db-9d5c-a300bce7ae95.json): reader ExcelReader; extension .xlsx
+- [UVVIS CS (v1.9)](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/d8e6bf8f-6de1-4743-9513-04cbd0c6c712.json): reader CSVReader; extension .csv; ontology CHMO:0000292: ['ultraviolet-visible spectrophotometry']
+- [X-ray diffraction data from brml, data: +, metadata: -](https://complat.github.io/chemotion-converter-profiles/atch/server/profiles/0d7dd8d4-a599-4151-855e-643956a7362c.json): reader BrmlReader; extension .brml

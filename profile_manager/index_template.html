@@ -1,38 +1,390 @@
- <!--If you want to change design and css style of the index.html do it only on the template file, !never! edit the index in the folder /docs/index.html. It is locally only for testing and will be overwritten by the build process.-->
 <!doctype html>
+<!--
+  Source template of docs/index.html. Edit ONLY this file (plus docs/global.css and docs/assets/app.js);
+  docs/index.html is build output of `python -m profile_manager build_index` and will be overwritten.
+
+  Placeholders filled by profile_manager/__main__.py:fill_data_into_html:
+  {{ PROGRAM_NAME }} {{ SITE_URL }} {{ BUILD_DATE }} {{ READER_COUNT }} {{ PROFILE_COUNT }}
+  {{ SITE_HEADER }} {{ SITE_FOOTER }} {{ READERS_TABLE }} {{ PROFILES_TABLE }}
+  {{ READERS_STATIC_LIST }} {{ PROFILES_STATIC_LIST }}
+
+  Privacy rule: no third-party requests. No CDN, no web fonts, no external images/scripts/styles.
+  The only third-party code (AG Grid) is vendored under docs/assets/vendor/ (see README there).
+-->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ PROGRAM_NAME }}</title>
+    <title>{{ PROGRAM_NAME }} – Readers &amp; Profiles for Chemotion ELN and standalone use</title>
+    <meta name="description" content="Searchable index of all Chemotion Converter readers and public conversion profiles. The open-source converter turns raw analytical instrument files (CSV, TXT, binary, PDF …) into JCAMP-DX, BagIt ZIP or RDF – inside the Chemotion ELN or as standalone server, desktop GUI and CLI." />
+    <meta name="keywords" content="Chemotion, Chemotion Converter, ChemConverter, electronic lab notebook, ELN, research data management, FAIR data, JCAMP-DX, BagIt, RDF, CHMO, analytical chemistry, instrument data, file converter, NFDI4Chem, LabIMotion, KIT" />
+    <meta name="author" content="ComPlat – Karlsruhe Institute of Technology (KIT)" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#2495cf" />
+    <link rel="canonical" href="{{ SITE_URL }}" />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="sitemap" type="application/xml" href="sitemap.xml" />
+    <link rel="alternate" type="text/plain" title="LLM-friendly summary" href="llms.txt" />
 
+    <!-- Open Graph / social previews (no third-party script involved) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ PROGRAM_NAME }}" />
+    <meta property="og:title" content="{{ PROGRAM_NAME }} – Readers &amp; Profiles Index" />
+    <meta property="og:description" content="Turn raw instrument files into FAIR research data: {{ READER_COUNT }} readers and {{ PROFILE_COUNT }} public profiles, for the Chemotion ELN and as standalone tool." />
+    <meta property="og:url" content="{{ SITE_URL }}" />
+    <meta property="og:image" content="{{ SITE_URL }}atch/about.png" />
+    <meta property="og:image:alt" content="Overview diagram of the Chemotion Converter profiles and readers workflow" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Structured data for search engines and AI crawlers (schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "{{ SITE_URL }}#website",
+          "url": "{{ SITE_URL }}",
+          "name": "{{ PROGRAM_NAME }} – Readers & Profiles Index",
+          "inLanguage": "en",
+          "publisher": { "@id": "{{ SITE_URL }}#org" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "{{ SITE_URL }}#org",
+          "name": "ComPlat – Karlsruhe Institute of Technology (KIT)",
+          "url": "https://chemotion.net/",
+          "sameAs": ["https://github.com/ComPlat"]
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "{{ SITE_URL }}#software",
+          "name": "{{ PROGRAM_NAME }}",
+          "alternateName": ["ChemConverter", "chemotion-converter-app"],
+          "description": "Open-source backend service to interconvert chemistry-related files. Readers parse raw analytical instrument files, profiles map them to standardised output (JCAMP-DX, BagIt ZIP, RDF/Turtle). Runs integrated in the Chemotion ELN or standalone as REST server, desktop GUI or command-line tool.",
+          "applicationCategory": "ScientificApplication",
+          "operatingSystem": "Linux, macOS (Python 3.12 or newer)",
+          "softwareRequirements": "Python >= 3.12",
+          "programmingLanguage": "Python",
+          "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
+          "isAccessibleForFree": true,
+          "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+          "codeRepository": "https://github.com/ComPlat/chemotion-converter-app",
+          "url": "{{ SITE_URL }}",
+          "author": { "@id": "{{ SITE_URL }}#org" },
+          "funder": {
+            "@type": "Organization",
+            "name": "Deutsche Forschungsgemeinschaft (DFG) – NFDI4Chem, project number 441958208"
+          },
+          "isPartOf": { "@type": "CreativeWork", "name": "Chemotion", "url": "https://chemotion.net/" },
+          "keywords": "ELN, research data management, FAIR, JCAMP-DX, BagIt, RDF, CHMO, analytical chemistry"
+        },
+        {
+          "@type": "Dataset",
+          "@id": "{{ SITE_URL }}#profiles",
+          "name": "Chemotion Converter public profiles and readers",
+          "description": "{{ PROFILE_COUNT }} public conversion profiles (JSON) and {{ READER_COUNT }} reader classes (Python) of the Chemotion Converter, with metadata, matching rules and CHMO ontology terms.",
+          "url": "{{ SITE_URL }}#profiles",
+          "dateModified": "{{ BUILD_DATE }}",
+          "license": "https://spdx.org/licenses/AGPL-3.0-or-later.html",
+          "isAccessibleForFree": true,
+          "creator": { "@id": "{{ SITE_URL }}#org" },
+          "keywords": ["Chemotion", "converter profiles", "instrument file formats", "CHMO"]
+        }
+      ]
+    }
+    </script>
+
+    <!-- AG Grid Community 36.2.0, MIT license, served locally (docs/assets/vendor/README.md) -->
+    <link rel="stylesheet" href="assets/vendor/ag-grid-community-36.2.0/ag-grid.min.css" />
+    <link rel="stylesheet" href="assets/vendor/ag-grid-community-36.2.0/ag-theme-alpine.min.css" />
+    <!-- Site styles after the grid theme, so the --ag-* overrides (brand colours, dark mode) win. -->
     <link rel="stylesheet" href="global.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-grid.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css">
-    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="assets/vendor/ag-grid-community-36.2.0/ag-grid-community.min.noStyle.js" defer></script>
     <script src="assets/app.js" defer></script>
   </head>
 
-  <body>
-    <header>
-      <h1>{{ PROGRAM_NAME }}</h1>
-      <nav>
-        <a href="impressum-en.html">Imprint</a>
-        <a href="atch/about.pdf">About PDF</a>
-        <a href="atch/tools/ChemConverterApp.exe">ChemConverterApp-Windows Standalone download (comming soon)</a>
-        <a href="atch/tools/ChemConverterApp">ChemConverterApp-Linux Standalone download (comming soon)</a>
-        <a href="all-pages.html">All pages</a>
-      </nav>
-    </header>
+  <body id="top">
+{{ SITE_HEADER }}
 
-    <main>
-      <p>Chemotion Converter is a very powerful python file converter running as a stand-alone flask server or included in an ELN or scientific Repository (like the <a href="https://chemotion.net/">Chemotion ELN</a>, other ELNs we cannot guarantee) and called via API during file upload. For local and offline users, it is also possible to use it as an CLI tool.</p>
-      <h1>Readers</h1>
-      <p>A reader is a python class file handling the translation of your input file format to a usable python object. It is created by providing an example file to the developers or python coders and used and defined by the <a href="https://github.com/ComPlat/chemotion-converter-app">converter app backend</a>.</p>
-      {{ READERS_TABLE }}
-      <h1>Profiles</h1>
-      <p>A profile is JSON file defining a ruleset on how to convert your input file. Normally, it is created by uploading an example of your input file to the GUI of the <a href="https://github.com/ComPlat/chemotion-converter-client">converter client frontend</a>.</p>
-      {{ PROFILES_TABLE }}
+    <main id="main" tabindex="-1">
+      <!-- ============ Hero ============ -->
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Open source · Part of the Chemotion ecosystem</p>
+            <h1 id="hero-title">Turn raw instrument files into <span class="accent">FAIR research data</span></h1>
+            <p class="lead">{{ PROGRAM_NAME }} is a very powerful Python file converter for analytical and instrument data. It runs as a stand-alone Flask server, is included in an ELN or scientific repository (like the <a href="https://chemotion.net/">Chemotion ELN</a>; for other ELNs we cannot give a guarantee) and is called via API during file upload. For local and offline users it is also available as desktop GUI and CLI tool.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#readers">Browse readers &amp; profiles</a>
+              <a class="btn btn-secondary" href="#standalone">Get started</a>
+              <a class="btn btn-secondary" href="https://github.com/ComPlat/chemotion-converter-app">Source code on GitHub</a>
+            </div>
+          </div>
+          <dl class="stats" aria-label="Key figures">
+            <div class="stat"><dt>Readers for instrument formats</dt><dd>{{ READER_COUNT }}</dd></div>
+            <div class="stat"><dt>Public conversion profiles</dt><dd>{{ PROFILE_COUNT }}</dd></div>
+            <div class="stat"><dt>Ways to run it: ELN, server, GUI, CLI</dt><dd>4</dd></div>
+            <div class="stat"><dt>Open source license</dt><dd>AGPL</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <!-- ============ Features ============ -->
+      <section id="features" class="section" aria-labelledby="features-title">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Why the Converter</span>
+            <h2 id="features-title">One converter for the whole lab</h2>
+            <p>Laboratories produce data in dozens of proprietary and semi-structured formats. The Converter reads them, understands their structure and writes standardised, machine-readable files that the Chemotion ELN, ChemSpectra and other tools can use directly.</p>
+          </div>
+          <ul class="card-grid">
+            <li class="card">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+              <h3>Readers for many formats</h3>
+              <p>Python reader classes parse CSV, TXT, Excel, XML, PDF and vendor-specific binary files (e.g. Gamry DTA, Metrohm NOVA, BioLogic EC-Lab, Bruker, Malvern Panalytical) into tables and metadata.</p>
+            </li>
+            <li class="card">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="16" r="3"/><path d="M20.2 18.2 22 20"/></svg></span>
+              <h3>Profiles instead of code</h3>
+              <p>A profile is a JSON rule set: it recognises a file by its identifiers and maps columns, units and metadata to the output. Profiles are created in a graphical editor – no programming needed.</p>
+            </li>
+            <li class="card">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg></span>
+              <h3>Standard output formats</h3>
+              <p>Results are written as JCAMP-DX (<code>.jdx</code>), as a BagIt ZIP container with checksums, as RDF/Turtle (<code>.ttl</code>) or as metadata JSON – ready for archiving and re-use.</p>
+            </li>
+            <li class="card">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8 7.5l3 8M16 7.5l-3 8M8.5 6h7"/></svg></span>
+              <h3>Ontology-aware</h3>
+              <p>Profiles can carry terms of the Chemical Methods Ontology (CHMO). The index below resolves them via the EBI Ontology Lookup Service, so every profile is linked to the measurement method it describes.</p>
+            </li>
+            <li class="card">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3"/></svg></span>
+              <h3>Data operations</h3>
+              <p>Profiles can transform x/y values with column, constant, metadata or header based operations and repeat output tables in loops for multi-table files.</p>
+            </li>
+            <li class="card">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg></span>
+              <h3>Versioned &amp; migratable</h3>
+              <p>Profiles are versioned and can be restored. Built-in migrations keep older profiles compatible when the profile format evolves.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ How it works ============ -->
+      <section id="how-it-works" class="section section-alt" aria-labelledby="how-title">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">How it works</span>
+            <h2 id="how-title">From raw file to standardised data in four steps</h2>
+          </div>
+          <ol class="pipeline">
+            <li><h3>Upload</h3><p>A file arrives – dropped into the ELN inbox, sent by a measurement device, posted to the REST API or passed on the command line.</p></li>
+            <li><h3>Match a reader</h3><p>Each reader's <code>check()</code> decides whether it can parse the file. If several fit, the lowest <em>priority</em> value wins.</p></li>
+            <li><h3>Match a profile</h3><p>The parsed tables and metadata are compared with the <em>identifiers</em> of all profiles to find the right rule set.</p></li>
+            <li><h3>Write output</h3><p>The profile maps the data to JCAMP-DX, BagIt ZIP, RDF or JSON – including units, metadata and ontology terms.</p></li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ ELN integration ============ -->
+      <section id="eln" class="section" aria-labelledby="eln-title">
+        <div class="container split">
+          <div>
+            <span class="section-kicker">Integrated</span>
+            <h2 id="eln-title">Built into the Chemotion ELN</h2>
+            <p>In the <a href="https://github.com/ComPlat/chemotion_ELN">Chemotion ELN</a> the Converter works as a background service. When a user or a measurement device uploads an analytical file, it is converted automatically – the user only notices the additional, converted files next to the original.</p>
+            <ul class="check-list">
+              <li>Automatic conversion on upload, no manual export steps</li>
+              <li>Converted results appear in the inbox next to the original file and can be attached to analyses</li>
+              <li>JCAMP-DX output can be inspected and processed with ChemSpectra</li>
+              <li>Admins manage profiles in the ELN under <strong>Converter Profiles</strong> and can delegate profile editing to individual users</li>
+              <li>Works with Chemotion LabIMotion</li>
+            </ul>
+            <a class="card-link" href="https://chemotion.net/docs/services/chemconverter/integration">Read how the ELN integration works →</a>
+          </div>
+          <div class="card">
+            <h3>Collaboration that improves both sides</h3>
+            <p>Every profile created for one ELN instance can be shared here as a public profile – so a new instrument supported in one lab becomes available to the whole Chemotion community.</p>
+            <ul>
+              <li><strong>ELN</strong>: upload, storage, sample context, visualisation</li>
+              <li><strong>Converter</strong>: format knowledge, mapping, standardisation</li>
+              <li><strong>This index</strong>: discoverability of readers and profiles</li>
+            </ul>
+            <a class="card-link" href="https://chemotion.net/">Discover Chemotion →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Standalone ============ -->
+      <section id="standalone" class="section section-alt" aria-labelledby="standalone-title">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Standalone</span>
+            <h2 id="standalone-title">Just as powerful on its own</h2>
+            <p>The Converter does not need an ELN. Install it with pip and use it on your workstation, in your own data pipelines or as a central conversion service for your institute. On first start the standalone mode downloads the public profile set automatically.</p>
+          </div>
+          <ul class="card-grid">
+            <li class="card">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+              <h3>Desktop GUI</h3>
+              <p>Starts a local server and opens the converter and profile editor in your browser at <code>http://127.0.0.1:5000</code>.</p>
+<pre tabindex="0"><code>python -m converter_app
+python -m converter_app edit-cli-profiles</code></pre>
+            </li>
+            <li class="card">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-5-6-5M12 19h8"/></svg></span>
+              <h3>Command line</h3>
+              <p>Convert files from shell scripts and data pipelines. Output types: <code>jcampzip</code>, <code>jcamp</code>, <code>rdf</code>.</p>
+<pre tabindex="0"><code>python -m converter_app convert \
+  -i measurement.csv -o jcampzip</code></pre>
+            </li>
+            <li class="card">
+              <span class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="18" height="7" rx="1.5"/><path d="M7 6.5h.01M7 17.5h.01"/></svg></span>
+              <h3>REST server</h3>
+              <p>Flask app served by gunicorn behind NGINX, with HTTP basic auth to separate clients. Endpoints include <code>/conversions</code>, <code>/tables</code>, <code>/profiles</code>, <code>/datasets</code> and <code>/options</code>.</p>
+              <a class="card-link" href="https://github.com/ComPlat/chemotion-converter-app#readme">Server setup guide →</a>
+            </li>
+          </ul>
+          <div class="callout">
+            <p><strong>Installation</strong> (Python 3.12 or newer, Linux or macOS; on Windows use WSL2):</p>
+<pre tabindex="0"><code>python3.12 -m venv .venv &amp;&amp; source .venv/bin/activate
+pip install git+https://github.com/ComPlat/chemotion-converter-app</code></pre>
+            <p>Pre-built standalone apps for Windows and Linux are <span class="badge">coming soon</span>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Components ============ -->
+      <section id="components" class="section" aria-labelledby="components-title">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Architecture</span>
+            <h2 id="components-title">Three open-source building blocks</h2>
+          </div>
+          <ul class="card-grid">
+            <li class="card">
+              <h3>converter-app <span class="badge">backend</span></h3>
+              <p>Python package and Flask service with all readers, the profile engine, writers and the CLI. Python ≥ 3.12, AGPL-3.0.</p>
+              <a class="card-link" href="https://github.com/ComPlat/chemotion-converter-app">ComPlat/chemotion-converter-app →</a>
+            </li>
+            <li class="card">
+              <h3>converter-client <span class="badge">frontend</span></h3>
+              <p>React application to upload example files, inspect the parsed tables and build profiles visually. AGPL-3.0.</p>
+              <a class="card-link" href="https://github.com/ComPlat/chemotion-converter-client">ComPlat/chemotion-converter-client →</a>
+            </li>
+            <li class="card">
+              <h3>converter-profiles <span class="badge">this site</span></h3>
+              <p>Public profiles, documentation and this automatically generated index of all readers and profiles, rebuilt on every change.</p>
+              <a class="card-link" href="https://github.com/ComPlat/chemotion-converter-profiles">ComPlat/chemotion-converter-profiles →</a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ============ Readers ============ -->
+      <section id="readers" class="section section-alt" aria-labelledby="readers-title">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Index</span>
+            <h2 id="readers-title">Readers</h2>
+            <p>A reader is a Python class handling the translation of your input file format to a usable Python object. It is created by providing an example file to the developers or Python coders and is used and defined by the <a href="https://github.com/ComPlat/chemotion-converter-app">converter app backend</a>.</p>
+          </div>
+          <ul class="grid-help" aria-label="How to use the table">
+            <li>Sort: click a column header</li>
+            <li>Filter: type into the field below a header</li>
+            <li>Column info: click <strong>i</strong></li>
+            <li>Download: click the file name</li>
+          </ul>
+          <noscript><div class="callout"><p>The interactive table needs JavaScript. A plain list of all readers is available below.</p></div></noscript>
+          <div class="grid-wrapper">
+{{ READERS_TABLE }}
+          </div>
+          <details class="static-list">
+            <summary>Plain list of all {{ READER_COUNT }} readers</summary>
+{{ READERS_STATIC_LIST }}
+          </details>
+        </div>
+      </section>
+
+      <!-- ============ Profiles ============ -->
+      <section id="profiles" class="section" aria-labelledby="profiles-title">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Index</span>
+            <h2 id="profiles-title">Profiles</h2>
+            <p>A profile is a JSON file defining a rule set on how to convert your input file. Normally, it is created by uploading an example of your input file to the GUI of the <a href="https://github.com/ComPlat/chemotion-converter-client">converter client frontend</a>.</p>
+          </div>
+          <ul class="grid-help" aria-label="How to use the table">
+            <li>Sort: click a column header</li>
+            <li>Filter: type into the field below a header</li>
+            <li>Column info: click <strong>i</strong></li>
+            <li>Download: click the profile id</li>
+          </ul>
+          <noscript><div class="callout"><p>The interactive table needs JavaScript. A plain list of all profiles is available below.</p></div></noscript>
+          <div class="grid-wrapper">
+{{ PROFILES_TABLE }}
+          </div>
+          <details class="static-list">
+            <summary>Plain list of all {{ PROFILE_COUNT }} profiles</summary>
+{{ PROFILES_STATIC_LIST }}
+          </details>
+          <div class="callout">
+            <p><strong>Your instrument is missing?</strong> Create a profile with the profile editor and share it via a pull request to <a href="https://github.com/ComPlat/chemotion-converter-profiles">chemotion-converter-profiles</a>. For a completely new file format, send an example file to the developers so that a reader can be added – see the <a href="impressum-en.html">contact details</a>.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Documentation ============ -->
+      <section id="docs" class="section section-alt" aria-labelledby="docs-title">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-kicker">Learn more</span>
+            <h2 id="docs-title">Documentation &amp; downloads</h2>
+          </div>
+          <ul class="card-grid">
+            <li class="card">
+              <h3>Converter loops</h3>
+              <p>How output tables are repeated for several input tables and how loop conditions are evaluated.</p>
+              <a class="card-link" href="loop_docu.html">Loop documentation →</a>
+            </li>
+            <li class="card">
+              <h3>Converter operators</h3>
+              <p>How profiles apply calculations to x- and y-values with columns, constants, metadata and header values.</p>
+              <a class="card-link" href="operator_docu.html">Operator documentation →</a>
+            </li>
+            <li class="card">
+              <h3>About this index</h3>
+              <p>Overview diagram: how profiles, readers, GitHub and this page work together.</p>
+              <a class="card-link" href="atch/about.pdf">About (PDF) →</a>
+            </li>
+            <li class="card">
+              <h3>ChemConverter user guide</h3>
+              <p>Official Chemotion documentation for users and administrators of the Converter.</p>
+              <a class="card-link" href="https://chemotion.net/docs/services/chemconverter">chemotion.net/docs →</a>
+            </li>
+            <li class="card">
+              <h3>ChemConverterApp standalone</h3>
+              <!-- Planned download targets: atch/tools/ChemConverterApp.exe (Windows) and atch/tools/ChemConverterApp (Linux).
+                   Turn the items below into links once the binaries are published. -->
+              <ul>
+                <li>Windows download <span class="badge badge-muted">coming soon</span></li>
+                <li>Linux download <span class="badge badge-muted">coming soon</span></li>
+              </ul>
+            </li>
+            <li class="card">
+              <h3>All pages</h3>
+              <p>A complete list of every page and attachment published on this site.</p>
+              <a class="card-link" href="all-pages.html">All pages →</a>
+            </li>
+          </ul>
+        </div>
+      </section>
     </main>
+
+{{ SITE_FOOTER }}
   </body>
 </html>

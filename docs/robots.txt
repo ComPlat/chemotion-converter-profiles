@@ -1,0 +1,5 @@
+# Everything on this site may be indexed by search engines and AI crawlers.
+User-agent: *
+Allow: /
+
+Sitemap: https://complat.github.io/chemotion-converter-profiles/sitemap.xml

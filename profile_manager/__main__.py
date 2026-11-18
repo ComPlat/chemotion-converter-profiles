@@ -2,6 +2,7 @@ import json
 import os
 import shutil
 import sys
+from datetime import datetime, timezone
 from html import escape
 from typing import BinaryIO, cast
 from importlib.resources import files
@@ -19,6 +20,9 @@ from profile_manager.parse_ast import read_metadata_from_readercode
 from llm_tools.code_translator import bullets_to_html, load_translations, save_translations
 
 program_name = "Chemotion Converter"
+# Public URL of the GitHub Pages deployment (canonical URL, sitemap, Open Graph, llms.txt).
+site_url = "https://complat.github.io/chemotion-converter-profiles/"
+partials_dir: Path = Path(__file__).parent.joinpath("partials")
 profiles_dict = {}
 readers_dict = {}
 
@@ -160,8 +164,15 @@ def build_index():
     profiles_table = dict_to_ag_grid_html(profiles_row_data, profiles_column_defs, "profiles")
 
     template_path = Path(__file__).parent.joinpath("index_template.html")
-    fill_data_into_html(template_path, readers_table, profiles_table)
+    fill_data_into_html(
+        template_path,
+        readers_table,
+        profiles_table,
+        readers_static_list=readers_static_list_html(),
+        profiles_static_list=profiles_static_list_html(),
+    )
     build_html_links_page(base_path)
+    build_discovery_files(base_path)
 
 
 def readers_dict_to_grid_config():
@@ -241,27 +252,213 @@ def profiles_dict_to_grid_config():
     return row_data, column_defs
 
 
+def _json_for_script_tag(data) -> str:
+    """Serialize to JSON that is safe inside <script type="application/json">.
+
+    json.dumps does not escape "</", so a value containing "</script>" (e.g. in reader source
+    code) would terminate the script element early. "<\\/" is still valid JSON.
+    """
+    return json.dumps(data).replace("</", "<\\/")
+
+
 def dict_to_ag_grid_html(row_data, column_defs, dict_type):
     grid_id = f"""{dict_type}Grid"""
 
-    return f"""<div id="{grid_id}" class="ag-theme-alpine" style="height: 400px; width: 100%;" data-dict-type="{dict_type}"></div>
-        <script type="application/json" id="{grid_id}-column-defs">{json.dumps(column_defs)}</script>
-        <script type="application/json" id="{grid_id}-row-data">{json.dumps(row_data)}</script>
+    # Height is set via the .data-grid class in docs/global.css.
+    return f"""<div id="{grid_id}" class="ag-theme-alpine data-grid" data-dict-type="{dict_type}" role="region" aria-label="Interactive table of all {dict_type}"></div>
+        <script type="application/json" id="{grid_id}-column-defs">{_json_for_script_tag(column_defs)}</script>
+        <script type="application/json" id="{grid_id}-row-data">{_json_for_script_tag(row_data)}</script>
         """
 
 
+def readers_static_list_html() -> str:
+    """Plain HTML list of all readers.
 
-def fill_data_into_html(html_file: Path, readers_table, profiles_table):
-    with open(html_file, "r") as file:
+    Fallback for visitors without JavaScript, for screen readers and for search engine / AI
+    crawlers, which usually do not execute the AG Grid script and would otherwise see no data.
+    """
+    items = []
+    for file_name, entry in sorted(readers_dict.items()):
+        href = f"atch/server/readers/{file_name}"
+        details = ", ".join(
+            str(part) for part in (entry.get("class name"), entry.get("identifier")) if part
+        )
+        items.append(
+            f'              <li><a href="{escape(href)}" download>{escape(file_name)}</a>'
+            + (f" – {escape(details)}" if details else "")
+            + "</li>"
+        )
+    return '            <ul>\n' + "\n".join(items) + '\n            </ul>'
+
+
+def profiles_static_list_html() -> str:
+    """Plain HTML list of all profiles (see readers_static_list_html for the rationale)."""
+    items = []
+    for profile_id, entry in sorted(profiles_dict.items(), key=lambda kv: str(kv[1].get("title") or "").lower()):
+        href = f"atch/server/profiles/{profile_id}.json"
+        title = entry.get("title") or profile_id
+        details = [
+            f"extension {entry['extension']}" if entry.get("extension") else "",
+            ", ".join(map(str, entry.get("devices") or [])),
+            ", ".join(map(str, entry.get("software") or [])),
+        ]
+        details = " · ".join(d for d in details if d)
+        items.append(
+            f'              <li><a href="{escape(href)}" download>{escape(str(title))}</a>'
+            + (f" – {escape(details)}" if details else "")
+            + "</li>"
+        )
+    return '            <ul>\n' + "\n".join(items) + '\n            </ul>'
+
+
+def _build_date() -> str:
+    return datetime.now(timezone.utc).date().isoformat()
+
+
+def render_partial(name: str, home: str) -> str:
+    """Load a shared layout partial (header/footer) from profile_manager/partials/.
+
+    `home` is the link target of the start page: "" on index.html itself (pure in-page anchors),
+    "index.html" on every other page.
+    """
+    with open(partials_dir / name, "r", encoding="utf-8") as file:
+        html = file.read()
+    return html.replace("{{ HOME }}", home).replace("{{ BUILD_DATE }}", _build_date())
+
+
+def fill_data_into_html(html_file: Path, readers_table, profiles_table,
+                        readers_static_list: str = "", profiles_static_list: str = ""):
+    with open(html_file, "r", encoding="utf-8") as file:
         html_content = file.read()
-    html_content = html_content.replace("{{ PROGRAM_NAME }}", program_name)
-    html_content = html_content.replace("{{ READERS_TABLE }}", readers_table)
-    html_content = html_content.replace("{{ PROFILES_TABLE }}", profiles_table)
+    replacements = {
+        "{{ SITE_HEADER }}": render_partial("site_header.html", home=""),
+        "{{ SITE_FOOTER }}": render_partial("site_footer.html", home=""),
+        "{{ PROGRAM_NAME }}": program_name,
+        "{{ SITE_URL }}": site_url,
+        "{{ BUILD_DATE }}": _build_date(),
+        "{{ READER_COUNT }}": str(len(readers_dict)),
+        "{{ PROFILE_COUNT }}": str(len(profiles_dict)),
+        "{{ READERS_STATIC_LIST }}": readers_static_list,
+        "{{ PROFILES_STATIC_LIST }}": profiles_static_list,
+        # Tables last: their JSON payload must not be scanned for placeholders.
+        "{{ READERS_TABLE }}": readers_table,
+        "{{ PROFILES_TABLE }}": profiles_table,
+    }
+    for placeholder, value in replacements.items():
+        html_content = html_content.replace(placeholder, value)
     base_path = pyprojroot.find_root(pyprojroot.has_dir("build"))
     os.makedirs(os.path.join(base_path, "docs"), exist_ok=True)
     index_path = Path(base_path, "docs", "index.html")
-    with open(index_path, "w") as file:
+    with open(index_path, "w", encoding="utf-8") as file:
         file.write(html_content)
+
+
+def build_discovery_files(base_path: Path):
+    """Write sitemap.xml, robots.txt and llms.txt into docs/ for search engines and AI crawlers.
+
+    Note: crawlers only honour robots.txt at the root of a host. On the GitHub Pages project
+    URL (/chemotion-converter-profiles/) it is informational; it becomes effective with a
+    custom domain. The sitemap can be submitted manually (e.g. Google Search Console).
+    """
+    docs_dir = Path(base_path, "docs")
+    build_date = _build_date()
+
+    pages = []
+    for page in sorted(docs_dir.glob("*.html")):
+        if page.name == "index.html":
+            loc, lastmod, priority = site_url, build_date, "1.0"
+        else:
+            loc = site_url + page.name
+            lastmod = datetime.fromtimestamp(page.stat().st_mtime, timezone.utc).date().isoformat()
+            priority = "0.3" if page.name in {"all-pages.html", "impressum-en.html", "privacy-en.html",
+                                              "accessibility-en.html"} else "0.6"
+        pages.append(
+            f"  <url>\n    <loc>{escape(loc)}</loc>\n    <lastmod>{lastmod}</lastmod>\n"
+            f"    <priority>{priority}</priority>\n  </url>"
+        )
+    sitemap = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "\n".join(pages)
+        + "\n</urlset>\n"
+    )
+    (docs_dir / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+
+    robots = (
+        "# Everything on this site may be indexed by search engines and AI crawlers.\n"
+        "User-agent: *\n"
+        "Allow: /\n\n"
+        f"Sitemap: {site_url}sitemap.xml\n"
+    )
+    (docs_dir / "robots.txt").write_text(robots, encoding="utf-8")
+
+    def one_line(value) -> str:
+        return " ".join(str(value).split())
+
+    reader_lines = []
+    for file_name, entry in sorted(readers_dict.items()):
+        line = f"- [{file_name}]({site_url}atch/server/readers/{file_name}): reader class `{entry.get('class name')}`"
+        if entry.get("identifier"):
+            line += f", identifier `{entry.get('identifier')}`"
+        if entry.get("priority") is not None:
+            line += f", priority {entry.get('priority')}"
+        reader_lines.append(line)
+
+    profile_lines = []
+    for profile_id, entry in sorted(profiles_dict.items(), key=lambda kv: str(kv[1].get("title") or "").lower()):
+        line = f"- [{one_line(entry.get('title') or profile_id)}]({site_url}atch/server/profiles/{profile_id}.json)"
+        facts = []
+        if entry.get("reader"):
+            facts.append(f"reader {entry['reader']}")
+        if entry.get("extension"):
+            facts.append(f"extension {entry['extension']}")
+        if entry.get("devices"):
+            facts.append("devices " + ", ".join(map(str, entry["devices"])))
+        if entry.get("software"):
+            facts.append("software " + ", ".join(map(str, entry["software"])))
+        if entry.get("ontology") and not str(entry["ontology"]).startswith("n.d."):
+            facts.append(f"ontology {entry['ontology']}")
+        if facts:
+            line += ": " + one_line("; ".join(facts))
+        profile_lines.append(line)
+
+    llms = f"""# {program_name} – Readers & Profiles Index
+
+> {program_name} (also: ChemConverter, chemotion-converter-app) is an open-source (AGPL-3.0) Python
+> service that converts raw analytical instrument files into standardised formats: JCAMP-DX, BagIt
+> ZIP containers, RDF/Turtle and metadata JSON. It runs integrated in the Chemotion ELN (automatic
+> conversion on upload) or standalone as REST server (Flask/gunicorn), desktop GUI
+> (`python -m converter_app`) and command-line tool (`python -m converter_app convert -i FILE -o jcampzip`).
+> Developed by ComPlat at the Karlsruhe Institute of Technology (KIT), funded by the DFG within NFDI4Chem.
+
+Readers are Python classes that parse a file format (`check()` decides if a reader accepts a file, the
+lowest `priority` wins). Profiles are JSON rule sets that recognise a file by `identifiers` and map
+its tables and metadata to the output, optionally annotated with CHMO ontology terms.
+This index was generated on {build_date} and lists {len(readers_dict)} readers and {len(profiles_dict)} public profiles.
+
+## Main pages
+
+- [Interactive index of readers and profiles]({site_url}): searchable tables, downloads
+- [Loop documentation]({site_url}loop_docu.html): repeated output tables
+- [Operator documentation]({site_url}operator_docu.html): x/y value operations in profiles
+- [ChemConverter user guide](https://chemotion.net/docs/services/chemconverter): official Chemotion documentation
+
+## Source code
+
+- [chemotion-converter-app](https://github.com/ComPlat/chemotion-converter-app): backend, readers, CLI (Python >= 3.12)
+- [chemotion-converter-client](https://github.com/ComPlat/chemotion-converter-client): React profile editor
+- [chemotion-converter-profiles](https://github.com/ComPlat/chemotion-converter-profiles): public profiles and this index
+- [chemotion_ELN](https://github.com/ComPlat/chemotion_ELN): Chemotion electronic lab notebook
+
+## Readers
+
+{chr(10).join(reader_lines)}
+
+## Profiles
+
+{chr(10).join(profile_lines)}
+"""
+    (docs_dir / "llms.txt").write_text(llms, encoding="utf-8")
 
 
 def build_html_links_page(base_path: Path):
@@ -271,7 +468,7 @@ def build_html_links_page(base_path: Path):
 
     # Keep these customizable for future filtering needs.
     additional_folder_blacklist = {".git", "__pycache__"}
-    extension_blacklist = {".md", ".jpg", ".jpeg", ".gif", ".css", ".js", ".json", ".txt", ".py", ".exe", ".sh"}
+    extension_blacklist = {".md", ".jpg", ".jpeg", ".gif", ".css", ".js", ".json", ".txt", ".py", ".exe", ".sh", ".xml"}
     folder_blacklist = {"server", *additional_folder_blacklist}
 
     root_links = []
@@ -295,41 +492,50 @@ def build_html_links_page(base_path: Path):
 
     def render_links(paths):
         if not paths:
-            return "<li>No matching files found.</li>"
+            return "          <li>No matching files found.</li>"
         return "\n".join(
-            f'        <li><a href="{escape(path)}">{escape(path)}</a></li>' for path in paths
+            f'          <li><a href="{escape(path)}">{escape(path)}</a></li>' for path in paths
         )
 
     html_content = f"""<!doctype html>
+<!-- Generated by profile_manager/__main__.py:build_html_links_page. Do not edit by hand. -->
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>All Pages</title>
+    <title>All pages – {program_name}</title>
+    <meta name="description" content="List of all pages and attachments published on the {program_name} documentation site." />
+    <link rel="canonical" href="{site_url}{links_page_name}" />
+    <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="global.css" />
   </head>
   <body>
-    <header>
-      <h1>All Pages</h1>
-      <nav>
-        <a href="index.html">Back</a>
-      </nav>
-    </header>
-    <main>
-      <h2>docs root</h2>
-      <ul>
+{render_partial("site_header.html", home="index.html")}
+    <main id="main" tabindex="-1">
+      <div class="page-head">
+        <div class="container">
+          <p class="breadcrumb"><a href="index.html">Home</a> / All pages</p>
+          <h1>All pages</h1>
+          <p>Every page and attachment published on this site.</p>
+        </div>
+      </div>
+      <div class="container prose">
+        <h2>Pages</h2>
+        <ul class="link-list">
 {render_links(root_links)}
-      </ul>
-      <h2>docs/atch (without docs/atch/server)</h2>
-      <ul>
+        </ul>
+        <h2>Attachments (docs/atch, without docs/atch/server)</h2>
+        <ul class="link-list">
 {render_links(atch_links)}
-      </ul>
+        </ul>
+      </div>
     </main>
+{render_partial("site_footer.html", home="index.html")}
   </body>
 </html>
 """
 
-    with open(docs_dir / links_page_name, "w") as file:
+    with open(docs_dir / links_page_name, "w", encoding="utf-8") as file:
         file.write(html_content)
 
 def validate_profiles():

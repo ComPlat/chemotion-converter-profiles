@@ -54,7 +54,9 @@ This command:
 - Extracts reader metadata (class name, identifier, priority, and `check()` code) from AST parsing.
 - Detects CHMO identifiers anywhere in a profile and fetches the ontology label from OLS4.
 - Copies profiles and reader source files into `docs/atch/server/` for download links.
-- Renders an HTML index in `docs/index.html` using `profile_manager/index_template.html`.
+- Renders an HTML index in `docs/index.html` using `profile_manager/index_template.html` and the
+  header/footer partials in `profile_manager/partials/`.
+- Writes `docs/sitemap.xml`, `docs/robots.txt` and `docs/llms.txt`.
 
 ## Generated Output
 Build artifacts are written to:
@@ -62,8 +64,24 @@ Build artifacts are written to:
 - `docs/atch/server/profiles/` (downloadable profile JSON files)
 - `docs/atch/server/readers/` (downloadable reader source files)
 
-## AG Grid (Frontend)
-The interactive tables in `docs/index.html` run entirely in the browser. AG Grid is not bundled in this repo; it is loaded at runtime from a CDN via external `<link>` and `<script>` tags that are injected by the build step (`profile_manager.__main__.py` in `dict_to_ag_grid_html`).
+## Frontend, privacy & accessibility
+The interactive tables in `docs/index.html` run entirely in the browser with
+[AG Grid Community](https://www.ag-grid.com/) (MIT). AG Grid is **vendored** in
+`docs/assets/vendor/` and served from GitHub Pages itself – the site loads no CDN, no web fonts and
+no other third-party resources, sets no cookies and uses no browser storage
+(see `docs/assets/vendor/README.md` and `docs/privacy-en.html`).
+
+The layout follows the [chemotion.net](https://chemotion.net/) look (brand blue, system fonts,
+light/dark mode) and targets WCAG 2.1 AA: skip link, landmarks, keyboard-operable table headers,
+AA contrast, and plain HTML lists of all readers/profiles as a fallback for the grids.
+
+For search engines and AI crawlers the build adds meta/Open Graph tags, schema.org JSON-LD,
+`sitemap.xml`, `robots.txt` and `llms.txt`.
+
+Preview locally after a build:
+```bash
+python -m http.server 8000 --directory docs   # then open http://localhost:8000
+```
 
 ## GitHub Pages Workflow (Rebuild on Push)
 The GitHub Actions workflow in `/.github/workflows/build_and_deploy.yml` runs on:
