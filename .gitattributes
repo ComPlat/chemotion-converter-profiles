@@ -1,0 +1,28 @@
+# Same bytes on Windows, WSL and Linux: text files are stored AND checked out with LF.
+# eol=lf overrides core.autocrlf (Git for Windows sets it to true system-wide), so a working
+# tree shared by Windows Git and WSL Git no longer shows phantom CRLF diffs.
+* text=auto eol=lf
+
+# Windows-only scripts keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Sample instrument files are test data for the readers: keep them byte-exact, never convert
+# line endings (some instruments write CRLF on purpose, others mixed or binary formats).
+data_files/** -text
+
+# Binary formats elsewhere in the repo (PDFs without NUL bytes would otherwise be detected as
+# text and corrupted by line-ending conversion).
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.tif binary
+*.zip binary
+*.xls binary
+*.xlsx binary
+*.woff binary
+*.woff2 binary

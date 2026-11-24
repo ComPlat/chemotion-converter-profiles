@@ -12,44 +12,37 @@
     }
   }
 
+  // Escape text before it is inserted as HTML (reader source code contains "<", "&" etc.).
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  // Value is pre-rendered, already escaped HTML from llm_tools.code_translator.bullets_to_html.
   function pulletPointCellRenderer(params) {
     if (!params.value) return "";
-
-    return `
-      <p style="
-        white-space: pre-wrap;
-        line-height: 1.4;
-      ">${params.value}</p>
-    `;
+    return `<p class="grid-bullets">${params.value}</p>`;
   }
 
   function codeCellRenderer(params) {
     if (!params.value) return "";
-
-    return `
-      <code style="
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-        white-space: pre-wrap;
-        display: block;
-        font-size: 12px;
-        background: #f6f8fa;
-        padding: 6px 8px;
-        border-radius: 6px;
-        line-height: 1.4;
-      ">${params.value}</code>
-    `;
+    return `<code class="grid-code">${escapeHtml(params.value)}</code>`;
   }
 
   function linkRenderer(params) {
     if (!params.value) return "";
     const dictType = (params.context && params.context.dictType) || "";
     const suffix = dictType === "profiles" ? ".json" : "";
-    return `<a href="atch/server/${dictType}/${params.value}${suffix}" download
-               target="_blank"
-               rel="noopener"
-            >
-      ${params.value}
-    </a>`;
+    const name = escapeHtml(params.value);
+    // Profiles carry their real file name in data.file (the id need not match it).
+    const fileName = (params.data && params.data.file) || `${params.value}${suffix}`;
+    const href = `atch/server/${encodeURIComponent(dictType)}/${encodeURIComponent(fileName)}`;
+    return `<a href="${href}" download target="_blank" rel="noopener"
+               aria-label="Download ${escapeHtml(fileName)}">${name}</a>`;
   }
 
   function HeaderWithInfo() {
@@ -69,6 +62,15 @@
       title.textContent = displayName;
       eGui.appendChild(title);
 
+      // A custom header has to sort on click and draw the sort state itself.
+      const sortIcon = document.createElement("span");
+      sortIcon.className = "ag-header-sort-icon";
+      sortIcon.setAttribute("aria-hidden", "true");
+      eGui.appendChild(sortIcon);
+      if (params.enableSorting) {
+        title.classList.add("ag-header-title-sortable");
+      }
+
       const menuButton = document.createElement("span");
       menuButton.className = "ag-header-cell-menu-button ag-header-menu-button";
       menuButton.setAttribute("role", "button");
@@ -81,7 +83,8 @@
       icon.className = "ag-header-info";
       icon.setAttribute("role", "button");
       icon.setAttribute("tabindex", "0");
-      icon.setAttribute("aria-label", `${displayName} info`);
+      icon.setAttribute("aria-label", `Information about column ${displayName}`);
+      icon.setAttribute("aria-expanded", "false");
       icon.textContent = "i";
       eGui.appendChild(icon);
 
@@ -95,6 +98,9 @@
 
       const popover = document.createElement("div");
       popover.className = "ag-header-popover";
+      popover.id = `ag-header-popover-${++HeaderWithInfo.counter}`;
+      popover.setAttribute("role", "tooltip");
+      icon.setAttribute("aria-controls", popover.id);
       popover.innerHTML = `
         <div class="ag-header-popover-title"></div>
         <div class="ag-header-popover-body"></div>
@@ -105,7 +111,7 @@
       const titleEl = popover.querySelector(".ag-header-popover-title");
       const bodyEl = popover.querySelector(".ag-header-popover-body");
       titleEl.textContent = displayName;
-      bodyEl.innerHTML = infoText.replace(/\n/g, "<br>");
+      bodyEl.innerHTML = escapeHtml(infoText).replace(/\n/g, "<br>");
 
       let isPinned = false;
       let hideTimeout = null;
@@ -121,11 +127,13 @@
         clearTimeout(hideTimeout);
         positionPopover();
         popover.style.display = "block";
+        icon.setAttribute("aria-expanded", "true");
       };
 
       const hidePopover = () => {
         if (isPinned) return;
         popover.style.display = "none";
+        icon.setAttribute("aria-expanded", "false");
       };
 
       const scheduleHide = () => {
@@ -140,6 +148,19 @@
 
       const onIconEnter = () => showPopover();
       const onIconLeave = () => scheduleHide();
+      // Keyboard users must be able to dismiss a pinned popover by moving focus on (WCAG 1.4.13).
+      const onIconBlur = () => {
+        isPinned = false;
+        scheduleHide();
+      };
+      const onTitleClick = (event) => {
+        if (params.enableSorting) params.progressSort(event.shiftKey);
+      };
+      const onSortChanged = () => {
+        const sort = params.column.getSort();
+        sortIcon.innerHTML = sort ? `<span class="ag-icon ag-icon-${sort}"></span>` : "";
+      };
+      onSortChanged();
       const onPopoverEnter = () => clearTimeout(hideTimeout);
       const onPopoverLeave = () => scheduleHide();
       const onMenuClick = (event) => {
@@ -170,6 +191,9 @@
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           onIconClick(event);
+        } else if (event.key === "Escape") {
+          isPinned = false;
+          hidePopover();
         }
       };
       const onScroll = () => {
@@ -185,6 +209,10 @@
       icon.addEventListener("mouseleave", onIconLeave);
       icon.addEventListener("click", onIconClick);
       icon.addEventListener("keydown", onIconKey);
+      icon.addEventListener("focus", onIconEnter);
+      icon.addEventListener("blur", onIconBlur);
+      title.addEventListener("click", onTitleClick);
+      params.column.addEventListener("sortChanged", onSortChanged);
       popover.addEventListener("mouseenter", onPopoverEnter);
       popover.addEventListener("mouseleave", onPopoverLeave);
       document.addEventListener("click", onDocClick);
@@ -197,6 +225,10 @@
       this._destroyFns.push(() => icon.removeEventListener("mouseleave", onIconLeave));
       this._destroyFns.push(() => icon.removeEventListener("click", onIconClick));
       this._destroyFns.push(() => icon.removeEventListener("keydown", onIconKey));
+      this._destroyFns.push(() => icon.removeEventListener("focus", onIconEnter));
+      this._destroyFns.push(() => icon.removeEventListener("blur", onIconBlur));
+      this._destroyFns.push(() => title.removeEventListener("click", onTitleClick));
+      this._destroyFns.push(() => params.column.removeEventListener("sortChanged", onSortChanged));
       this._destroyFns.push(() => popover.removeEventListener("mouseenter", onPopoverEnter));
       this._destroyFns.push(() => popover.removeEventListener("mouseleave", onPopoverLeave));
       this._destroyFns.push(() => document.removeEventListener("click", onDocClick));
@@ -221,6 +253,8 @@
     };
   }
 
+  HeaderWithInfo.counter = 0;
+
   function createGridFromElement(gridEl) {
     const gridId = gridEl.id;
     const columnDefs = parseJsonScript(`${gridId}-column-defs`);
@@ -231,6 +265,8 @@
 
     const gridOptions = {
       theme: "legacy",
+      // Privacy: never fetch fonts from Google (only relevant for the Theming API, set anyway).
+      loadThemeGoogleFonts: false,
       columnDefs,
       rowData,
       enableCellTextSelection: true,
@@ -258,6 +294,10 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    if (typeof agGrid === "undefined") {
+      console.error("AG Grid failed to load (docs/assets/vendor/). Tables cannot be rendered.");
+      return;
+    }
     const grids = document.querySelectorAll(".ag-theme-alpine[data-dict-type]");
     grids.forEach(createGridFromElement);
   });

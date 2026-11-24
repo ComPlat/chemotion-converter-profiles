@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t">
+  <title id="t">Chemotion Converter</title>
+  <rect width="64" height="64" rx="14" fill="#1A75A8"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="#2495CF"/>
+  <!-- raw file -->
+  <path d="M13 15h14l6 6v17a3 3 0 0 1-3 3H13a3 3 0 0 1-3-3V18a3 3 0 0 1 3-3z" fill="#fff" opacity=".95"/>
+  <path d="M27 15v6h6" fill="none" stroke="#2495CF" stroke-width="2"/>
+  <path d="M14 26h12M14 30h15M14 34h9" stroke="#2495CF" stroke-width="2" stroke-linecap="round"/>
+  <!-- conversion arrow -->
+  <path d="M35 38h10" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+  <path d="M41 33l5 5-5 5" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- spectrum -->
+  <path d="M30 54c3 0 4-2 6-10 1.5-6 3-6 4.5 0 1.2 5 2.2 6 4 6 2 0 2.5-9 4.5-9s2.5 9 4 13" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

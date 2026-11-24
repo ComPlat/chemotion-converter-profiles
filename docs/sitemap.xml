@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://complat.github.io/chemotion-converter-profiles/accessibility-en.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://complat.github.io/chemotion-converter-profiles/all-pages.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://complat.github.io/chemotion-converter-profiles/impressum-en.html</loc>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://complat.github.io/chemotion-converter-profiles/</loc>
+    <lastmod>2026-11-24</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://complat.github.io/chemotion-converter-profiles/loop_docu.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://complat.github.io/chemotion-converter-profiles/operator_docu.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://complat.github.io/chemotion-converter-profiles/privacy-en.html</loc>
+    <priority>0.3</priority>
+  </url>
+</urlset>

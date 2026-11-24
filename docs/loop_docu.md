@@ -210,7 +210,7 @@ A dropdown with these options:
 
 The user chooses one of these options for each output table.
 
-<img width="785" height="443" alt="grafik" src="https://github.com/user-attachments/assets/02b32599-05c6-4f22-adca-d9cbb5e5cb32" />
+<img width="785" height="443" alt="Profile editor: dropdown 'Use this output table configuration for' with the four loop options – all input tables, same column header, same table header, same metadata" loading="lazy" src="atch/loop_docu/02b32599-05c6-4f22-adca-d9cbb5e5cb32.png" />
 
 
 ### How this relates to the backend
@@ -229,25 +229,25 @@ The options mean:
   Backend: `loopType` is not `'all'`, and the frontend uses `loop_header` rules.  
   → The backend uses `loop_header` to check if input tables have matching **column headers** (column names and positions).
 
-  <img width="1626" height="414" alt="grafik" src="https://github.com/user-attachments/assets/43d39f23-4b86-4067-8aef-ada996008947" />
+  <img width="1626" height="414" alt="Profile editor: loop option 'same column header' with a column selector listing the columns of input table #0 next to the input table data" loading="lazy" src="atch/loop_docu/43d39f23-4b86-4067-8aef-ada996008947.png" />
 
 
 - **`theader`**  
   Backend: `loopType` is not `'all'`, and the frontend uses `loop_theader`.  
   → The backend uses `loop_theader` and `_search_regex` to check for **matching table header text/patterns**.
 
-  <img width="742" height="106" alt="grafik" src="https://github.com/user-attachments/assets/91eb1a42-f501-47da-aedb-068eb2692699" />
+  <img width="742" height="106" alt="Profile editor: loop rule based on the table header text (loop_theader)" loading="lazy" src="atch/loop_docu/91eb1a42-f501-47da-aedb-068eb2692699.png" />
 
 
 - **`metadata`**  
   Backend: `loopType` is not `'all'`, and the frontend uses `loop_metadata`.  
   → The backend uses `loop_metadata` to compare **metadata values** between tables.
 
-  <img width="760" height="112" alt="grafik" src="https://github.com/user-attachments/assets/1e6145cb-9829-4845-a24f-3fd51c21a368" />
+  <img width="760" height="112" alt="Profile editor: loop rule based on a metadata value (loop_metadata)" loading="lazy" src="atch/loop_docu/1e6145cb-9829-4845-a24f-3fd51c21a368.png" />
 
 - **it is also possible to combine all settings with a logical "&"**
 
-  <img width="754" height="184" alt="grafik" src="https://github.com/user-attachments/assets/1ab58e89-7f59-4421-9718-dae5087fc625" />
+  <img width="754" height="184" alt="Profile editor: several loop rules (column header, table header and metadata) combined with a logical AND" loading="lazy" src="atch/loop_docu/1ab58e89-7f59-4421-9718-dae5087fc625.png" />
 
 
 
