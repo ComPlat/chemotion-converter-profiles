@@ -3,10 +3,11 @@
   Source template of docs/index.html. Edit ONLY this file (plus docs/global.css and docs/assets/app.js);
   docs/index.html is build output of `python -m profile_manager build_index` and will be overwritten.
 
-  Placeholders filled by profile_manager/__main__.py:fill_data_into_html:
-  {{ PROGRAM_NAME }} {{ SITE_URL }} {{ BUILD_DATE }} {{ READER_COUNT }} {{ PROFILE_COUNT }}
-  {{ SITE_HEADER }} {{ SITE_FOOTER }} {{ READERS_TABLE }} {{ PROFILES_TABLE }}
-  {{ READERS_STATIC_LIST }} {{ PROFILES_STATIC_LIST }}
+  Placeholders filled by profile_manager/__main__.py:fill_data_into_html (written in the markup
+  as the name in double curly braces; listed here without braces so they are not replaced):
+  PROGRAM_NAME SITE_URL BUILD_DATE READER_COUNT PROFILE_COUNT
+  SITE_HEADER SITE_FOOTER READERS_TABLE PROFILES_TABLE
+  READERS_STATIC_LIST PROFILES_STATIC_LIST
 
   Privacy rule: no third-party requests. No CDN, no web fonts, no external images/scripts/styles.
   The only third-party code (AG Grid) is vendored under docs/assets/vendor/ (see README there).

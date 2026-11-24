@@ -38,9 +38,11 @@
     const dictType = (params.context && params.context.dictType) || "";
     const suffix = dictType === "profiles" ? ".json" : "";
     const name = escapeHtml(params.value);
-    const href = `atch/server/${encodeURIComponent(dictType)}/${encodeURIComponent(params.value)}${suffix}`;
+    // Profiles carry their real file name in data.file (the id need not match it).
+    const fileName = (params.data && params.data.file) || `${params.value}${suffix}`;
+    const href = `atch/server/${encodeURIComponent(dictType)}/${encodeURIComponent(fileName)}`;
     return `<a href="${href}" download target="_blank" rel="noopener"
-               aria-label="Download ${name}${suffix}">${name}</a>`;
+               aria-label="Download ${escapeHtml(fileName)}">${name}</a>`;
   }
 
   function HeaderWithInfo() {
@@ -59,6 +61,15 @@
       title.className = "ag-header-title";
       title.textContent = displayName;
       eGui.appendChild(title);
+
+      // A custom header has to sort on click and draw the sort state itself.
+      const sortIcon = document.createElement("span");
+      sortIcon.className = "ag-header-sort-icon";
+      sortIcon.setAttribute("aria-hidden", "true");
+      eGui.appendChild(sortIcon);
+      if (params.enableSorting) {
+        title.classList.add("ag-header-title-sortable");
+      }
 
       const menuButton = document.createElement("span");
       menuButton.className = "ag-header-cell-menu-button ag-header-menu-button";
@@ -137,6 +148,19 @@
 
       const onIconEnter = () => showPopover();
       const onIconLeave = () => scheduleHide();
+      // Keyboard users must be able to dismiss a pinned popover by moving focus on (WCAG 1.4.13).
+      const onIconBlur = () => {
+        isPinned = false;
+        scheduleHide();
+      };
+      const onTitleClick = (event) => {
+        if (params.enableSorting) params.progressSort(event.shiftKey);
+      };
+      const onSortChanged = () => {
+        const sort = params.column.getSort();
+        sortIcon.innerHTML = sort ? `<span class="ag-icon ag-icon-${sort}"></span>` : "";
+      };
+      onSortChanged();
       const onPopoverEnter = () => clearTimeout(hideTimeout);
       const onPopoverLeave = () => scheduleHide();
       const onMenuClick = (event) => {
@@ -186,7 +210,9 @@
       icon.addEventListener("click", onIconClick);
       icon.addEventListener("keydown", onIconKey);
       icon.addEventListener("focus", onIconEnter);
-      icon.addEventListener("blur", onIconLeave);
+      icon.addEventListener("blur", onIconBlur);
+      title.addEventListener("click", onTitleClick);
+      params.column.addEventListener("sortChanged", onSortChanged);
       popover.addEventListener("mouseenter", onPopoverEnter);
       popover.addEventListener("mouseleave", onPopoverLeave);
       document.addEventListener("click", onDocClick);
@@ -200,7 +226,9 @@
       this._destroyFns.push(() => icon.removeEventListener("click", onIconClick));
       this._destroyFns.push(() => icon.removeEventListener("keydown", onIconKey));
       this._destroyFns.push(() => icon.removeEventListener("focus", onIconEnter));
-      this._destroyFns.push(() => icon.removeEventListener("blur", onIconLeave));
+      this._destroyFns.push(() => icon.removeEventListener("blur", onIconBlur));
+      this._destroyFns.push(() => title.removeEventListener("click", onTitleClick));
+      this._destroyFns.push(() => params.column.removeEventListener("sortChanged", onSortChanged));
       this._destroyFns.push(() => popover.removeEventListener("mouseenter", onPopoverEnter));
       this._destroyFns.push(() => popover.removeEventListener("mouseleave", onPopoverLeave));
       this._destroyFns.push(() => document.removeEventListener("click", onDocClick));

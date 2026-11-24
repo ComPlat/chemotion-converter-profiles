@@ -24,6 +24,8 @@ program_name = "Chemotion Converter"
 site_url = "https://complat.github.io/chemotion-converter-profiles/"
 partials_dir: Path = Path(__file__).parent.joinpath("partials")
 profiles_dict = {}
+# Profile id -> file name in docs/atch/server/profiles/ (the id need not match the file name).
+profile_files = {}
 readers_dict = {}
 
 should_translate_code = False
@@ -133,7 +135,8 @@ def build_index():
         '''
 
         # Extract relevant fields
-        profile_id = json_profile.get("id")
+        # Fall back to the file name so profiles without an id do not collide under the key None.
+        profile_id = json_profile.get("id") or profile.stem
 
         ols, _ = get_chmo.find_chmo_id(json_profile)
         try:
@@ -159,6 +162,7 @@ def build_index():
         # Copy profile JSON to docs and link to the local docs path
         shutil.copy2(profile, docs_profile_dir / profile.name)
         profiles_dict[profile_id] = profile_entry
+        profile_files[profile_id] = profile.name
 
     profiles_row_data, profiles_column_defs = profiles_dict_to_grid_config()
     profiles_table = dict_to_ag_grid_html(profiles_row_data, profiles_column_defs, "profiles")
@@ -210,7 +214,8 @@ def readers_dict_to_grid_config():
 
 def profiles_dict_to_grid_config():
     row_data = [
-        {"id": k, **v}
+        # "file" is not a column; linkRenderer in docs/assets/app.js uses it as download target.
+        {"id": k, "file": profile_files.get(k, f"{k}.json"), **v}
         for k, v in profiles_dict.items()
     ]
 
@@ -255,10 +260,12 @@ def profiles_dict_to_grid_config():
 def _json_for_script_tag(data) -> str:
     """Serialize to JSON that is safe inside <script type="application/json">.
 
-    json.dumps does not escape "</", so a value containing "</script>" (e.g. in reader source
-    code) would terminate the script element early. "<\\/" is still valid JSON.
+    json.dumps does not escape "<", so a value containing "</script>" or "<!--" (e.g. in reader
+    source code) could end the script element early or switch the HTML parser into the "script
+    data double escaped" state. Escaping every "<" as "\\u003c" covers all cases and is still
+    valid JSON.
     """
-    return json.dumps(data).replace("</", "<\\/")
+    return json.dumps(data).replace("<", "\\u003c")
 
 
 def dict_to_ag_grid_html(row_data, column_defs, dict_type):
@@ -295,7 +302,7 @@ def profiles_static_list_html() -> str:
     """Plain HTML list of all profiles (see readers_static_list_html for the rationale)."""
     items = []
     for profile_id, entry in sorted(profiles_dict.items(), key=lambda kv: str(kv[1].get("title") or "").lower()):
-        href = f"atch/server/profiles/{profile_id}.json"
+        href = f"atch/server/profiles/{profile_files.get(profile_id, f'{profile_id}.json')}"
         title = entry.get("title") or profile_id
         details = [
             f"extension {entry['extension']}" if entry.get("extension") else "",
@@ -368,13 +375,14 @@ def build_discovery_files(base_path: Path):
         if page.name == "index.html":
             loc, lastmod, priority = site_url, build_date, "1.0"
         else:
-            loc = site_url + page.name
-            lastmod = datetime.fromtimestamp(page.stat().st_mtime, timezone.utc).date().isoformat()
+            # No lastmod for static pages: in CI every file mtime is the checkout time.
+            loc, lastmod = site_url + page.name, None
             priority = "0.3" if page.name in {"all-pages.html", "impressum-en.html", "privacy-en.html",
                                               "accessibility-en.html"} else "0.6"
         pages.append(
-            f"  <url>\n    <loc>{escape(loc)}</loc>\n    <lastmod>{lastmod}</lastmod>\n"
-            f"    <priority>{priority}</priority>\n  </url>"
+            f"  <url>\n    <loc>{escape(loc)}</loc>\n"
+            + (f"    <lastmod>{lastmod}</lastmod>\n" if lastmod else "")
+            + f"    <priority>{priority}</priority>\n  </url>"
         )
     sitemap = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -406,7 +414,7 @@ def build_discovery_files(base_path: Path):
 
     profile_lines = []
     for profile_id, entry in sorted(profiles_dict.items(), key=lambda kv: str(kv[1].get("title") or "").lower()):
-        line = f"- [{one_line(entry.get('title') or profile_id)}]({site_url}atch/server/profiles/{profile_id}.json)"
+        line = f"- [{one_line(entry.get('title') or profile_id)}]({site_url}atch/server/profiles/{profile_files.get(profile_id, f'{profile_id}.json')})"
         facts = []
         if entry.get("reader"):
             facts.append(f"reader {entry['reader']}")

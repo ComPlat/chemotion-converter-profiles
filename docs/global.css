@@ -736,6 +736,14 @@ noscript .callout {
   gap: 6px;
 }
 
+.ag-header-title-sortable {
+  cursor: pointer;
+}
+
+.ag-header-sort-icon:empty {
+  display: none;
+}
+
 .ag-header-menu-button {
   display: inline-flex;
   align-items: center;

@@ -10,7 +10,7 @@
 Readers are Python classes that parse a file format (`check()` decides if a reader accepts a file, the
 lowest `priority` wins). Profiles are JSON rule sets that recognise a file by `identifiers` and map
 its tables and metadata to the output, optionally annotated with CHMO ontology terms.
-This index was generated on 2026-11-18 and lists 45 readers and 55 public profiles.
+This index was generated on 2026-11-24 and lists 45 readers and 55 public profiles.
 
 ## Main pages
 
